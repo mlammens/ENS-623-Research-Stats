@@ -20,6 +20,10 @@ For example,
 
 `Lammens_ENS623_SP18_PS1.Rmd`
 
+#### Grading note
+
+* Part 1 is worth 10 points
+* Part 2 is worth 15 points
 
 # Part 1 - More Practice with R
 
