@@ -75,15 +75,15 @@ Here are some useful resources for leanring R, biostats, research methods, and g
 * [Diagram of distribution relationships](http://www.johndcook.com/blog/distribution_chart/) - Here's a good site outlining the different relationships between various statistical distributions. It's based on a well known 
 [paper](http://www.math.wm.edu/~leemis/2008amstat.pdf) by Leemis and McQueston.
 
-### Grants
+### Grants, Fellowships, and other opportunities
+
+* [A list maintained by Pace Environmental Studies and Science Department and DCISE](https://www.pace.edu/dyson/departments/environmental-studies-science/environmental-student-opportunities)
 
 * [Barnabas McHenry Hudson River Valley Awards](https://www.openspaceinstitute.org/funds/mchenry)
 
 * [Torrey Botanical Society Andrew M. Greller Graduate Student Research Award for Conservation of Local Flora and Ecosystems](http://www.torreybotanical.org/grants-awards/torrey-botanical-society-andrew-m-greller-graduate-student-research-award-for-conservation-of-local-flora-and-ecosystems/)
 
 * [Environmental Consortium of Colleges and University- Hudson Valley Specific](http://environmentalconsortium.org/resources/scholarships/scholarships.html)
-
-* [Hudson River Environmental Society - McKeon Research Grant Application](http://www.hres.org/joomla/images/mckeon_research_grant_application_2018.pdf)
 
 * [Hudson River Foundation - Tibor T. Polgar Fellowship](http://www.hudsonriver.org/?x=polgar)
 
