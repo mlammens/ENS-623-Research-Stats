@@ -66,6 +66,13 @@ Documenting your analysis in R, using R scripts or Rmd files allows you to re-ru
 
 ## Getting started
 
+### Difference between R and RStudio
+
+In this class, we will be working primarily in RStudio.
+So what is the difference between R and RStudio?
+R is both a programming language (specifically a statsitical analysis programming language), while RStudio is an **Integrated Development Environment**, or **IDE** for short. 
+RStudio offers a number of features, mostly related to visual presentation of information, that make writing and working with R code easier.
+
 ### Overall layout
 
 * Four panels, each has valuable information
@@ -75,6 +82,18 @@ Documenting your analysis in R, using R scripts or Rmd files allows you to re-ru
 * Setup a `ENS-623-Research-Stats` directory
 * Make a `data` directory
 * Make a `scripts` directory
+* In RStudio, set working directory to your new `ENS-623-Research-Stats` directory
+
+#### Setting your working directory
+
+Point-and-click method - Use 'Session' > 'Set Working Directory' > 'Choose Directory'.
+
+Using the R Console:
+
+```{r, eval=FALSE}
+setwd("/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-SP18/")
+```
+
 
 ### Getting help
 
