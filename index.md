@@ -22,7 +22,7 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 ## R Course Notes
 
 |Date | Topic | Recommended Reading | Lecture Notes | Assignment |
-|-----|-------|---------|---------------|------------|
+|:-----|:-------|:---------|:---------------|:------------|
 |3/13 |Introduction to Biostatistics and R |[Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)| [Lecture notes 1](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-1.html); [In class R file]()|[Problem Set 1]() |
 
 
