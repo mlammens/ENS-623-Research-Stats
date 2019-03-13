@@ -1,0 +1,21 @@
+---
+title: "ENS 623 - Spring 2019 - Problem Set 1"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file.**
+
+As I mentioned during our first meeting, rmarkdown is a way to incorporate text, with simple formatting, with R code chunks.
+Rather than spell out how to create an Rmd file here, I recommend you consult the following resources:
+
+* [RStudio Rmarkdown Quick Tour](http://rmarkdown.rstudio.com/authoring_quick_tour.html)
+* [RStudio Rmarkdown Intro Article](http://rmarkdown.rstudio.com/articles_intro.html)
+* [OurCodingClub Intro Example](https://ourcodingclub.github.io/2016/11/24/rmarkdown-1.html)
+
+#### Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP18_PS1.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP18_PS1.Rmd`
