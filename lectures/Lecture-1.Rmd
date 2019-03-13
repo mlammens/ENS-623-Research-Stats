@@ -1,23 +1,16 @@
 ---
-title: "Meeting 1 - Introduction to Course and R Programming"
+title: "Meeting 7 - Introduction to Biostats and R Programming"
 author: "Matthew E. Aiello-Lammens"
-date: '2018-01-23'
+date: '2019-03-13'
 output: 
   html_document: 
     toc: yes
+    code_folding: hide
 ---
-
-# Class expectations
-
-* Why are you taking this class?
-* What are you hoping to learn?
-
-See [Syllabus](http://mlammens.github.io/ENS-623-Research-Stats/syllabus/)
 
 # Class goals
 
-* Learn how to develop a research question
-* Practice systematic review of the scientific literature
+* Learn how to develop a research question - **DONE**
 * Become proficient using the R statistical programming language
 * Learn how to explore data collected during a research project
 * Learn and master the standard statistical analyses used in scientific studies
@@ -77,7 +70,7 @@ Documenting your analysis in R, using R scripts or Rmd files allows you to re-ru
 
 ### File management
 
-* Setup a `Biostatistics` directory
+* Setup a `ENS-623-Research-Stats` directory
 * Make a `data` directory
 * Make a `scripts` directory
 
@@ -118,6 +111,8 @@ There's internal control for order of operations (Please Excuse My Dear Aunt Sal
 **Challenge**
 
 Write an example where adding parentheses matters.
+
+### Internal functions
 
 There are a ton of internal functions, and a lot of add-ons.
 
@@ -247,5 +242,316 @@ v3 <- seq(from = 1, to = 10)
 
 1. Look up the help for the `seq` function, and use this to make a vector from 1 to 100, by steps of 5.
 2. Come up with a way that you would use the `length.out` argument.
+
+## Exploring variable elements
+
+You can get specific elements from vectors and other data structures
+
+* Introduction to the square brackets `[]`
+
+```{r}
+pets <- c("cat", "dog", "rabbit", "pig", "snake")
+pets[1]
+```
+
+* Getting a number of elements, in sequence
+
+```{r}
+pets[3:4]
+```
+
+* Getting a number of elements, not in sequence
+
+```{r}
+pets[c(1,4)]
+```
+
+
+## Working with matrices
+
+**Review** - Why might we want 2D data?
+
+Let's make a matrix
+
+**Challenge**
+
+With the people next to you, break down this function, and describe each argument.
+What is the final product?
+
+```{r}
+my_mat <- matrix(data = runif(50), nrow = 10, byrow = TRUE)
+```
+
+What does it mean to fill `byrow`?
+
+```{r}
+matrix(data = 1:9, nrow = 3, byrow = TRUE)
+```
+
+Versus
+
+```{r}
+matrix(data = 1:9, nrow = 3, byrow = FALSE)
+```
+
+**Challenge**
+
+What is the default value for `byrow`?
+
+### Indexing matrices
+
+Indexing happens by **row**, **column** notation.
+
+```{r}
+my_mat <- matrix(data = 1:50, nrow = 10, byrow = TRUE)
+
+my_mat[1,1]
+my_mat[1,2]
+my_mat[2,1]
+
+my_mat[1:4, 1:3]
+
+my_mat[c(1,3,5), ]
+my_mat[ ,c(1,3,5)]
+```
+
+## Combinining internal functions with matrices
+
+Make a "random" matrix (that isn't random in this case because of the `set.seed` function)
+
+```{r}
+set.seed(1)
+mat1 <- matrix(data = runif(50), nrow = 10, byrow = TRUE)
+```
+
+Calculate the mean of all of the data
+
+```{r}
+mean(mat1)
+```
+
+Calculate the standard deviation of all of the data
+
+```{r}
+sd(mat1)
+```
+
+Calculate row means and column means
+
+```{r}
+rowMeans(mat1)
+colMeans(mat1)
+```
+
+Introduce the `apply` function
+
+```{r}
+apply(mat1, MARGIN = 1, mean)
+```
+
+## User Defined Functions
+
+What is a function?
+
+Why write a function?
+
+**Example**
+
+*Note:* the example below is borrowed from the [Software Carpentry](https://software-carpentry.org/) Introduction to Programming materials.
+
+Convert from Fahrenheit to Kelvin
+
+```{r}
+fahr_to_kelvin <- function(temp) {
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  return(kelvin)
+}
+```
+
+Convert from Kelvin to Celsius
+
+```{r}
+kelvin_to_celsius <- function(temp) {
+  celsius <- temp - 273.15
+  return(celsius)
+}
+```
+
+**Challenge**
+
+Write a function to convert from Fahrenheit to Celsius.
+
+
+## `for` loops
+
+How do I do the same thing many times?
+
+### Generic for loop
+
+```
+for (variable in collection) {
+  do things with variable
+}
+```
+
+Let's get more specific. Say we took a bunch of measurements of temperature in Fahrenheit, but want to convert them. How might we do it?
+
+#### Make our temperature data set
+
+```{r}
+set.seed(8)
+temp_data <- runif(n = 20, min = -5, max = 5) + 45
+```
+
+**Challenge**
+
+What did we just do?
+
+#### Use our `fahr_to_kelvin` function on each element
+
+Iteration 1.
+
+```{r}
+for( x in temp_data){
+  fahr_to_kelvin(x)
+}
+```
+
+Iteration 2.
+
+```{r}
+for( x in temp_data){
+  print(fahr_to_kelvin(x))
+}
+```
+
+Iteration 3.
+
+```{r}
+for( x in 1:length(temp_data)){
+  print(fahr_to_kelvin(temp_data[x]))
+}
+```
+
+Iteration 4.
+
+```{r}
+temp_data_kelvin <- vector()
+for( x in 1:length(temp_data)){
+  temp_data_kelvin[x] <- fahr_to_kelvin(temp_data[x])
+}
+
+print(temp_data_kelvin)
+```
+
+
+
+## Conditionals
+
+We can use conditional statements to control the flow of our code, and to "make choices" as it progresses.
+
+### `if` and `else`
+
+The `if` and `else` statements are key to making choices in your code.
+Before understanding `if`/`else` statements, we need to review **booleans** - i.e., `TRUE` and `FALSE`
+
+#### Aside: `TRUE` and `FALSE` values
+
+```{r}
+TRUE
+```
+
+```{r}
+20 == 20
+```
+
+```{r}
+20 > 40
+```
+
+A `!` sign can be used as a logical negation
+
+```{r}
+!(20 > 40)
+```
+
+There are many logical operators to consider.
+
+***
+
+**Challenge** Describe what each fo the following operators are doing.
+
+```{r}
+x <- TRUE
+y <- FALSE
+```
+
+```{r}
+x & y
+```
+
+```{r}
+x | y
+```
+
+```{r}
+xy <- c(x,y)
+```
+
+```{r}
+any(xy)
+```
+
+```{r}
+all(xy)
+```
+
+***
+
+Now that we know a bit about booleans, let's get into `if`/`else` statements.
+
+Essential, and `if` is a conditional that says, "do this thing after the `if` statement, ***if*** the conditional was TRUE."
+
+Here's a simple example (taken from Software Carpentry's lessons)
+
+```{r}
+num <- 37
+if (num > 100) {
+  print("greater")
+} else {
+  print("not greater")
+}
+```
+
+**Challenge** 
+
+Re-define `num` so you get the other option.
+
+We don't need an `else` statement for this to work -
+
+```{r}
+num <- 37
+if (num > 100) {
+  print("The number was greater than 100")
+}
+
+```
+
+We can also write a "cascade" of `if`/`else` statements
+
+```{r}
+if (num > 0) {
+  return(1)
+} else if (num == 0) {
+  return(0)
+} else {
+  return(-1)
+}
+```
+
+**Challenge**
+
+Make the above into a function, that takes in any value, and returns whether it is positive, negative, or equal to 0.
+
 
 
