@@ -3,7 +3,6 @@ _gh_pages
 _site
 .ruby-version
 .sass-cache
-
 # Numerous always-ignore extensions
 *.diff
 *.err
@@ -15,7 +14,6 @@ _site
 *.zip
 *.vi
 *~
-
 # OS or Editor folders
 .DS_Store
 ._*
@@ -29,31 +27,25 @@ nbproject
 *.sublime-project
 *.sublime-workspace
 .idea
-
 # Komodo
 *.komodoproject
 .komodotools
-
 # grunt-html-validation
 validation-status.json
 validation-report.json
-
 # Folders to ignore
 node_modules
 .Rproj.user
-
 # R files
 .Rhistory
-
 # Symbolic link to QK data
 data/QK_data*
-
 # Ignore submitted work
 submitted_work/*
 solutions/*
-
 # Ignore exams
 exams/*
-
 # html in _posts folder
 _posts/*html
+ENS-623-Research-Methods-SP19.pdf
+pages/ENS-623*
