@@ -9,25 +9,28 @@ description: course syllabus
 
 **Course Number:** ENS 623  
 **Credits:** 3  
-**Professor:** Dr. Matthew Aiello-Lammens  
+**Professors:** Dr. Michael Rubbo and Dr. Matthew Aiello-Lammens  
 **Meeting day and time:** Wed 5:40 - 8:40 PM  
-**Term:** Spring 2018  
+**Term:** Spring 2019  
 **Location:** Environmental Center Classroom   
 
 ## Course description
 
-This course covers issues related to the proper manner in which develop and conduct a research project.
+This course covers issues related to the proper manner in which to develop and conduct a research project.
 Statistical issues related to environmental evaluations will be discussed, including minimal detectable levels proper sample size, and determination of proper methods for evaluation of data, using both parametric and nonparametric procedures. 
 
 ## Rationale
 
+The ability to pose questions, plan research projects, and carry out data analyses it vital for environmental scientists at all levels.
 Scientists need to analyze data in order to evaluate hypotheses and extract further insights from their observations. 
 Further, the ability to analyze data collected during fieldwork is a key component of effective science communication. 
 This course will provide students with these techniques.
 Additionally, the methods of biostatistical analysis are applicable in all fields relating to science, whether they are applied directly when analyzing data or indirectly by providing a structure to interpret scientific findings.
 
 
-## Learning objectives
+## Learning outcomes
+
+By the end of this course, you should know:
 
 * How to perform exploratory data analysis.
 * How to evaluate data quality.
@@ -36,19 +39,31 @@ Additionally, the methods of biostatistical analysis are applicable in all field
 * How to identify the most appropriate analysis techniques to use with a given dataset.
 * How to use knowledge of standard data analysis techniques to effectively choose and apply more advanced methods.
 
+## MS Environemntal Science Learning Objectives
+
+This course addresses the following MS ES program learning objectives:
+
+* Understand and critique the current state of knowledge on environmental issues and identify important knowledge gaps that need further investigation.
+* Understand the philosophy, rationale, and approach to using interdisciplinary, multidisciplinary, and transdisciplinary themes and concepts in contemporary environmental science.
+* Practice and master implementation of the scientific method and the process of environmental project design, implementation, and communication.
+
+
 ## Assessment
 
-I will assess your achievement of the learning objectives based on your performance on problem sets, inclass exams, and a final analysis report.
+We will assess your achievement of the learning objectives based on your performance on the following assignments. 
+More information on each of these will be provided throughout the semester.
 
-Problem sets - 60%  
-Semester project - 40%  
-
-### Analysis project
-
-The written analysis report will be a document that describes the methods used to collect and analyze your data, your results, and all figures and tables associated with the analysis. 
+* Participation during in class assignments (10%)
+* Draft MSES Appendix C and/or Appendix D, as appropriate for individual students (10%)
+* Completed grant or RFP proposal (25%)
+* Problem sets (25%)
+* Analysis project (15%)
+* Stats exam (15%)
 
 
 ## Required materials
+
+Copies of these texts will be made available to you.
 
 * Logan. 2010. Biostatistical Design and Analysis Using R: A Practical Guide. Wiley-Blackwell
 * Quinn and Keough. 2009. Experimental Design and Data Analysis for Biologists. Cambridge Press
@@ -68,15 +83,15 @@ Course Policies
 ### Attendance
 
 Attendance and punctuality are required. Excused absences will be
-considered, but must be discussed with Prof. Aiello-Lammens. Unexcused
+considered, but must be discussed with your professors. Unexcused
 absences and/or consistent lateness will negatively impact a student’s
 final assessment and could result in failure.
 
 ### Technology in the Classroom
 
 Use of computers and tablets may be necessary to complete some in-class
-assignments. However, I expect you to respectful and professional, and
-not to be “surfing the internet” during class. If I witness this
+assignments. However, we expect you to respectful and professional, and
+not to be “surfing the internet” during class. If we witness this
 activity, you will not be allowed to use technology in the classroom
 thereafter.
 
@@ -126,3 +141,30 @@ the University’s web site.\
 To receive accommodation for any disability, students must contact the
 campus Counseling Center (Pace Plaza, 212-346-1526; Westchester,
 914-773-3710).
+
+## Course schedule
+
+This is a guide for the material we will cover during the course, however it may be amended during the semester as needed. 
+
+|Date | Topic &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| 
+|-----|:-------|
+|<img width=200/>|<img width=500/>|
+|1/30 |Introductions, syllabus review, conservation issues in the Hudson Valley, choosing a research topic, reviewing the literature.|
+|2/06 |Student presentations on research topic. Formalizing your research question. Identifying Thesis advisors/Committees. **Research on funding opportunities – selection due in class on Feb. 20.**|
+|2/13 |Ecological studies and sampling. Project Design - Identifying project vision, scope, goals, objectives, activities, outcomes, and resources. Discussion of project constraints, creating a budget.  **Draft budget due Feb. 20 in class.**|
+|2/20 |Budget presentations. The basics of grant proposals. **Selection of funding opportunity for grant proposal assignment.** Development of your elevator speech.|
+|2/27 |Creation of logic models and implementation plans. **Summary of meeting with potential Advisor/Committee members.**|
+|3/06 |Student project presentations.  **Grant proposal due March 13.**|
+|3/13 |Introduction to R/RStudio statistics programming language|
+|3/20 | **No Class - Spring Break** |
+|3/27 |Data visualization|
+|4/03 |Probability and probability distributions|
+|4/10 |Hypothesis testing|
+|4/17 |Correlation and regression|
+|4/24 |ANOVA and ANCOVA|
+|5/01 |Non-parametric statistical tests and randomization approaches|
+|5/08 | **Statistics Exam** |
+
+
+
+

@@ -5,18 +5,30 @@ tagline: Learning to collect and analyze data
 description: A website for ENS 511 at Pace University
 ---
 
+## Archives
+
+This page is for ENS 623 during the Spring of 2019. Links to previous versions of this course are below:
+
+* [ENS 623 - Spring 2018](https://mlammens.github.io/ENS-623-Research-Stats-Spring-2018/)
+
 ## Course Description
 
 This course covers issues related to the proper manner in which develop and conduct a research project. Statistical issues related to environmental evaluations will be discussed, including minimal detectable levels, proper sample size, and determination of proper methods for evaluation of data, using both parametric and nonparametric procedures. 
 
 ## Syllabus
 
-You can find a **DRAFT** copy of the syllabus [here](pages/syllabus.html)
+You can find a copy of the syllabus [here](pages/syllabus.html)
 
-## Course Schedule
+## R Course Notes
 
-|Date |Meeting | Topic | Recommended Reading | Lecture Notes | Assignment |
-|-----|--------|-------|---------|---------------|------------|
+|Date | Topic | Recommended Reading | Lecture Notes | Assignment |
+|-----|-------|---------|---------------|------------|
+|3/13 |Introduction to Biostatistics and R |[Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)| [Lecture notes 1](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-1.html); [In class R file]()|[Problem Set 1]() |
+
+
+
+
+<!---
 |1/24 | 1 |Introduction to Biostatistics and R |Karban et al. 2014, Chapter 1; Sutherland et al. 2013| [Lecture notes 1](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-1.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-1-InClass.R)|[Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) |
 |1/31  | 2 |Intro to R (cont) and Asking Research Questions|[Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)| [Lecture notes 2](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-2.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-2-InClass.R)|[Problem Set 2](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-2.html) |
 |2/7  | 3 |Snow day: On-line Meeting |Review - Karban et al. 2014, Chapter 1|[Lecture notes 3](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-3.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-3-InClass.html) | [Problem Set 3](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-3.html); [Research Question Exercise](pages/research-question-exercise.html)|
@@ -34,7 +46,6 @@ You can find a **DRAFT** copy of the syllabus [here](pages/syllabus.html)
 |5/2  | 13 |ANCOVA; Analysis of Frequencies; GLM; Wrap-up |Logan Chap. 15-17; Q&K 12-14 |[Lecture notes 13](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-13.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-13-InClass.R) |  |
 
 
-<!---
 ### Topics to cover
 
 * 
@@ -44,17 +55,10 @@ You can find a **DRAFT** copy of the syllabus [here](pages/syllabus.html)
 * 
 --->
 
-## Semester Project Overview
+## Analysis Project Overview
 
 During the semester, you will carry out an independent research and analysis project, using the skills we learn in this class. 
-The project represents 40% of your grade, but is broken up into several components. 
-
-* [Research question exercise](pages/research-question-exercise.html) - 5% - DUE 2/14
-* [Background literature search](pages/background-lit.html) - 5% - DUE 3/28
-* [Methods description](pages/Methods-Description.html) - 5% - DUE 4/18
-* Mini-presentation (5 minutes in class) - 5% - DUE 4/25 or 5/2
-* Final report - 20% - DUE 5/11
-
+The project represents 15% of your grade, but is broken up into several components. 
 
 ## Resources
 
