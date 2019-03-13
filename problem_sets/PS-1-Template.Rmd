@@ -1,0 +1,54 @@
+---
+title: "PS 1 Template"
+output: html_document
+---
+
+This is a template for your Rmd file for Problem Set 1. **Remove any text that is not necessary for your submission (including this line!).**
+
+#### REMINDER: Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP18_PS1.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP18_PS1.Rmd`
+
+
+# Part 1
+
+## Two plots from `swirl` lesson
+
+```{r}
+# put the code used to make these two plots here
+```
+
+## User-defined function
+
+```{r}
+# put the code for the user defined function here
+```
+
+
+# Part 2
+
+## Description of data set
+
+**Describe the data set you are "playing" with here. This description should include where you got the data set (and references if appropriate), what kinds of values are recorded, and a little about the reason why these data were collected.**
+
+## Read the data set into R
+
+```{r}
+# code to read your data set into R
+```
+
+
+## `data.frame` viewing and summary functions
+
+```{r}
+# put the code to do your head, tail, summary, etc. functions here
+```
+
+## Observations from data set
+
+**Write a few sentences about what you have found by playing with your data set. For example, what kinds of measurements were made, are there any mean values to compare, what's the variability look like, etc.?**
+
