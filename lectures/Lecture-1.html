@@ -222,6 +222,7 @@ $(document).ready(function () {
 <li><a href="#introduction-to-r-and-rstudio">Introduction to R and RStudio</a><ul>
 <li><a href="#why-do-i-have-to-learn-to-program-in-r">Why do I have to learn to program in R?</a></li>
 <li><a href="#getting-started">Getting started</a><ul>
+<li><a href="#difference-between-r-and-rstudio">Difference between R and RStudio</a></li>
 <li><a href="#overall-layout">Overall layout</a></li>
 <li><a href="#file-management">File management</a></li>
 <li><a href="#getting-help">Getting help</a></li>
@@ -316,6 +317,10 @@ $(document).ready(function () {
 </div>
 <div id="getting-started" class="section level2">
 <h2>Getting started</h2>
+<div id="difference-between-r-and-rstudio" class="section level3">
+<h3>Difference between R and RStudio</h3>
+<p>In this class, we will be working primarily in RStudio. So what is the difference between R and RStudio? R is both a programming language (specifically a statsitical analysis programming language), while RStudio is an <strong>Integrated Development Environment</strong>, or <strong>IDE</strong> for short. RStudio offers a number of features, mostly related to visual presentation of information, that make writing and working with R code easier.</p>
+</div>
 <div id="overall-layout" class="section level3">
 <h3>Overall layout</h3>
 <ul>
@@ -328,7 +333,14 @@ $(document).ready(function () {
 <li>Setup a <code>ENS-623-Research-Stats</code> directory</li>
 <li>Make a <code>data</code> directory</li>
 <li>Make a <code>scripts</code> directory</li>
+<li>In RStudio, set working directory to your new <code>ENS-623-Research-Stats</code> directory</li>
 </ul>
+<div id="setting-your-working-directory" class="section level4">
+<h4>Setting your working directory</h4>
+<p>Point-and-click method - Use ‘Session’ &gt; ‘Set Working Directory’ &gt; ‘Choose Directory’.</p>
+<p>Using the R Console:</p>
+<pre class="r"><code>setwd(&quot;/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-SP18/&quot;)</code></pre>
+</div>
 </div>
 <div id="getting-help" class="section level3">
 <h3>Getting help</h3>
@@ -727,7 +739,7 @@ summary(iris_new)</code></pre>
 <div id="reading-in-your-own-data" class="section level2">
 <h2>Reading in your own data</h2>
 <p>One of the most basic things you will need to do in R is read in your own data set. You can read in Excel files, simple text files, and even files from Google Sheets. But the easiest type of file to read in is a comma seperated values (CSV) file. You can save an Excel workbook (or Numbers workbook or Google Sheet) as a CSV file by using the “Save as …” menu item.</p>
-<p>For today, we’re going to work with a data set related to gastropod fecundity. We’ll link to the file directly using a Dropbox link, but it’s possible to download the file here - <a href="https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/ward.csv">gastropod data</a></p>
+<p>For today, we’re going to work with a data set related to gastropod fecundity. We’ll link to the file directly using a Dropbox link, but it’s possible to download the file here - <a href="https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/ward.csv">gastropod data</a> <strong>The download will begin when you press the hyperlink! The file is called <code>ward.csv</code>.</strong></p>
 <div id="differences-in-fecundity-of-intertidal-gastropods-in-two-different-intertidal-zones-example-6a-in-logan-box-3.1-in-qk" class="section level3">
 <h3>Differences in fecundity of intertidal gastropods in two different intertidal zones (Example 6A in Logan, Box 3.1 in Q&amp;K)</h3>
 <p>Ward and Quinn (1988) investigated the differences in fecundity of <em>Lepsiella vinosa</em> in two different intertidal zones (mussel zone and littorinid zone).</p>
