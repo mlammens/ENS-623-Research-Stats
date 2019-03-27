@@ -24,8 +24,7 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 |Date | Topic | Recommended Reading | Lecture Notes | Assignment |
 |:-----|:-------|:---------|:---------------|:------------|
 |3/13 |Introduction to Biostatistics and R |[Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)| [Lecture notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-1.html); [In class R file]()|[Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) |
-
-
+|3/27 |R Programming and Data Visualization |Q&K Chap. 4; Logan Chap. 5| [Lecture notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-2.html); [In class R file]()|[Problem Set 2](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-2.html) |
 
 
 <!---
