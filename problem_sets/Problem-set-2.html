@@ -213,8 +213,8 @@ $(document).ready(function () {
 \]</span></p>
 <p>Compare the results of your function with that of the <code>mean</code> function in base R.</p>
 </div>
-<div id="problem-2---plotting-relationships-between-variables" class="section level1">
-<h1>Problem 2 - Plotting relationships between variables</h1>
+<div id="problem-2---plotting-relationships-between-variables" class="section level2">
+<h2>Problem 2 - Plotting relationships between variables</h2>
 <p>In class on Wednesday, I demonstrated how to use <code>ggplot2</code> to make an x-y scatter plot comparing <code>Sepal.Length</code> and <code>Petal.Length</code> in the <code>iris</code> data set.</p>
 <p>Recall that you must first install <code>ggplot2</code> if you have not done so already:</p>
 <pre class="r"><code>install.packages(&quot;ggplot2&quot;)</code></pre>
@@ -234,19 +234,19 @@ ggplot(data = iris, aes( x = Sepal.Length, y = Petal.Length, colour = Species ))
 <p><strong>Use the code above, but replace <code>Petal.Length</code> with <code>Sepal.Width</code>. Make a new x-y scatter plot with linear regression lines. Describe how accounting for the three different species might influence how you interpret your data, in comparison to an x-y scatter plot where you do not seperate the species.</strong></p>
 <p><strong><em>Hint:</em> You should make two plots, one where you color the points by species and a second where you do not include any color.</strong></p>
 </div>
-<div id="problem-3---working-with-syntax-in-ggplot2" class="section level1">
-<h1>Problem 3 - Working with syntax in <code>ggplot2</code></h1>
+<div id="problem-3---working-with-syntax-in-ggplot2" class="section level2">
+<h2>Problem 3 - Working with syntax in <code>ggplot2</code></h2>
 <p>Below are two code chunks, both which create histograms and density plots using the <code>iris</code> data set.</p>
-<div id="chunk-1" class="section level2">
-<h2>Chunk 1</h2>
+<div id="chunk-1" class="section level3">
+<h3>Chunk 1</h3>
 <pre class="r"><code>ggplot() +
   geom_histogram(data = iris, aes(x = Petal.Length, y = ..density.., fill = Species), 
                  position = &quot;dodge&quot;) +
   geom_density(data = iris, aes(x = Petal.Length, colour = Species)) +
   theme_bw() </code></pre>
 </div>
-<div id="chunk-2" class="section level2">
-<h2>Chunk 2</h2>
+<div id="chunk-2" class="section level3">
+<h3>Chunk 2</h3>
 <pre class="r"><code>ggplot(data = iris, aes(x = Petal.Length)) +
   geom_histogram( aes(y = ..density.., fill = Species), 
                  position = &quot;dodge&quot;) +
