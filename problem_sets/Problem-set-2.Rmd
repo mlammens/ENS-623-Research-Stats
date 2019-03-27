@@ -1,0 +1,114 @@
+---
+title: "ENS 623 - Spring 2019 - Problem Set 2"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file.**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP19_PS2.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP19_PS2.Rmd`
+
+#### Grading note
+
+* Problem 1 is worth 10 points
+* Problem 2 is worth 10 points
+* Problem 3 is worth 5 points
+
+
+
+## Problem 1 - `for` loop inside a function
+
+Write a **function** that uses a `for` loop to calculate the mean of a vector of numbers.
+
+Recall that the mean is:
+
+$$
+\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n}
+$$
+
+Compare the results of your function with that of the `mean` function in base R.
+
+# Problem 2 - Plotting relationships between variables
+
+In class on Wednesday, I demonstrated how to use `ggplot2` to make an x-y scatter plot comparing `Sepal.Length` and `Petal.Length` in the `iris` data set.
+
+Recall that you must first install `ggplot2` if you have not done so already:
+
+```{r, eval=FALSE}
+install.packages("ggplot2")
+```
+
+Then load it into your environment:
+
+```{r}
+library(ggplot2)
+```
+
+Then the code to create the actual plot looks like this:
+
+```{r}
+data(iris)
+
+ggplot(data = iris, aes( x = Sepal.Length, y = Petal.Length, colour = Species )) + 
+  geom_point()
+```
+
+I very briefly showed you that you can add the term `geom_smoth(method = "lm")` to add linear regression lines onto your plot, as such:
+
+
+```{r}
+ggplot(data = iris, aes( x = Sepal.Length, y = Petal.Length, colour = Species )) + 
+  geom_point() +
+  geom_smooth(method = "lm")
+
+```
+
+**Use the code above, but replace `Petal.Length` with `Sepal.Width`. Make a new x-y scatter plot with linear regression lines. Describe how accounting for the three different species might influence how you interpret your data, in comparison to an x-y scatter plot where you do not seperate the species.**
+
+***Hint:* You should make two plots, one where you color the points by species and a second where you do not include any color.**
+
+```{r, eval=FALSE, echo=FALSE}
+ggplot(data = iris, aes( x = Sepal.Length, y = Sepal.Width, colour = Species )) + 
+  geom_point() +
+  geom_smooth(method = "lm")
+
+```
+
+
+# Problem 3 - Working with syntax in `ggplot2`
+
+Below are two code chunks, both which create histograms and density plots using the `iris` data set.
+
+## Chunk 1
+
+```{r, eval=FALSE}
+ggplot() +
+  geom_histogram(data = iris, aes(x = Petal.Length, y = ..density.., fill = Species), 
+                 position = "dodge") +
+  geom_density(data = iris, aes(x = Petal.Length, colour = Species)) +
+  theme_bw() 
+```
+
+## Chunk 2
+
+```{r, eval=FALSE}
+ggplot(data = iris, aes(x = Petal.Length)) +
+  geom_histogram( aes(y = ..density.., fill = Species), 
+                 position = "dodge") +
+  geom_density( aes(colour = Species)) +
+  theme_bw() 
+```
+
+**Describe the differences between the code chunks.**
+
+**Do Chunks 1 and 2 produce the same plots? (You need to show me that you ran the code to get credit for this.)**
+
+**Based on the answers to the above two questions, what do you think the role of defining arguments in the `ggplot()` function is?**
