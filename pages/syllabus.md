@@ -58,7 +58,7 @@ More information on each of these will be provided throughout the semester.
 * Completed grant or RFP proposal (25%)
 * Problem sets (25%)
 * Analysis project (15%)
-* Stats exam (15%)
+* Stats exam - takehome via Blackboard (15%)
 
 
 ## Required materials
@@ -158,12 +158,12 @@ This is a guide for the material we will cover during the course, however it may
 |3/13 |Introduction to R/RStudio statistics programming language|
 |3/20 | **No Class - Spring Break** |
 |3/27 |Data visualization|
-|4/03 |Probability and probability distributions|
-|4/10 |Hypothesis testing|
-|4/17 |Correlation and regression|
-|4/24 |ANOVA and ANCOVA|
-|5/01 |Non-parametric statistical tests and randomization approaches|
-|5/08 | **Statistics Exam** |
+|4/03 |Probability|
+|4/10 |Probability Distributions and Central Limit Theorem|
+|4/17 |Hypothesis testing and t-tests|
+|4/24 |ANOVA|
+|5/01 |Correlation, regression, and ANCOVA|
+|5/08 | GLM, Non-parametric statistical tests, and randomization approaches|
 
 
 
