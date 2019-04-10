@@ -118,6 +118,10 @@ Repeat the steps above until you get to a number of flips to make that consisten
 
 # Probability Distributions (Intro)
 
+Let's look at a historgram of the total number of heads each of us got during the above experiment. 
+From this figure, we can discuss the binomial probability distribution.
+
+<!---
 Go to this link [https://goo.gl/TeZvfT](https://goo.gl/TeZvfT) and add the number of heads that you got when we simulated 100 coin flips. 
 If you don't remember, simply run the simulation again.
 
@@ -132,70 +136,8 @@ Make a histogram with these data.
 ```{r, eval=FALSE}
 hist(heads_cnt$n_heads)
 ```
+--->
 
-
-
-## Mutually Exclusive Outcomes
-
-For this section, let's think about rolling a six-sided die, rather than a coin flip.
-
-**Challenge** - what's the probability of rolling a 1?
-
-$P(1) = 1/6$ -- likewise, each of the numbers has the same probability.
-
-**Challenge** - what's the probability of rolling a 1 and a 2 at the same exact time?
-
-These events are mutually exclusive.
-
-**Challenge** - What's the probability of rolling a 1 or a 2?
-
-**Challenge** - What's the probability of rolling a 1 or 2 or 3 or 4 or 5 or 6?
-
-### Addition Rule of Mutually Exclusive (Disjoint) Outcomes
-
-$A_1$ and $A_2$ are mutually exclusive. Then the 
-
-$$
-P(A_1\text{ or } A_2 ) = P(A_1) + P(A_2)
-$$
-
-Extending this to $k$ mutually exclusive events:
-
-$$
-P(A_1) + P(A_2) + ... + P(A_k)
-$$
-
-## Non-mutually Exclusive Events
-
-**Example** - 6-sided die
-
-$$
-P(<4 \text{ OR odd})
-$$
-
-Show probability of each, and areas of overlap.
-
-$$
-P(A\text{ or } B ) = P(A) + P(B) - P(A\text{ and }B)
-$$
-
-
-## Independence
-
-> *Two processes are **independent** if knowing the outcome of one provides* no useful information *about the outcome of the other.* - Diez et al. 2016, p. 85
-
-**Challenge** - Is flipping two coins different from flipping one, then the other? 
-
-**Challenge** - You flip 99 heads. What is the probability you will flip a head on the 100th toss?
-
-**Challenge** - For our 6-sided die example above, why aren't $P(<4)$ and $P(\text{odd})$ **NOT** independent events?
-
-
-### Multiplication Rule for Independent Processes
-
-$$
-P(A \text{ and } B) = P(A) \times P(B)
-$$
 
 
 *** 
@@ -405,101 +347,4 @@ individual_color_compare <- new_bag_counts == my_orig_bag
 all(individual_color_compare)
 ```
 
-
-# Visualizing probability - Venn Diagrams
-
-For this, we'll need to install and load a new package.
-
-```{r, eval=FALSE}
-install.packages("VennDiagram")
-```
-
-Then to load it into my workspace, and make the functions available:
-
-```{r}
-library(VennDiagram)
-```
-
-
-Let's draw a Venn diagram representing the probability of getting a **blue** M&M.
-This is written algebraically as $P(Blue)$:
-
-```{r, results='hide'}
-## Load VennDiagram package - NB: you will likely have to install this package first
-library(VennDiagram)
-
-## Create a Venn diagram
-draw.single.venn(area = 0.23, category = "Blue M&M", fill = "blue", alpha = 0.5)
-```
-
-Draw a Venn diagram representing the probability of getting a **blue or red** M&M.
-This is written algebraically as $P(Blue \cup Red)$:
-
-```{r, results='hide'}
-grid.newpage()
-draw.pairwise.venn(area1 = 0.23, area2 = 0.13, cross.area = 0, 
-                   category = c("Blue M&M", "Red M&M"),
-                   fill = c("blue", "red"), alpha = rep(0.5, 2))
-```
-
-**IMPORTANT: Note that there is no overlap between these two events. We say that these events are *mutually exclusive*.**
-
-### Adding Peanut and Almond M&Ms to the mix
-
-Let's imagine the scenario that we add an equal amount of Peanut and Almond M&Ms to our bags of M&Ms. 
-Now we can ask a question like, *what is the probability of getting a **blue AND peanut** M&M?*
-We can write this algebraically as $P(Blue \cap Peanut)$.
-
-Recall that $P(Blue) = 0.23$, and because all three types of M&Ms are represented equally, the $P(Peanut) = 0.33$.
-
-```{r, results='hide'}
-grid.newpage()
-draw.pairwise.venn(area1 = 0.23, area2 = 0.33, cross.area = 0.0759, 
-                   category = c("Blue M&M", "Peanut M&M"),
-                   fill = c("blue", "yellow"), alpha = rep(0.5, 2))
-```
-
-**IMPORTANT: Note that in this example, the color and type of M&M are *indpendent* from each other.**
-
-#### Challenge
-
-**What is the probability of getting a *blue OR peanut* M&M?** I.e. $P(Blue \cup Peanut)$.
-
-Hint: Note the difference between adding up the area represented in the Venn diagram versus adding the $P(Blue) + P(Peanut)$.
-
-### Conditional probability
-
-#### Challange
-
-What is the probability of drawing a blue M&M, CONDITIONAL on it being a peanut M&M?
-
-$$
-P(Blue|Peanut) = \frac{P(Blue \cap Peanut)}{P(Peanut)}
-$$
-
-Calculate this probability.[^1] 
-
-[^1]:The value should be 0.23. **Why?**
-
-***
-
-### More general thinking
-
-We can use a bit of algebra and re-write a general form of the equation above as:
-
-$$
-P(A|B) P(B) = P(A \cap B)
-$$
-
-Now, because $P(A \cap B)$ is identical to $P(B \cap A)$, we can expand this further too:
-
-$$
-P(A|B) P(B) = P(A \cap B) = P(B|A) P(A)
-$$
-
-And after a little more algebra, we arrive at **Bayes Theorem**:
-
-$$
-P(A|B) = \frac{P(B|A) P(A)}{P(B)} = \frac{P(B|A) P(A)}{P(B|A)P(A) + P(B|~A)P(~A)}
-$$
 
