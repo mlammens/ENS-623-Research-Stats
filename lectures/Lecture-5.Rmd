@@ -1,0 +1,490 @@
+---
+title: "Meeting 11 - Central Limit Theorem and Hypothesis Testing"
+author: "Matthew E. Aiello-Lammens"
+date: '2019-04-17'
+output:
+  html_document:
+    code_folding: hide
+    toc: yes
+---
+
+# Today's Goals
+
+* Become familiar with the Central Limit Theorem
+* Introduce principles of hypothesis testing
+
+***
+
+# Standard Normal distribution
+
+Recall that last week we were introduced to the Normal (or Gaussian) Distribution with pdf:
+
+$$
+f(x|\mu,\sigma) \thicksim \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+$$
+
+The **Standard Normal** distribution is a **Normal** distribution with $\mu = 0$ and $\sigma = 1$.
+
+#### Challenge
+
+Draw 1000 samples from the standard normal distribution and plot a histogram and density curve for the resulting data.
+After making this plot, try 10,000 samples.
+
+```{r}
+stdnorm_samps <- data.frame( samps = rnorm(n = 10000, mean = 0, sd = 1) )
+
+library(ggplot2)
+
+ggplot(data = stdnorm_samps, aes(x = samps)) +
+  geom_histogram( aes( y = ..density.. ) ) +
+  geom_density(colour = "red", size = 2) + 
+  theme_bw()
+```
+
+* How well does the density plot represent the standard normal distribution?
+* Can we add the functional form of the normal distribution?
+
+```{r}
+ggplot(data = stdnorm_samps, aes(x = samps)) +
+  geom_histogram( aes( y = ..density.. ) ) +
+  geom_density(colour = "red", size = 2) + 
+  stat_function( fun = dnorm, colour = "blue", alpha = 0.6, size = 2) +
+  theme_bw()
+```
+
+### Z-scores
+
+We can convert from a normal distribution with any mean $\mu$ and standard deviation $\sigma$ to the standard normal by subtracting the mean from each value, then dividing by the standard deviation:
+
+$$
+z_i = \frac{y_i - \mu}{\sigma}
+$$
+
+The resulting values of this conversation are more commonly referred to as **Z-scores**.
+
+### The utility of knowing the amount of area under the curve for probability densities
+
+Last week I briefly mentioned that approximately 95% of the area under the standard normal is between -2 and 2. 
+Let's find the exact values and use this information to do some useful things.
+
+* Where do 95% of the values from the standard normal fall? **Introducing `qnorm`.**
+* The `q` in `qnorm` stands for **quantile**
+
+```{r}
+qnorm(.025)
+qnorm(.975)
+```
+
+* How might we visualize this?
+
+```{r}
+ggplot(data = stdnorm_samps, aes(x = samps)) +
+  coord_cartesian(xlim = c(-5, 5), ylim = c(0, 0.41)) +
+  geom_vline(xintercept = c(-1.96, 1.96), size = 2 ) +
+  stat_function( fun = dnorm, colour = "blue", size = 2) +
+  theme_bw()
+```
+
+
+# The Central Limit Theorem
+
+This section gets into more nitty-gritty probability and statistics. 
+You should review this information in both of the course text books.
+
+## Sampling distribution of the mean
+
+The frequency distribution of the **mean values** of several *different samples* taken from a population.
+
+From Q&K p. 18:
+
+> The probability distribution of means of samples from a normal distribution is also normally distributed.
+
+#### Challenge
+
+1. Take 100 samples of 10 observations from a normal distribution with a mean of 0 and a standard deviation of 1. Plot a histogram of the means.
+2. Increase the number of samples. How does this affect the outcome?
+3. Increase the number of observations. How does this affect the outcome?
+
+```{r, eval=FALSE}
+mean_100samp_10obs <- 0
+for(x in 1:100){
+  mean_100samp_10obs <- c(mean_100samp_10obs,
+                          mean(rnorm(10)))
+}
+hist(mean_100samp_10obs)
+
+# Increase samples
+mean_1000samp_10obs <- 0
+for(x in 1:1000){
+  mean_1000samp_10obs <- c(mean_1000samp_10obs,
+                          mean(rnorm(10)))
+}
+hist(mean_1000samp_10obs)
+
+# Increase observations
+mean_100samp_100obs <- 0
+for(x in 1:100){
+  mean_100samp_100obs <- c(mean_100samp_100obs,
+                          mean(rnorm(100)))
+}
+hist(mean_100samp_100obs)
+
+```
+
+
+## CLT
+
+In the limit as $n \to \infty$, the probability distribution of means of samples from ***any distribution*** will approach a normal distribution.
+
+### Distribution of means of samples from the Poisson distribution 
+
+Plot a histogram of 100 observations that are **Poisson distributed** with a $\lambda$ value $= 1$.
+Describe the shape of the distribution. 
+Does it look normal?
+
+```{r}
+ggplot(data = NULL) +
+  geom_histogram(aes(x = rpois(100, lambda = 1)))
+```
+
+
+Next, take 100 samples of 10 observations from a **Poisson distribution** with $\lambda = 3$, calculate the mean for each sample. Plot a histogram of the means.
+
+```{r}
+mean_100samp_10obs <- 0
+for(x in 1:100){
+  mean_100samp_10obs <- c(mean_100samp_10obs,
+                          mean(rpois(10,lambda = 3)))
+}
+hist(mean_100samp_10obs)
+
+```
+
+## Using the CLT
+
+From Q&K p. 18:
+
+> The expected value or mean of the probability distribution of sample means equals the mean of the population ($\mu$) from which the samples were taken.
+
+
+### Standard error of the sample mean
+
+We just demonstrated that **sample means are normally distributed**. 
+What can we do with this?
+To start, we can say something about the precision and accuracy of our estimates of the *population* mean based on the *sample* mean.
+
+**Standard error of the mean** - the expected value of the standard deviation of the sample mean:
+
+$$
+\sigma_{\bar{y}} = \frac{\sigma}{\sqrt{n}}
+$$
+
+Often times we only have **one sample** from the population. What can we say then?
+
+Standard error of the mean:
+
+$$
+s_{\bar{y}} = \frac{s}{\sqrt{n}}
+$$
+
+where $s$ is the sample estimate of the standard deviation of the original population and $n$ is the sample size.
+
+**NB:** The standard error of the means "tells us about the error in using $\bar{y}$ to estimate $\mu$."
+
+
+## Confidence intervals for the population mean
+
+Recall that we can convert any observation from normal distribution to it's equivalent value from a standard normal distribution using:
+
+$$
+z_i = \frac{y_i - \mu}{\sigma}
+$$
+
+and that these are sometimes called ***z-scores***.
+
+Using this formula, we can convert a sample mean, $\bar{y}$, into its corresponding value from a standard normal using:
+
+$$
+z = \frac{\bar{y} - \mu}{\sigma_{\bar{y}}}
+$$
+
+where the denominator is the standard error of the mean (see above). 
+
+We can use this information to estimate how confident we are that are sample mean is a good representation of the *true* population mean.
+Again, we are doing this by taking advantage of the fact that we know the sample means are *normally distributed*.
+We calculate the range in which 95% of the sample mean values fall.
+
+In mathematical terms, this looks like:
+
+$$
+P\{\bar{y} - 1.96\sigma_{\bar{y}} \leq \mu \leq \bar{y} + 1.96\sigma_{\bar{y}} \} = 0.95
+$$
+
+**VERY IMPORTANT:** The probability statement here is about the *interval*, not $\mu$. 
+$\mu$ is not a random variable; it is fixed.
+What we are saying is that there is 95% confidence that this interval includes the population mean, $\mu$.
+
+
+
+### Unknown $\sigma$ (and $\sigma_{\bar{y}}$)
+
+We rarely know $\sigma$, so we cannot calculate $\sigma_{\bar{y}}$. 
+So what *can* we do?
+
+Instead, we use the sample standard deviation, $s_{\bar{y}}$. 
+So now we are dealing with a random variable that looks like: 
+
+$$
+\frac{\bar{y}-\mu}{s_{\bar{y}}}
+$$
+
+which is no longer standard normal distributed, but rather ***t* distributed**.
+
+#### Challenge
+
+Use whatever resource available to you, and look-up the ***t* distribution**.
+What is/are the parameter(s) of the *t* distribution?
+
+
+### Degrees of freedom
+
+> The number of observations in our sample that are "free to vary" when we are estimating the variance (Q&K p.20; Box 2.1).
+
+If I have calculated the mean, how many observations, out of a total of *n*, are free to vary?
+
+**Answer:** $n-1$. Once I have the mean, I can use it and any $n-1$ values to calculate the *n*th value.
+
+General rule regarding df's:
+
+> the df is the number of observations minus the number of parameters included in the formula for the variance (Q&K p.20; Box 2.1).
+
+
+## Standard error of other statistics
+
+> The standard error is ... the standard deviation of the probability distribution of a specific statistics (Q&K p. 20).
+
+### Standard error of the sample variance
+
+The distribution of the sample variance is *not normal*. It is $\chi^2$ distributed.
+
+Mathematically, this is explained as:
+
+$$
+X \thicksim N(0,1) \to X^2 \thicksim \chi^2
+$$
+
+Intuitively, why does this make sense?
+
+***
+
+# Hypothesis Testing
+
+* What is a hypothesis? 
+* How do we test our hypothesis?
+
+The answers to these questions, with respect to this course, are primarily based on frequentist statistics.
+
+
+## Example
+
+Let's say we have a sample of observations that we want to know if they come from some population with a known value for $\mu$ (i.e., we know the population mean). 
+We can see how (un)likely it is that the sample estimates come from this particular population, by looking at where these values fall in a *t* distribution. That is, calculate the *t* statistic:
+
+$$
+t_s = \frac{\bar{y} - \mu}{s_{\bar{y}}}
+$$
+
+
+## *t*-test
+
+* Looking at differences between two samples of data. 
+The *differences* should be *t* distributed.
+* **Major assumptions** - the samples are drawn from populations that are:
+    1. Normally Distributed
+    2. Equally varied (i.e. equal variance)
+    3. Each observation is *independent*
+    
+## We select the error rate
+
+General concencus is $p = 0.05$. This is known as Type-I error, or $\alpha$.
+
+### Type-I versus Type-II error
+
+* **Type-I error: $\alpha$** - our test suggests there is an effect, but there really is not one
+* **Type-II error: $\beta$** - when you fail to detect an effect that really occurs
+
+### Statistical power
+
+The reciprical of Type-II error ($\beta$) is **power**. 
+
+$$
+power(1-\beta) \propto \frac{ES \sqrt{n} \alpha}{\sigma}
+$$
+
+#### How do we increase statistical power?
+
+Increase the sample size.
+
+* Distribution of the mean becomes narrower
+* Acceptance region becomes narrower
+* Curves overlap less
+* Type II error rate becomes smaller
+
+![power](https://www.dropbox.com/s/joh0kxc7ygsq9xw/power.png?dl=1)
+
+## What are the general steps to hypothesis testing?
+
+See p. 33-34 in Q&K. Fisher's approach below:
+
+* Construct null hypothesis ($H_0$)
+* Choose a test stat that measures deviation from null
+* Collect data and compare the value of the test stat to the known distribution of that stat.
+* Determine p-val
+* Accept or reject null
+
+What are some of the potential problems with this approach?
+
+### Our data or something more extreme
+
+When we use a sampling distribution for our test statistic (e.g., the *t* distribution), we are asking "what is the probability of observing our data, or something more extreme, in the long run, if $H_0$ is true."
+Mathematically, this can be written as:
+
+$$
+P(data|H_0)
+$$
+
+## Examples of parametric hypothesis testing
+
+Below is the generic form of the *t* statistic:
+
+$$
+t_s = \frac{St - \theta}{S_{St}}
+$$
+
+where $St$ is the value of some statistic (e.g., the mean) from our **sample**, $\theta$ is the **population** value for that statistic, and $S_{St}$ is the estimated standard error of the statistic $St$ (based on our sample).
+
+How can we use this formula to test whether two samples are drawn from the same population?
+
+Imagine the case where we have two different samples, and for each we're testing whether the means are different from the population means.
+We then have:
+
+$$
+t_1 = \frac{\bar{y_1}-\mu_1}{s_{\bar{y}_1}}
+$$
+
+and
+
+$$
+t_2 = \frac{\bar{y_2}-\mu_2}{s_{\bar{y}_2}}
+$$
+
+If the two samples are drawn from the same population, then $\mu_1 = \mu_2$, or $\mu_1 - \mu_2 = 0$.
+
+We can then write our *t* stat as:
+
+$$
+t = \frac{(\bar{y_1} - \bar{y_2}) - (\mu_1 - \mu_2)}{s_{\bar{y}_1 - \bar{y}_2}}
+$$
+
+which simplifies to:
+
+$$
+t = \frac{\bar{y_1} - \bar{y_2}}{s_{\bar{y}_1 - \bar{y}_2}}
+$$
+
+where $s_{\bar{y}_1 - \bar{y}_2}$ is the standard error of the difference between the means and is equal to:
+
+$$
+s_{\bar{y}_1 - \bar{y}_2} = 
+\sqrt{
+\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 -2}
+(\frac{1}{n_1} + \frac{1}{n_2})
+}
+$$
+
+
+### Differences in fecundity of intertidal gastropods in two different intertidal zones (Example 6A in Logan, Box 3.1 in Q&K)
+
+Ward and Quinn (1988) investigated the differences in fecundity of *Lepsiella vinosa* in two different intertidal zones (mussel zone and littorinid zone). 
+
+Get the data and have a quick look
+
+```{r}
+gastro <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/ward.csv")
+summary(gastro)
+```
+
+Make a box plot to help assess differences in variance and deviations from normality.
+
+```{r}
+library(ggplot2)
+
+ggplot() +
+  geom_boxplot(data = gastro, aes(x = ZONE, y = EGGS)) +
+  theme_bw()
+
+```
+
+Calculate means and standard deviations of each group separatley. We will be using `dplyr` for this.
+
+```{r}
+library(dplyr)
+
+gastro %>%
+  group_by(ZONE) %>%
+  summarise(Mean = mean(EGGS), Var = var(EGGS))
+
+```
+
+
+Run *t* test.
+
+```{r}
+(gastro_t_test <- t.test(data = gastro, EGGS ~ ZONE, var.equal = TRUE))
+
+gastro_t_test$estimate[1] - gastro_t_test$estimate[2]
+
+```
+
+
+### Metabolic rates of northern fulmars (sea-bird)
+
+Furness and Bryant (1996) measured the metabolic rates of male and female breeding northern fulmars, and tested if there were any observalbe differences in these rates.
+
+Get the data and have a look
+
+```{r}
+fulmars <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/furness.csv")
+fulmars
+summary(fulmars)
+```
+
+Make a box plot to help assess differences in variance and deviations from normality.
+
+```{r}
+ggplot() +
+  geom_boxplot(data = fulmars, aes(x = SEX, y = METRATE)) +
+  theme_bw()
+
+```
+
+#### Challenge
+
+Are the variances the same?
+
+Calculate means and standard deviations of each group separatley. We will be using `dplyr` for this.
+
+```{r}
+fulmars %>%
+  group_by(SEX) %>%
+  summarise(Mean = mean(METRATE), Var = var(METRATE))
+
+```
+
+Based on inequality of variances, use Welch's *t*-test.
+
+```{r}
+(fulmars_t_test <- t.test(data = fulmars, METRATE ~ SEX, var.equal = FALSE))
+```
+
+
