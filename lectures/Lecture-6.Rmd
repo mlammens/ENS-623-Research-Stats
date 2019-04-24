@@ -127,7 +127,10 @@ Example 10B in Logan provides an example of the use of planned comparisons.
 
 Sometimes your replicates aren't quite independent.
 
-**See visual as per Logan, Fig 11.1.**
+Figure 11.1 in Logan provides a good visual of nested design.
+
+![Logan - Figure 11.1](/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/lectures/logan-fig-11-1.png)
+
 
 For formula, see Logan p. 284 and for calculation of F-ratios see Table 11.1.
 **Note that Mean-Squared Errors are the same if B is random or fixed, but F-ratio is differen! Why? Discuss.**
