@@ -1,0 +1,308 @@
+---
+title: "Meeting 12 - ANOVA"
+author: "Matthew E. Aiello-Lammens"
+date: '2019-04-24'
+output:
+  html_document:
+    code_folding: hide
+    toc: yes
+---
+
+# Today's Goals
+
+* Introduction to all things ANOVA
+* As time allows:
+    * One-way ANOVA
+    * Nested ANOVA
+    * Factorial / Multi-way ANOVA
+
+***
+
+# Introduction to Analysis of Variance - ANOVA
+
+In biology there are many times when we are working with **categorical** predictor variables and continuous responses. 
+For example, let's consider a fertilizer addition experiment, where the growth of some plant species is measured under a fertilizer versus no-fertilizer treatment. 
+Here, the predictor variable (fertilizer addition or not) is a categorical variable. 
+
+#### Challenge
+
+We have worked with this kind of simple case, where we have one-predictor variable which can take two values. What did we do in this case?
+
+
+```{r}
+library(dplyr)
+
+data(iris)
+t.test( x = filter(iris, Species == "setosa")$Petal.Length,
+        y = filter(iris, Species == "versicolor")$Petal.Length )
+
+anova(lm(data = filter(iris, Species != "virginica"), formula = Petal.Length ~ Species))
+```
+
+If we have more than two values within a single predictor variable, then we cannot use a *t*-test. Here we go to an ANOVA.
+
+```{r}
+anova(lm(data = iris, formula = Petal.Length ~ Species))
+
+```
+
+
+We'll work through another example below, that comes from the lecture material.
+
+
+## Visual understanding of ANOVA
+
+Logan, Figure 10.2, offers a good visual understanding of ANOVA. 
+Note that we are examining the relationships between different sets of sums of squares (think about calculating variance!).
+
+![Logan - Figure 10.2](/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/lectures/logan-fig-10-2.png)
+
+## Fixed versus Random Effects
+
+**Fixed factors** are ones we have manipulated, or that we expect *a priori* to have an effect on the response. 
+From Logan, p 254 - "conclusions about the effects of a fixed factor are restricted to the specific treatment levels investigated ..."
+
+**Random factors** are, as per Logan, p. 254, "randomly chosen from all the possible levels of populations and are used as random representatives of the populations". 
+E.g., density of plants could be random. Or position of camera traps on a hillside.
+
+## Null hypotheses
+
+**Fixed effects model:** 
+
+$$
+H_0: \mu_1 = \mu_2 = ... = \mu_i = \mu
+$$
+
+**Random effects model:**
+
+$$
+H_0: \sigma^2_1 = \sigma^2_2 = ... = \sigma^2_i = \sigma^2 
+$$
+
+
+
+# One-way ANOVA
+
+Here I will demonstrate how to do an ANOVA in R using the Wolf River data set.
+
+```{r}
+#aldrin <- read.csv("https://www.dropbox.com/s/sfstj4p8beajir5/aldrin.csv?dl=1")
+aldrin <- read.csv("https://bit.ly/2DXjm59")
+summary(aldrin)
+
+```
+
+ANOVA is a kind of linear model (we'll talk more about this next week), so we use the `lm` function in R first.
+
+```{r}
+aldrin_lm <- lm(data = aldrin, aldrin~depth)
+```
+
+Next, we use a special summary command called `anova` to show the results of our linear model.
+
+```{r}
+anova(aldrin_lm)
+```
+
+## Post-hoc multiple comparisons
+
+We have found that the different locations are different, but not which ones differe frome each other. 
+To do this, we would normally use a method like Tukey's Honset Significant Differences test, which I implement below.
+
+```{r}
+TukeyHSD(aov(data = aldrin, aldrin~depth))
+```
+
+Note, that for reasons that have never been clear to me, you can only use the TukeyHSD method when using the `aov` function.
+For an alternative approach, see the `glht` function in the `multcomp` package. 
+This is described in Logan (e.g., p. 267).
+
+## Planned comparisons
+
+Where as unplanned, post-hoc comparisons require a correction for multiple comparisons, planned comparisons do not. 
+We will not cover planned comparisons in class, but they may show up in the homework or on the final. 
+Example 10B in Logan provides an example of the use of planned comparisons.
+
+# Nested ANOVA
+
+Sometimes your replicates aren't quite independent.
+
+**See visual as per Logan, Fig 11.1.**
+
+For formula, see Logan p. 284 and for calculation of F-ratios see Table 11.1.
+**Note that Mean-Squared Errors are the same if B is random or fixed, but F-ratio is differen! Why? Discuss.**
+
+## Unbalanced designes
+
+Often your observations will not be clean. This is unfortunate, as it makes the analyses more complicated. But they are still doable.
+
+## Nested ANOVA Example
+
+From Logan Example 11.A - Density-dependent grazing effects of sea urchin on filamentous algea (Andrew and Underwood 1993).
+
+Levels: 
+1. Sea urchin density
+2. Patches of Reef
+3. Quadrats within patches
+
+Get the data and have a look.
+
+```{r}
+#algae_density <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter11/Data/andrew.csv")
+algae_density <- read.csv(file = "https://bit.ly/2Dpwr5B")
+
+head(algae_density)
+summary(algae_density)
+```
+
+Patch and Quad need to be converted to factors!
+
+```{r}
+algae_density$PATCH <- factor(algae_density$PATCH)
+algae_density$QUAD <- factor(algae_density$QUAD)
+
+summary(algae_density)
+```
+
+Much better.
+
+Let's make some visuals.
+
+```{r}
+library(ggplot2)
+
+ggplot(data = algae_density) +
+  geom_boxplot(aes(x = TREAT, y = ALGAE)) +
+  theme_bw()
+```
+
+We should also consider this from the perspective to collapsing the quadrats into their mean values.
+
+```{r}
+library(dplyr)
+
+algae_density_agg <-
+  algae_density %>%
+  group_by(TREAT, PATCH) %>%
+  summarize(ALGAE_QUAD_MEAN = mean(ALGAE))
+
+ggplot(data = algae_density_agg) +
+  geom_boxplot(aes(x = TREAT, y = ALGAE_QUAD_MEAN)) +
+  theme_bw()
+
+```
+
+Construct an ANOVA model and look at the results.
+
+```{r}
+algae_density_aov <- aov(data = algae_density, ALGAE ~ TREAT + Error(PATCH))
+
+summary(algae_density_aov)
+```
+
+* What can we conclude?
+* What was the unit of replication?
+
+# Factorial ANOVA
+
+What if we want to look at two, or more, factors where one is not nested in the other?
+
+**See visuals as per Logan, Fig 12.1 and 12.2.**
+
+For formula, see Logan p. 314 and for calculation of F-ratios see Table 12.1.
+
+
+
+
+## Example - Two factor fixed effects model (Model I)
+
+From Logan 2010, p. 334:
+
+> Quinn (1988) manipulated the density of adults limpets within enclosures (8, 15, 30 and 45 individuals per enclosure) during two seasons (winter-spring and summer-autumn) so as to investigate the effects of adult density and season on egg mass production by intertidal limpets. Three replicate enclosures per density/season combination were used, and both density and season were considered fixed factors (from Box 9.4 of Quinn and Keough (2002)).
+
+```{r}
+#limpets <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter12/Data/quinn.csv")
+limpets <- read.csv(file = "https://bit.ly/2UCV7x2")
+
+head(limpets)
+summary(limpets)
+
+limpets$DENSITY <- factor(limpets$DENSITY)
+```
+
+Let's get some visuals.
+
+```{r}
+ggplot(data = limpets) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets) +
+  geom_boxplot(aes(x = SEASON, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS, fill = SEASON)) +
+  theme_bw()
+
+```
+
+
+And let's run the model.
+
+```{r}
+limpets_lm <- lm(data = limpets, formula = EGGS ~ SEASON * DENSITY)
+summary(limpets_lm)
+anova(limpets_lm)
+```
+
+
+## Example - Two factor fixed effects model
+
+From Logan 2010, p. 338:
+
+> Quinn (1988) also manipulated the density of larger adults limpets further down the shoreline within enclosures (6, 12 and 24 individuals per enclosure) during the two seasons (winter-spring and summer-autumn) so as to investigate their effects on egg mass production. Again, three replicate enclosures per density/season combination were used, and both density and season were considered fixed factors (from Box 9.4 of Quinn and Keough (2002))
+
+```{r}
+#limpets1 <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter12/Data/quinn1.csv")
+limpets1 <- read.csv(file = "https://bit.ly/2DyOB50")
+
+head(limpets1)
+summary(limpets1)
+
+limpets1$DENSITY <- factor(limpets1$DENSITY)
+summary(limpets1)
+
+```
+
+```{r}
+ggplot(data = limpets1) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets1) +
+  geom_boxplot(aes(x = SEASON, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets1) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS, fill = SEASON)) +
+  theme_bw()
+
+```
+
+
+And let's run the model.
+
+```{r}
+limpets1_lm <- lm(data = limpets1, formula = EGGS ~ SEASON * DENSITY)
+summary(limpets1_lm)
+anova(limpets1_lm)
+```
+
+### Problems from unbalanced design
+
+See Logan Fig 12.3, p. 325. The variance in a model is "explained" sequentially.
+
+Provided there's time, we'll play with the models above.
+
+
