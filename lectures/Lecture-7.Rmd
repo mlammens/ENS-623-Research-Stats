@@ -98,6 +98,8 @@ For Pearson's correlation coefficient to be appropriate, the data should have:
 
 Now we assume that any change in **y** is due to a change in **x**.
 
+**Written Notes - Page 5**
+
 ## Example of linear regression
 
 Effects of starvation and humidity on water loss in the confused flour beetle.
@@ -224,9 +226,7 @@ Below is a list of techniques that are covered well in both of the class textboo
 
 What do we do when we have two or more predictors?
 
-**See written notes -- page 2**
-
-Also, look at this totally awesome site! [Visualizing Relations in Multiple Regression](http://www.math.yorku.ca/SCS/spida/lm/visreg.html)
+Look at this totally awesome site! [Visualizing Relations in Multiple Regression](http://www.math.yorku.ca/SCS/spida/lm/visreg.html)
 
 ## Additive model
 
