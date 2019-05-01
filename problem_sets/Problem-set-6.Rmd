@@ -1,0 +1,51 @@
+---
+title: "ENS 623 - Spring 2019 - Problem Set 6"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file.**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP19_PS6.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP19_PS6.Rmd`
+
+#### Grading note
+
+* Problem 1 is worth 10 points
+* Problem 2 is worth 10 points
+* Problem 3 is worth 5 points
+
+# Overview
+
+For this problem set we will use data on cell survival for fourteen plates exposed to different levels of radiation.
+You can acquire these data by using the following command:
+
+```{r}
+cell_survival <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/cell_survival.csv")
+```
+
+# Problem 1
+
+Use the `lm` function to fit a linear regression model to these data. 
+Report the results and plot the data and the best-fit line. (10 pnts)
+
+# Problem 2
+
+Use the regression diagnostics we learned about in class to examine these data.
+Identify the outlier(s). 
+Remove the outlier(s) and run a new `lm`. 
+How does the regression slope change if it/they were to be removed from the dataset? 
+Be sure to clearly state which data points you are considering "outliers" and why. (10 pnts)
+
+# Problem 3
+
+Do these data fit the assumptions of linear regression?
+Address each of the "big 3" assumptions separately. (5 pnts)
+
