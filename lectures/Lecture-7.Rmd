@@ -162,11 +162,6 @@ ggplot(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
 * **Cook's D:** a statistics that offers a measure of the influence of each data point on the fitted model that incorporates both leverage and residuals. Values $\ge 1$ are considered "suspect".
 
 
-
-```{r}
-plot(flr_beetle_lm)
-```
-
 ## Standard error of regression coefficients, the regression line, and $\hat{y}_i$ predictions
 
 Regression coefficients are statistics and thus we can determine the standard error of these statistics.
