@@ -13,7 +13,7 @@ This page is for ENS 623 during the Spring of 2019. Links to previous versions o
 
 ## Course Description
 
-This course covers issues related to the proper manner in which develop and conduct a research project. Statistical issues related to environmental evaluations will be discussed, including minimal detectable levels, proper sample size, and determination of proper methods for evaluation of data, using both parametric and nonparametric procedures. 
+This course covers issues related to the proper manner in which develop and conduct a research project. Statistical issues related to environmental evaluations will be discussed, including minimal detectable levels, proper sample size, and determination of proper methods for evaluation of data, using both parametric and non-parametric procedures. 
 
 ## Syllabus
 
@@ -64,9 +64,21 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 During the semester, you will carry out an independent research and analysis project, using the skills we learn in this class. 
 The project represents 15% of your grade, but is broken up into several components. 
 
+**Guidelines and Requirements**
+
+* Your analysis project should be submitted in *.docx format on the course Blackboard page
+* You can use RMarkdown to write your report and knit it into a *.docx format
+* Your write up should include the following sections
+    * **Introduction** (approx. 250 - 500 words) - an overview of the data set you are using in your analysis. If you generated the data yourself, describe how you collected these data. If you are using data from another person's or group's project, describe why and how these data were collected by that individual or group.
+    * **Research Question** (approx. 250 - 500 words) - describe your research question that you are trying to answer with these data. Why is this question important in a broader context (i.e., with respect to environmental science in general).
+    * **Statistical Analysis** (approx. 500 - 750 words) - describe the analysis you are going to use in order to answer your question. Why is this the most appropriate analysis for your data and question? What assumptions are there in this analysis? Do you data meet these assumptions? If not, how much of an influence might these violations have on the interpretation of your results? Are there any other studies that have used a similar analysis to answer a similar question? 
+    * **Results** (approx. 500 - 750 words) - provide a description and interpretation of your results.
+* You should include any and all **in text** citations and a **works cited** section to support your description of your data, question, analysis choice, and results interpretation.
+* **Figures and Tables** - you should include any and all figures and tables that support your analysis. **Each figure and table should have it's own caption that stands alone from the paper in *briefly* describing what information the figure/table is meant to convey.**
+
 ## Resources
 
-Here are some useful resources for leanring R, biostats, research methods, and grants.
+Here are some useful resources for learning R, biostats, research methods, and grants.
 
 ### R
 
