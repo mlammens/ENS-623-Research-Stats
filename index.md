@@ -30,6 +30,7 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 |4/17 |CLT and Hypothesis Testing|Q&K Chap. 2 & 3; Logan Chap. 3 & 6| [Lecture notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-5.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-11-InClass.R) |   |
 |4/24 |ANOVA|Q&K 8 & 9; Logan 10-12 | [Lecture slides](https://docs.google.com/presentation/d/1dkWNSVRYUWei170BAH1zM85Qj6W38YoZrcT618-WAY4/edit?usp=sharing); [Lecture notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-6.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-12-InClass.R) | [Problem Set 5](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-5.html)  |
 |5/01 |Correlation and Regression|Q&K Chap. 3 & 5; Logan Chap. 6-8| [Lecture notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-7.html); [Supplemental lecture notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-7-Notes.pdf); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-13-InClass.R) | [Problem Set 6](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-6.html)  |
+|5/08 |ANCOVA, GLM, Frequency Analysis|Q&K 12-14; Logan Chap. 15-17| [Lecture notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-8.html); [In class R file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-14-InClass.R) |   |
 
 
 <!---
