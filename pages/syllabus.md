@@ -54,11 +54,9 @@ We will assess your achievement of the learning objectives based on your perform
 More information on each of these will be provided throughout the semester.
 
 * Participation during in class assignments (10%)
-* Draft MSES Appendix C and/or Appendix D, as appropriate for individual students (10%)
-* Completed grant or RFP proposal (25%)
-* Problem sets (25%)
-* Analysis project (15%)
-* Stats exam - takehome via Blackboard (15%)
+* Problem sets (40%)
+* Analysis project (20%)
+* Midterm and Final - takehome via Blackboard (15% each / 30% total)
 
 
 ## Required materials
@@ -141,30 +139,4 @@ the University’s web site.\
 To receive accommodation for any disability, students must contact the
 campus Counseling Center (Pace Plaza, 212-346-1526; Westchester,
 914-773-3710).
-
-## Course schedule
-
-This is a guide for the material we will cover during the course, however it may be amended during the semester as needed. 
-
-|Date | Topic &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| 
-|-----|:-------|
-|<img width=200/>|<img width=500/>|
-|1/30 |Introductions, syllabus review, conservation issues in the Hudson Valley, choosing a research topic, reviewing the literature.|
-|2/06 |Student presentations on research topic. Formalizing your research question. Identifying Thesis advisors/Committees. **Research on funding opportunities – selection due in class on Feb. 20.**|
-|2/13 |Ecological studies and sampling. Project Design - Identifying project vision, scope, goals, objectives, activities, outcomes, and resources. Discussion of project constraints, creating a budget.  **Draft budget due Feb. 20 in class.**|
-|2/20 |Budget presentations. The basics of grant proposals. **Selection of funding opportunity for grant proposal assignment.** Development of your elevator speech.|
-|2/27 |Creation of logic models and implementation plans. **Summary of meeting with potential Advisor/Committee members.**|
-|3/06 |Student project presentations.  **Grant proposal due March 13.**|
-|3/13 |Introduction to R/RStudio statistics programming language|
-|3/20 | **No Class - Spring Break** |
-|3/27 |Data visualization|
-|4/03 |Probability|
-|4/10 |Probability Distributions and Central Limit Theorem|
-|4/17 |Hypothesis testing and t-tests|
-|4/24 |ANOVA|
-|5/01 |Correlation, regression, and ANCOVA|
-|5/08 | GLM, Non-parametric statistical tests, and randomization approaches|
-
-
-
 

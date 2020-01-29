@@ -1,7 +1,7 @@
 ---
-title: "Meeting 7 - Introduction to Biostats and R Programming"
+title: "Meeting 1 - Introduction to R Programming"
 author: "Matthew E. Aiello-Lammens"
-date: '2019-03-13'
+date: '2020-01-29'
 output:
   html_document:
     code_folding: hide
@@ -12,7 +12,7 @@ output:
 
 # Class goals
 
-* Learn how to develop a research question - **DONE**
+* Learn how to develop a research question
 * Become proficient using the R statistical programming language
 * Learn how to explore data collected during a research project
 * Learn and master the standard statistical analyses used in scientific studies
@@ -48,7 +48,7 @@ Traditional view:
 5. Based on results, make an inference about our hypothesis - do the data support or reject our prediction?
 6. Repeat as necessary to acquire knowledge
 
-Checkout [Understanding Science](http://undsci.berkeley.edu/article/0_0_0/howscienceworks_02)
+Checkout [Understanding Science](https://undsci.berkeley.edu/flowchart_noninteractive.php)
 
 ### Analysis is iterative
 
@@ -94,6 +94,11 @@ Using the R Console:
 setwd("/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-SP18/")
 ```
 
+#### Make an RStudio Project
+
+In the upper right hand corner, let's navigate the project options and make a project from an existing directory.
+
+Close RStudio, and reopen by double clicking on the project.
 
 ### Getting help
 
@@ -153,7 +158,7 @@ Use a script file for your work. It's easier to go back to and easy to document.
 
 #### Challenge
 
-Create a new R script file in your `scripts` directory.
+Create a new R script file in your `scripts` directory. Run a few basic commands in the new file.
 
 ### Basic file managment in R
 
