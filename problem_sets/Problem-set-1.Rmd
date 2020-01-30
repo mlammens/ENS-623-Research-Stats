@@ -1,9 +1,9 @@
 ---
-title: "ENS 623 - Spring 2019 - Problem Set 1"
+title: "ENS 623 - Spring 2020 - Problem Set 1"
 output: html_document
 ---
 
-**Please submit this homework as an R Markdown (Rmd) file.**
+**Please submit this homework on Blackboard as *both* an R Markdown (Rmd) and DOCX file.**
 
 As I mentioned during our first meeting, rmarkdown is a way to incorporate text, with simple formatting, with R code chunks.
 Rather than spell out how to create an Rmd file here, I recommend you consult the following resources:
@@ -14,79 +14,29 @@ Rather than spell out how to create an Rmd file here, I recommend you consult th
 
 #### Your file should use the following naming scheme
 
-**`[last name]_ENS623_SP18_PS1.Rmd`**
+**`[last name]_ENS623_SP20_PS1.Rmd`**
 
 For example, 
 
-`Lammens_ENS623_SP18_PS1.Rmd`
+`Lammens_ENS623_SP20_PS1.Rmd`
 
 #### Grading note
 
 * Part 1 is worth 10 points
 * Part 2 is worth 15 points
 
-# Part 1 - More Practice with R
+# Part 1 - Introducing the Iris data set
 
-For the first part of this assignment, you will use a learning tool named [swirl](https://swirlstats.com/students.html) to walk through another brief introduction to R.
-In order to use `swirl` we will need to download a new "package" to your system.
-You can cut and paste the code below to do this.
-**IF YOU HAVE ALREADY INSTALLED `swirl` THEN SKIP THE `install.packages()` STEP, BUT DO `library(swirl)`**
+In class I mentioned that the R package `datasets` includes several different kinds of data sets to use in R. In this problem set, we'll work with the `iris` data set. Using any of the help functions we learned in class, `?` or `help.search`, find the help page for the iris data set. 
 
-```{r, eval=FALSE}
-install.packages("swirl")
-```
-
-After you've installed `swirl`, execute the following command:
-
-```{r}
-library(swirl)
-```
+* Briefly describe what these data are.
+* Think about a model that might describe the varition in petal length values in this data set.
 
 
-Next, we need to download the `swirl` lesson we'll be working with today.
-Use the code below.
+# Part 2 - Play with the the `iris` data set
 
-```{r, eval=FALSE}
-swirl::install_course("A_(very)_short_introduction_to_R")
-```
+Use the `head`, `tail`, and `summary` functions to investigate the `iris` data set. Use the help functions (or search online) to figure out *how* to use these functions and *what* these functions return. Make at least three observations about the data and/or the data set using these functions.
 
-
-### What to do if the swirl repository doesn't seem to be working
-
-Sometimes, the code above doesn't work, so we must first download the file, then open it. 
-The file can be found [here](https://github.com/ClaudiaBrauer/A-very-short-introduction-to-R/blob/master/documents/A_(very)_short_introduction_to_R.swc), then once it's downloaded, **run the command below**, and navigating to the *.swc file you just downloaded using the file window that opens up from RStudio.
-
-
-```{r, eval=FALSE}
-swirl::install_course(swc_path = file.choose())
-```
-
-
-## Start your `swirl` lesson.
-
-Start swirl by executing the following command:
-
-```{r, eval=FALSE}
-swirl()
-```
-
-Navigate to the `A (very) short introduction to R` course and go through Modules 1-3.
-
-## Prove that you did the `swirl` lesson
-
-Recreate **two plots** and the **user defined function** that you created during the `swirl` lesson.
-Make sure that you do this in your Rmd file you will submit for this homework.
-
-# Part 2 - Play With a Data Set
-
-In this section of the homework, I want you to acquire a data set, describe it, read it into R, use the `head`, `tail`, and `summary` functions to begin investigating these data, apply **at least** two other functions we used in class, and write a description of what you have found by starting to "play" with your data.
-
-For those of you who already have collected data, this is your chance to play with your data in R. 
-For those of you who **do not** have your own data yet, you should acquire a publicly accessible data set.
-Based on your presentations last week, I have ideas for each of you. 
-
-One great source of publicly available data is the [DataONE repository](https://www.dataone.org/).
-You can use a search phrase (e.g., "deer herbivory") in the **Discover** tool on the main webpage, and go from there. [Data Dryad](https://datadryad.org/) is another good data search engine as well.
 
 
 
