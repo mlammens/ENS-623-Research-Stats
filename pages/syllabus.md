@@ -1,7 +1,9 @@
 ---
 title: "Syllabus"
 layout: page
-output: pdf_document
+output:
+  word_document: default
+  pdf_document: default
 description: course syllabus
 ---
 
