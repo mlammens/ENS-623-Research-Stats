@@ -443,6 +443,14 @@ ggplot(data = iris_full, aes( x = Sepal.Length, y = Petal.Length, colour = Speci
   theme_bw()
 ```
 
+How about if we wanted to add trend lines.
+
+```{r}
+ggplot(data = iris_full, aes( x = Sepal.Length, y = Petal.Length, colour = Species)) + 
+  geom_point(size = 2.5 ) +
+  geom_smooth(method = "lm") +
+  theme_bw()
+```
 
 **facets** - a way to separate data into different subplots
 
@@ -523,7 +531,7 @@ ggplot(data = iris_full, aes(x = Petal.Length)) +
 
 ***
 
-## Reading in your own data
+# Reading in your own data
 
 One of the most basic things you will need to do in R is read in your own data set. 
 You can read in Excel files, simple text files, and even files from Google Sheets.
