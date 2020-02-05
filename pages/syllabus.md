@@ -9,15 +9,15 @@ description: course syllabus
 
 **Course Number:** ENS 623  
 **Credits:** 3  
-**Professors:** Dr. Michael Rubbo and Dr. Matthew Aiello-Lammens  
+**Professors:** Dr. Matthew Aiello-Lammens  
 **Meeting day and time:** Wed 5:40 - 8:40 PM  
-**Term:** Spring 2019  
-**Location:** Environmental Center Classroom   
+**Term:** Spring 2020  
+**Location:** Environmental House Conference Room   
 
 ## Course description
 
 This course covers issues related to the proper manner in which to develop and conduct a research project.
-Statistical issues related to environmental evaluations will be discussed, including minimal detectable levels proper sample size, and determination of proper methods for evaluation of data, using both parametric and nonparametric procedures. 
+Statistical issues related to environmental evaluations will be discussed, including minimal detectable levels proper sample size, and determination of proper methods for evaluation of data, using both parametric and non-parametric procedures. 
 
 ## Rationale
 
@@ -36,12 +36,12 @@ By the end of this course, you should know:
 * How to evaluate data quality.
 * Methods to visualize patterns in data.
 * How to perform standard data analysis techniques, including linear regression, ANOVA, and generalized linear modeling.
-* How to identify the most appropriate analysis techniques to use with a given dataset.
+* How to identify the most appropriate analysis techniques to use with a given data set.
 * How to use knowledge of standard data analysis techniques to effectively choose and apply more advanced methods.
 
 ## MS Environemntal Science Learning Objectives
 
-This course addresses the following MS ES program learning objectives:
+This course addresses the following MS Environmental Science program learning objectives:
 
 * Understand and critique the current state of knowledge on environmental issues and identify important knowledge gaps that need further investigation.
 * Understand the philosophy, rationale, and approach to using interdisciplinary, multidisciplinary, and transdisciplinary themes and concepts in contemporary environmental science.
@@ -56,7 +56,7 @@ More information on each of these will be provided throughout the semester.
 * Participation during in class assignments (10%)
 * Problem sets (40%)
 * Analysis project (20%)
-* Midterm and Final - takehome via Blackboard (15% each / 30% total)
+* Midterm and Final - take home via Blackboard (15% each / 30% total)
 
 
 ## Required materials
@@ -73,7 +73,7 @@ Copies of these texts will be made available to you.
 * M&M color counts from our bags during class 1: [class_mm_data.csv](http://mlammens.github.io/Biostats/data/class_mm_data.csv)
 --->
 
-* Logan (2010) datasets can be found [here](https://github.com/mlammens/ENS-623-Research-Stats/tree/gh-pages/data/Logan_Examples).
+* Logan (2010) data sets can be found [here](https://github.com/mlammens/ENS-623-Research-Stats/tree/gh-pages/data/Logan_Examples).
 
 Course Policies
 ---------------
@@ -81,15 +81,15 @@ Course Policies
 ### Attendance
 
 Attendance and punctuality are required. Excused absences will be
-considered, but must be discussed with your professors. Unexcused
+considered, but must be discussed with your professor. Unexcused
 absences and/or consistent lateness will negatively impact a student’s
 final assessment and could result in failure.
 
 ### Technology in the Classroom
 
 Use of computers and tablets may be necessary to complete some in-class
-assignments. However, we expect you to respectful and professional, and
-not to be “surfing the internet” during class. If we witness this
+assignments. However, I expect you to be respectful and professional, and
+not to be “surfing the internet” during class. If I witness this
 activity, you will not be allowed to use technology in the classroom
 thereafter.
 
