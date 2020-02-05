@@ -1,5 +1,5 @@
 ---
-title: "ENS 623 - Spring 2019 - Problem Set 2"
+title: "ENS 623 - Spring 2020 - Problem Set 2"
 output: html_document
 ---
 
@@ -10,33 +10,19 @@ See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Resear
 
 Your file should use the following naming scheme
 
-**`[last name]_ENS623_SP19_PS2.Rmd`**
+**`[last name]_ENS623_SP20_PS2.Rmd`**
 
 For example, 
 
-`Lammens_ENS623_SP19_PS2.Rmd`
+`Lammens_ENS623_SP20_PS2.Rmd`
 
 #### Grading note
 
-* Problem 1 is worth 10 points
+* Problem 1 is worth 15 points
 * Problem 2 is worth 10 points
-* Problem 3 is worth 5 points
 
 
-
-## Problem 1 - `for` loop inside a function
-
-Write a **function** that uses a `for` loop to calculate the mean of a vector of numbers.
-
-Recall that the mean is:
-
-$$
-\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n}
-$$
-
-Compare the results of your function with that of the `mean` function in base R.
-
-## Problem 2 - Plotting relationships between variables
+## Problem 1 - Plotting relationships between variables
 
 In class on Wednesday, I demonstrated how to use `ggplot2` to make an x-y scatter plot comparing `Sepal.Length` and `Petal.Length` in the `iris` data set.
 
@@ -71,7 +57,7 @@ ggplot(data = iris, aes( x = Sepal.Length, y = Petal.Length, colour = Species ))
 
 ```
 
-**Use the code above, but replace `Petal.Length` with `Sepal.Width`. Make a new x-y scatter plot with linear regression lines. Describe how accounting for the three different species might influence how you interpret your data, in comparison to an x-y scatter plot where you do not seperate the species.**
+**Use the code above, but replace `Petal.Length` with `Sepal.Width`. Make a new x-y scatter plot with linear regression lines. Describe how fitting a different line to the data from each species might influence how you interpret your data, in comparison to an x-y scatter plot where you do not seperate the species.**
 
 ***Hint:* You should make two plots, one where you color the points by species and a second where you do not include any color.**
 
@@ -83,7 +69,7 @@ ggplot(data = iris, aes( x = Sepal.Length, y = Sepal.Width, colour = Species )) 
 ```
 
 
-## Problem 3 - Working with syntax in `ggplot2`
+## Problem 2 - Working with syntax in `ggplot2`
 
 Below are two code chunks, both which create histograms and density plots using the `iris` data set.
 
@@ -111,4 +97,4 @@ ggplot(data = iris, aes(x = Petal.Length)) +
 
 **Do Chunks 1 and 2 produce the same plots? (You need to show me that you ran the code to get credit for this.)**
 
-**Based on the answers to the above two questions, what do you think the role of defining arguments in the `ggplot()` function is?**
+**Based on the answers to the above two questions, what do you think the role of defining arguments in the `ggplot()` function is versus defining arguments in the `geom_` functions?**

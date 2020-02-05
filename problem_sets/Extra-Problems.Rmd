@@ -1,0 +1,17 @@
+---
+title: "Possible Problems for Problem Sets"
+author: "Matthew Aiello-Lammens"
+output: html_document
+---
+
+## Problem XXX - `for` loop inside a function
+
+Write a **function** that uses a `for` loop to calculate the mean of a vector of numbers.
+
+Recall that the mean is:
+
+$$
+\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n}
+$$
+
+Compare the results of your function with that of the `mean` function in base R.
