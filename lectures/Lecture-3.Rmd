@@ -160,7 +160,21 @@ for( x in 1:length(temp_data)){
 print(temp_data_kelvin)
 ```
 
+***
 
+#### Challenge
+
+Write a **function** that uses a `for` loop to calculate the mean of a vector of numbers.
+
+Recall that the mean is:
+
+$$
+\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n}
+$$
+
+Compare the results of your function with that of the `mean` function in base R.
+
+***
 
 ## Conditionals
 
@@ -270,4 +284,37 @@ if (num > 0) {
 Make the above into a function, that takes in any value, and returns whether it is positive, negative, or equal to 0.
 
 ***
+
+### `while` loops
+
+`while` loops are not necessarily as common as `for` loops introduced in class Wednesday, but they are quite important. 
+One key difference between `for` loops and `while` loops is that the former is usually set to repeat a given number of times, while the later repeats until some condition is met.
+Incidentally, this also means it's easy to get into an [infinite loop](https://en.wikipedia.org/wiki/Infinite_loop) when writing `while` loops. Be careful!
+
+Here is a basic `while` loop.
+
+```{r}
+foo <- 0
+while(foo < 10){
+  print(foo)
+  foo <- foo + 1
+}
+```
+
+
+
+# Writing Pseudocode
+
+When faced with a problem such as that in [Problem Set 3](http://mlammens.github.io/Biostats/lectures/Lecture-3.html), I will often write out the flow of my simulation before I start coding. 
+This is called [pseudocode](https://en.wikipedia.org/wiki/Pseudocode) in computer programing.
+In this problemset I would probably write out the pseudocode in several steps.
+
+## Number of coin flips it takes to get to 100 heads
+
+
+Imagine you are flipping a fair coin (i.e., there is a 0.5 chance of getting a heads and a 0.5 chance of getting a tails).
+You want to continue flipping the coin *until* you get 100 heads.
+**Write a script that simulates coin flips, and counts the number of times you need to flip the coin until you get 100 heads.**
+Note that since the coin flip is a random process, it will not necessarily take you the same number of flips if you re-run the script.
+
 
