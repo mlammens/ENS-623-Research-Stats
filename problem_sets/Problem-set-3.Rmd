@@ -1,78 +1,40 @@
 ---
-title: "ENS 623 - Spring 2019 - Problem Set 3"
+title: "ENS 623 - Spring 2020 - Problem Set 3"
 output: html_document
 ---
 
-**Please submit this homework as an R Markdown (Rmd) file.**
+**Please submit this homework as an R Markdown (Rmd) file AND a Word file (docx).**
 See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
 
 #### File name
 
 Your file should use the following naming scheme
 
-**`[last name]_ENS623_SP19_PS3.Rmd`**
+**`[last name]_ENS623_SP20_PS3.Rmd`**
 
 For example, 
 
-`Lammens_ENS623_SP19_PS3.Rmd`
+`Lammens_ENS623_SP20_PS3.Rmd`
 
 #### Grading note
 
-* Problem 1 is worth 10 points
-* Problem 2 is worth 15 points
+This is a single problem worth 25 points, but partial credit will be given.
 
-# Problem 1 - How many coins must I flip?
+*Caveat - this example is based on a real competative relationship, but all numbers are completely fictional.*
 
-### `while` loops
+Red fox and arctic fox compete both directly and indirectly where their species ranges meet. 
+Direct competition usually involves fighting between individuals, while indirect competition usually involves competition for denning locations.
+Generally, red fox can out compete arctic fox in both direct and indirect competition, but cannot physically tolerate the colder temperatures that arctic fox can.
+Therefore, the red fox is primarily responsible for the southern range edge of the arctic fox.
 
-`while` loops are not necessarily as common as `for` loops introduced in class Wednesday, but they are quite important. 
-One key difference between `for` loops and `while` loops is that the former is usually set to repeat a given number of times, while the later repeats until some condition is met.
-Incidentally, this also means it's easy to get into an [infinite loop](https://en.wikipedia.org/wiki/Infinite_loop) when writing `while` loops. Be careful!
+During direct competition, an individual will "attack" as long as it has the "advantage" in the fight.
+The individual maintains the "advantage" as long as it is "wins" a bout. 
+If on the other hand, an individual is attacked, it will "defend".
+An individual "wins-overall" when it scores 21 "wins" on its opponent. 
+(This setup is similar to how raquetball is scored.)
+If a red fox attacks first, it will "win" a "bout" with a probability of 0.6. 
+If a red fox is attacked by an arctic fox, it will "win" the "bout" with a probability of of 0.5. 
 
-Here is a basic `while` loop.
+Estimate, by simulation, the probability that during a red fox-arctic fox interaction, **a red fox will "win-overall"**. 
 
-```{r}
-foo <- 0
-while(foo < 10){
-  print(foo)
-  foo <- foo + 1
-}
-```
-
-Imagine you are flipping a fair coin (i.e., there is a 0.5 chance of getting a heads and a 0.5 chance of getting a tails).
-You want to continue flipping the coin *until* you get 100 heads.
-**Write a script that simulates coin flips, and counts the number of times you need to flip the coin until you get 100 heads.**
-Note that since the coin flip is a random process, it will not necessarily take you the same number of flips if you re-run the script.
-
-# Problem 2 - How likely was my bag of M&Ms?
-
-Write a short R script to simulate the combinations of colors that would have been possible from your bag of M&Ms assuming the company-stated color distribution (23% blue, 14% brown, 16% green, 20% orange, 13% red, 14% yellow) and use this script to calculate the probability of obtaining the combination in your bag. 
-
-Needed:
-* `for` loop
-* `if` statement
-* `sample` function
-
-Recall that you can sample a bag of M&Ms using the following:
-
-```{r}
-## Colors as a vector
-mm_colors <- c("blue", "brown", "green", "orange", "red", "yellow")
-
-## Proportion/probability of each color
-mm_probs <- c(.23, .14, .16, .20, .13, .14)
-
-## I want to "sample" a bag of MMs
-new_bag <- sample(x = mm_colors, size = 15, replace = TRUE, prob = mm_probs)
-```
-
-## Hints and tips
-
-* You can read in your data from Wednesday's class in order to use **one** of your bags from class.
-
-* Your bag is pretty unlikely, so it may take **many** iterations in your `for` loop.
-
-* You will need to have a **counter** of some sort, to count the number of times your original bag matches the random bag.
-
-* Make sure you have the M&M counts in the order for the original bag and the new bag.
-
+*Acknowledgements: This problem is a variation of one developed by Dr. Heather Lynch at Stony Brook University for her biostats class.*
