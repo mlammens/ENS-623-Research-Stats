@@ -23,7 +23,7 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 ## R Course Notes
 
 |Date | Meeting | Topic | Recommended Reading | Lecture Notes | Assignment |
-|:-----|:-------|:---------|:---------------|:------------|
+|:-----|:-------|:---------|:---------------|:------------|:-----|
 |1/29 | 1 |Introduction to R |[Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)| [Lecture notes 1](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-1.html)| [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) |
 |2/5  | 2 |Intro to R (cont) and Data Visaluzation |[Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)| [Lecture notes 2](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-2.html)| [Problem Set 2](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-2.html) |
 |2/12  | 3 |R Programming |[Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)|[Lecture notes 3](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-3.html) | [Problem Set 3](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-3.html); [Research Question Exercise](http://mlammens.github.io/ENS-623-Research-Stats/pages/research-question-exercise.html)|
