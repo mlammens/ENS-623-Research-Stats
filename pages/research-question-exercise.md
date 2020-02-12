@@ -1,7 +1,9 @@
 ---
 title: "ENS 623 - Semester Project - Research Question Exercise"
 layout: page
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 description: developing your research question
 ---
 
