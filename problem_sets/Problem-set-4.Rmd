@@ -1,5 +1,5 @@
 ---
-title: "ENS 623 - Spring 2020 - Problem Set 3"
+title: "ENS 623 - Spring 2020 - Problem Set 4"
 output: html_document
 ---
 
@@ -10,11 +10,11 @@ See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Resear
 
 Your file should use the following naming scheme
 
-**`[last name]_ENS623_SP20_PS3.Rmd`**
+**`[last name]_ENS623_SP20_PS4.Rmd`**
 
 For example, 
 
-`Lammens_ENS623_SP20_PS3.Rmd`
+`Lammens_ENS623_SP20_PS4.Rmd`
 
 #### Grading note
 
@@ -27,11 +27,10 @@ Direct competition usually involves fighting between individuals, while indirect
 Generally, red fox can out compete arctic fox in both direct and indirect competition, but cannot physically tolerate the colder temperatures that arctic fox can.
 Therefore, the red fox is primarily responsible for the southern range edge of the arctic fox.
 
-During direct competition, an individual will "attack" as long as it has the "advantage" in the fight.
-The individual maintains the "advantage" as long as it is "wins" a bout. 
-If on the other hand, an individual is attacked, it will "defend".
-An individual "wins-overall" when it scores 21 "wins" on its opponent. 
-(This setup is similar to how raquetball is scored.)
+During direct competition, a fox will "attack" as long as it has the "advantage" in the fight.
+The fox maintains the "advantage" as long as it is "wins" a bout. 
+If on the other hand, a fox is attacked, it will "defend".
+One fox "wins-overall" when it "wins" **five** bouts against its opponent. 
 If a red fox attacks first, it will "win" a "bout" with a probability of 0.6. 
 If a red fox is attacked by an arctic fox, it will "win" the "bout" with a probability of of 0.5. 
 
