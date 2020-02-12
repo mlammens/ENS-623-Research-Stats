@@ -10,62 +10,39 @@ output:
 
 # Today's Goals
 
-
-
-
-
-
-
-***
-
-# Reading in your own data
-
-One of the most basic things you will need to do in R is read in your own data set. 
-You can read in Excel files, simple text files, and even files from Google Sheets.
-But the easiest type of file to read in is a comma seperated values (CSV) file. 
-You can save an Excel workbook (or Numbers workbook or Google Sheet) as a CSV file by using the "Save as ..." menu item. 
-
-For today, we're going to work with a data set related to gastropod fecundity.
-First, download the file here - [gastropod data](https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/ward.csv) **The download will begin when you press the hyperlink! The file is called `ward.csv`.**
-
-Once you've downloaded the file, move it to the `data` subfolder in your `ENS-623-Research-Stats` folder.
-
-### Differences in fecundity of intertidal gastropods in two different intertidal zones (Example 6A in Logan, Box 3.1 in Q&K)
-
-Ward and Quinn (1988) investigated the differences in fecundity of *Lepsiella vinosa* in two different intertidal zones (mussel zone and littorinid zone). 
-
-Let's read in the data and have a quick look
-
-```{r, eval=FALSE}
-gastro <- read.csv(file = "~/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/data/Logan_Examples/Chapter6/Data/ward.csv")
-summary(gastro)
-```
-
-
-```{r, echo=FALSE}
-gastro <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/ward.csv")
-summary(gastro)
-```
-
-
-
-
+* Be able to write your own "user defined" function
+* Repeat a computation task using `for` and `while` loops
+* Implement flow control in your R scripts using conditional `if` and `else`
+* Understand and practice the use of pseudocode to help solve computational problems
 
 ***
 
 # R Programming
 
-## User Defined Functions
+## User defined functions
 
-What is a function?
+### What is a function?
 
-Why write a function?
+R code that does some generic "computation" task.
 
-**Example**
+### Why write a function?
+
+To make repeating a process easier. *Rule of thumb* - if you are copying and pasting your code, to use is someplace else in a script, you should probably write a function.
+
+### Example: Converting from Fahrenheit to Kelvin
 
 *Note:* the example below is borrowed from the [Software Carpentry](https://software-carpentry.org/) Introduction to Programming materials.
 
-Convert from Fahrenheit to Kelvin
+If I give you a single temperature measurement in Fahrenheit, how would you convert it to the Kelvin scale?
+
+```{r}
+my_temp <- 41
+((my_temp - 32) * (5 / 9)) + 273.15
+```
+
+If I give you another value, you would probably copy-paste the above, and change the number accordingly.
+
+Instead, make a generic function.
 
 ```{r}
 fahr_to_kelvin <- function(temp) {
@@ -73,6 +50,12 @@ fahr_to_kelvin <- function(temp) {
   return(kelvin)
 }
 ```
+
+#### Aside: Indentations and white space
+
+You will notice in R Studio, when you are making a function, the editor will automatically indent the code lines inside the function.
+Technically this indentation (white space) is not necessary in R (though it is for other languages, such as Python), however, it is meant to make reading your code easier.
+Generally, lines that are indented similarly are "at the same level" (i.e., in the function or in the loop).
 
 Convert from Kelvin to Celsius
 
@@ -83,10 +66,13 @@ kelvin_to_celsius <- function(temp) {
 }
 ```
 
+***
+
 #### Challenge
 
 Write a function to convert from Fahrenheit to Celsius.
 
+***
 
 ## `for` loops
 
@@ -100,6 +86,8 @@ for (variable in collection) {
 }
 ```
 
+**Note:** I created a short YouTube video several years ago presenting `for` loops, which you might find helpful too [https://youtu.be/tTOTZtcoo1c]()
+
 Let's get more specific. Say we took a bunch of measurements of temperature in Fahrenheit, but want to convert them. How might we do it?
 
 #### Make our temperature data set
@@ -109,9 +97,13 @@ set.seed(8)
 temp_data <- runif(n = 20, min = -5, max = 5) + 45
 ```
 
+*** 
+
 #### Challenge
 
-What did we just do?
+What did we just do in the code above?
+
+*** 
 
 
 #### Aside: Resetting the `seed` so the numbers are random again
@@ -149,7 +141,7 @@ for( x in 1:length(temp_data)){
 }
 ```
 
-Iteration 4. By element locatoin with output in a new vector
+Iteration 4. By element location with output in a new vector
 
 ```{r}
 temp_data_kelvin <- vector()
@@ -176,7 +168,7 @@ Compare the results of your function with that of the `mean` function in base R.
 
 ***
 
-## Conditionals
+## Flow control with conditionals
 
 We can use conditional statements to **control the flow** of our code, and to "make choices" as it progresses.
 
@@ -209,7 +201,7 @@ There are many logical operators to consider.
 
 ***
 
-#### Challenge Describe what each fo the following operators are doing.
+#### Challenge: Describe what each fo the following operators are doing.
 
 ```{r}
 x <- TRUE
@@ -279,15 +271,17 @@ if (num > 0) {
 }
 ```
 
+***
+
 #### Challenge
 
-Make the above into a function, that takes in any value, and returns whether it is positive, negative, or equal to 0.
+Make the above code into a function, that takes in any value, and returns whether it is positive, negative, or equal to 0.
 
 ***
 
-### `while` loops
+## `while` loops
 
-`while` loops are not necessarily as common as `for` loops introduced in class Wednesday, but they are quite important. 
+`while` loops are not necessarily as common as `for` loops, but they are quite important. 
 One key difference between `for` loops and `while` loops is that the former is usually set to repeat a given number of times, while the later repeats until some condition is met.
 Incidentally, this also means it's easy to get into an [infinite loop](https://en.wikipedia.org/wiki/Infinite_loop) when writing `while` loops. Be careful!
 
@@ -301,20 +295,69 @@ while(foo < 10){
 }
 ```
 
-
+We're going to use a `while` loop to address the challenge below.
 
 # Writing Pseudocode
 
-When faced with a problem such as that in [Problem Set 3](http://mlammens.github.io/Biostats/lectures/Lecture-3.html), I will often write out the flow of my simulation before I start coding. 
-This is called [pseudocode](https://en.wikipedia.org/wiki/Pseudocode) in computer programing.
-In this problemset I would probably write out the pseudocode in several steps.
+When faced with a problem such as that in the challenge below (or in [Problem Set 4](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-4.html), I will often write out the flow of my simulation before I start coding. 
+This is called [pseudocode](https://en.wikipedia.org/wiki/Pseudocode) in computer programming.
+For this challenge, I might write out the pseudocode in several steps.
 
-## Number of coin flips it takes to get to 100 heads
-
+## Challenge: Number of coin flips it takes to get to 100 heads
 
 Imagine you are flipping a fair coin (i.e., there is a 0.5 chance of getting a heads and a 0.5 chance of getting a tails).
 You want to continue flipping the coin *until* you get 100 heads.
 **Write a script that simulates coin flips, and counts the number of times you need to flip the coin until you get 100 heads.**
 Note that since the coin flip is a random process, it will not necessarily take you the same number of flips if you re-run the script.
+
+### Pseudo code
+
+1. Begin by writing down the main things you need to do
+
+```
+- Flip a coin
+- Determine if the coin is "heads" or "tails"
+- Repeat the flip until you get 100 heads
+- Tally the number of heads and the number of total flips
+```
+
+2. Start putting these things in order
+
+3. Add in key components of the flow-control
+
+
+
+***
+
+# Reading in your own data
+
+One of the most basic things you will need to do in R is read in your own data set. 
+You can read in Excel files, simple text files, and even files from Google Sheets.
+But the easiest type of file to read in is a comma separated values (CSV) file. 
+You can save an Excel workbook (or Numbers workbook or Google Sheet) as a CSV file by using the "Save as ..." menu item. 
+
+For today, we're going to work with a data set related to gastropod fecundity.
+First, download the file here - [gastropod data](https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/ward.csv) **The download will begin when you press the hyperlink! The file is called `ward.csv`.**
+
+Once you've downloaded the file, move it to the `data` sub folder in your `ENS-623-Research-Stats` folder.
+
+### Differences in fecundity of intertidal gastropods in two different intertidal zones (Example 6A in Logan, Box 3.1 in Q&K)
+
+Ward and Quinn (1988) investigated the differences in fecundity of *Lepsiella vinosa* in two different intertidal zones (mussel zone and littorinid zone). 
+
+Let's read in the data and have a quick look
+
+```{r, eval=FALSE}
+gastro <- read.csv(file = "~/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/data/Logan_Examples/Chapter6/Data/ward.csv")
+summary(gastro)
+```
+
+
+```{r, echo=FALSE}
+gastro <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/ward.csv")
+summary(gastro)
+```
+
+
 
 
