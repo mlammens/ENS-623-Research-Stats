@@ -1,5 +1,5 @@
 ---
-title: "ENS 623 - Spring 2020 - Problem Set 4"
+title: "ENS 623 - Spring 2020 - Problem Set 3"
 output: html_document
 ---
 
@@ -10,11 +10,11 @@ See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Resear
 
 Your file should use the following naming scheme
 
-**`[last name]_ENS623_SP20_PS4.Rmd`**
+**`[last name]_ENS623_SP20_PS3.Rmd`**
 
 For example, 
 
-`Lammens_ENS623_SP20_PS4.Rmd`
+`Lammens_ENS623_SP20_PS3.Rmd`
 
 #### Grading note
 
