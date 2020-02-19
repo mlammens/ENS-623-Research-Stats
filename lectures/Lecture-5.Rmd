@@ -1,0 +1,11 @@
+---
+title: "Meeting 5 - Probability"
+author: "Matthew E. Aiello-Lammens"
+date: '2020-02-26'
+output:
+  html_document:
+    code_folding: hide
+    toc: yes
+---
+
+# Today's Goals
