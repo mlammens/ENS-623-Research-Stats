@@ -231,7 +231,52 @@ summary {
 </div>
 <div id="asking-research-questions" class="section level1">
 <h1>Asking research questions</h1>
+<p>Below are some quotes and thoughts from the Karban et al. reading I thought important to touch on in discussion.</p>
+<blockquote>
+<p>…at this statge in most students’ careers, many topics sound equally interesting, so this forced focus is difficult or even painful.</p>
+</blockquote>
+<p>How many of you feel this way?</p>
+<blockquote>
+<p>For most jobs … search committees will want to see strong records of research and publication even if you won’t be expected to conduct research or publish a lot on the job.</p>
+</blockquote>
+<p>What research gives us (from Box 1) -</p>
+<ul>
+<li>Multiple perspectives</li>
+<li>Reasoning and critical thinking</li>
+<li>Writing and communication</li>
+</ul>
 <hr />
+<div id="challenge" class="section level4">
+<h4>Challenge</h4>
+<p>Write down some short-, mid-, and long-term goals related to environmental science.</p>
+<hr />
+<blockquote>
+<p>So you’re looking for questions that are specific yet general and novel yet relevant to your goals. You could fret about this for years.</p>
+</blockquote>
+<p>Personal note - I did not defend my dissertation <em>proposal</em> until the end of my third year as a PhD student. I fretted for a few years.</p>
+<p>However, for your MS in Environmental Science, novelty is not necessarily as important as it is for a PhD in Ecology (at least in our program).</p>
+<blockquote>
+<p>… it is not realistic to expect yourself to sit at your desk and conjure up the perfect study …</p>
+</blockquote>
+<p>Get out and do things. Experiment. Mess around with data. Write grant applications before you’re ready. It will all stimulate thinking and creativity.</p>
+<blockquote>
+<p>Fieldwork is hard business, and many of the factors associated with failure or success are beyond your control.</p>
+</blockquote>
+<p>Some field projects fail. Some don’t yield interesting results. At the MS level, we’re more interested in refining your process. <strong>Focus on the process.</strong></p>
+<hr />
+</div>
+<div id="challenge-1" class="section level4">
+<h4>Challenge</h4>
+<p>Considering formulating a research question, are you more drawn to asking some specific question first or working in a particular system?</p>
+<hr />
+<blockquote>
+<p>Don’t assume questions have been answered just because they seem obvious.</p>
+</blockquote>
+<blockquote>
+<p>Be willing to hang with the dumb ideas that you will inevitably come up with, because the really great ideas stand on the shoulders of the dumb ones.</p>
+</blockquote>
+<hr />
+</div>
 </div>
 <div id="probability" class="section level1">
 <h1>Probability</h1>
@@ -243,7 +288,7 @@ summary {
 <p>The relative frequency of an event over the long term, after many trials.</p>
 <p>E.g., throwing a coin. What’s the probability of a ‘heads’? After one trial, two trials, …, 1000 trials.</p>
 <pre class="r"><code>(head &lt;- runif(1) &gt; 0.5)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>## [1] FALSE</code></pre>
 </div>
 <div id="bayesian-statistics" class="section level2">
 <h2>Bayesian statistics</h2>
@@ -278,7 +323,7 @@ summary {
 <h2>Example of law of large numbers</h2>
 <p>Let’s simulate a coin flip. To do this, we’ll draw a single uniform random number between 0 and 1.</p>
 <pre class="r"><code>(flip &lt;- runif(1))</code></pre>
-<pre><code>## [1] 0.3684583</code></pre>
+<pre><code>## [1] 0.8541868</code></pre>
 <p>Let’s define all values between 0 and 0.5 as being a “heads”. In order to <em>define</em> the flip as heads or tails, we’ll need to use an <code>if</code> statement.</p>
 <pre class="r"><code>if(flip &lt; 0.5){
   coin_flip &lt;- &quot;head&quot;
@@ -306,23 +351,23 @@ for(x in 1:100){
 }</code></pre>
 <p>Now, let’s count the number of heads.</p>
 <pre class="r"><code>all_flips == &quot;head&quot;</code></pre>
-<pre><code>##   [1]  TRUE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE FALSE
-##  [13] FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE
-##  [25]  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE
-##  [37] FALSE  TRUE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE
-##  [49] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE
-##  [61]  TRUE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
-##  [73]  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE
-##  [85]  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE
-##  [97] FALSE FALSE  TRUE  TRUE</code></pre>
+<pre><code>##   [1] FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE  TRUE
+##  [13]  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
+##  [25]  TRUE  TRUE FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE
+##  [37]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE
+##  [49]  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE
+##  [61] FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE
+##  [73] FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE
+##  [85]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE
+##  [97] FALSE FALSE  TRUE FALSE</code></pre>
 <pre class="r"><code>sum(all_flips == &quot;head&quot;)</code></pre>
-<pre><code>## [1] 47</code></pre>
+<pre><code>## [1] 51</code></pre>
 <p>Calculate the probability of a heads</p>
 <pre class="r"><code>sum(all_flips == &quot;head&quot;) / length(all_flips)</code></pre>
-<pre><code>## [1] 0.47</code></pre>
+<pre><code>## [1] 0.51</code></pre>
 <p>How close to 0.5 is this?</p>
 <hr />
-<div id="challenge" class="section level4">
+<div id="challenge-2" class="section level4">
 <h4>Challenge</h4>
 <p>Repeat the steps above until you get to a number of flips to make that consistently results in values <em>very</em> close to 0.5.</p>
 <hr />
