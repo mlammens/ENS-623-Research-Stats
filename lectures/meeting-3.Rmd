@@ -1,0 +1,350 @@
+---
+title: "Meeting 2 - In Class Notes"
+author: "Matt"
+date: "2/12/2020"
+output: html_document
+---
+
+# Goals
+
+* Continue with intro to R - focusing on programming in R
+* Learn about functions
+* Learn about for loops and while loops
+* Introduce to if and else statements
+* Understanding the role of pseudocode
+
+# Functions
+
+## What is a function
+
+R code, grouped together, it does some "thing", and
+when we group that code together, we make it generic
+
+## Why write a function
+
+* It makes for cleaner code
+* It makes code more understandable
+* It's efficient - NO COPY PASTE!
+
+### Example - convert from fahrenheit temperature scale to Kelvin
+
+* substract 32
+* multiply by (5/9)
+* add 273.15
+
+```{r}
+my_temp <- 41
+((my_temp - 32) * (5/9)) + 273.15
+
+my_temp2 <- 98.6
+((my_temp2 - 32) * (5/9)) + 273.15
+```
+
+### Let's write a function
+
+```{r}
+fahr_to_kelvin <- function(temp){
+  kelvin <- ((temp-32) * (5/9)) + 273.15
+  return(kelvin)
+}
+```
+
+Use our function
+
+```{r}
+fahr_to_kelvin(temp = 32)
+```
+
+Practice with another function
+
+```{r}
+kelvin_to_celsius <- function(temp){
+  celsius <- temp - 273.15
+  return(celsius)
+}
+```
+
+Use my function
+
+```{r}
+kelvin_to_celsius(273)
+```
+
+*** 
+
+#### Challenge
+
+Write a function that converts from Fahrenheit to Celsius
+
+```{r}
+farh_to_cels1 <- function(temp){
+  celsius <- ((temp-32) * (5/9)) 
+  return(celsius)
+}
+
+farh_to_cels1(temp = 32)
+
+fahr_to_cels2 <- function(temp){
+  as_kelvin <- fahr_to_kelvin(temp = temp)
+  as_celsius <- kelvin_to_celsius(temp = as_kelvin)
+  return(as_celsius)
+}
+
+fahr_to_cels2(32)
+```
+
+***
+
+# `for` loops
+
+the answer to the quesiton, how do I do the same thing many times?
+
+```
+for(variable in a collection of variables){
+  do something to or with that variable
+}
+```
+
+### Create a temperature data set
+
+```{r}
+set.seed(8)
+temp_data <- runif(n = 20, min = -5, max = 5) + 45
+temp_data
+```
+
+Reset our seed to default
+
+```{r}
+rm(.Random.seed, envir = globalenv())
+```
+
+
+### For loops
+
+
+```{r}
+for(x in temp_data){
+  print(x)
+}
+```
+
+Another small exampel
+
+```{r}
+for(x in 1:10){
+  print(x)
+}
+```
+
+```{r}
+for(foo in 10:1){
+  print(foo)
+}
+foo <- as.numeric(5)
+```
+
+Let's use a function multiple times
+
+```{r}
+for(x in temp_data){
+  fahr_to_kelvin(x)
+}
+```
+
+
+```{r}
+for(x in temp_data){
+  print(fahr_to_kelvin(x))
+}
+```
+
+Use for loop, iteration by element location
+
+```{r}
+1:length(temp_data)
+
+for(x in 1:length(temp_data)){
+  print(fahr_to_kelvin( temp_data[x] ))
+}
+
+```
+
+Loop through by element location, with output as a new vector
+
+
+```{r}
+temp_data_kelvin <- vector()
+
+for(x in 1:length(temp_data)){
+  temp_data_kelvin <- c(temp_data_kelvin,
+                        fahr_to_kelvin(temp_data[x]))
+}
+
+temp_data_kelvin
+```
+
+#### Challenge
+
+Use a for loop and write a function to calculate the mean of a vector of numbers.
+
+Mean = (sum a a vector of numbers) / length of that vector
+
+Inside your function, you will use a for loop to calculate the sum of
+vector of numbers.
+
+* use a for loop to calculate a sum of numbers
+* make a function that includes that for loop so you can do this to
+any given set of numbers
+* calculate a mean be dividing that sum by the length of those numbers
+
+
+```{r}
+foo <- 1:10
+mean(foo)
+
+
+my_mean <- function(my_vect){
+  
+  # Calculate the sum of given vector, my_vect
+  my_sum <- 0
+  for(x in my_vect){
+    my_sum <- my_sum + x
+    #print(my_sum)
+  }
+  
+  # Divide my sum of the given vector by the length of that vector
+  my_calc_mean <- my_sum / length(my_vect)
+  
+  # Return my_calc_mean
+  return(my_calc_mean)
+  
+}
+
+my_mean(my_vect = foo)
+mean(foo)
+```
+
+# Conditionals - flow control
+
+`if` `else`
+
+### Booleans
+
+```{r}
+TRUE
+FALSE
+T
+F
+```
+
+```{r}
+20 == 20
+```
+
+
+```
+<- does the same thing as =
+```
+
+```{r}
+bar = 5
+bar <- 5
+```
+
+```{r}
+TRUE == TRUE
+TRUE == FALSE
+```
+
+```{r}
+20 > 40
+```
+
+! is logical negation
+
+```{r}
+!(20>40)
+```
+
+***
+
+#### Challenge
+
+```{r}
+x <- TRUE
+y <- FALSE
+```
+
+
+```{r}
+x & y
+```
+
+
+```{r}
+x | y
+```
+
+```{r}
+xy <- c(x, y)
+```
+
+```{r}
+any(xy)
+```
+
+```{r}
+all(xy)
+```
+
+
+```{r}
+# Are any of these greater than 5
+any(1:10 >= 5)
+
+# Are all of these greater than 5?
+all(1:10 >= 5)
+```
+
+
+
+Finally get to `if`s
+
+```{r}
+num <- 37
+num > 100
+
+if(num > 100){
+  print("greater than 100")
+} else {
+  print("not greater than 100")
+}
+
+```
+
+## Cascade of if/else statements
+
+```{r}
+num <- 0
+
+if (num > 0) {
+  print("positive")
+} else if (num == 0) {
+  print("equals 0")
+} else {
+  print("negative")
+}
+```
+
+# While loops
+
+```{r}
+foo <- 0
+while(foo < 10){
+  print(foo)
+  foo <- foo + 1
+}
+
+```
+

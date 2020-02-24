@@ -1,0 +1,132 @@
+---
+title: "Meeting 4 - In Class Notes"
+author: "Matt"
+date: "2/19/2020"
+output: html_document
+---
+
+# Probability 
+
+* in terms of events
+* probability of event A occuring - P(A)
+* P(A) between 0 and 1
+* If P(A) = 0, the event is impossible
+* if P(A) = 1, the event is certain
+
+## Frequentist statistics
+
+We determine the probability of an event, but observint the frequency
+of that event over the long term, after many trials.
+
+```{r}
+head <- runif(1) > 0.5
+head
+```
+
+## Bayesian statistics
+
+There are other perspectives in stats. 
+Key difference between Bayes and frequentist is that Bayes lets you incorporate prior knowledge.
+
+### Flipping a coin
+
+* frequentist - p(heads) is approximately the frequency of getting heads after doings lot of coin flips.
+* Bayes - assume p(heads) is 0.5 based on your prior experience, then do a bunch of coin flips, and update your prior based on your new knowledge.
+
+## Properties of probability
+
+* a random process that gives rise to an outcome
+    * a coin flip is a random process
+    * the outcome is heads or tails
+    * a specific event might be heads
+* 0 <= p(some event) <= 1
+* approximate P (p-hat) $\hat{p}$, the proportion of outcomes out of the total number of trials run that match your event
+    * flip a coin 100 times, get 52 heads, you would say p(heads) = 52/100
+
+### Law of large numbers
+
+As more observations are collected, p-hat approaches P
+
+```{r}
+(flip <- runif(1))
+```
+
+```{r}
+if(flip < 0.5){
+  coin_flip <- "head"
+} else {
+  coin_flip <- "tail"
+}
+coin_flip
+```
+
+
+Let's repeat this process 100 times
+
+```{r}
+# start a vector to store all of the flips in
+all_flips <- c()
+
+for(x in 1:100){
+  # Flip a coin
+  flip <- runif(1)
+  
+  # Identify the flip as heads or tails
+  if(flip < 0.5){
+    coin_flip <- "head"
+  } else {
+    coin_flip <- "tail"
+  }
+  
+  # add this coin flip to our all_flips object
+  all_flips <- c(all_flips, coin_flip)
+  
+}
+
+all_flips == "head"
+sum(all_flips == "head")
+sum(all_flips == "head") / length(all_flips)
+```
+
+##### Challenge: Number of coin flips it takes to get to 100 heads
+
+Imagine you are flipping a fair coin (i.e., there is a 0.5 chance of getting a heads and a 0.5 chance of getting a tails). You want to continue flipping the coin until you get 100 heads. Write a script that simulates coin flips, and counts the number of times you need to flip the coin until you get 100 heads. Note that since the coin flip is a random process, it will not necessarily take you the same number of flips if you re-run the script.
+
+Once you get to this, repeat it many times to determine the average number of flips required to get to 100 heads.
+
+```{r}
+all_flip_cnt <- c()
+
+for(x in 1:1000){
+  
+  flip_cnt <- 0
+  head_cnt <- 0
+  
+  while(head_cnt < 100){
+    #flip a coin
+    flip <- runif(1)
+    flip_cnt <- flip_cnt + 1
+    
+    # heads/tails
+    if(flip < 0.5){
+      coin_flip <- "heads"
+      head_cnt <- head_cnt + 1
+    } else {
+      coin_flip <- "tails"
+    }
+    
+  }
+  all_flip_cnt <- c(all_flip_cnt, flip_cnt)
+}
+
+mean(all_flip_cnt)
+
+```
+
+```{r}
+library(ggplot2)
+
+ggplot() +
+  geom_histogram(aes(x = all_flip_cnt))
+```
+

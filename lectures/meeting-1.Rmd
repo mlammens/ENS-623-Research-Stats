@@ -1,0 +1,48 @@
+---
+title: "Meeting 1 - In Class Notes"
+author: "Matt"
+date: "1/29/2020"
+output: html_document
+---
+
+## Variables and objects
+
+### Data structures
+
+* vectors - one-dimensional array of numbers, letters, or logicals
+* matrix - 2-dimensional array, nums, chars, logs, BUT all the same
+* arrays - 3-dimensions or more
+* lists - can contain multiple different kinds of data types
+* data.frames <- special 2-dimensional list/matrix, where eacy column can be a different data type
+
+### Variables
+
+Something we define
+
+* Windows - cntrl-alt-i gives you a code chunk
+* Mac - cmd-alt-i
+
+```{r}
+my_var <- 8
+
+# add another variable
+my_var2 <- 10
+
+# add two assigned variables
+my_var + my_var2
+
+# make a new variable from the other two
+my_var_tot <- my_var + my_var2
+
+# print my_var_tot
+my_var_tot
+print(my_var_tot)
+
+# change value for my_var2
+my_var2 <- 3
+my_var_tot <- my_var + my_var2
+my_var_tot
+
+
+```
+

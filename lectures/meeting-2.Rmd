@@ -1,0 +1,332 @@
+---
+title: "Meeting 2 - In Class Notes"
+author: "Matt"
+date: "2/5/2020"
+output: html_document
+---
+
+# Variables and objects
+
+Define some variables
+
+```{r}
+my_var <- 8
+```
+
+Let's make another variable
+
+```{r}
+my_var2 <- 10
+```
+
+## Make a vector
+
+Make our first vector
+
+```{r}
+my_vect <- c(my_var, my_var2)
+```
+
+Let's make some other vectors
+
+```{r}
+v1 <- c(10, 2, 8, 7, 11, 15)
+
+pets <- c("cat", "dog", "rabbit", "pig")
+```
+
+Make vectors of numbers based on a sequence of 
+numbers
+
+```{r}
+v2 <- 1:10
+v3 <- seq(from = 1, to = 10)
+```
+
+#### Challenge
+
+1. Look up the help for the `seq` function, and use this function
+to make a vector from 1 to 100, that steps by increments of 5
+
+```{r}
+v4 <- seq(from = 1, to = 100, by = 5)
+v4
+
+seq(1, 100, 5)
+?seq
+
+seq(from = 100, to = 1)
+```
+
+
+2. Come up with a way that you would use the `length.out` argument
+
+```{r}
+seq(from = 10, to = 100, length.out = 10)
+```
+
+## Exploring variable elements
+
+Introduce the bracket notation -- `[]`
+
+```{r}
+pets
+pets <- c(pets, "snake")
+pets
+
+pets[1]
+pets[3]
+
+
+# getting number of elements in a sequence
+pets[3:4]
+
+
+# getting number of elements, not in a sequenc
+pets[c(1,4)]
+pets
+```
+
+
+### Fun with vectors
+
+```{r}
+mixed_vect <- c(1, 7, "cat")
+mixed_vect
+
+as.numeric(mixed_vect[1]) + 5
+```
+
+
+## Working with matrices
+
+Matrices are 2-dimensional
+
+```{r}
+my_mat <- matrix(data = runif(50), nrow = 10, byrow = TRUE)
+my_mat
+```
+
+##### Challenge
+
+Break down this function, and describe each argument that is going on.
+
+
+```{r}
+matrix(data = 1:9, nrow = 3, byrow = TRUE)
+```
+
+```{r}
+matrix(data = 1:9, nrow = 3, byrow = FALSE)
+matrix(data = 1:9, nrow = 3)
+```
+
+## Indexing matrices
+
+```{r}
+my_mat <- matrix(data = 1:9, nrow = 3, byrow = TRUE)
+my_mat
+```
+
+```{r}
+my_mat[1]
+my_mat[3]
+my_mat[6]
+
+# always goes by row, column
+my_mat[1,1]
+my_mat[3,2]
+```
+
+```{r}
+my_mat[1:2, 3]
+```
+
+```{r}
+my_mat[c(1,3), 3]
+```
+
+```{r}
+my_mat[c(1,3), c(1,3)]
+```
+
+
+
+```{r}
+my_mat[1:2, ]
+```
+
+## Using internal functions on matrices
+
+Make a new matrix
+
+```{r}
+set.seed(1)
+mat1 <- matrix(data = runif(50), nrow = 10, byrow = TRUE)
+mat1
+```
+
+Apply a function to this matrix
+
+```{r}
+mean(mat1)
+```
+
+```{r}
+sd(mat1)
+```
+
+calculate row and column means
+
+```{r}
+rowMeans(mat1)
+```
+
+```{r}
+colMeans(mat1)
+```
+
+### `apply` function
+
+```{r}
+?apply
+apply(X = mat1, MARGIN = 2, FUN = mean)
+apply(X = mat1, MARGIN = 2, FUN = sd)
+apply(X = mat1, MARGIN = 2, FUN = min)
+apply(X = mat1, MARGIN = 2, FUN = max)
+
+apply(X = mat1, MARGIN = 1, FUN = sd)
+apply(X = mat1, MARGIN = 1, FUN = min)
+mat1
+```
+
+# Data frames
+
+*Very* special kinds of 2-d arrays
+
+```{r}
+data(iris)
+head(iris)
+```
+
+
+```{r}
+tail(iris)
+```
+
+
+```{r}
+summary(iris)
+```
+
+### Aside: differences between characters and factors
+
+```{r}
+iris_new <- iris
+
+iris_new$species_char <- as.character(iris_new$Species)
+
+
+summary(iris_new)
+```
+
+### Introduction to navigating a data.frame
+
+Treat a data.frame like a matrix
+
+```{r}
+iris[5, 3]
+```
+
+As a matrix, get petal length values
+
+```{r}
+iris[ , 3]
+```
+
+Just the first fifty petal length values
+
+```{r}
+iris[1:50, 3]
+```
+
+**For data.frames** I can also use the `$` operator
+
+```{r}
+iris$Petal.Length
+
+iris$Petal.Length[5]
+
+```
+
+#### Challenge
+
+What will you see when you execute the following:
+
+```{r}
+head( iris[c("Species", "Sepal.Width", "Petal.Length")] )
+```
+
+
+# Data Visualization
+
+Get a new package called ggplot2
+
+```{r, eval=FALSE}
+install.packages("ggplot2")
+```
+
+```{r}
+library(ggplot2)
+```
+
+
+### Visualizing the measurements of a single variable
+
+```{r}
+ggplot(data = iris, aes(x = Petal.Length)) +
+  geom_histogram()
+```
+
+### x-y scatter plot
+
+```{r}
+ggplot(data = iris, aes(x = Sepal.Length, y = Petal.Length)) +
+  geom_point()
+```
+
+
+```{r}
+ggplot(data = iris, aes(x = Sepal.Length, y = Petal.Length,
+                        colour = Species)) +
+  geom_point() +
+  geom_smooth(method = "lm") + 
+  xlab("Sepal Length (cm)") +
+  ylab("Petal Length (cm)") +
+  theme_minimal()
+```
+
+
+
+### Boxplots
+
+```{r}
+ggplot(data = iris, aes(x = Species, y = Petal.Length,
+                        fill = Species)) +
+  geom_boxplot()
+
+ggplot(data = iris, aes(x = Species, y = Petal.Length,
+                        fill = Species)) +
+  geom_violin()
+
+```
+
+
+#### Return to histograms
+
+```{r}
+ggplot(data = iris, aes(x = Petal.Length, fill = Species)) +
+  #geom_histogram(position = "dodge")
+  geom_density(alpha = 0.3)
+```
+
