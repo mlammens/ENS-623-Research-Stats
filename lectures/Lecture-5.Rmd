@@ -80,7 +80,7 @@ Next calculate the total distances. We could also call this the **sums of distan
 
 What information does this give us, and why might it not be useful?
 
-* Add up the *absolute* distances form the mean. 
+* Add up the *absolute* distances from the mean. 
 
 First calculate the *absolute* distances from the mean.
 
@@ -94,21 +94,42 @@ Next add up the total *absolute* distances from the mean.
 (sum_absdist_from_mean <- sum(absdist_from_mean))
 ```
 
+While the absolute distance from the mean does give us a reasonable measure of variability, because of specific mathematical properties, it's more convenient to work with *squared* distances from the mean, leading to the measures of **variance** and **standard deviation** we are more familiar with.
+
 * Add up the *squared* distances from the mean.
 
-While the absolute distance from the mean does give us a reasonable measure of variability, because of specific mathematical properties, it's more convenient to work with *squared* distances from the mean, leading to the measures of **variance** and **standard deviation**.
+***
 
 #### Challenge
 
 Calculate *squared* distances from the mean, and sum them to determine the total squared deviation.
 
+***
+
+**Variance** is the average squared distance from the mean -- need to divide by $n$ (actually, we divide by $n-1$, but we're not going to go into why just yet.)
+
+### Sample Variance
+
+$$
+var = \frac{\sum_{i=1}^n{(\bar{x} - x_i)^2}}{n-1}
+$$
+
+
 **Standard deviation** can be thought of as the average deviation from the mean.
+
+$$
+sd = \sqrt{var} = \sqrt{\frac{\sum_{i=1}^n{(\bar{x} - x_i)^2}}{n-1}}
+$$
+
+***
 
 #### Challenge
 
 1. Calculate the **variance** of the number of M&Ms in a bag, considering all of the bags in the class. Do this without using the `var` function.
 
 2. Calculate the **standard deviation** of the number of M&Ms in a bag. Do this without using the `sd` function.
+
+***
 
 ## Probability and M&Ms
 
@@ -118,16 +139,33 @@ The **set** of brown, yellow, green, red, orange, blue is the **sample space**.
 
 Your selection of a single M&M is called an **event**.
 
+*** 
 
 #### Challenge
 
-* What's the probability of getting a "color" M&M in **your** bag?
+What's the probability of getting a "color" M&M in **your** bag?
 
 P(brown), P(yellow), etc.
+
+***
 
 ### Putting our data together into a `data.frame`
 
 Here we will collate the classes data into a single data set.
+
+#### Aside: Reading in your own data
+
+One of the most basic things you will need to do in R is read in your own data set. 
+You can read in Excel files, simple text files, and even files from Google Sheets.
+But the easiest type of file to read in is a comma separated values (CSV) file. 
+You can save an Excel workbook (or Numbers workbook or Google Sheet) as a CSV file by using the "Save as ..." menu item. 
+
+## TO-DO
+
+Add reading in our M&M data set here.
+
+
+***
 
 #### Challenge
 
@@ -138,6 +176,7 @@ Tools to use:
 * `data.frames`
 * `apply`
 
+***
 
 ## Probability of events
 
@@ -172,18 +211,23 @@ P(green) + P(blue)
 
 * What is the probability of getting green, then blue, *without replacing your first draw*?
 
+***
+
 #### Challenge
 
 What is the sample space when drawing two M&Ms?
 
+***
 
 ## Draw a random bag of M&Ms using the company stated frequencies/probabilities for each color
+
+***
 
 #### Challenge
 
 How would you create a random bag of M&Ms, assuming that each M&M has an equal probability of being in any given bag?
 
-
+***
 
 Mars claims that percentages of each color M&Ms are slightly different.
 
@@ -222,25 +266,29 @@ individual_color_compare <- new_bag_counts == my_orig_bag
 all(individual_color_compare)
 ```
 
+
+
+
 ## Mutually Exclusive Outcomes
 
-For this section, let's think about rolling a six-sided die, rather than a coin flip.
 
-**Challenge** - what's the probability of rolling a 1?
+**Challenge** - what's the probability of getting a green M&M?
 
-$P(1) = 1/6$ -- likewise, each of the numbers has the same probability.
+$P(green) = 0.16$ -- likewise, we can identify the associated values for each of the other colors.
 
-**Challenge** - what's the probability of rolling a 1 and a 2 at the same exact time?
+**Challenge** - what's the probability of your M&M being *both* green **AND** blue?
 
 These events are mutually exclusive.
 
-**Challenge** - What's the probability of rolling a 1 or a 2?
+**Challenge** - What's the probability of getting a green **OR** a blue M&M?
 
-**Challenge** - What's the probability of rolling a 1 or 2 or 3 or 4 or 5 or 6?
+$P(green \space\cap\space blue) = P(green) + P(blue)$
+
+**Challenge** - What's the probability of getting a blue, brown, green, orange, red, or yellow M&M?
 
 ### Addition Rule of Mutually Exclusive (Disjoint) Outcomes
 
-$A_1$ and $A_2$ are mutually exclusive. Then the 
+Given $A_1$ and $A_2$ are mutually exclusive, then the 
 
 $$
 P(A_1\text{ or } A_2 ) = P(A_1) + P(A_2)
@@ -253,6 +301,8 @@ P(A_1) + P(A_2) + ... + P(A_k)
 $$
 
 ## Non-mutually Exclusive Events
+
+Let's think about rolling a six-sided die for the following examples.
 
 **Example** - 6-sided die
 
@@ -284,9 +334,10 @@ $$
 P(A \text{ and } B) = P(A) \times P(B)
 $$
 
+
 # Visualizing probability - Venn Diagrams
 
-For this, we'll need to install and load a new package.
+For this, we'll need to install and load the `VennDiagram` package.
 
 ```{r, eval=FALSE}
 install.packages("VennDiagram")
