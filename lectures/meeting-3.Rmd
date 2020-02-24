@@ -1,5 +1,5 @@
 ---
-title: "Meeting 2 - In Class Notes"
+title: "Meeting 3 - In Class Notes"
 author: "Matt"
 date: "2/12/2020"
 output: html_document
