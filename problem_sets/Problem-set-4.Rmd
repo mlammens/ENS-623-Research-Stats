@@ -1,0 +1,51 @@
+---
+title: "ENS 623 - Spring 2020 - Problem Set 4"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file AND a Word file (docx).**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP20_PS4.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP20_PS4.Rmd`
+
+#### Grading note
+
+This is a single problem worth 25 points, but partial credit will be given.
+
+Write an R script to simulate the combinations of colors that would have been possible from your bag of M&Ms assuming the company-stated color distribution (23% blue, 14% brown, 16% green, 20% orange, 13% red, 14% yellow) and use this script to calculate the probability of obtaining the combination in your bag. 
+
+Needed:
+* `for` loop
+* `if` statement
+* `sample` function
+
+Recall that you can sample a bag of M&Ms using the following:
+
+```{r}
+## Colors as a vector
+mm_colors <- c("blue", "brown", "green", "orange", "red", "yellow")
+
+## Proportion/probability of each color
+mm_probs <- c(.23, .14, .16, .20, .13, .14)
+
+## I want to "sample" a bag of MMs - here my bag has 15 M&Ms in it. 
+new_bag <- sample(x = mm_colors, size = 15, replace = TRUE, prob = mm_probs)
+```
+
+## Hints and tips
+
+* You can read in your data from Wednesday's class in order to use **one** of your bags from class.
+
+* Your bag is pretty unlikely, so it may take **many** iterations in your `for` loop.
+
+* You will need to have a **counter** of some sort, to count the number of times your original bag matches the random bag.
+
+* Make sure you have the M&M counts in the order for the original bag and the new bag.
