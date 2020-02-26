@@ -207,7 +207,6 @@ summary {
 <li><a href="#probability-and-mms">Probability and M&amp;Ms</a><ul>
 <li><a href="#putting-our-data-together-into-a-data.frame">Putting our data together into a <code>data.frame</code></a></li>
 </ul></li>
-<li><a href="#to-do">TO-DO</a></li>
 <li><a href="#probability-of-events">Probability of events</a><ul>
 <li><a href="#sampling-with-replacement">Sampling with replacement</a></li>
 <li><a href="#sampling-without-replacement">Sampling without replacement</a></li>
@@ -326,16 +325,137 @@ sd = \sqrt{var} = \sqrt{\frac{\sum_{i=1}^n{(\bar{x} - x_i)^2}}{n-1}}
 <div id="putting-our-data-together-into-a-data.frame" class="section level3">
 <h3>Putting our data together into a <code>data.frame</code></h3>
 <p>Here we will collate the classes data into a single data set.</p>
+<p>Go to this Google Sheet and add your data: <a href="https://docs.google.com/spreadsheets/d/1FKOtz2XKOMCBcKX2_g3BTrNsB6CkXwdVbS-Fm3gwaN0/edit?usp=sharing" class="uri">https://docs.google.com/spreadsheets/d/1FKOtz2XKOMCBcKX2_g3BTrNsB6CkXwdVbS-Fm3gwaN0/edit?usp=sharing</a></p>
 <div id="aside-reading-in-your-own-data" class="section level4">
 <h4>Aside: Reading in your own data</h4>
 <p>One of the most basic things you will need to do in R is read in your own data set. You can read in Excel files, simple text files, and even files from Google Sheets. But the easiest type of file to read in is a comma separated values (CSV) file. You can save an Excel workbook (or Numbers workbook or Google Sheet) as a CSV file by using the “Save as …” menu item.</p>
+<p>Let’s download our M&amp;M data set that we just put together. First, download the file here. Right click the link and select “Download linked file” - <a href="https://github.com/mlammens/ENS-623-Research-Stats/raw/gh-pages/lectures/mm_data.csv">M&amp;M data</a> <strong>The file is called <code>mm_data.csv</code>.</strong></p>
+<p>Put the file in your <code>ENS-623-Research-Stats/data</code> folder. Then we can read in the file.</p>
+<pre class="r"><code>read.csv(&quot;data/mm_data.csv&quot;)
+
+mm_data &lt;- read.csv(&quot;data/mm_data.csv&quot;)</code></pre>
 </div>
-</div>
-</div>
-<div id="to-do" class="section level2">
-<h2>TO-DO</h2>
-<p>Add reading in our M&amp;M data set here.</p>
+<div id="aside-manipulating-a-data-set-with-tidyr-and-dplyr-enter-the-tidyverse" class="section level4">
+<h4>Aside: Manipulating a data set with <code>tidyr</code> and <code>dplyr</code> (enter the <code>tidyverse</code>)</h4>
+<p><a href="https://www.tidyverse.org/"><code>tidyvers</code></a> is a set of R packages focused on data science. <code>ggplot2</code> is actually one of these packages. We’re going to use some of the tools in the <code>tidyverse</code> to do some basic data manipulation.</p>
+<p>There are several very good resources for learning about the tools in the <code>tidyverse</code>. The most comprehensive is the book linked from the tidyverse website.</p>
+<p>Personally, I rely on this <a href="https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">data wrangling cheetsheet</a>.</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
+<pre class="r"><code># load tidyverse libraries
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
+## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
+## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
+## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code># Read in the M&amp;M data set
+mm_data &lt;- read.csv(&quot;mm_sample.csv&quot;)
+
+# look at these data
+mm_data</code></pre>
+<pre><code>##    Color Matt Brendan Felix
+## 1   blue   16      13    12
+## 2  brown    6       6    11
+## 3  green    7      14    10
+## 4 orange   14      12    14
+## 5    red    6      10     6
+## 6 yellow   10       5     8</code></pre>
+<p>Currently, these data are in <strong>wide-format</strong>, which while easy to read, is a bit hard to manipulate.</p>
+<p>We want to convert to <strong>long-format</strong>. In this format, each row will correspond to <strong>exactly one observation</strong>.</p>
+<pre class="r"><code>mm_data_long &lt;- tidyr::gather(mm_data, &quot;Person&quot;, &quot;MM_Count&quot;, 2:4)
+
+# Look at these data in long format
+mm_data_long</code></pre>
+<pre><code>##     Color  Person MM_Count
+## 1    blue    Matt       16
+## 2   brown    Matt        6
+## 3   green    Matt        7
+## 4  orange    Matt       14
+## 5     red    Matt        6
+## 6  yellow    Matt       10
+## 7    blue Brendan       13
+## 8   brown Brendan        6
+## 9   green Brendan       14
+## 10 orange Brendan       12
+## 11    red Brendan       10
+## 12 yellow Brendan        5
+## 13   blue   Felix       12
+## 14  brown   Felix       11
+## 15  green   Felix       10
+## 16 orange   Felix       14
+## 17    red   Felix        6
+## 18 yellow   Felix        8</code></pre>
+<p>We can use <code>dplyr</code> tools to perform various data processing tasks on these data.</p>
+<p><strong>Calculate the total M&amp;Ms in each persons bag</strong></p>
+<pre class="r"><code>mm_data_long %&gt;%
+  group_by(Person) %&gt;%
+  summarise(Tot_MM = sum(MM_Count))</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   Person  Tot_MM
+##   &lt;chr&gt;    &lt;int&gt;
+## 1 Brendan     60
+## 2 Felix       61
+## 3 Matt        59</code></pre>
+<p><strong>Add the sum as another column to our <em>long</em> format data set</strong></p>
+<pre class="r"><code>mm_data_long &lt;-
+  mm_data_long %&gt;%
+  group_by(Person) %&gt;%
+  mutate(Tot_MM = sum(MM_Count))
+
+mm_data_long</code></pre>
+<pre><code>## # A tibble: 18 x 4
+## # Groups:   Person [3]
+##    Color  Person  MM_Count Tot_MM
+##    &lt;fct&gt;  &lt;chr&gt;      &lt;int&gt;  &lt;int&gt;
+##  1 blue   Matt          16     59
+##  2 brown  Matt           6     59
+##  3 green  Matt           7     59
+##  4 orange Matt          14     59
+##  5 red    Matt           6     59
+##  6 yellow Matt          10     59
+##  7 blue   Brendan       13     60
+##  8 brown  Brendan        6     60
+##  9 green  Brendan       14     60
+## 10 orange Brendan       12     60
+## 11 red    Brendan       10     60
+## 12 yellow Brendan        5     60
+## 13 blue   Felix         12     61
+## 14 brown  Felix         11     61
+## 15 green  Felix         10     61
+## 16 orange Felix         14     61
+## 17 red    Felix          6     61
+## 18 yellow Felix          8     61</code></pre>
+<p><strong>Use the above to calculate the prob of getting each color in each bag</strong></p>
+<pre class="r"><code>mm_data_long$Prob_Color &lt;- round(mm_data_long$MM_Count / mm_data_long$Tot_MM, 2)
+
+mm_data_long</code></pre>
+<pre><code>## # A tibble: 18 x 5
+## # Groups:   Person [3]
+##    Color  Person  MM_Count Tot_MM Prob_Color
+##    &lt;fct&gt;  &lt;chr&gt;      &lt;int&gt;  &lt;int&gt;      &lt;dbl&gt;
+##  1 blue   Matt          16     59       0.27
+##  2 brown  Matt           6     59       0.1 
+##  3 green  Matt           7     59       0.12
+##  4 orange Matt          14     59       0.24
+##  5 red    Matt           6     59       0.1 
+##  6 yellow Matt          10     59       0.17
+##  7 blue   Brendan       13     60       0.22
+##  8 brown  Brendan        6     60       0.1 
+##  9 green  Brendan       14     60       0.23
+## 10 orange Brendan       12     60       0.2 
+## 11 red    Brendan       10     60       0.17
+## 12 yellow Brendan        5     60       0.08
+## 13 blue   Felix         12     61       0.2 
+## 14 brown  Felix         11     61       0.18
+## 15 green  Felix         10     61       0.16
+## 16 orange Felix         14     61       0.23
+## 17 red    Felix          6     61       0.1 
+## 18 yellow Felix          8     61       0.13</code></pre>
 <hr />
+</div>
 <div id="challenge-3" class="section level4">
 <h4>Challenge</h4>
 <p>What is the mean probability of getting each color across each bag?</p>
@@ -345,6 +465,7 @@ sd = \sqrt{var} = \sqrt{\frac{\sum_{i=1}^n{(\bar{x} - x_i)^2}}{n-1}}
 <li><code>apply</code></li>
 </ul>
 <hr />
+</div>
 </div>
 </div>
 <div id="probability-of-events" class="section level2">
@@ -401,11 +522,11 @@ mm_colors &lt;- c(&quot;blue&quot;, &quot;brown&quot;, &quot;green&quot;, &quot;
 mm_probs &lt;- c(.23, .14, .16, .20, .13, .14)
 
 ## I want to &quot;sample&quot; a bag of MMs
-new_bag &lt;- sample(x = mm_colors, size = 15, replace = TRUE, prob = mm_probs)
+new_bag &lt;- sample(x = mm_colors, size = 60, replace = TRUE, prob = mm_probs)
 table(new_bag)</code></pre>
 <pre><code>## new_bag
-##   blue  brown orange    red yellow 
-##      4      1      5      3      2</code></pre>
+##   blue  brown  green orange    red yellow 
+##     17      3      6     16      8     10</code></pre>
 <p>Because it is possible to draw a bag that is completely missing some of the colors, we need to explicitly check how many of each color is in the new bag, if we want to compare with our original bag.</p>
 <pre class="r"><code>## Count the number of each color
 new_bag_counts &lt;- c(sum(new_bag == &quot;blue&quot;),
@@ -415,7 +536,7 @@ new_bag_counts &lt;- c(sum(new_bag == &quot;blue&quot;),
                     sum(new_bag == &quot;red&quot;),
                     sum(new_bag == &quot;yellow&quot;))
 new_bag_counts</code></pre>
-<pre><code>## [1] 4 1 0 5 3 2</code></pre>
+<pre><code>## [1] 17  3  6 16  8 10</code></pre>
 <p>And now to check if my bag is the same as the new bag I can look at a series of logical tests.</p>
 <pre class="r"><code>individual_color_compare &lt;- new_bag_counts == my_orig_bag
 

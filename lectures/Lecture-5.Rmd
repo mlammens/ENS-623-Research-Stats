@@ -153,6 +153,9 @@ P(brown), P(yellow), etc.
 
 Here we will collate the classes data into a single data set.
 
+Go to this Google Sheet and add your data:
+[https://docs.google.com/spreadsheets/d/1FKOtz2XKOMCBcKX2_g3BTrNsB6CkXwdVbS-Fm3gwaN0/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1FKOtz2XKOMCBcKX2_g3BTrNsB6CkXwdVbS-Fm3gwaN0/edit?usp=sharing)
+
 #### Aside: Reading in your own data
 
 One of the most basic things you will need to do in R is read in your own data set. 
@@ -160,9 +163,84 @@ You can read in Excel files, simple text files, and even files from Google Sheet
 But the easiest type of file to read in is a comma separated values (CSV) file. 
 You can save an Excel workbook (or Numbers workbook or Google Sheet) as a CSV file by using the "Save as ..." menu item. 
 
-## TO-DO
+Let's download our M&M data set that we just put together.
+First, download the file here. Right click the link and select "Download linked file" - [M&M data](https://github.com/mlammens/ENS-623-Research-Stats/raw/gh-pages/lectures/mm_data.csv) **The file is called `mm_data.csv`.**
 
-Add reading in our M&M data set here.
+Put the file in your `ENS-623-Research-Stats/data` folder. Then we can read in the file.
+
+```{r, eval=FALSE}
+read.csv("data/mm_data.csv")
+
+mm_data <- read.csv("data/mm_data.csv")
+```
+
+#### Aside: Manipulating a data set with `tidyr` and `dplyr` (enter the `tidyverse`)
+
+[`tidyvers`](https://www.tidyverse.org/) is a set of R packages focused on data science. `ggplot2` is actually one of these packages. 
+We're going to use some of the tools in the `tidyverse` to do some basic data manipulation.
+
+There are several very good resources for learning about the tools in the `tidyverse`. 
+The most comprehensive is the book linked from the tidyverse website. 
+
+Personally, I rely on this [data wrangling cheetsheet](https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
+
+```{r, eval=FALSE}
+install.packages("tidyverse")
+```
+
+```{r}
+# load tidyverse libraries
+library(tidyverse)
+
+# Read in the M&M data set
+mm_data <- read.csv("mm_sample.csv")
+
+# look at these data
+mm_data
+
+```
+
+Currently, these data are in **wide-format**, which while easy to read, is a bit hard to manipulate.
+
+We want to convert to **long-format**. In this format, each row will correspond to **exactly one observation**.
+
+```{r}
+mm_data_long <- tidyr::gather(mm_data, "Person", "MM_Count", 2:4)
+
+# Look at these data in long format
+mm_data_long
+```
+
+
+We can use `dplyr` tools to perform various data processing tasks on these data.
+
+**Calculate the total M&Ms in each persons bag**
+
+```{r}
+mm_data_long %>%
+  group_by(Person) %>%
+  summarise(Tot_MM = sum(MM_Count))
+```
+
+**Add the sum as another column to our *long* format data set**
+
+```{r}
+mm_data_long <-
+  mm_data_long %>%
+  group_by(Person) %>%
+  mutate(Tot_MM = sum(MM_Count))
+
+mm_data_long
+```
+
+
+**Use the above to calculate the prob of getting each color in each bag**
+
+```{r}
+mm_data_long$Prob_Color <- round(mm_data_long$MM_Count / mm_data_long$Tot_MM, 2)
+
+mm_data_long
+```
 
 
 ***
@@ -237,7 +315,7 @@ mm_colors <- c("blue", "brown", "green", "orange", "red", "yellow")
 mm_probs <- c(.23, .14, .16, .20, .13, .14)
 
 ## I want to "sample" a bag of MMs
-new_bag <- sample(x = mm_colors, size = 15, replace = TRUE, prob = mm_probs)
+new_bag <- sample(x = mm_colors, size = 60, replace = TRUE, prob = mm_probs)
 table(new_bag)
 
 ```
