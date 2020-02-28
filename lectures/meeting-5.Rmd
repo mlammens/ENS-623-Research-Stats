@@ -1,0 +1,318 @@
+---
+title: "Meeting 5 - In Class Notes"
+author: "Matt"
+date: "2/26/2020"
+output: html_document
+---
+
+# Probability through M&Ms
+
+```{r}
+mm_counts <- c(57, 55, 56, 55, 55, 43, 54, 56, 50)
+```
+
+
+On average, how many m&ms will I get in a bag
+
+```{r}
+sum(mm_counts) / length(mm_counts)
+```
+
+Sample mean
+
+$$
+\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n}
+$$
+There is also a population mean, denoted by $\mu$.
+
+```{r}
+mean(mm_counts)
+```
+
+## Quantify variation in the number of M&Ms we might expect to get in a bag
+
+* Standard deviation - will return to this shortly
+
+* total distance of my observed m&m counts from the mean count
+
+```{r}
+mm_counts
+dist_from_mean <- mm_counts - mean(mm_counts)
+dist_from_mean
+
+```
+
+Get a single number to discuss variability
+
+```{r}
+sum(dist_from_mean)
+```
+
+
+* Sum of absolute values
+
+```{r}
+sum(abs(dist_from_mean))
+```
+
+
+* sum of squared values
+
+```{r}
+sum(dist_from_mean^2)
+```
+
+Also called squared deviations from the mean
+
+Advantage of squared vs absolute - squared yields a continuous function, where as absolute has a point of discontinuity.
+
+* variance
+
+sum of squared distances / n-1
+
+$$
+var = \frac{\sum_{i=1}^n{(\bar{x} - x_i)^2}}{n-1}
+$$
+
+Intuitively think of this as - is the average squared distance of any observation
+
+Take the square root of var, and you get the average absolute distance from the mean of any observation
+
+standard deviation = square root of variance
+
+***
+
+#### Challenge
+
+1. calculate the variance of the number of M&Ms in a bag, using basic functions - `sum` `/` `length`
+Check your answer against `var`
+
+2. Do the same for standard deviation.
+
+
+```{r}
+sum( (mean(mm_counts) - mm_counts)^2 ) / (length(mm_counts) - 1)
+```
+
+```{r}
+var(mm_counts)
+```
+
+
+### do this all for SD
+
+```{r}
+sqrt(sum( (mean(mm_counts) - mm_counts)^2 ) / (length(mm_counts) - 1))
+
+```
+
+```{r}
+sd(mm_counts)
+```
+
+```{r}
+library(ggplot2)
+
+ggplot() +
+  geom_point(aes(x = mm_counts, y = 0)) +
+  geom_vline(xintercept = mean(mm_counts))
+```
+
+# Probability
+
+Choose an m&m
+
+You could have chosen a:
+
+{brown, blue, yellow, orange, red, green} a set, our sample space
+
+sample space = is the set that includes all possible outcomes of an event
+
+Event = the selection of one m&m
+
+```{r}
+runif(1)
+```
+
+Assuming all color m&ms are equally likely,
+what's the probability that your event is a green m&m?
+
+1/6
+
+
+Let's get our data set
+
+```{r}
+
+mm_data <- read.csv(file = "mm_data.csv")
+mm_data
+```
+
+
+#### A brief intro into tidyverse
+
+```{r, eval=FALSE}
+install.packages("tidyverse")
+```
+
+```{r}
+library(tidyverse)
+
+mm_data
+
+```
+
+
+Transform our data into long-format
+
+```{r}
+mm_data_long <- tidyr::gather(mm_data, "Person", "MM_Count", 2:10)
+mm_data_long
+
+```
+
+
+**Calc total M&Ms in each bag**
+
+```{r}
+mm_data_long %>%
+  group_by(Person) %>%
+  summarise(Tot_MM = sum(MM_Count))
+```
+
+**Add a new column to mm_data_long with the total MM counts**
+
+```{r}
+mm_data_long <-
+  mm_data_long %>%
+  group_by(Person) %>%
+  mutate(Tot_MM = sum(MM_Count))
+
+mm_data_long
+```
+
+**Calc probability of getting any particular color for each person**
+
+```{r}
+mm_data_long$Prob_Color <- mm_data_long$MM_Count / mm_data_long$Tot_MM
+mm_data_long
+```
+
+
+***
+
+#### Challenge
+
+What is the man probablity of getting each color across the bags?
+
+
+```{r}
+mm_data_long %>%
+  group_by(Color) %>%
+  summarise(Prob_Color = mean(Prob_Color))
+```
+
+## Probability of events
+
+whats the prob(green OR blue OR red)?
+
+= prob(green) + prob(blue) + prob(red)
+
+
+what's the prob of not green?
+
+= 1 - p(green) = p(blue) + prob(red) + prob( brown) + p(yellow) + p(orange)
+
+$$
+P(\sim Green) = P(Not Green) = P(Green)^c
+$$
+
+
+### Sampling with replacement
+
+I draw one M&M from my bag, put it back, then draw another
+
+* What's the P(green and then blue)?
+
+P(green) * P(blue)
+
+### Samlping without replacement
+
+I draw one M&M, eat it, then draw another
+
+* What's the P(Green and then blue)?
+
+*** 
+
+#### Challenge 
+
+What is the sample space when drawing two M&Ms?
+
+***
+
+
+```{r}
+mm_colors <- c("blue", "brown", "green", "orange", "red", "yellow")
+mm_probs <- c(0.23, 0.14, 0.16, 0.2, 0.13, 0.14)
+```
+
+Let's "sample" a new bag
+
+```{r}
+new_bag <- sample(x = mm_colors, size = 57, replace = TRUE, prob = mm_probs)
+new_bag
+
+table(new_bag)
+
+```
+
+Get new bag color counts
+
+```{r}
+new_bag_counts <- c(sum(new_bag == "blue"),
+                    sum(new_bag == "brown"),
+                    sum(new_bag == "green"),
+                    sum(new_bag == "orange"), 
+                    sum(new_bag == "red"),
+                    sum(new_bag == "yellow")
+                    )
+new_bag_counts
+
+```
+
+
+```{r}
+mm_matts <- mm_data$Matt
+mm_matts
+sum(mm_matts)
+```
+
+Does my bag match the simulated bag?
+
+```{r}
+all(mm_matts == new_bag_counts)
+
+```
+
+
+
+
+
+Another, side, example of sample
+
+Shuffle numbers / permute numbers
+
+```{r}
+sample(1:10, replace = FALSE)
+```
+
+
+Sample w replacement (boot strap)
+
+```{r}
+sample(1:10, replace = TRUE)
+```
+
+
+
+
