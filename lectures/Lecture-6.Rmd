@@ -506,6 +506,45 @@ ggplot() +
 1. Increase the number of random varialbes drawn.
 2. Change the `mean` and `sd` parameters.
 
+## Standard Normal distribution
+
+The **Standard Normal** distribution is a **Normal** distribution with $\mu = 0$ and $\sigma = 1$.
+
+#### Challenge
+
+Draw 1000 samples from the standard normal distribution and plot a histogram and density curve for the resulting data.
+After making this plot, try 10,000 samples.
+
+```{r}
+stdnorm_samps <- data.frame( samps = rnorm(n = 10000, mean = 0, sd = 1) )
+
+ggplot(data = stdnorm_samps, aes(x = samps)) +
+  geom_histogram( aes( y = ..density.. ) ) +
+  geom_density(colour = "red", size = 2) + 
+  theme_bw()
+```
+
+* How well does the density plot represent the standard normal distribution?
+* Can we add the functional form of the normal distribution?
+
+```{r, fig.show='hide'}
+ggplot(data = stdnorm_samps, aes(x = samps)) +
+  geom_histogram( aes( y = ..density.. ) ) +
+  geom_density(colour = "red", size = 2) + 
+  stat_function( fun = dnorm, colour = "blue", alpha = 0.6, size = 2) +
+  theme_bw()
+```
+
+
+We can convert from a normal distribution with any mean $\mu$ and standard deviation $\sigma$ to the standard normal by subtracting the mean from each value, then dividing by the standard deviation:
+
+$$
+z_i = \frac{y_i - \mu}{\sigma}
+$$
+
+### Z-scores
+
+This same process can be used to calculate what are called **z-scores**. We can calculate z-scores for observations in *any* data set (though they are not always necessarily standard normally distributed).
 
 ## Negative Binomial Distribution:
 
@@ -565,6 +604,97 @@ period T**.
 $$
 {pdf} = P(x|T,\lambda) = \frac{ e^{-(\lambda T)} (\lambda T)^x }{ x! }
 $$
+
+## Other important distributions in data analysis we'll see this semester
+
+* Student's $t$ distribution
+* $\chi^2$ distribution
+* $F$ distribution
+
+
+***
+
+# Important properties of distributions
+
+## Measures of location, dispersion, and variability 
+
+When we are looking at the distribution of any data set, we want to have a measure of the center of the distribution.
+Usually our first step will be to look at the **arithmetic mean**, but each statistical distribution has its own **Expected Value**.
+
+Similarly, we want to have a measure of dispersion and variability. 
+Again, we usually would do something like calculate the **standard deviation**, but each distribution has its own measure of **Variance**.
+
+
+### Terms and properties of distributions
+
+Consider a generic probability distribution, with a PDF of 
+
+$$
+P( a < x < b) = \int_a^b f(x|params)dx
+$$
+
+(or an analogous PMF). This distribution has a number of properties that could be described.
+
+* Parameters
+    + Location - where
+    + Shape - eponymous
+    + Scale - spread
+* Support - what values of $x$ are possible
+* PDF or PMF
+* Mean - expected value
+* Median - middle value
+* Mode - most common value
+* Variance
+* Skewness - measure of asymmetry
+* Kurtosis - how fat/thin the tails are
+
+
+## Estimating distribution parameters
+ 
+**What are we estimating?**
+
+Usually measures of **location** and **dispersion and variability**.
+
+#### Challenge
+
+Can you think of any measures of location and dispersion that you are familiar with?
+
+### Expected value of a distribution
+
+* Long-run average value
+* Mean
+
+### Expected value for discrete distributions
+
+$$
+E[X] = \sum_{i=1}^{\infty} x_i p_i
+$$
+
+### Expected value for continuous distributions
+
+$$
+E[X] = \int_{-\infty}^{\infty} x \cdot f(x) dx
+$$
+
+### Population versus sample statistics
+
+We use **sample statistics** to estimate **population statistics**.
+In most cases in biology, populations are too large to measure population parameters directly.
+Therefore, we use different **estimators** to calculate the **populations statistics** based on the **sample statistics**.
+
+
+### Properities of good estimators
+
+See Q&K page 15 for more details.
+
+1. Unbiased - repeated estimates should not consistently under- or over-estimate population parameters
+2. Consistent - as sample size increases, sample estimate should get closer to population estimate
+3. Efficient - estimate has lowest variance among other estimators
+
+### Different kinds of estimators
+
+* **Point estimate** - a single value estimate for a population parameter
+* **Interval estimate** - a range of values that might include the parameter with a known probability
 
 ***
 
