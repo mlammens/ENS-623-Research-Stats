@@ -1,0 +1,64 @@
+---
+title: "ENS 623 - Spring 2020 - Problem Set 5"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file AND a Word file (docx).**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP20_PS5.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP20_PS5.Rmd`
+
+
+## Blood Oxygen Levels
+
+You are taking measurements of blood oxygen levels in class using a pulse oximeter. Miraculously, you know that the **population mean**, $\mu$, is 97.6 f, and the **population standard deviation**, $\sigma$, is 1.5 f.
+Below is a data set of ten measurements taken during class.
+
+```{r}
+oxy_data <- data.frame(name = c("Matt", "Yaw", "Madison", "Bryan", "Holly", 
+                                "Kevin", "Amanda", "Tyler", "Iris", "Catherine"),
+                       blood_ox = c(98.86, 93.16, 98.77, 94.98, 96.03,
+                                    98.11, 96.57, 92.88, 94.87, 99.71))
+oxy_data
+```
+
+### Histogram (10 points)
+
+Make a histogram of these data. 
+
+
+```{r}
+# Put your code here
+```
+
+Based on the histogram, what probability distribution do you think best matches your data?
+
+*Put your answer here.*
+
+### Z-scores (10 points)
+
+Assuming that blood oxygen levels are normally distributed, calculate the Z-scores for each of the observations (i.e., each of your classmates).
+
+```{r}
+# Put your code to calculate Z-scores here
+```
+
+Based on the Z-scores, are there any observations that stand out as being particularly concerning?
+
+*Put your answer here.*
+
+
+### Identifying Assumptions (5 points)
+
+Identify at least one problem with assuming that these data are normally distributed.
+
+*Put your answer here.*
+
