@@ -169,7 +169,7 @@ Calculate this probability.[^1]
 
 ## The return of the red fox!
 
-** What is the probability that a red fox wins *x* bouts**
+**What is the probability that a red fox wins *x* bouts**
 
 Recall [problem set 3](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-3.html) (i.e., the red fox versus arctic fox simulation).
 What if we wanted to know what the probability of a red fox winning 60 out of 100 bouts is? 
@@ -177,7 +177,7 @@ How might we figure that out?
 Let's start by using *a modified portion* of the solution to problem set 3. 
 Specifically, let's simulate the number of bouts a red fox wins, given some number of total bouts.
 
-* Given the stated probability of a red fox winning, how many bouts do you think the red fox shoud win?
+* Given the stated probability of a red fox winning, how many bouts do you think the red fox should win?
 
 ```{r, results='hide'}
 ## Start a `for` loop, to replicate a known number of bouts
@@ -310,9 +310,9 @@ Using our last plot, estimate the probability of the red fox winning exactly 60 
 
 ## Probability of 60 wins - analytically
 
-Thinking about probability and counting (see [Meeting 5](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-5.html)), let's determine the exact probability of the redfox winning exactly 60 bouts.
+Thinking about probability and counting (see [Meeting 5](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-5.html)), let's determine the exact probability of the red fox winning exactly 60 bouts.
 
-1. What's the probability of a redfox winning 60 bouts, then losing 40?
+1. What's the probability of a red fox winning 60 bouts, then losing 40?
 
 $$
 P(\text{red fox wins})^{60} * P(\text{red fox loses})^{40}
@@ -321,7 +321,7 @@ $$
 2. How many different ways can there be 60 wins?
 
 Think about the result of each bout as an *indpendent event*.
-How many ways can you line up 100 indpendent events?
+How many ways can you line up 100 independent events?
 
 $$
 n \cdot (n-1) \cdot (n-2) \cdot \text{...} \cdot 1 = n!
@@ -355,7 +355,7 @@ $$
 
 ## Binomial probability distribution
 
-We just derived the bionomial probability distribution.
+We just derived the binomial probability distribution.
 In fact, the equation above is what's called the **probability density function** for the **Bionomial Distribution**.
 The Binomial distribution can be thought of as the 
 sum of $n$ Bernoulli distributions (see below), all with the same 
@@ -402,7 +402,7 @@ ggplot() +
 
 #### Challenge
 
-What happens to the historgram if you increase the observations, i.e. `n`?
+What happens to the histogram if you increase the observations, i.e. `n`?
 
 
 ***
@@ -465,7 +465,7 @@ $$
 
 #### Challange
 
-Go back to our emperical probability distribution function for red fox bout wins.
+Go back to our empirical probability distribution function for red fox bout wins.
 What's the probability that the red fox wins between 58 and 62 bouts?
 
 # Important Statistical Distributions
@@ -503,7 +503,7 @@ ggplot() +
 
 #### Challenge
 
-1. Increase the number of random varialbes drawn.
+1. Increase the number of random variables drawn.
 2. Change the `mean` and `sd` parameters.
 
 ## Standard Normal distribution
@@ -595,7 +595,7 @@ Poisson when we have some process that usually results
 in a small number most of the times and produces larger 
 numbers less frequently. Think about the number of eggs produced
 by some bird, or the number of off spring for some animal. 
-By substituting the ususal $\lambda$ value in the Poisson 
+By substituting the usual $\lambda$ value in the Poisson 
 with $\lambda T$, where $T$ is some defined time period, and 
 $\lambda$ is some rate value, **we can use the Poisson to address 
 questions concerning the number of successes in some time 
