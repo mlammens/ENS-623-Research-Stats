@@ -35,7 +35,7 @@ These events are mutually exclusive.
 
 **Challenge** - What's the probability of getting a green **OR** a blue M&M?
 
-$P(green \space\cap\space blue) = P(green) + P(blue)$
+$P(green \space\cup\space blue) = P(green) + P(blue)$
 
 **Challenge** - What's the probability of getting a blue, brown, green, orange, red, or yellow M&M?
 
