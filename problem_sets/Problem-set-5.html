@@ -189,44 +189,17 @@ summary {
 <p>For example,</p>
 <p><code>Lammens_ENS623_SP20_PS5.Rmd</code></p>
 </div>
-<div id="blood-oxygen-levels" class="section level2">
-<h2>Blood Oxygen Levels</h2>
-<p>You are taking measurements of blood oxygen levels in class using a pulse oximeter. Miraculously, you know that the <strong>population mean</strong>, <span class="math inline">\(\mu\)</span>, is 97.6 f, and the <strong>population standard deviation</strong>, <span class="math inline">\(\sigma\)</span>, is 1.5 f. Below is a data set of ten measurements taken during class.</p>
-<pre class="r"><code>oxy_data &lt;- data.frame(name = c(&quot;Matt&quot;, &quot;Yaw&quot;, &quot;Madison&quot;, &quot;Bryan&quot;, &quot;Holly&quot;, 
-                                &quot;Kevin&quot;, &quot;Amanda&quot;, &quot;Tyler&quot;, &quot;Iris&quot;, &quot;Catherine&quot;),
-                       blood_ox = c(98.86, 93.16, 98.77, 94.98, 96.03,
-                                    98.11, 96.57, 92.88, 94.87, 99.71))
-oxy_data</code></pre>
-<pre><code>##         name blood_ox
-## 1       Matt    98.86
-## 2        Yaw    93.16
-## 3    Madison    98.77
-## 4      Bryan    94.98
-## 5      Holly    96.03
-## 6      Kevin    98.11
-## 7     Amanda    96.57
-## 8      Tyler    92.88
-## 9       Iris    94.87
-## 10 Catherine    99.71</code></pre>
-<div id="histogram-10-points" class="section level3">
-<h3>Histogram (10 points)</h3>
-<p>Make a histogram of these data.</p>
-<pre class="r"><code># Put your code here</code></pre>
-<p>Based on the histogram, what probability distribution do you think best matches your data?</p>
-<p><em>Put your answer here.</em></p>
-</div>
-<div id="z-scores-10-points" class="section level3">
-<h3>Z-scores (10 points)</h3>
-<p>Assuming that blood oxygen levels are normally distributed, calculate the Z-scores for each of the observations (i.e., each of your classmates).</p>
-<pre class="r"><code># Put your code to calculate Z-scores here</code></pre>
-<p>Based on the Z-scores, are there any observations that stand out as being particularly concerning?</p>
-<p><em>Put your answer here.</em></p>
-</div>
-<div id="identifying-assumptions-5-points" class="section level3">
-<h3>Identifying Assumptions (5 points)</h3>
-<p>Identify at least one problem with assuming that these data are normally distributed.</p>
-<p><em>Put your answer here.</em></p>
-</div>
+<div id="working-with-the-multinomial-distribution" class="section level2">
+<h2>Working with the multinomial distribution</h2>
+<p>Near the end of class on Wednesday, I introduced the <a href="https://en.wikipedia.org/wiki/Multinomial_distribution">multinomial distribution</a>. Using this distribution, you can calculate the exact probability of getting <em>your bag of M&amp;Ms</em>. To do this, you need to know the probability of getting each color. In class, we used probability values reported by the Mars company as recently as 2008. This <a href="https://qz.com/918008/the-color-distribution-of-mms-as-determined-by-a-phd-in-statistics/">article</a> includes these numbers, but also updated numbers from two different M&amp;M factories.</p>
+<p><strong>For this problem set, calcualte the probability of getting your bag of M&amp;Ms using (15 points):</strong></p>
+<ol style="list-style-type: decimal">
+<li>The 2008 probabilities (similar to what we used in class).</li>
+<li>The 2017, New Jersey Factory probabilities.</li>
+<li>The 2017, Tennessee Factory probabilities.</li>
+</ol>
+<p><strong>Please do all calculations in R.</strong></p>
+<p><strong>Based on the probabilities calculated above, write an argument about where your bag most likely came from (10 points).</strong></p>
 </div>
 
 
