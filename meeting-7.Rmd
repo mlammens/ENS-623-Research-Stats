@@ -1,0 +1,213 @@
+---
+title: "Meeting 7 - Probability Distributions and Central Limit Theorem"
+author: "Matthew Aiello-Lammens"
+date: "3/11/2020"
+output: html_document
+---
+
+# Goals 
+
+* finish talking about distributions
+* id some important distributions for biostats
+* transition to the central limit theorem
+* use CLT to talk about confidence intervals
+* maybe, look into some properties of distn's
+
+# Probability distribution (cont'd)
+
+## Review from last time
+
+* histogram of binomial distn
+* relationship between binomial and bernouli
+* Binomial - answers the question, what's the probability of observing x successes in n trials, where the probability of success is p.
+
+## Why do we care about probability distn's
+
+* we use distributions to deals with uncertainty in biological data
+
+Two types of uncertainty:
+
+* process uncertainty - imperfect knowledge of the system. Ex: you can measure 50 iris petals, get the mean value, and it will differ from the mean of another 50 iris petals. You simply aren't measuring and/or accounting for everything that goes into understanding the length of the petal. - e.g. soil conditions might differ, sun light availability, genetics, ...
+
+* observation uncertainty - inaccuracies the result during measurements - two rulers, and they aren't identical. Or you are just duffus with a ruler.
+
+Imagine you're out in a field measuring petal lengths for iris species.
+
+## Histograms and density plots as emperical probability distributions
+
+```{r}
+library(ggplot2)
+
+ggplot(data = iris) +
+  geom_histogram(aes(x = Petal.Length, y = ..density.., fill = Species), binwidth = 0.1) +
+  facet_grid(Species ~ .)
+
+```
+
+What is the probability of finding a petal with length 1.9 to 2 for iris setosa?
+
+
+### Emperical probability distributions
+
+* Why emperical? Because you observe them!
+* You can have values that are possible based on biology, but you didn't observe, so then your emperical distribution would suggest the value is 0. E.g., petal length of 3.1 to 3.2 for versicolor
+
+```{r}
+ggplot(data = iris) +
+  geom_histogram(aes(x = Petal.Length, y = ..density.., fill = Species), binwidth = 0.1) +
+  geom_density(aes(x = Petal.Length, color = Species)) +
+  facet_grid(Species ~ .)
+
+
+
+```
+
+## Normal Distribution
+
+```{r}
+?rnorm
+```
+
+Generate some normally distributed data
+
+```{r}
+normal_rvs <- rnorm(n = 100, mean = 0, sd = 1)
+
+ggplot() +
+  geom_histogram(aes(x = normal_rvs))
+```
+
+#### Challenge
+
+1. Increase the number of random values and describe how the plot changes
+2. What happens when you change `mean` and `sd` parameters.
+
+### Standard Normal Distribution
+
+Normal with mean = 0 and standard deviation = 1.
+
+
+```{r}
+stdnorm_samps <- data.frame( samps = rnorm(n = 10000, mean = 0, sd = 1) )
+
+ggplot(data = stdnorm_samps, aes(x = samps)) +
+  geom_histogram( aes( y = ..density.. ) ) +
+  geom_density(colour = "red", size = 2) + 
+  stat_function(fun = dnorm, color = "blue", alpha = 0.6, size = 2) +
+  theme_bw()
+```
+
+
+We can convert any normal distribution, with any mean = mu and standard deviation = sigma to a standard normal by using the following formula:
+
+$$
+z_i = \frac{y_i - \mu}{\sigma}
+$$
+
+Apply this formula for every value
+
+### Z-Scores
+
+These are called **z-scores**.
+
+We can actually calculate z-scores for any data set, even if they aren't necessarily normally distributed data, but the z-scores will have a bit of a different meaning.
+
+In this context, the z-scores can be used to **standardize** across different measurement schemes, or different observers.
+
+# Utility of knowing the amount of area under the curve?
+
+* Where do 95% of the values from the standard normal distribution fall?
+
+Use `qnorm`
+
+```{r}
+qnorm(p = 0.025, mean = 0, sd = 1)
+```
+
+
+```{r}
+qnorm(p = 0.025, mean = 0, sd = 1, lower.tail = FALSE)
+qnorm(p = 0.975, mean = 0, sd = 1)
+```
+
+```{r}
+ggplot(data = stdnorm_samps, aes(x = samps)) +
+  coord_cartesian(xlim = c(-5, 5), ylim = c(0, 0.41)) +
+  geom_vline(xintercept = c(-1.96, 1.96), size = 2 ) +
+  stat_function( fun = dnorm, colour = "blue", size = 2) +
+  theme_bw()
+```
+
+# Central Limit Theorem
+
+```{r}
+normal_rvs <- rnorm(100)
+ggplot() +
+  geom_histogram(aes(x = normal_rvs))
+
+```
+
+
+```{r}
+normal_rv_means <- c()
+
+for(x in 1:1000){
+  # generate new normal rvs
+  new_norm_rvs <- rnorm(100)
+  
+  # calculate the mean of my new norm rvs
+  new_norm_rv_mean <- mean(new_norm_rvs)
+  
+  # Add this mean to the vector of means
+  normal_rv_means <- c(normal_rv_means, new_norm_rv_mean)
+}
+
+#normal_rv_means
+
+ggplot() + 
+  geom_histogram(aes(x = normal_rv_means))
+
+```
+
+* The distribution of sample means is normal.
+* Sample means are normally distributed.
+
+Sample means?
+
+A **sample mean** is the mean of a sample of values from some distribution.
+
+**Population mean** is the true mean value.
+
+
+Let's think about the poisson distn
+
+```{r}
+pois_rvs <- rpois(n = 100, lambda = 1)
+
+ggplot() +
+  geom_histogram(aes(x = pois_rvs))
+```
+
+```{r}
+pois_means <- c()
+
+for(x in 1:100){
+  new_pois_mean <- mean(rpois(100, lambda = 1))
+  pois_means <- c(pois_means, new_pois_mean)
+}
+
+ggplot() +
+  geom_histogram(aes(x = pois_means))
+
+```
+
+If the distribution of sample means is always normally distributed, then we can convert that to a standard normal distrbution (using z-socres), and then we can make estimates for where 95% of our values fall (or and percentile of our values)
+
+We can also calculate the standard deviation of the distribution of the sample means -> **standard error** of the mean.
+
+```{r}
+sd(pois_means)
+```
+
+* standard deviation says something about the variability of that particular data set
+* stnadard error says something about the uncertainty of using a sample mean as a "guess" at the true population mean.
