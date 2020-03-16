@@ -299,6 +299,12 @@ ggplot(data = NULL) +
 
 ```
 
+### Good videos explaining the CLT
+
+* [https://youtu.be/lsCc_pS3O28](https://youtu.be/lsCc_pS3O28)
+* [https://youtu.be/3SKwerKHbRk](https://youtu.be/3SKwerKHbRk)
+
+
 ## Using the CLT
 
 From Q&K p. 18:
@@ -396,6 +402,10 @@ If I have calculated the mean, how many observations, out of a total of *n*, are
 General rule regarding df's:
 
 > the df is the number of observations minus the number of parameters included in the formula for the variance (Q&K p.20; Box 2.1).
+
+### Good videos explaining confidence intervals
+
+* [https://youtu.be/FUaXoKdCre4](https://youtu.be/FUaXoKdCre4)
 
 
 ## Standard error of other statistics
