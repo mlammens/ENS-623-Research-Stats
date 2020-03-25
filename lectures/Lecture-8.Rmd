@@ -20,7 +20,7 @@ output:
 Recall that last week we were introduced to the Normal (or Gaussian) Distribution with pdf:
 
 $$
-f(x|\mu,\sigma) \thicksim \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+f(x|\mu,\sigma) \sim \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 $$
 
 The **Standard Normal** distribution is a **Normal** distribution with $\mu = 0$ and $\sigma = 1$.
@@ -149,6 +149,10 @@ General rule regarding df's:
 
 > the df is the number of observations minus the number of parameters included in the formula for the variance (Q&K p.20; Box 2.1).
 
+## Example of working with Confidence Intervals in R
+
+I've worked out a full example of working with confidence intervals [here](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-8-1-Confidence-Intervals.html). Please have a look.
+
 
 ## Standard error of other statistics
 
@@ -161,7 +165,7 @@ The distribution of the sample variance is *not normal*. It is $\chi^2$ distribu
 Mathematically, this is explained as:
 
 $$
-X \thicksim N(0,1) \to X^2 \thicksim \chi^2
+X \sim N(0,1) \to X^2 \sim \chi^2
 $$
 
 Intuitively, why does this make sense?
@@ -223,7 +227,7 @@ Increase the sample size.
 * Curves overlap less
 * Type II error rate becomes smaller
 
-![power](https://www.dropbox.com/s/joh0kxc7ygsq9xw/power.png?dl=1)
+![power](../lectures/power.png)
 
 ## What are the general steps to hypothesis testing?
 
