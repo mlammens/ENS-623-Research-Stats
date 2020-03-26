@@ -8,8 +8,11 @@ output: html_document
 ## Learning Objectives
 
 * Understand the relationship between population statistics, sample statistics, and confidence intervals
-* Become familiar with how to calculate a margin of error and confidence interval
-* Understand the use of confidence intervals in hypothesis testing
+* Become familiar with how to calculate confidence intervals
+
+## Recorded Lecture
+
+I recorded myself going through this activity, and you can find it here: [https://youtu.be/GzPtJlLYy9k](https://youtu.be/GzPtJlLYy9k).
 
 ## Working with the Youth Risk Behavior Surveillance System (YRBSS) data
 
@@ -315,8 +318,8 @@ set.seed(623)
 
 # start with vectors to store mean and upper / lower CI values
 samp_means <- c()
-samp_CI_Upper <- c()
-samp_CI_Lower <- c()
+samp_CI_upper <- c()
+samp_CI_lower <- c()
 
 # start a for loop the does 25 iterations
 for(x in 1:25){
@@ -332,8 +335,8 @@ for(x in 1:25){
   se_samp <- sd(yrbss_samp$height, na.rm = TRUE) / sqrt(nrow(yrbss_samp))
   CI_upper <- mean_samp + (1.96*se_samp)
   CI_lower <- mean_samp - (1.96*se_samp)
-  samp_CI_Upper <- c(samp_CI_Upper, CI_upper)
-  samp_CI_Lower <- c(samp_CI_Lower, CI_lower)
+  samp_CI_upper <- c(samp_CI_upper, CI_upper)
+  samp_CI_lower <- c(samp_CI_lower, CI_lower)
   
 }
 
@@ -342,11 +345,11 @@ for(x in 1:25){
 Now let's build a plot that compared the sample means and confidence intervals to the true population mean
 
 ```{r}
-samp_stats_df <- data.frame(obs = 1:length(samp_means), samp_means = samp_means, samp_CI_Lower = samp_CI_Lower, samp_CI_Upper = samp_CI_Upper)
+samp_stats_df <- data.frame(obs = 1:length(samp_means), samp_means = samp_means, samp_CI_lower = samp_CI_lower, samp_CI_upper = samp_CI_upper)
 
 ggplot(data = samp_stats_df) + 
   geom_point(aes(x = samp_means, y = obs)) +
-  geom_linerange(aes(xmin = samp_CI_Lower, xmax = samp_CI_Upper, y = obs)) +
+  geom_linerange(aes(xmin = samp_CI_lower, xmax = samp_CI_upper, y = obs)) +
   geom_vline(xintercept = yrbss_hgt_pop, color = "red") + 
   theme_bw()
 ```
