@@ -1,0 +1,32 @@
+---
+title: "ENS 623 - Spring 2020 - Problem Set 7"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file AND a Word file (docx).**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP20_PS7.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP20_PS7.Rmd`
+
+# Problem 1 - Confidence Intervals
+
+Review the Lecture 8 supplement [Example of working with Confidence Intervals in R](https://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-8-1-Confidence-Intervals.html). 
+Note that I provided a link to a YouTube video in which I go through this example in detail.
+
+Focusing on the section **Examining multiple estimates and confidence intervals**, re-run this code, but increase the sample size from 10 to 100 and 1000. *Show your new code in your Rmd file.*
+
+**Describe the effect of increasing sample size on the confidence interval calculations.**
+
+# Problem 2 - More Confidence Intervals
+
+Consider the built in `iris` data set we have worked with in the past. For each of the three species, calculate the sample mean and confidence intervals for `Petal.Length` and `Petal.Width`. *Show your code in your Rmd file.*
+
+**Based on your calculations of sample means and CIs for each sepcies for these two measurements, do you think the petal sizes of these three species are significantly different from each other? Explain your answer.**
