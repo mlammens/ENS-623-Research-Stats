@@ -1,5 +1,5 @@
 ---
-title: "Meeting 9 - DRAFT - Intro to Hypothesis Testing"
+title: "Meeting 9 - Intro to Hypothesis Testing"
 author: "Matthew E. Aiello-Lammens"
 date: '2020-04-01'
 output:
@@ -94,7 +94,7 @@ $$
 P(data|H_0)
 $$
 
-## Examples of parametric hypothesis testing
+## Generic "test" statistics
 
 Below is the generic form of the *t* statistic:
 
@@ -103,6 +103,8 @@ t_s = \frac{St - \theta}{S_{St}}
 $$
 
 where $St$ is the value of some statistic (e.g., the mean) from our **sample**, $\theta$ is the **population** value for that statistic, and $S_{St}$ is the estimated standard error of the statistic $St$ (based on our sample).
+
+## Comparing two samples
 
 How can we use this formula to test whether two samples are drawn from the same population?
 
@@ -143,8 +145,11 @@ s_{\bar{y}_1 - \bar{y}_2} =
 }
 $$
 
+***
 
-### Differences in fecundity of intertidal gastropods in two different intertidal zones (Example 6A in Logan, Box 3.1 in Q&K)
+# Example of parametric hypothesis testing
+
+## Differences in fecundity of intertidal gastropods in two different intertidal zones (Example 6A in Logan, Box 3.1 in Q&K)
 
 Ward and Quinn (1988) investigated the differences in fecundity of *Lepsiella vinosa* in two different intertidal zones (mussel zone and littorinid zone). 
 
@@ -174,14 +179,59 @@ Calculate means and standard deviations of each group separately. We will be usi
 ```{r}
 library(dplyr)
 
-gastro %>%
+gastro_summary <-
+  gastro %>%
   group_by(ZONE) %>%
-  summarise(Mean = mean(EGGS), Var = var(EGGS))
+  summarise(Mean = mean(EGGS), 
+            Var = var(EGGS), 
+            SD = sd(EGGS),
+            SE = sd(EGGS)/sqrt(length(ZONE)))
+
+gastro_summary
+```
+
+### Calculate the *t* stat by hand, using the equations above
+
+First, let's calculate $s_{\bar{y}_1 - \bar{y}_2}$ using the formula noted above:
+
+```{r}
+n_littor <- sum(gastro$ZONE == "Littor")
+n_mussel <- sum(gastro$ZONE == "Mussel")
+
+sd_littor <- gastro_summary$SD[1]
+sd_mussel <- gastro_summary$SD[2]
+
+s_1_2 <- sqrt( (((n_littor - 1)*sd_littor^2 + (n_mussel - 1)*sd_mussel^2 )/
+                  (n_littor + n_mussel -2)) * 
+                 ((1/n_littor) + (1/n_mussel)) )
+
+mean_littor <- gastro_summary$Mean[1]
+mean_mussel <- gastro_summary$Mean[2]
+
+tstat <- (mean_littor - mean_mussel) / s_1_2
 
 ```
 
+OK, now we have our *t* statistic. In order to use this to say something about the probability that these two sample come from a population with the same mean, we need to know what degrees of freedom to use to parameterize our *t* distribution. 
+Here's the simple formula:
 
-Run *t* test.
+$$
+df = (n_1 - 1) + (n_2 - 1)
+$$
+
+So now we can say that the *df* here is:
+
+```{r}
+df_gastro <- (n_littor - 1) + (n_mussel - 1)
+```
+
+```{r}
+pt(q = tstat, df = df_gastro) * 2
+```
+
+The resulting probability value is **very** small, much less than 0.05. In this case, we would **reject the null hypothesis** that these two samples come from the same population. 
+
+### Use R's native `t.test` function
 
 ```{r}
 (gastro_t_test <- t.test(data = gastro, EGGS ~ ZONE, var.equal = TRUE))
@@ -191,45 +241,6 @@ gastro_t_test$estimate[1] - gastro_t_test$estimate[2]
 ```
 
 
-### Metabolic rates of northern fulmars (sea-bird)
-
-Furness and Bryant (1996) measured the metabolic rates of male and female breeding northern fulmars, and tested if there were any observable differences in these rates.
-
-Get the data and have a look
-
-```{r}
-fulmars <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/furness.csv")
-fulmars
-summary(fulmars)
-```
-
-Make a box plot to help assess differences in variance and deviations from normality.
-
-```{r}
-ggplot() +
-  geom_boxplot(data = fulmars, aes(x = SEX, y = METRATE)) +
-  theme_bw()
-
-```
-
-#### Challenge
-
-Are the variances the same?
-
-Calculate means and standard deviations of each group separately. We will be using `dplyr` for this.
-
-```{r}
-fulmars %>%
-  group_by(SEX) %>%
-  summarise(Mean = mean(METRATE), Var = var(METRATE))
-
-```
-
-Based on inequality of variances, use Welch's *t*-test.
-
-```{r}
-(fulmars_t_test <- t.test(data = fulmars, METRATE ~ SEX, var.equal = FALSE))
-```
 
 ***
 
@@ -250,7 +261,7 @@ From Q&K p. 47:
 
 ## Randomization tests
 
-Powell and Russel (1984, 1985) investigated differences in bettle consumption between two size classes of eastern horned lizards.
+Powell and Russel (1984, 1985) investigated differences in beetle consumption between two size classes of eastern horned lizards.
 
 
 Get the data and look at it
@@ -368,7 +379,7 @@ for (i in 1:19) {
 p_vals
 ```
 
-How many are false possitives?
+How many are false positives?
 
 ```{r}
 sum(p_vals < 0.05, na.rm = TRUE)
