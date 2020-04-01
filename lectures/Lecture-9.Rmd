@@ -350,9 +350,30 @@ t_rand_extreme <- sum(abs(t_rand) > t_orig)
 
 # Multiple testing
 
-* If you perform a singly hypothesis test, using $\alpha = 0.05$, what is the probability that you reject the null hypothesis, even though the null is correct?
+* If you perform a single hypothesis test, using $\alpha = 0.05$, what is the probability that you reject the null hypothesis, even though the null is correct?
+
+The probability of a *significant result by chance* is p = 0.05. 
 
 * If you perform 20 hypothesis tests, using $\alpha = 0.05$, what is the probability that in at least one of those cases, you will reject the null hypothesis, even though it is correct?
+
+Here, we are looking for the probability of *at least one significant result by chance*, which we can write probablistically as:
+
+P(at least one significant result) = 1 - P(no signicant results)
+
+Next, let's note that the P(no significant result) = 1 - P(significant result), which is 1 - 0.05.
+
+Put this all together and we see that:
+
+$$
+P(\text{at least one significant result}) = 1 - (1 - 0.05)^{20} \approx 0.64
+$$
+
+**Note:** Some information above is based on material found at [https://www.stat.berkeley.edu/~mgoldman/Section0402.pdf](https://www.stat.berkeley.edu/~mgoldman/Section0402.pdf).
+
+
+From Quinn and Keough, p. 48:
+
+> One of the most difficult issues related to statistical hypothesis testing is the potential accumulation  of  decision  errors  under  circumstances  of multiple    testing. 
 
 
 ### Example of problems with multiple comparisons
@@ -367,7 +388,8 @@ for (i in 1:20) {
 }
 ```
 
-Run a *t* test for all possible pair-wise comparisons.
+Run a *t* test for all possible pair-wise comparisons. 
+**This results in `r (20*19)/2` pair-wise comparisons.
 
 ```{r}
 p_vals <- matrix(ncol = 20, nrow = 20)
@@ -383,6 +405,31 @@ How many are false positives?
 
 ```{r}
 sum(p_vals < 0.05, na.rm = TRUE)
+```
+
+There are a number of ways to address the multiple comparison problem.
+One approach, which we will learn in the coming weeks, is to use Analysis of Variance (ANOVA) when appropriate. 
+Another, is to adjust the $\alpha$ value we use to accept / reject our null hypothesis.
+There are multiple ways to adjust the $\alpha$ value; I recommend looking at the help for the function `p.adjust`.
+One of the most common methods is the [**Bonferroni Correction**](https://en.wikipedia.org/wiki/Bonferroni_correction), which is:
+
+$$
+\frac{\alpha}{m}
+$$
+
+where $m$ is the number of different tests. 
+
+So for our example above, we would use:
+
+```{r}
+new_alpha <- 0.05 / 190
+new_alpha
+```
+
+And using this new value we can look for how many false positives there are:
+
+```{r}
+sum(p_vals < new_alpha, na.rm = TRUE)
 ```
 
 
