@@ -244,7 +244,7 @@ gastro_t_test$estimate[1] - gastro_t_test$estimate[2]
 
 ***
 
-# Dealing with violation of assumptions
+# Dealing with violations of assumptions
 
 Recall our **Major assumptions for using a *t* test** - the samples are drawn from populations that are:
     1. (Approximately) normally distributed
@@ -260,7 +260,7 @@ But the cases it can be applied in are fairly limited.
 
 To demonstrate the paired *t*-test, let's examine Example 6C in the Logan 2010 text book.
 This example relates to a paper by [Elgar et al. 1996](https://s3.amazonaws.com/academia.edu.documents/43462589/Foraging_strategies_in_orbspinning_spide20160307-9576-1q368rr.pdf?response-content-disposition=inline%3B%20filename%3DForaging_strategies_in_orb-spinning_spid.pdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIATUSBJ6BACGNXOTFV%2F20200409%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200409T155826Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIGNXibuCh7%2BubU1Xcb3xozzoUQqFiDPFINS4UnlNwrp8AiEAjKoa9pf%2FKJfCWe0cBLzgHtQjDn7RXrnkOprCCZxx%2Bo0qvQMI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgwyNTAzMTg4MTEyMDAiDITX%2FTE%2FNA%2FeFjWIFiqRA1zWRI9POYSclvFMf8J%2BIDjzSxdWr55C9fp35XgN2v6IypWF3tPy%2BksvjuNwVi3tthVQXk%2FfYS4cp%2Fo%2BxsLD%2FxDVxGz89Mzz9O3r7ztJ2%2FdlnGmRLJHu6f9yWM3huE6%2FgJwzJyxLA1kg464iv8AzXFuuV5yjzvIvUv09CfiLaT%2BDPop3jGQfqIiUCZber3xSPUblNqvwN%2BTY3AEzDDlRJ92W2lXByuqUHurKwGIkq%2FjsaA67ANxipELtgrG%2Bh7dUA8MJQLUBX9egvwIWcOViSS470neyzqXksNETZrRIt1EgYHwcMTfyE94LXYvWpD9itkZK4Z5MiMcIXSGiKk6PlataIazD%2Bmh5DNUIjwaV6QFVJAcfGDrw3V4%2FeU97Js6kBwuiBaQ%2Fkly9tnp8kug%2B3R2gdvq6N1fgDL9D64SYOcdqXdL03gvqswRsn5By3Oi%2BRZ9vbyYTSnGBBS1P95AUseYZUMVfFIxa6E%2F1Kh3Nyn%2Bf206NC0J2%2BKfBGHv3Zcc8NIi%2FOH1kPrEFjHy3PKNSVZdkMNn8vPQFOusBznjE2MJC%2B%2FEjGBGmn4AUoIh6fyNtiPQByvtQmcaVYbk06iL8PVzj9JI5QXDj6mY0dmHKn71nrc%2F0KkSqj3%2FHnlTJT9LJZS1jwI%2Feu2%2By2jrmR%2BUMeTbqLeOEXlEdiLFLvN3fam6sRE8K7dM%2B2RGFjrb0wkoYOphMs48mPsf%2F0OJsfrVxBVO8R5gW3%2BrPO1i8TFh2robFFDcFlwOBlfKh6rrJKcliMCrntGQfdrcDRJkEhaMk6NH%2FD0OA%2FjRY377DTsRFsdRcGHEjFskCeIUW6cub1fubYDPZ0sBki9i0s9jGuk%2BzITqrnSoZ0w%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=0a199e56855688c9343500252708be5392696131a91c1f8197ef2300c258f9b7), where the researchers examined the width and height of orb-spinning spider webs in two different light conditions, light and dark. 
-Each spider in the study was examined in both light and dark conitions, which means that the light and dark measurements were **not independent** from each other. 
+Each spider in the study was examined in both light and dark conditions, which means that the light and dark measurements were **not independent** from each other. 
 Therefore, the authors employed a paired *t*-test. 
 Below we work through this example.
 
@@ -331,7 +331,7 @@ From Q&K p. 47:
 3. Compare the smaller rank sum to the probability distribution of rank sums, based on repeated randomization of observations to groups.
 4. If sample sizes are large, the probability distribution of rank sums approximates a normal distribution and the *z* statistic can be used.
 
-To demonstrate the Mann-Witney / Wilcoxon test, let's look at Example 6D from Logan 2010.
+To demonstrate the Mann-Whitney / Wilcoxon test, let's look at Example 6D from Logan 2010.
 This example analyzes data presented in Sokal and Rohlf (1997), which happens to be the book I used when learning Biometry. These data include measurements of the sizes of two different samples of chiggers. The question is, do these chiggers have the same mean size values? That is, do they come from the same population?
 
 Load the data set.
@@ -340,7 +340,7 @@ Load the data set.
 chigger <- read.csv("https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/nymphs.csv")
 ```
 
-Make a boxplot.
+Make a box plot.
 
 ```{r}
 library(ggplot2)
@@ -360,7 +360,7 @@ ggplot(data = chigger, aes(x = LENGTH, fill = SAMPLE)) +
 
 ```
 
-Look at the Q-Q plots. Q-Q plots are a diagnositc tool to visually see deviations from normality.
+Look at the Q-Q plots. Q-Q plots are a diagnostic tool to visually see deviations from normality.
 Normal data should appear along the straight line.
 
 ```{r}
@@ -484,7 +484,7 @@ The probability of a *significant result by chance* is p = 0.05.
 
 Here, we are looking for the probability of *at least one significant result by chance*, which we can write probablistically as:
 
-P(at least one significant result) = 1 - P(no signicant results)
+P(at least one significant result) = 1 - P(no significant results)
 
 Next, let's note that the P(no significant result) = 1 - P(significant result), which is 1 - 0.05.
 
