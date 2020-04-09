@@ -244,11 +244,83 @@ gastro_t_test$estimate[1] - gastro_t_test$estimate[2]
 
 ***
 
-# Non-parametric tests
+# Dealing with violation of assumptions
 
+Recall our **Major assumptions for using a *t* test** - the samples are drawn from populations that are:
+    1. (Approximately) normally distributed
+    2. Equally varied (i.e. equal variance)
+    3. Each observation is *independent*
+ 
 Let's say our data don't fit the assumptions of the *t* test. What are our options?
 
-## Rank based tests - Mann-Whitney test
+## Paired *t*-test
+
+A paired *t*-test provides one way to deal with data that are not independent. 
+But the cases it can be applied in are fairly limited. 
+
+To demonstrate the paired *t*-test, let's examine Example 6C in the Logan 2010 text book.
+This example relates to a paper by [Elgar et al. 1996](https://s3.amazonaws.com/academia.edu.documents/43462589/Foraging_strategies_in_orbspinning_spide20160307-9576-1q368rr.pdf?response-content-disposition=inline%3B%20filename%3DForaging_strategies_in_orb-spinning_spid.pdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIATUSBJ6BACGNXOTFV%2F20200409%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200409T155826Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIGNXibuCh7%2BubU1Xcb3xozzoUQqFiDPFINS4UnlNwrp8AiEAjKoa9pf%2FKJfCWe0cBLzgHtQjDn7RXrnkOprCCZxx%2Bo0qvQMI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgwyNTAzMTg4MTEyMDAiDITX%2FTE%2FNA%2FeFjWIFiqRA1zWRI9POYSclvFMf8J%2BIDjzSxdWr55C9fp35XgN2v6IypWF3tPy%2BksvjuNwVi3tthVQXk%2FfYS4cp%2Fo%2BxsLD%2FxDVxGz89Mzz9O3r7ztJ2%2FdlnGmRLJHu6f9yWM3huE6%2FgJwzJyxLA1kg464iv8AzXFuuV5yjzvIvUv09CfiLaT%2BDPop3jGQfqIiUCZber3xSPUblNqvwN%2BTY3AEzDDlRJ92W2lXByuqUHurKwGIkq%2FjsaA67ANxipELtgrG%2Bh7dUA8MJQLUBX9egvwIWcOViSS470neyzqXksNETZrRIt1EgYHwcMTfyE94LXYvWpD9itkZK4Z5MiMcIXSGiKk6PlataIazD%2Bmh5DNUIjwaV6QFVJAcfGDrw3V4%2FeU97Js6kBwuiBaQ%2Fkly9tnp8kug%2B3R2gdvq6N1fgDL9D64SYOcdqXdL03gvqswRsn5By3Oi%2BRZ9vbyYTSnGBBS1P95AUseYZUMVfFIxa6E%2F1Kh3Nyn%2Bf206NC0J2%2BKfBGHv3Zcc8NIi%2FOH1kPrEFjHy3PKNSVZdkMNn8vPQFOusBznjE2MJC%2B%2FEjGBGmn4AUoIh6fyNtiPQByvtQmcaVYbk06iL8PVzj9JI5QXDj6mY0dmHKn71nrc%2F0KkSqj3%2FHnlTJT9LJZS1jwI%2Feu2%2By2jrmR%2BUMeTbqLeOEXlEdiLFLvN3fam6sRE8K7dM%2B2RGFjrb0wkoYOphMs48mPsf%2F0OJsfrVxBVO8R5gW3%2BrPO1i8TFh2robFFDcFlwOBlfKh6rrJKcliMCrntGQfdrcDRJkEhaMk6NH%2FD0OA%2FjRY377DTsRFsdRcGHEjFskCeIUW6cub1fubYDPZ0sBki9i0s9jGuk%2BzITqrnSoZ0w%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=0a199e56855688c9343500252708be5392696131a91c1f8197ef2300c258f9b7), where the researchers examined the width and height of orb-spinning spider webs in two different light conditions, light and dark. 
+Each spider in the study was examined in both light and dark conitions, which means that the light and dark measurements were **not independent** from each other. 
+Therefore, the authors employed a paired *t*-test. 
+Below we work through this example.
+
+Read in the data.
+
+```{r}
+orb_spider <- read.csv("https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/elgar.csv")
+```
+
+
+Calculate the difference columns for both width (horizontal) and height (vertical).
+
+```{r}
+orb_spider$VERT_DIFF <- orb_spider$VERTDIM - orb_spider$VERTLIGH
+orb_spider$HORIZ_DIFF <- orb_spider$HORIZDIM - orb_spider$HORIZLIG
+```
+
+Calculate the mean and standard error values
+
+```{r}
+vert_diff_mean <- mean(orb_spider$VERT_DIFF)
+horiz_diff_mean <- mean(orb_spider$HORIZ_DIFF)
+```
+
+```{r}
+vert_diff_se <- sd(orb_spider$VERT_DIFF) / sqrt(nrow(orb_spider))
+horiz_diff_se <- sd(orb_spider$HORIZ_DIFF) / sqrt(nrow(orb_spider))
+```
+
+
+Calculate T-stat
+
+```{r}
+vert_diff_T <- (vert_diff_mean - 0) / vert_diff_se
+horiz_diff_T <- (horiz_diff_mean - 0) / horiz_diff_se
+```
+
+Calculate p-vals
+
+```{r}
+2*pt(q = vert_diff_T, df = (17-1), lower.tail = FALSE)
+2*pt(q = horiz_diff_T, df = (17-1), lower.tail = FALSE)
+```
+
+
+Now try using `t.test` function
+
+```{r}
+t.test(x = orb_spider$VERTDIM, y = orb_spider$VERTLIGH, paired = TRUE)
+```
+
+```{r}
+t.test(x = orb_spider$HORIZDIM, y = orb_spider$HORIZLIG, paired = TRUE)
+```
+
+
+
+## Non-parametric Rank based tests - Mann-Whitney / Wilcoxon test
+
+Rank based tests are good to use if our data do not fit the assumption of normality and cannot be easily transformed, but do fit the assumption of approximately equal variance.
 
 Look at ranks, rather than actual values.
 
@@ -259,9 +331,63 @@ From Q&K p. 47:
 3. Compare the smaller rank sum to the probability distribution of rank sums, based on repeated randomization of observations to groups.
 4. If sample sizes are large, the probability distribution of rank sums approximates a normal distribution and the *z* statistic can be used.
 
+To demonstrate the Mann-Witney / Wilcoxon test, let's look at Example 6D from Logan 2010.
+This example analyzes data presented in Sokal and Rohlf (1997), which happens to be the book I used when learning Biometry. These data include measurements of the sizes of two different samples of chiggers. The question is, do these chiggers have the same mean size values? That is, do they come from the same population?
+
+Load the data set.
+
+```{r}
+chigger <- read.csv("https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/nymphs.csv")
+```
+
+Make a boxplot.
+
+```{r}
+library(ggplot2)
+ggplot(data = chigger, aes(x = SAMPLE, y = LENGTH)) +
+  geom_boxplot()
+```
+
+Make a histogram for each sample
+
+```{r}
+ggplot(data = chigger, aes(x = LENGTH, fill = SAMPLE)) +
+  geom_histogram(position = "dodge")
+
+ggplot(data = chigger, aes(x = LENGTH, fill = SAMPLE)) +
+  geom_histogram(position = "dodge") +
+  facet_grid(SAMPLE~.)
+
+```
+
+Look at the Q-Q plots. Q-Q plots are a diagnositc tool to visually see deviations from normality.
+Normal data should appear along the straight line.
+
+```{r}
+ggplot(data = chigger, aes(sample = LENGTH, color = SAMPLE)) +
+  geom_qq() +
+  geom_qq_line()
+```
+
+
+Neither of these is normally distributed, so we use a non-parametric test.
+
+We'll use a [Mann-Whitney U test](https://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U_test) to examine differences between the two groups. The Mann-Whitney U test is a special case of the **Wilcox signed-rank test**.
+
+```{r}
+wilcox.test(chigger$LENGTH~chigger$SAMPLE)
+```
+
+If we consider our standard $p < 0.05$ threshold for rejecting our null hypothesis, then we see that in this case, we should reject the null hypothesis that these two samples of chiggers are from the same population.
+
+You can find more information on non-parametric tests [here](https://www.statmethods.net/stats/nonparametric.html) and [here](http://rcompanion.org/handbook/F_01.html).
+
+
 ## Randomization tests
 
-Powell and Russel (1984, 1985) investigated differences in beetle consumption between two size classes of eastern horned lizards.
+Randomization tests are good to use when our data do not fit either the assumption of normality or equal variance.
+
+Here's an example from Logan 2019 (Example 6E). It goes through the analysis for a study by Powell and Russel (1984, 1985), who investigated differences in beetle consumption between two size classes of eastern horned lizards.
 
 
 Get the data and look at it
