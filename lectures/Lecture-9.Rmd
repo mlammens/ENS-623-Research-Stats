@@ -247,9 +247,10 @@ gastro_t_test$estimate[1] - gastro_t_test$estimate[2]
 # Dealing with violations of assumptions
 
 Recall our **Major assumptions for using a *t* test** - the samples are drawn from populations that are:
-    1. (Approximately) normally distributed
-    2. Equally varied (i.e. equal variance)
-    3. Each observation is *independent*
+
+1. (Approximately) normally distributed
+2. Equally varied (i.e. equal variance)
+3. Each observation is *independent*
  
 Let's say our data don't fit the assumptions of the *t* test. What are our options?
 
