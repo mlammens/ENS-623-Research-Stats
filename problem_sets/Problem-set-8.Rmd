@@ -43,6 +43,8 @@ Make a box plot showing a comparison of metabolic rate (`METRATE` in this data s
 Calculate a *t* statistic, using the formulas presented in [Lecture 9](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-9.html) and following the example related to fecundity of intertidal gastropods. 
 Once you have the *t* statistic, calculate the probability that the samples of metabolic rates for male and female northern fulmars come from the same population. 
 
+**Use this probability value to make a statement about whether you would accept or reject your null hypothesis.**
+
 # Problem 3
 
 Use the `t.test` function to verify that your answers for Problem 2 are correct. **Hint:** for this to work properly you will need to add the argument `var.equal = TRUE` to the `t.test` function call.
