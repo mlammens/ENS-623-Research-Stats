@@ -254,6 +254,8 @@ Recall our **Major assumptions for using a *t* test** - the samples are drawn fr
  
 Let's say our data don't fit the assumptions of the *t* test. What are our options?
 
+**NOTE: I've posted videos on Blackboard the work through each of the three examples below.**
+
 ## Paired *t*-test
 
 A paired *t*-test provides one way to deal with data that are not independent. 
