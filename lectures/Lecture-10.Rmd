@@ -1,5 +1,5 @@
 ---
-title: "Meeting 10 - Linear Regression and Multiple Regression"
+title: "Meeting 10 - Correlation and Linear Regression"
 author: "Matthew E. Aiello-Lammens"
 date: '2020-04-15'
 output:
@@ -122,10 +122,6 @@ Run a linear regression
 
 ```{r}
 flr_beetle_lm <- lm(data = flr_beetle, WEIGHTLOSS ~ HUMIDITY)
-
-## This will give us a multitude of diagnostic plots
-plot(flr_beetle_lm)
-
 summary(flr_beetle_lm)
 ```
 
@@ -160,7 +156,7 @@ ggplot(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
 
 * **Cook's D:** a statistics that offers a measure of the influence of each data point on the fitted model that incorporates both leverage and residuals. Values $\ge 1$ are considered "suspect".
 
-
+If we plot the `lm` result, we will see a set of diagnostic plots:
 
 ```{r}
 plot(flr_beetle_lm)
