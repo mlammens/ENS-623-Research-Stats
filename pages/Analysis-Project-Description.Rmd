@@ -32,11 +32,11 @@ The project represents 30% of your grade, but is broken up into several componen
 
 * Wednesday, March 25 - Analysis project proposal due
     * The proposal is a short document expressing your interests and identifying potential data sets to work with. It will help me to guide you to resources that will be useful for your project.
-* Wednesday, April 15 - Project update due
-    * Your project update should include a description of the data set you will analyze, along with summary stats and figures related to these data.
-* Wednesday, April 29 - Draft project due
+* Wednesday, April 29 - Project update due
+    * Your project update should include a description of the data set you will analyze, along with summary stats and figures related to these data. 
+* Wednesday, May 6 - Draft project due
     * Your draft should inlcude your Introduction and Research Question sections, as well as *at minimum* basic descriptions of your data and ideas for your analysis. 
-* Wednesday, May 13 - Analysis project DUE
+* Wednesday, May 13 - Analysis project due
 
 ### Possible Sources of Data:
 
