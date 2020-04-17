@@ -35,7 +35,7 @@ $$
 
 where $b$ is the slope and $a$ is the y-intercept.
 
-**Written Notes - pages 1-3**
+**[Written Notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-10-Notes.pdf) - pages 1-3**
 
 ## Co-variation
 
@@ -58,7 +58,7 @@ var(x = iris$Sepal.Length, y = iris$Sepal.Width)
 ```
 
 
-**Written Notes - Page 4**
+**[Written Notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-10-Notes.pdf) - Page 4**
 
 ## Correlation
 
@@ -140,80 +140,12 @@ ggplot(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
 #### The big three:
 
 1. **Normality:** The $y_i$ **AND** error values ($\epsilon_i$) are normally distributed. If normality is violated, *p*-values and confidence intervals may be inaccurate and unreliable.
-2. **Homogeneity of variance:** The $y_i$ **AND** error values ($\epsilon_i$) have the same variance for each $x_i$. 
+2. **Homogeneity of variance:** The $y_i$ **AND** error values ($\epsilon_i$) have similar levels of variance across all $x_i$ values. 
 3. **Independence:** The $y_i$ **AND** error values are independent of *each other*.
 
 #### Other assumptions:
 
 * **Linearity:** The relationship between $x_i$ and $y_i$ is linear (only important when using simple linear regression).
-* **Fixed X values:** The $x_i$ values are measured without error. In practice this means the error in the $x_i$ values is much smaller than that in the $y_i$ values.
+* **Fixed $x$ values:** The $x_i$ values are measured without error. In practice this means the error in the $x_i$ values is much smaller than that in the $y_i$ values.
 
-### Linear regression diagnostics
-
-* **Leverage:** a measure of how extreme a value in **x-space** is (i.e., along the x-axis) and how much of an influence each $x_i$ has on $\hat{y}_i$. High leverage values indicate that model is unduly influenced by an outlying value.
-
-* **Residuals:** the differences between the observed $y_i$ values and the predicted $\hat{y}_i$ values. Looking at the pattern between residuals and $\hat{y}_i$ values can yield important information regarding violation of model assumptions (e.g., homogeneity of variance).
-
-* **Cook's D:** a statistics that offers a measure of the influence of each data point on the fitted model that incorporates both leverage and residuals. Values $\ge 1$ are considered "suspect".
-
-If we plot the `lm` result, we will see a set of diagnostic plots:
-
-```{r}
-plot(flr_beetle_lm)
-```
-
-## Standard error of regression coefficients, the regression line, and $\hat{y}_i$ predictions
-
-Regression coefficients are statistics and thus we can determine the standard error of these statistics.
-From there, we can use these values and the *t*-distribution to determine confidence intervals.
-For example, the confidence interval for $b_1$ is:
-
-$$
-b_1 \pm t_{0.05, n-2}s_{b_{1}}
-$$
-
-### $\beta_1$ standard error
-
-$$
-s_{b_{1}} = \sqrt{ \frac{MS_{Residual}}{\sum^n_{i=1}(x_i-\bar{x})^2} }
-$$
-
-### $\beta_0$ standard error
-
-$$
-s_{b_{0}} = \sqrt{ MS_{Residual} [\frac{1}{n} + \frac{\bar{x}^2}{\sum^n_{i=1}(x_i-\bar{x})^2}] }
-$$
-
-### Confidence bands for regression line 
-
-From Quinn and Keough, p. 87:
-
-> The 95% confidence band is a biconcave band that will contain the true population regression line 95% of the time.
-
-### $\hat{y}_i$ standard error
-
-$$
-s_{\hat{y}} = \sqrt{ MS_{Residual} [1 + \frac{1}{n} + \frac{x_p - \bar{x}^2}{\sum^n_{i=1}(x_i-\bar{x})^2}] }
-$$
-
-where $x_p$ is the value from $x$ we are "predicting" a $y$ value for.
-
-
-## My model looks good, but is it meaningful?
-
-In order to determine if your linear regression model is meaningful (or *significant*) you must compare the **variance explained** by your model versus the **variance unexplained**.
-
-![Logan - Figure 8.3](../lectures/logan-fig-8-3.png)
-
-Note that there is a typo in this figure in panel (c). Instead of "Explained variability", the arrow tag should be "Unexplained variability".
-
-# Regression and regression-like techniques we will not be covering in depth
-
-Below is a list of techniques that are covered well in both of the class textbooks. 
-
-* Model II regression - e.g. Major axis regression. Used to deal with uncertain $x_i$ values
-* Running medians - generation of predicted values ($\hat{y}_i$) that are *medians* of the responses in the bands surrounding each observation
-* LOESS (or LOWESS) - local least-square regression fits, glued together
-* kernel smoothers - weighted average values of $y_i$'s within a band of $x_i$ values
-* splines - combined series of polynomial fits generated using windows of the data
 
