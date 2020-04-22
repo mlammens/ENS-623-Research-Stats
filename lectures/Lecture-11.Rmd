@@ -8,7 +8,7 @@ output:
     toc: yes
 ---
 
-# Linear regression
+# Linear regression - recap
 
 Now we assume that any change in **y** is due to a change in **x**.
 
@@ -48,38 +48,82 @@ ggplot(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
 ```
 
 
-### Linear regression assumptions
+## Linear regression assumptions
 
-#### The big three:
+### The big three:
 
 1. **Normality:** The $y_i$ **AND** error values ($\epsilon_i$) are normally distributed. If normality is violated, *p*-values and confidence intervals may be inaccurate and unreliable.
 2. **Homogeneity of variance:** The $y_i$ **AND** error values ($\epsilon_i$) have the same variance for each $x_i$. 
 3. **Independence:** The $y_i$ **AND** error values are independent of *each other*.
 
-#### Other assumptions:
+### Other assumptions:
 
 * **Linearity:** The relationship between $x_i$ and $y_i$ is linear (only important when using simple linear regression).
 * **Fixed X values:** The $x_i$ values are measured without error. In practice this means the error in the $x_i$ values is much smaller than that in the $y_i$ values.
 
-### Linear regression diagnostics
 
-* **Leverage:** a measure of how extreme a value in **x-space** is (i.e., along the x-axis) and how much of an influence each $x_i$ has on $\hat{y}_i$. High leverage values indicate that model is unduly influenced by an outlying value.
+# Line fitting and model evalutation 
 
-* **Residuals:** the differences between the observed $y_i$ values and the predicted $\hat{y}_i$ values. Looking at the pattern between residuals and $\hat{y}_i$ values can yield important information regarding violation of model assumptions (e.g., homogeneity of variance).
+## Finding the best-fit line
 
-* **Cook's D:** a statistics that offers a measure of the influence of each data point on the fitted model that incorporates both leverage and residuals. Values $\ge 1$ are considered "suspect".
+We have jumped into linear regression by going through the example above relating flour beetle weight loss to humidity, but we have not gone into detail about how "the best fit line" is actually calculated.
 
-If we plot the `lm` result, we will see a set of diagnostic plots:
+We are not going to go into the mathematical details of line fitting here (you can get more details looking at Box 5.5 on pp. 83-84 in Quinn and Keough 2002), but we will go through an intuitive explanation. 
+
+Recall, that our goal is to fit a line through the cloud of data points such that the distance between the points and the line is minimized. 
+These distances are what we call **residuals** (or **errors**), and are symbolized with $\epsilon$ or $e$.
+
+Looking at the plot made with the code below, the vertical black lines represent the residuals.
 
 ```{r}
-plot(flr_beetle_lm)
+library(dplyr)
+flr_beetle$y_hat <- predict(flr_beetle_lm, newdata = flr_beetle)
+flr_beetle$y_min <- apply(select(flr_beetle, WEIGHTLOSS, y_hat), MARGIN = 1, FUN = min)
+flr_beetle$y_max <- apply(select(flr_beetle, WEIGHTLOSS, y_hat), MARGIN = 1, FUN = max)
+
+ggplot(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
+  geom_point() +
+  stat_smooth(method = "lm", se = FALSE) +
+  geom_linerange(aes(ymin = y_min, ymax = y_max )) +
+  theme_bw()
+
+
 ```
+
+Again, our goal is to fit a line that minimizes these residuals. 
+In a mathematical sense, what we want to do is find estimates of $\beta_0$ and $\beta_1$, i.e., our slope and intercept values, to use in the equation of this line, $\hat{y} = b_0 + b_1 x$, such that we minimize the value $\sum(y_i - \hat{y})^2$. 
+
+This last equation, $\sum(y_i - \hat{y})^2$, goes by several names, including the **sum of squared residuals**, **sum of squared errors**, and **sum of squared deviations**. For short, I'll often use $SS_{res}$.
+
+It is possible to minimize $SS_{res}$ by taking a guess at $b_0$ and $b_1$, calculating $SS_{res}$, taking another guess at the parameters, and accepting them if $SS_{res}$ is smaller. Keep doing this until to can minimize $SS_{res}$ any further. 
+But this is a pretty inefficient approach.
+Instead, using the probability distribution we derived last week for this line and a few principles of calculus, we can find the values of $b_0$ and $b_1$ that minimize $SS_{res}$. 
+We saw these equations last week.
+
+
+## My model looks good, but is it meaningful?
+
+In order to determine if your linear regression model is meaningful (or *significant*) you must compare the **variance explained** by your model versus the **variance NOT explained ** by your model (conveniently referred to as the variance unexplained).
+
+**Your residuals represent the variation that is *not* explained!**
+
+![Logan - Figure 8.3](../lectures/logan-fig-8-3.png)
+
+**Note:** there is a typo in this figure in panel (c). Instead of "Explained variability", the arrow tag should be "Unexplained variability".
+
+In this figure, we see in panel (d) that we compare the variation explained to the variation unexplained, and use an **F-ratio test** to see if the amount of variation ascribed to each are different. 
+If the explained variation is relatively large compared to the unexplained variation, then this ratio will be large. 
+Larger $F$ ratios are more extreme, when considering an **F distribution**. 
+Thus, an extreme $F$ ratio would imply that the two variances are **not** equal, and specifically, that the amount of variance explained is **significantly** greater than that unexplained.
+
 
 ## Standard error of regression coefficients, the regression line, and $\hat{y}_i$ predictions
 
 Regression coefficients are statistics and thus we can determine the standard error of these statistics.
 From there, we can use these values and the *t*-distribution to determine confidence intervals.
-For example, the confidence interval for $b_1$ is:
+(Note that we can also see if these coefficients are **significantly** different from 0 using a **Wald Test** (similar to the $t$ test).)
+
+The confidence interval for $b_1$ is:
 
 $$
 b_1 \pm t_{0.05, n-2}s_{b_{1}}
@@ -112,13 +156,22 @@ $$
 where $x_p$ is the value from $x$ we are "predicting" a $y$ value for.
 
 
-## My model looks good, but is it meaningful?
+## Linear regression diagnostics
 
-In order to determine if your linear regression model is meaningful (or *significant*) you must compare the **variance explained** by your model versus the **variance unexplained**.
+If we plot the `lm` result, we will see a set of diagnostic plots:
 
-![Logan - Figure 8.3](../lectures/logan-fig-8-3.png)
+```{r}
+plot(flr_beetle_lm)
+```
 
-Note that there is a typo in this figure in panel (c). Instead of "Explained variability", the arrow tag should be "Unexplained variability".
+* **Leverage:** a measure of how extreme a value in **x-space** is (i.e., along the x-axis) and how much of an influence each $x_i$ has on $\hat{y}_i$. High leverage values indicate that model is unduly influenced by an outlying value.
+
+* **Residuals:** the differences between the observed $y_i$ values and the predicted $\hat{y}_i$ values. Looking at the pattern between residuals and $\hat{y}_i$ values can yield important information regarding violation of model assumptions (e.g., homogeneity of variance).
+
+* **Cook's D:** a statistics that offers a measure of the influence of each data point on the fitted model that incorporates both leverage and residuals. Values $\ge 1$ are considered "suspect".
+
+
+
 
 # Regression and regression-like techniques we will not be covering in depth
 
@@ -162,7 +215,7 @@ where $\beta_3 x_{i1} x_{i2}$ is the interactive effect of $X_1$ and $X_2$ on $Y
 
 ## Additional assumption(s) to consider
 
-* **(Multi)collinearity** - the predictor variables should not be highly correlated.
+* **(Multi)collinearity** - the predictor variables should **not** be highly correlated.
 
 ### Example of collinearity 
 
@@ -175,7 +228,7 @@ Temperature in June and rainfall in June
 ### Assessing collinearity
 
 * Look at pair-wise correlation values among all predictor variables
-* calculate **tolerance**, or its inverse **Variance Inflation Factor**, for each predictor variable. For VIF, we should be cautios if values are greater than 5, and down right concerned if they are greater than 10.
+* calculate **tolerance**, or its inverse **Variance Inflation Factor**, for each predictor variable. For VIF, we should be cautious if values are greater than 5, and down right concerned if they are greater than 10.
 
 ## Example of addative multiple linear regression
 
@@ -206,7 +259,7 @@ bird_frag_transform$DIST <- log10(bird_frag$DIST)
 bird_frag_transform$LDIST <- log10(bird_frag$LDIST)
 ```
 
-Replot.
+Re-plot.
 
 ```{r}
 ggpairs(bird_frag_transform)
@@ -251,7 +304,7 @@ What if we wanted to look at each partial regression plot? Use `av.plots` from t
 avPlots(bird_frag_lm, ask = F)
 ```
 
-An alterantive way to **approximately visualize** the relationships between each predictor and the response variable is to look at marginal regression plots.
+An alternative way to **approximately visualize** the relationships between each predictor and the response variable is to look at marginal regression plots.
 
 ```{r}
 library(reshape)
