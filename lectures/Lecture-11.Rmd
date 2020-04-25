@@ -1,5 +1,5 @@
 ---
-title: "DRAFT - Meeting 11 - Linear Regression and Multiple Regression"
+title: "Meeting 11 - Linear Regression and Multiple Regression"
 author: "Matthew E. Aiello-Lammens"
 date: '2020-04-22'
 output:
@@ -63,6 +63,8 @@ ggplot(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
 
 
 # Line fitting and model evalutation 
+
+You can access a video going through this section here - [https://youtu.be/2tI5YFDajp8](https://youtu.be/2tI5YFDajp8)
 
 ## Finding the best-fit line
 
