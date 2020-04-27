@@ -45,7 +45,8 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 
 These notes go along with the videos I'm posting:
 
-* Regression Coefficients - [video](), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Regression-Coefficients.Rmd)
+* Linear Regression Model Fitting - [video](https://youtu.be/2tI5YFDajp8), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-11-Notes.Rmd)
+* Regression Coefficients - [video](https://youtu.be/JavRAr5u-6w), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Regression-Coefficients.Rmd)
 
 <!---
 
