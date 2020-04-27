@@ -1,0 +1,97 @@
+---
+title: "Linear Regression Model Diagnostics"
+author: "Matthew Aiello-Lammens"
+output: html_document
+---
+
+# Flour Beetle Regression
+
+```{r}
+flr_beetle <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter8/Data/nelson.csv")
+
+flr_beetle_lm <- lm(data = flr_beetle, WEIGHTLOSS~HUMIDITY)
+
+summary(flr_beetle_lm)
+```
+
+
+Let's use the plot function on the `lm` object.
+
+```{r}
+plot(flr_beetle_lm)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Species Abundance vs Area Relationship
+
+From Logan 2010 - Example 8D. Peake and Quinn (1993) investigated the relationship between the abundance of non-mussel invertabrates (`INDIV`) in 25 intertidal mussel clumps, where the clumps covered varying amounts of area (`AREA`), measured in mm^2^. 
+
+
+```{r}
+inverts <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter8/Data/peake.csv")
+```
+
+Can we make our data appear normal by transforming them?
+
+Transform = log10
+
+```{r}
+library(ggplot2)
+ggplot(data = inverts, aes(sample = log10(INDIV))) +
+  geom_qq() +
+  geom_qq_line()
+```
+
+
+```{r}
+ggplot(data = inverts, aes(x = log10(INDIV))) +
+  geom_histogram()
+```
+
+
+
+
+
+
+
+```{r}
+ggplot(data = inverts, aes(sample = log10(AREA))) +
+  geom_qq() +
+  geom_qq_line()
+```
+
+```{r}
+inverts_lm_notransform <- lm(data = inverts, INDIV ~ AREA)
+
+summary(inverts_lm_notransform)
+```
+
+
+```{r}
+inverts_lm_transform <- lm(data = inverts, log10(INDIV) ~ log10(AREA))
+
+summary(inverts_lm_transform)
+```
+
+
+```{r}
+plot(inverts_lm_notransform)
+```
+
+
+```{r}
+plot(inverts_lm_transform)
+```
+
