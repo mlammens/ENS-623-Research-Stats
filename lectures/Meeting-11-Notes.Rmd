@@ -1,0 +1,113 @@
+---
+title: "Meeting 11 Notes"
+author: "Matthew Aiello-Lammens"
+date: "4/22/2020"
+output: html_document
+---
+
+# Linear regression - recap
+
+Flour beetle data on effects of starvation and humidity on weightloss of flour beetls
+
+
+```{r}
+flr_beetle <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter8/Data/nelson.csv")
+```
+
+Plot these data
+
+* response variable on the y-axis
+* predictor variable on the x-axis
+
+```{r}
+library(ggplot2)
+ggplot() +
+  geom_point(data = flr_beetle, aes(x = HUMIDITY, y = WEIGHTLOSS))
+```
+
+
+Let's do a linear regression on these data
+
+response = left-hand side
+predictors = right-hand side
+y ~ x
+
+y = b0 + b1*x + errors
+
+```{r}
+flr_beetle_lm <- lm(data = flr_beetle, WEIGHTLOSS ~ HUMIDITY)
+summary(flr_beetle_lm)
+```
+
+y = 8.704027 + (-0.053222) * x + error
+
+WEIGHTLOSS = 8.704027 + (-0.053222) * HUMIDITY
+
+R^2 = 0.9708 --- > 97% of the variation observed in WEIGHTLOSS is explained by variation in HUMIDITY
+
+* Significant interecept estimates (significantly different from 0) are almost never interesting
+* Significant slope estimates (significantly different from 0) ARE interesting
+
+Plot these data again, with a regression line added
+
+```{r}
+ggplot(data = flr_beetle, aes(x = HUMIDITY, y = WEIGHTLOSS)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+
+```
+
+# Linear regression assumptions
+
+1. Normality - y values are normal and the residuals (error values) are approximately normal
+2. Homogeneity of variance - there aren't trends in the variance as x values change
+    * Example of heterogentieity of variance = the variance observed in your y values increases as your x values increase
+3. Independence - each y observation is independent and the error values are independent
+    * Non-independence of error value may result from temporal or spatial autocorrelation
+
+## Other assumptions
+
+* Linearity - simple linear regession (i.e., fitting a straight line)
+* Fixed x values - uncertainty in x is due to observation errors, but there's no underlying uncertainty
+    * Should be able to explain all variation in our predictor variables
+    
+# Line fitting
+
+Find a line, with intercept b_0 and slope b_1, such that the line minimizes our residuals
+
+How do we know what values our linear regression predict for our y's (y-hat)
+
+```{r}
+library(dplyr)
+flr_beetle$y_hat <- predict(flr_beetle_lm, newdata = flr_beetle)
+flr_beetle$y_min <- apply(select(flr_beetle, WEIGHTLOSS, y_hat), MARGIN = 1, FUN = min) 
+flr_beetle$y_max <- apply(select(flr_beetle, WEIGHTLOSS, y_hat), MARGIN = 1, FUN = max)
+
+ggplot(data = flr_beetle, aes(x = HUMIDITY, y = WEIGHTLOSS)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) + 
+  geom_linerange(aes(ymin = y_min, ymax = y_max))
+
+```
+
+We want to find b_0 and b_1 for the line that minimizes sum(residuals^2)
+
+$$
+\sum{(y_i - \hat{y}_i)^2}
+$$
+
+We call this the sum of squares residuals (sum of squares error or sum of squares deviations)
+
+How do we find the line that minimizes the above?
+
+* fit a line by eye, estimate the slope and y-intercept, calculate SS_res, take another guess, calculate SS_res again, and keep which ever set of slope and y-intercept values result in a smaller SS_res, repeat -> Inefficient
+* principles of calculus and the equation for the probability distribution associated with linear regression (saw this last week), find values of b_0 and b_1 that minimize SS_res analytically
+
+## My model looks good, but is it meaningful
+
+Compare the variance that is explained by my model versus the variance that is not explained by my model.
+
+**Your residuals represent the variance (variation) that is *not* explained!**
+
+
+
