@@ -1,0 +1,153 @@
+---
+title: "Regression Coefficients"
+author: "Matthew Aiello-Lammens"
+output: html_document
+---
+
+# Simple linear model
+
+Equation to define any given response value $y_i$ based on knowing predictor value $x_i$ 
+
+$$
+y_i = \beta_0 + \beta_1*x_i + \epsilon_i
+$$
+
+Considering all values
+
+$$
+Y = \beta_0 + \beta_1*X + \epsilon
+$$
+
+where 
+
+$$
+\epsilon \sim N(0,\sigma^2)
+$$
+
+Now, when *estimating* our model parameters we write this as:
+
+$$
+Y = b_0 + b_1*X + e
+$$
+
+and we are trying to estimate $\beta_0$, $\beta_1$, and $\sigma$.
+
+In [Meeting 10](https://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-10.html) we learned the equations for estimating these parameters:
+
+### $\beta_0$ estimate
+
+$$
+b_0 = \bar{y} - b_1 *\bar{x}
+$$
+
+### $\beta_1$ estimate
+
+$$
+b_1 = \frac{\sum_{i=1}^n{[(x_i - \bar{x})(y_i - \bar{y})]}}{\sum_{i=1}^n{(x_i - \bar{x})^2}}
+$$
+
+### $\epsilon$ estimate
+
+$$
+e_i = y_i - \hat{y}_i
+$$
+
+and thus $s$, the estimate for $\sigma$ is the standard deviation of the residuals.
+
+# Model parameters / coefficients are statistics
+
+Model parameters are statistics, and we can calculate standard errors for these statistics.
+
+In what follows, we are most interested in looking at the standard errors for the $b_0$ and $b_1$ parameters, which are also called our **linear regression coefficients**.
+
+### $\beta_0$ standard error
+
+$$
+s_{b_{0}} = \sqrt{ MS_{Residual} [\frac{1}{n} + \frac{\bar{x}^2}{\sum^n_{i=1}(x_i-\bar{x})^2}] }
+$$
+
+### $\beta_1$ standard error
+
+$$
+s_{b_{1}} = \sqrt{ \frac{MS_{Residual}}{\sum^n_{i=1}(x_i-\bar{x})^2} }
+$$
+
+What is MS_Residual? 
+
+It's the Mean Sums of Squares Residuals (see figure in [Lecture 11 notes](https://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-11.html#my-model-looks-good-but-is-it-meaningful)).
+
+Note that the degrees of freedom used to calculate MS_Residuals is the number of observations minus the number of coefficients being estimated. 
+So hear, $n - 2$, because we are estimating $\beta_0$ and $\beta_1$.
+
+Once we have the **standard error of regression coefficient** values, we can use them and the *t*-distribution to determine confidence intervals.
+
+
+For example, the confidence interval for $b_1$ is:
+
+$$
+b_1 \pm t_{0.05, n-2}s_{b_{1}}
+$$
+
+
+Similarly, we can also calculate a standard error for our predicted $y$ values, $\hat{y}_i$:
+
+### $\hat{y}_i$ standard error
+
+$$
+s_{\hat{y}} = \sqrt{ MS_{Residual} [1 + \frac{1}{n} + \frac{x_p - \bar{x}^2}{\sum^n_{i=1}(x_i-\bar{x})^2}] }
+$$
+
+where $x_p$ is the value from $x$ we are "predicting" a $y$ value for.
+
+
+We can use these standard errors to calculate confidence intervals, and ultimately calculate and display a confidence interval for the regression line itself.
+
+To demonstrate, let's return to our Flour Beetle example.
+
+```{r}
+flr_beetle <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter8/Data/nelson.csv")
+```
+
+
+```{r}
+library(ggplot2)
+
+ggplot(data = flr_beetle, aes(x = HUMIDITY, y = WEIGHTLOSS)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+
+
+```{r}
+ggplot(data = flr_beetle, aes(x = HUMIDITY, y = WEIGHTLOSS)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+```
+
+
+
+
+
+
+# Testing whether coefficients are *significant*
+
+We can also use our standard error values to examine whether the coefficient estimates resulting from a linear regression are **significantly** different from 0 using a **Wald Test** (similar to the $t$ test).
+
+```{r}
+flr_beetle_lm <- lm(data = flr_beetle, WEIGHTLOSS~HUMIDITY)
+
+summary(flr_beetle_lm)
+```
+
+```{r}
+(8.704027 - 0)/0.191565
+```
+
+```{r}
+pt(q = 45.44, df = (9-2), lower.tail = FALSE) * 2
+```
+ Reject our null that intercept is 0, and support alternative that it's not 0.
+
+

@@ -41,6 +41,11 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 |5/6 | 13 |Nested and Factorial ANOVA |Q&K 8 & 9; Logan 10-12 | [Lecture notes 13](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-13.html) |[Problem Set 11](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-11.html) |
 |5/13  | 14 |ANCOVA; Analysis of Frequencies; GLM; Wrap-up |Logan Chap. 15-17; Q&K 12-14 | [Lecture notes 14](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-14.html) | Take-home Final |
 
+### Supplementary Notes
+
+These notes go along with the videos I'm posting:
+
+* Regression Coefficients - [video](), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Regression-Coefficients.Rmd)
 
 <!---
 
