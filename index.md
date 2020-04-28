@@ -48,8 +48,8 @@ These notes go along with the videos I'm posting:
 * Linear Regression Model Fitting - [video](https://youtu.be/2tI5YFDajp8), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-11-Notes.Rmd)
 * Regression Coefficients - [video](https://youtu.be/JavRAr5u-6w), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Regression-Coefficients.Rmd)
 * Linear Regression Diagnostics - [video](https://youtu.be/pOvZsR5JW2w), [slide deck](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Linear-Regression-Diagnostics.pptx), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Model-Diagnostics.html) 
-* Multiple Linear Regression - video, [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression.html), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression.Rmd)
-* Multiple Linear Regression with Interaction - video, [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression-Interaction.html), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression-Interaction.Rmd)
+* Multiple Linear Regression - [video](https://youtu.be/uadovf4nk3w), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression.html), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression.Rmd)
+* Multiple Linear Regression with Interaction - [video](https://youtu.be/uadovf4nk3w), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression-Interaction.html), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression-Interaction.Rmd)
 
 <!---
 
