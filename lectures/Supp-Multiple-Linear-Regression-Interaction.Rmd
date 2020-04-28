@@ -26,6 +26,27 @@ c3_plants$LAT <- as.numeric(scale(c3_plants$LAT, scale = FALSE))
 c3_plants$LONG <- as.numeric(scale(c3_plants$LONG, scale = FALSE))
 ```
 
+Perform a linear regression
+
+```{r}
+c3_plants_lm2 <- lm(data = c3_plants, log10(C3 + 0.1) ~ LONG*LAT)
+```
+
+Get model summary
+
+```{r}
+summary(c3_plants_lm2)
+```
+
+
+Look at diagnostic plots
+
+```{r}
+plot(c3_plants_lm2)
+```
+
+
+Steps to make plotly figures to visualize 3-dimensions
 
 ```{r}
 x_values <- c3_plants$LAT %>% 

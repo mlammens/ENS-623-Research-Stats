@@ -21,9 +21,32 @@ summary(bird_frag)
 Log transform AREA
 
 ```{r}
-bird_frag$LOG_AREA <- log(bird_frag$AREA)
+bird_frag$LOG_AREA <- log10(bird_frag$AREA)
 ```
 
+
+Perform a linear regression
+
+```{r}
+bird_frag_lm <- lm(data = bird_frag, ABUND ~ log10(AREA) + YR.ISOL + log10(DIST) + log10(LDIST) + GRAZE + ALT)
+```
+
+
+Get model summary
+
+```{r}
+summary(bird_frag_lm)
+```
+
+
+Look at diagnostic plots
+
+```{r}
+plot(bird_frag_lm)
+```
+
+
+Steps to make plotly figures to visualize 3-dimensions
 
 ```{r}
 x_values <- bird_frag$LOG_AREA %>% 

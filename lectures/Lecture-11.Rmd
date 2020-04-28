@@ -190,8 +190,8 @@ Below is a list of techniques that are covered well in both of the class textboo
 
 What do we do when we have two or more predictors?
 
-**See written notes -- page 2**
-
+In the examples above, we dealt with one response and one predictor variable, and thus fit a line through out data.
+If we have one response variable and two predictor variables, then we are fitting a plane through our clould of data. 
 
 ## Additive model
 
