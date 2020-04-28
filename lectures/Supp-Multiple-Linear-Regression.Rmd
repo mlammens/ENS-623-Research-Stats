@@ -1,0 +1,121 @@
+---
+title: "Multiple Linear Regression"
+author: "Matthew Aiello-Lammens"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(plotly)
+```
+
+
+Get bird fragmentation data
+
+```{r}
+bird_frag <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter9/Data/loyn.csv")
+summary(bird_frag)
+```
+
+Log transform AREA
+
+```{r}
+bird_frag$LOG_AREA <- log(bird_frag$AREA)
+```
+
+
+```{r}
+x_values <- bird_frag$LOG_AREA %>% 
+  round(2)
+y_values <- bird_frag$GRAZE %>% 
+  round(2)
+z_values <- bird_frag$ABUND %>% 
+  round(2)
+
+```
+
+
+
+```{r}
+# Define regression plane -------------------------------------------------
+# Construct x and y grid elements
+x_grid <- seq(from = min(bird_frag$LOG_AREA), to = max(bird_frag$LOG_AREA), length = 50)
+y_grid <- seq(from = min(bird_frag$GRAZE), to = max(bird_frag$GRAZE), length = 50)
+
+```
+
+
+```{r}
+# Construct z grid by computing
+# 1) fitted beta coefficients
+# 2) fitted values of outer product of x_grid and y_grid
+# 3) extracting z_grid (matrix needs to be of specific dimensions)
+beta_hat <- bird_frag %>% 
+  #lm(ABUND ~ LOG_AREA + GRAZE, data = .) %>% 
+  lm(ABUND ~ LOG_AREA + GRAZE + log10(DIST) + log10(LDIST) + YR.ISOL + ALT, data = .) %>%
+  coef()
+
+fitted_values <- crossing(y_grid, x_grid) %>% 
+  #mutate(z_grid = beta_hat[1] + beta_hat[2]*x_grid + beta_hat[3]*y_grid)
+  mutate(z_grid = beta_hat[1] + beta_hat[2]*x_grid + beta_hat[3]*y_grid + 
+           beta_hat[4]*mean(log10(bird_frag$DIST)) + beta_hat[5]*mean(log10(bird_frag$LDIST)) +
+           beta_hat[6]*mean(bird_frag$YR.ISOL) + beta_hat[7]*mean(bird_frag$ALT))
+
+z_grid <- fitted_values %>% 
+  pull(z_grid) %>%
+  matrix(nrow = length(x_grid)) %>%
+  t()
+
+```
+
+
+
+
+```{r}
+# Define text element for each point in plane
+text_grid <- fitted_values %>% 
+  pull(z_grid) %>%
+  round(3) %>% 
+  as.character() %>% 
+  paste("ABUND: ", ., sep = "") %>% 
+  matrix(nrow = length(x_grid)) %>%
+  t()
+
+```
+
+```{r}
+# Plot using plotly -------------------------------------------------------
+plot_ly() %>%
+  # 3D scatterplot:
+  add_markers(
+    x = x_values,
+    y = y_values,
+    z = z_values,
+    marker = list(size = 5),
+    hoverinfo = 'text',
+    text = ~paste(
+      "ABUND: ", z_values, "<br>",
+      "GRAZE: ", y_values, "<br>",
+      "LOG_AREA: ", x_values 
+    )
+  ) %>%
+  # Regression plane:
+  add_surface(
+    x = x_grid,
+    y = y_grid,
+    z = z_grid,
+    hoverinfo = 'text',
+    text = text_grid
+  ) %>%
+  # Axes labels and title:
+  layout(
+    title = "3D scatterplot and regression plane",
+    scene = list(
+      zaxis = list(title = "y: ABUND"),
+      yaxis = list(title = "x2: GRAZE"),
+      xaxis = list(title = "x1: LOG_AREA")
+    )
+  )
+```
+
