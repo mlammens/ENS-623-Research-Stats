@@ -1,10 +1,11 @@
 ---
-title: "DRAFT - Meeting 12 - ANOVA"
+title: "Meeting 12 - ANOVA"
 author: "Matthew E. Aiello-Lammens"
-output: 
-  html_document: 
-    toc: yes
+date: '2020-04-29'
+output:
+  html_document:
     code_folding: hide
+    toc: yes
 ---
 
 
@@ -41,11 +42,11 @@ anova(lm(data = iris, formula = Petal.Length ~ Species))
 
 First, recall the visual understanding of linear regression:
 
-![Logan - Figure 8.3](/Users/maiellolammens/Dropbox/Pace/Teaching/Web/ENS-623-Research-Stats/lectures/logan-fig-8-3.png)
+![Logan - Figure 8.3](/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/lectures/logan-fig-8-3.png)
 
 Now, what would this look like if the **x** value (i.e., the predictor) was categorical?
 
-![Logan - Figure 10.2](/Users/maiellolammens/Dropbox/Pace/Teaching/Web/ENS-623-Research-Stats/lectures/logan-fig-10-2.png)
+![Logan - Figure 10.2](/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/lectures/logan-fig-10-2.png)
 
 ## Fixed versus Random Effects
 
@@ -72,19 +73,51 @@ $$
 
 # One-way ANOVA
 
-From Medley and Clements (1998), by way of Logan 2010 - investigation of the impact of zinc contamination on diversity of diatom species in the USA Rocky Mountains.
+From Medley and Clements (1998), by way of Logan 2010 - investigation of the impact of zinc contamination on diversity of diatom species in the USA Rocky Mountains. (From Logan 2010 - Example 10A)
+
+Get the data
 
 ```{r}
 diatoms <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter10/Data/medley.csv")
 ```
 
+Look at the data
 
 ```{r}
-## Look at the data
 head(diatoms)
+```
 
+Note that species diversity here is measured as the [Shannon's Diversity Index](https://en.wikipedia.org/wiki/Diversity_index#Shannon_index), which is one of *many* different diversity measurements.
+
+Make a plot - categorical predictor and continuous response -> box plot!
+
+```{r}
+library(ggplot2)
+
+ggplot(data = diatoms, aes(x = ZINC, y = DIVERSITY)) + 
+  geom_boxplot()
+```
+
+
+Just for fun, here's another kind of plot we could use. It's called a violin plot. What do you think it is showing us?
+
+```{r}
+ggplot(data = diatoms, aes(x = ZINC, y = DIVERSITY)) + 
+  geom_violin()
+```
+
+
+Let's perform an ANOVA, first using the `aov` function
+
+
+```{r}
 summary(aov(data = diatoms, DIVERSITY ~ ZINC ))
 
+```
+
+Let's do this again, but this time using the `lm` function. The same function we used for linear regression!
+
+```{r}
 ## Make the linear model
 diatom_lm <- lm(data = diatoms, DIVERSITY ~ ZINC )
 
@@ -94,16 +127,26 @@ anova(diatom_lm)
 ## Look at the linear model results
 summary(diatom_lm)
 
+```
+
+**Challenge** Let's work together to interpret the `summary` output.
+
+
+
+We can also look at our model diagnostics
+
+```{r}
 ## Look at the model diagnostics
 plot(diatom_lm)
 
 ```
 
+
 ## Post-hoc comparisons
 
 Now we can say that the biodiversity measures taken at different zinc concentrations **DO NOT** come from a common distribution, but we don't know which are different from each other.
 
-We could compare each concentration to each of the others separately, but recall the problems with multiple comparions. 
+We could compare each concentration to each of the others separately, but recall the problems with multiple comparisons. 
 Instead, we'll use a *post-hoc* comparison method. 
 Specifically, we'll use the Tukey Honest Significant Differences (HSD), but there are several other methods you might use as well (see Logan p. 265). 
 
@@ -115,15 +158,16 @@ Note, that for reasons that have never been clear to me, you can only use the Tu
 For an alternative approach, see the `glht` function in the `multcomp` package. 
 This is described in Logan (e.g., p. 267).
 
+
 ## Planned comparisons
 
-Where as unplanned, post-hoc comparisons require a correction for multiple comparisons, planned comparisons do not. 
-We will not cover planned comparisons in class, but they may show up in the homework or on the final. 
-Example 10B in Logan provides an example of the use of planned comparisons.
+Where as unplanned, i.e. *post-hoc*,  comparisons require a correction for multiple comparisons, planned comparisons do not. 
+We will not cover planned comparisons in class, but they may show up in your own work. 
+Example 10B in Logan 2010 provides an example of the use of planned comparisons.
 
 ## Non-parametric ANOVA
 
-As with many of the other methods we've discussed, there are also non-parameteric ANOVA approachs. 
+As with many of the other methods we've discussed, there are also non-parametric ANOVA approaches. 
 The most common is the Kruskal-Wallace test, which uses **rank based** statistics.
 
 
@@ -131,18 +175,20 @@ The most common is the Kruskal-Wallace test, which uses **rank based** statistic
 
 Sometimes your replicates aren't quite independent.
 
-**See visual as per Logan, Fig 11.1.**
+Look how the replicates presented in panel (b) below are *nested* within a bigger treatment block.
+
+![Logan - Figure 11.1](/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/lectures/logan-fig-11-1.png)
 
 For formula, see Logan p. 284 and for calculation of F-ratios see Table 11.1.
-**Note that Mean-Squared Errors are the same if B is random or fixed, but F-ratio is differen! Why? Discuss.**
+**Note that Mean-Squared Errors are the same if B is random or fixed, but F-ratio is different! Why? Discuss.**
 
-## Unbalanced designes
+## Unbalanced designs
 
 Often your observations will not be clean. This is unfortunate, as it makes the analyses more complicated. But they are still doable.
 
 ### Nested ANOVA Example
 
-From Logan Example 11.A - Density-dependent grazing effects of sea urchin on filamentous algea (Andrew and Underwood 1993).
+From Logan Example 11.A - Density-dependent grazing effects of sea urchin on filamentous algae (Andrew and Underwood 1993).
 
 Levels: 
 1. Sea urchin density
@@ -212,6 +258,10 @@ What if we want to look at two, or more, factors where one is not nested in the 
 
 **See visuals as per Logan, Fig 12.1 and 12.2.**
 
+![Logan - Figure 12.1](/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/lectures/logan-fig-12-1.png)
+
+![Logan - Figure 12.2](/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/lectures/logan-fig-12-2.png)
+
 For formula, see Logan p. 314 and for calculation of F-ratios see Table 12.1.
 
 
@@ -219,6 +269,9 @@ For formula, see Logan p. 314 and for calculation of F-ratios see Table 12.1.
 
 ### Example - Two factor fixed effects model (Model I)
 
+From Logan (Example 12A):
+
+> Quinn (1988) manipulated the density of adults limpets within enclosures (8, 15, 30 and 45 individuals per enclosure) during two seasons (winter-spring and summer-autumn) so as to investigate the effects of adult density and season on egg mass production by intertidal limpets. Three replicate enclosures per density/season combination were used, and both density and season were considered fixed factors (from Box 9.4 of Quinn and Keough (2002)).
 
 ```{r}
 limpets <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter12/Data/quinn.csv")
@@ -255,8 +308,18 @@ summary(limpets_lm)
 anova(limpets_lm)
 ```
 
+Plot the effects of Season and Density using the `allEffects` function in the `effects` package. You may need to use `install.packages` to install this package.
 
-### Example - Two factor fixed effects model
+
+```{r}
+library(effects)
+
+plot(allEffects(limpets_lm))
+```
+
+
+
+### (Another) Example - Two factor fixed effects model
 
 Effects of density and season on the number of eggs produced by slipper limpets.
 
@@ -294,6 +357,14 @@ limpets1_lm <- lm(data = limpets1, formula = EGGS ~ SEASON * DENSITY)
 summary(limpets1_lm)
 anova(limpets1_lm)
 ```
+
+Make an effects plot
+
+```{r}
+plot(allEffects(limpets1_lm))
+```
+
+
 
 ### Problems from unbalanced design
 
