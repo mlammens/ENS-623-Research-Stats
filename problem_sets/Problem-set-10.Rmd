@@ -1,0 +1,85 @@
+---
+title: "ENS 623 - Spring 2020 - Problem Set 10"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file AND a Word file (docx).**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP20_PS10.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP20_PS10.Rmd`
+
+
+# Overview
+
+In this problem set, you are going to work on comparing groups of data **using ANOVA**, to see if there are significant differences between groups.
+We will be using data on Phosphorus levels in the soil at Pace University.
+In this problem set, you will be testing for whether there is a difference between **sites**. 
+
+First, let's get the data.
+
+
+```{r soil_data}
+soil_data <- read.csv("https://www.dropbox.com/s/b8vanatf6kejuba/soil_p_data.csv?dl=1")
+summary(soil_data)
+```
+
+# ANOVA by hand (15 points)
+
+Calculate all of the components to perform an ANOVA and build your ANOVA table.
+You might want to consult the [OpenIntro supplementary chatper on ANOVA](https://www.openintro.org/download.php?file=stat_extra_anova_calculations&referrer=/stat/textbook.php) for help or **Table 8.2 in Quinn and Keough 2002**.
+
+**Put your R code below, and use #s to add comments to keep track of your calculations.**
+
+```{r}
+# Start R code here
+
+
+```
+
+
+
+Determine if we reject or accept our null hypothesis, where $H_0$ = there is no difference in phosphorus levels at the different sites. Explain your answer.
+
+**Write your answer here.**
+
+
+# ANOVA with R (5 points)
+
+Use either `summary(aov())` or `anova(lm())` to perform an ANOVA identical to what you did "by hand" above.
+
+**Put your R code below.**
+
+```{r}
+
+
+
+```
+
+Do the results of your "by hand" ANOVA match with the results of using `anova` or `aov`? Explain how you determined that they do or don't match.
+
+**Write your answer here.**
+
+
+# Tukey's Honest Significant Differences test (5 points)
+
+Use `TukeyHSD()` to perform all multiple comparisons, and to determine with sites are different from each other.
+
+**Put your R code below.**
+
+```{r}
+
+
+
+```
+
+Based on the results of the Tukey HSD test, which sites do you think are different from one another? Explain your answer.
+
+**Write your answer here.**

@@ -1,0 +1,170 @@
+---
+title: "Meeting 12 - In class notes"
+author: "Matthew Aiello-Lammens"
+date: "4/29/2020"
+output: html_document
+---
+
+# Linear Regression - Recap
+
+* predictor variables (independent) -> continuous **numeric** value!
+* response variable (dependent) -> **numeric** values!
+
+Visualization -> x-y scatter plot
+
+# Analysis of Variance (ANOVA)
+
+* predictor variables (independent) -> categorical values (in R, they are called **factors**)
+* response variable (dependent) -> **numeric** values
+
+## Iris data set as example
+
+```{r}
+data(iris)
+summary(iris)
+```
+
+If we compare just two of the three species, we can use a t-test
+
+If we wanted to compare all three, one approach is to compare the three pair-wise options
+* setosa - versicolor
+* versicolor - virgnica
+* setosa - virginica
+
+In determining significant differences between these, we would by default apply a p < 0.05 cut off for rejecting our null hypothesis.
+
+If I tell you, you have a 0.05 chance of flipping a coin and getting a "heads", would you have a better chance of getting at least one head if you flipped three coins?
+
+```{r}
+1 - pbinom(q = 0, size = 3, prob = 0.05)
+
+```
+
+How do we deal with multiple comparison problems?
+
+We use ANOVA
+
+```{r}
+anova(lm(data = iris, Petal.Length ~ Species))
+```
+
+```{r}
+TukeyHSD(aov(data =iris, Petal.Length ~ Species))
+```
+
+
+
+
+```{r}
+library(ggplot2)
+
+ggplot(data = NULL, aes(x = c(0, 10))) +
+  stat_function(fun = df, args = list(df1 = 2, df2 = 147))
+```
+
+## Fixed effects vs random effects
+
+* Fixed effects - a predictor variable that you have reason to suspect will have an effect; in an experiment, this is the thing you manipulate
+    * Ex. does water effect plant growth? The categories of watering are fixed effect
+* Random effects - a random selection of a large set of categories
+    * Ex. different locations that were randomly chosen to examine percent of invasive species
+
+For this class, we'll always work assuming fixed effects.
+
+Mathematically - Null Hypothesis for:
+* fixed = all group means are the same
+* random = all group variances are the same
+
+# One-way ANOVA 
+
+one-way = one predictor variable
+
+## data from Medley and Clements (Example 10A in Logan) 
+
+What is the influence of zinc contamination on diversity of diatom species. Measured diversity shannon's index of diversity, H'.
+
+get our data
+
+```{r}
+diatoms <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter10/Data/medley.csv")
+```
+
+look at data
+
+```{r}
+head(diatoms)
+```
+
+Visualize these data
+
+```{r}
+ggplot(data = diatoms, aes(x = ZINC, y = DIVERSITY)) +
+  geom_boxplot()
+```
+
+Alternative visualization
+
+```{r}
+ggplot(data = diatoms, aes(x = ZINC, y = DIVERSITY)) +
+  geom_violin()
+```
+
+Let's perform an ANOVA
+
+Alternative ANOVA commands / functions
+
+```{r}
+table(diatoms$ZINC)
+summary(aov(data = diatoms, DIVERSITY ~ ZINC))
+```
+
+
+Let's do this again, but use the `lm` function
+
+```{r}
+diatom_lm <- lm(data = diatoms, DIVERSITY ~ ZINC)
+
+# Look at ANOVA results
+anova(diatom_lm)
+```
+
+We can use the `summary` function on our diatom_lm object
+
+```{r}
+summary(diatom_lm)
+```
+
+We can use our model diagnostics here too
+
+```{r}
+plot(diatom_lm)
+```
+
+
+## Post-hoc comparisons
+
+Tukey's Honest Significant Difference comparison test (HSD)
+
+```{r}
+TukeyHSD(aov(data = diatoms, DIVERSITY ~ ZINC))
+```
+
+```{r}
+ggplot(data = NULL, aes(x = diatom_lm$residuals)) +
+  geom_histogram()
+
+
+ggplot(data = NULL, aes(x = diatoms$DIVERSITY)) +
+  geom_histogram()
+
+```
+
+```{r}
+ggplot(data = diatom_lm, aes(sample = DIVERSITY)) +
+  geom_qq() + 
+  geom_qq_line()
+```
+
+
+
+
