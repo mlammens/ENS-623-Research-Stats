@@ -1,0 +1,324 @@
+---
+title: "Meeting 13 - Nested and Factorial ANOVA"
+author: "Matthew E. Aiello-Lammens"
+date: '2020-05-06'
+output:
+  html_document:
+    code_folding: hide
+    toc: yes
+---
+
+
+# Nested ANOVA
+
+Sometimes your replicates aren't quite independent.
+
+Look how the replicates presented in panel (b) below are *nested* within a bigger treatment block.
+
+![Logan - Figure 11.1](/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/lectures/logan-fig-11-1.png)
+
+For formula, see Logan p. 284 and for calculation of F-ratios see Table 11.1.
+**Note that Mean-Squared Errors are the same if B is random or fixed, but F-ratio is different! Why? Discuss.**
+
+## Unbalanced designs
+
+Often your observations will not be clean. This is unfortunate, as it makes the analyses more complicated. But they are still doable.
+
+### Nested ANOVA Example
+
+From Logan Example 11.A - Density-dependent grazing effects of sea urchin on filamentous algae (Andrew and Underwood 1993).
+
+Levels: 
+1. Sea urchin density
+2. Patches of Reef
+3. Quadrats within patches
+
+Get the data and have a look.
+
+```{r}
+algae_density <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter11/Data/andrew.csv")
+
+head(algae_density)
+summary(algae_density)
+```
+
+Patch and Quad need to be converted to factors!
+
+```{r}
+algae_density$PATCH <- factor(algae_density$PATCH)
+algae_density$QUAD <- factor(algae_density$QUAD)
+
+summary(algae_density)
+```
+
+Much better.
+
+Let's make some visuals.
+
+```{r}
+library(ggplot2)
+
+ggplot(data = algae_density) +
+  geom_boxplot(aes(x = TREAT, y = ALGAE)) +
+  theme_bw()
+```
+
+Here's a visual considering the Patches seperately
+
+```{r}
+ggplot(data = algae_density) +
+  geom_boxplot(aes(x = TREAT, y = ALGAE, fill = factor(PATCH))) +
+  theme_bw()
+```
+
+
+
+We should also consider this from the perspective to collapsing the quadrats into their mean values.
+
+```{r}
+library(dplyr)
+
+algae_density_agg <-
+  algae_density %>%
+  group_by(TREAT, PATCH) %>%
+  summarize(ALGAE_QUAD_MEAN = mean(ALGAE))
+
+ggplot(data = algae_density_agg) +
+  geom_boxplot(aes(x = TREAT, y = ALGAE_QUAD_MEAN)) +
+  theme_bw()
+
+```
+
+Construct an ANOVA model and look at the results.
+
+Without accounting for nested structure.
+
+```{r}
+algae_density_aov_nonest <- aov(data = algae_density, ALGAE ~ TREAT)
+summary(algae_density_aov_nonest)
+```
+
+And here we are **properly** considering the **nested structure**.
+
+```{r}
+algae_density_aov <- aov(data = algae_density, ALGAE ~ TREAT + Error(PATCH))
+summary(algae_density_aov)
+```
+
+* Notice the large differences in F values assocated with Treatement, and corresponding P values
+* What can we conclude?
+* What was the unit of replication?
+
+
+
+# Factorial ANOVA
+
+What if we want to look at two, or more, factors where one is not nested in the other?
+
+**See visuals as per Logan, Fig 12.1 and 12.2.**
+
+![Logan - Figure 12.1](/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/lectures/logan-fig-12-1.png)
+
+![Logan - Figure 12.2](/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/lectures/logan-fig-12-2.png)
+
+For formula, see Logan p. 314 and for calculation of F-ratios see Table 12.1.
+
+
+
+
+## Example - Two factor fixed effects model (Model I)
+
+From Logan (Example 12A):
+
+> Quinn (1988) manipulated the density of adults limpets within enclosures (8, 15, 30 and 45 individuals per enclosure) during two seasons (winter-spring and summer-autumn) so as to investigate the effects of adult density and season on egg mass production by intertidal limpets. Three replicate enclosures per density/season combination were used, and both density and season were considered fixed factors (from Box 9.4 of Quinn and Keough (2002)).
+
+```{r}
+limpets <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter12/Data/quinn.csv")
+
+head(limpets)
+summary(limpets)
+
+limpets$DENSITY <- factor(limpets$DENSITY)
+```
+
+Let's get some visuals.
+
+```{r}
+ggplot(data = limpets) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets) +
+  geom_boxplot(aes(x = SEASON, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS, fill = SEASON)) +
+  theme_bw()
+
+```
+
+
+And let's run the model.
+
+```{r}
+limpets_lm <- lm(data = limpets, formula = EGGS ~ SEASON * DENSITY)
+summary(limpets_lm)
+anova(limpets_lm)
+```
+
+Plot the effects of Season and Density using the `allEffects` function in the `effects` package. You may need to use `install.packages` to install this package.
+
+
+```{r}
+library(effects)
+
+plot(allEffects(limpets_lm))
+```
+
+
+
+## (Another) Example - Two factor fixed effects model
+
+Effects of density and season on the number of eggs produced by slipper limpets.
+
+```{r}
+limpets1 <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter12/Data/quinn1.csv")
+
+head(limpets1)
+summary(limpets1)
+
+limpets1$DENSITY <- factor(limpets1$DENSITY)
+summary(limpets1)
+
+```
+
+```{r}
+ggplot(data = limpets1) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets1) +
+  geom_boxplot(aes(x = SEASON, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets1) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS, fill = SEASON)) +
+  theme_bw()
+
+```
+
+
+And let's run the model.
+
+```{r}
+limpets1_lm <- lm(data = limpets1, formula = EGGS ~ SEASON * DENSITY)
+summary(limpets1_lm)
+anova(limpets1_lm)
+```
+
+Make an effects plot
+
+```{r}
+plot(allEffects(limpets1_lm))
+```
+
+
+
+### Problems from unbalanced design
+
+See Logan Fig 12.3, p. 325. The variance in a model is "explained" sequentially.
+
+Provided there's time, we'll play with the models above.
+
+# ANCOVA
+
+Some times we have a mix of continuous and categorical predictor variables, with a continuous response variable. 
+
+**See Figure 15.1 in Logan p. 449**
+
+![Logan - Figure 15.1](/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/lectures/Logan-Fig-15.1.png)
+
+## Example
+
+From Logan p. 457
+
+> To investigate the impacts of sexual activity on male fruitfly longevity, Partridge and Farquhar (1981), measured the longevity of male fruitflies with access to either one virgin female (potential mate), eight virgin females, one pregnant female (not a potential mate), eight pregnant females or no females. The available male fruitflies varied in size and since size is known to impact longevity, the researchers randomly allocated each individual fruitfly to one of the five treatments and also measured thorax length as a covariate (from Box 12.1 of Quinn and Keough (2002)).
+
+Get the data
+
+```{r}
+fruitfly <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter15/Data/partridge.csv")
+
+head(fruitfly)
+```
+
+Plot these data
+
+By group membership
+
+```{r}
+ggplot(data = fruitfly, aes(x = TREATMENT, y = LONGEV)) +
+  geom_boxplot() +
+  theme_bw()
+```
+
+By size
+
+```{r}
+ggplot(data = fruitfly, aes(x = THORAX, y = LONGEV)) +
+  geom_point() +
+  theme_bw()
+```
+
+By both
+
+```{r}
+ggplot(data = fruitfly, aes(x = THORAX, y = LONGEV, colour = TREATMENT)) +
+  geom_point() +
+  theme_bw()
+```
+
+With linear regressions
+
+```{r}
+ggplot(data = fruitfly, aes(x = THORAX, y = LONGEV)) +
+  geom_point(aes(colour = TREATMENT)) +
+  stat_smooth(aes(colour = TREATMENT), method = "lm") +
+  stat_smooth(method = "lm", size = 2, colour = "black") +
+  theme_bw()
+```
+
+Let's build an ANCOVA model
+
+```{r}
+fruitfly_ancova <- lm(data = fruitfly, LONGEV ~ TREATMENT * THORAX)
+```
+
+Looking at the ANOVA table for this model, the fact that TREATMENT:THORAX interaction is not significant indicates that the slopes are not significantly different from each other.
+
+```{r}
+anova(fruitfly_ancova)
+```
+
+Look at the model diagnostics
+
+```{r}
+plot(fruitfly_ancova)
+```
+
+Note that there is a wedge-shaped pattern to the residuals, suggestive of non-homogeniety of variance. 
+We can use a log10 transform to deal with this problem.
+
+```{r}
+fruitfly_ancova_2 <- lm(data = fruitfly, log10(LONGEV) ~ TREATMENT + THORAX)
+
+plot(fruitfly_ancova_2)
+
+summary(fruitfly_ancova_2)
+```
+
+### Challenge
+
+Look at how the ANCOVA results differ from either ignoring the continuous or categorical predictor.
+
