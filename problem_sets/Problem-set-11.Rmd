@@ -16,25 +16,85 @@ For example,
 
 `Lammens_ENS623_SP20_PS11.Rmd`
 
-
 # Overview
 
-The dataset loaded in to R in the code below reports on the success (as assessed by the column `Scent`) of luring spruce moths using different baits (`Bait`) placed at varying heights (`Location`) within a forest canopy.
+For each question below, answer the following five sub-questions.
+**Make sure to address each of these five sub-questions!**
 
-```{r}
-moth <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/spruce_moth_traps.csv")
+1. Choose the most appropriate statistical analysis. You might want to consult the key in Logan 2010.
+
+2. Identify the relevant response and predictor variables. Identify if they are categorical or continuous variables.
+
+3. Write appropriate null and alternative hypotheses.
+
+4. Outline how you would analyze these data, including referencing the relevant equations and R functions you would use. Complete all calculations that are explicitly asked for.
+**NOTE: You can write R code that does not get exectued by adding the flag `eval = FALSE` to the code chunk, like this:** 
+
+\```{r, eval = FALSE}
+
+[code in this chunk won't be exectured when you knit, but it will appear in the document as code.]
+
+\```
+
+5. Describe the assumptions you would need to check for and how you would do that. For example, might you need to look at a QQ plot, or check some other assumption?
+
+
+
+
+## Road Mortality for Turtles
+
+Mike set out to determine if the proximity of wetlands, lakes, or streams influences the number of observed road mortality events for turtles in the Lower Hudson Valley. He examined roads with similar traffic patterns but differing distances from the nearest water body, surveying these roads multiple times per week looking for signs of turtle-vehicle collisions that were deadly for the turtle. How should he analyze the data presented below?
+
+```{r,echo=FALSE}
+distance <- round(runif(n = 15, min = 0, max = 1000),1)
+num_turtles <- rpois(15,(1/(distance))*1000)
+
+knitr::kable(tibble::tibble(`Distance (meters)` = distance, `Observed Turtle Mortality` = num_turtles))
 ```
 
-# Two-way ANOVA "by hand" (15 points) 
 
-Write an R script to calculate the 2-way ANOVA table (including interactions) manually (i.e. calculating all the entries including the F and p-values). 
-Assume that Baits and Location are fixed (not random).
-(**Hint:** To complete this problem, calculate the results for the equations described in **Table 9.8 in Quinn and Keough** and F-ratios as described in **Table 12.1 in Logan**.)
 
-# Two-way ANOVA by function (10 points)
+## Caffeine and Sugar
 
-Use the `anova` and `lm` (or `aov`) functions to analyze Scent as a function of Location and Bait. 
+A double-blind randomized experiment assigned healthy undergraduate students to drink one of four beverages after fasting overnight: water, water with 75 mg of caffeine, water with 75 g of glucose, and water with 75 mg of caffeine and 75 g of glucose. There were 18 students in each of these treatment groups. After drinking the beverage, the students took a test to measure their cognitive skills - attention, reaction time, etc.. They were given a score for this test. You would like to know if the drinks had an effect on the students test performance. Below is a table of summary statistics for these data. How shale you proceed in your analysis? 
 
-* How should the intercept be interpreted? 
-* What determines what R uses as the model intercept?
-* Compare your ANOVA table from **Part 1** against that produced by the R functions. Do you get the same answer as you calculated by hand?
+|Beverage|n|Mean test performance|
+|--------|-|:-------------------:|
+|Water|18|389.35|
+|Water and caffeine|18|320.16|
+|Water and glucose|18|318.16|
+|water, caffeine, and glucose|18|336.44|
+
+
+## Possum Classification in Australia
+
+The common brushtail possum of the Australia region is a bit cuter than its distant cousin, the American opossum. In this study, researchers examined 104 brushtail possums from two regions in Australia. The possums may be considered a random sample from the population. The first region was Victoria, which is in the eastern half of Australia and traverses the southern coast. The second region consisted of New South Wales and Queensland, which make up eastern and northeastern Australia, and is denoted below as "Other". The researchers were interested in determining if a possum's tail length could be used to determine if it came from Victoria or one of the other two regions. A plot of their data, with an accompanying model, are below. Note that in the plot, Victoria is assigned a value of 0 and other is assigned a value of 1. What analysis did they use?
+
+
+```{r, echo=FALSE, fig.width=3, fig.height=3, message = FALSE}
+library(openintro)
+library(ggplot2)
+possum_temp <- possum
+possum_temp$pop_num <- as.numeric(possum_temp$pop) -1
+
+ggplot(data = possum_temp, aes(x = tailL, y = pop_num)) +
+  geom_point() +
+  geom_smooth(method = "glm", method.args=list(family="binomial"), se=FALSE) +
+  xlab("Tail Length") +
+  ylab("Population\n(Victoria = 0, Other = 1)") +
+  theme_bw()
+```
+
+## Cherry Tree Timber Yield
+
+Timber yield is approximately equal to the volume of a tree, however, this value is difficult to measure without first cutting the tree down. 
+Instead, other variables, such as height and diameter, may be used to predict a tree’s volume and yield. 
+Researchers wanting to understand the relationship between these variables for black cherry trees collected data from 31 such trees in the Allegheny National Forest, Pennsylvania. 
+Height is measured in feet, diameter in inches (at 54 inches above ground), and volume in cubic feet.
+What analysis could they use with these data to predict wood volume (yield)?
+Below is a table of the first 10 rows of the data.
+
+```{r, echo=FALSE}
+data("cherry")
+knitr::kable(head(cherry, n = 10))
+```

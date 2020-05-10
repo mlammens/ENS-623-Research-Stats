@@ -1,0 +1,152 @@
+---
+title: "Interpreting ANOVA regression coefficients"
+author: "Matthew Aiello-Lammens"
+output: html_document
+---
+
+Let's work with the limpet data set from Quinn (1988), presented in both Quinn and Keough 2009 and Logan 2010. 
+
+```{r}
+# Read in the file
+limpets <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter12/Data/quinn.csv")
+# Make DENSITY a factor
+limpets$DENSITY <- as.factor(limpets$DENSITY)
+# Show a summary of the data.frame
+summary(limpets)
+```
+
+
+Next, let's calculate the group means for the different treatments.
+
+```{r}
+library(dplyr)
+
+limpets_grp_means <-
+  limpets %>%
+  group_by(SEASON, DENSITY) %>%
+  summarise(GROUP_Mean = mean(EGGS))
+limpets_grp_means
+
+```
+
+Use `spread` function in the `tidyr` package to make this into a nice table
+
+```{r}
+library(tidyr)
+spread(limpets_grp_means, SEASON, GROUP_Mean)
+```
+
+Make a visualization of these data too.
+
+```{r}
+library(ggplot2)
+
+ggplot(data = limpets) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS, fill = SEASON))
+```
+
+
+Let's now run an ANOVA analysis.
+
+```{r}
+limpets_lm <- lm(data = limpets, formula = EGGS ~  SEASON + DENSITY)
+anova(limpets_lm)
+```
+
+We are confident there is an effect of **both** DENSITY and SEAON on EGGS, based on these results.
+
+Now, we can use the regression coefficients from this model to ***estimate*** the group means.
+
+```{r}
+summary(limpets_lm)
+```
+
+Let's think of these as regression coefficients (which they are!) and use the following symbols:
+
+|Coef. symbol | Coef. name |
+|:------------|:----------:|
+|*b~0~*       |(Intercept) |
+|*b~1~*       |SEASONsummer|
+|*b~2~*       |DENSITY15   |
+|*b~3~*       |DENSITY30   |
+|*b~4~*       |DENSITY45   |
+
+The table below translates how these coefficients can be used to calcualte *estimates* for each group mean value.
+
+**NOTE** - I'm emphasizing that these are *estimates* of the group means. In this case, our model assumes that there is **no interaction** between the predictor variables DENSITY and SEASON. 
+
+|            |SEASON - Spring| SEASON - Summer |
+|:-----------|:-------------:|:---------------:|
+|DENSITY - 8 |*b~0~*         |*b~0~* + *b~1~*  |
+|DENSITY - 15|*b~0~* + *b~2~*|*b~0~* + *b~1~* + *b~2~*|
+|DENSITY - 30|*b~0~* + *b~3~*|*b~0~* + *b~1~* + *b~3~*|
+|DENSITY - 45|*b~0~* + *b~4~*|*b~0~* + *b~1~* + *b~4~*|
+
+Let's now use the results of our `lm` call to estimate the group means.
+I'm going to do this in the Rmd file by getting the model coefficients, then using the in-line R code execution in the table.
+
+
+```{r}
+limpets_coef <- round(coef(limpets_lm), digits = 3)
+```
+
+|            |SEASON - Spring| SEASON - Summer |
+|:-----------|:-------------:|:---------------:|
+|DENSITY - 8 |`r limpets_coef[1]`|`r limpets_coef[1] + limpets_coef[2]` |
+|DENSITY - 15|`r limpets_coef[1] + limpets_coef[3]`|`r limpets_coef[1] + limpets_coef[2] + limpets_coef[3]` |
+|DENSITY - 30|`r limpets_coef[1] + limpets_coef[4]`|`r limpets_coef[1] + limpets_coef[2] + limpets_coef[4]` |
+|DENSITY - 45|`r limpets_coef[1] + limpets_coef[5]`|`r limpets_coef[1] + limpets_coef[2] + limpets_coef[5]` |
+
+If we compare these estimates to the actual values we see in the table above, we should see that they are pretty close. 
+
+Now, let's see what happens if we include and interaction between DENSITY and SEASON.
+
+```{r}
+limpets_lm_int <- lm(data = limpets, EGGS ~ SEASON * DENSITY)
+anova(limpets_lm_int)
+```
+
+And now let's look at the regression coefficients.
+
+```{r}
+summary(limpets_lm_int)
+```
+
+As above, let's think of these as regression coefficients (which they are!) and use the following symbols:
+
+|Coef. symbol | Coef. name |
+|:------------|:----------:|
+|*b~0~*       |(Intercept) |
+|*b~1~*       |SEASONsummer|
+|*b~2~*       |DENSITY15   |
+|*b~3~*       |DENSITY30   |
+|*b~4~*       |DENSITY45   |
+|*b~5~*       |SEASONsummer:DENSITY15|
+|*b~6~*       |SEASONsummer:DENSITY30|
+|*b~7~*       |SEASONsummer:DENSITY45|
+
+
+The table below translates how these coefficients can be used to calcualte *estimates* for each group mean value. 
+Pay particular attention to the fact that we now have **three** more coefficients to work with, representing the interaction effects.
+
+|            |SEASON - Spring| SEASON - Summer |
+|:-----------|:-------------:|:---------------:|
+|DENSITY - 8 |*b~0~*         |*b~0~* + *b~1~*  |
+|DENSITY - 15|*b~0~* + *b~2~*|*b~0~* + *b~1~* + *b~2~* + *b~5~*|
+|DENSITY - 30|*b~0~* + *b~3~*|*b~0~* + *b~1~* + *b~3~* + *b~6~*|
+|DENSITY - 45|*b~0~* + *b~4~*|*b~0~* + *b~1~* + *b~4~* + *b~7~*|
+
+Now using this table, let's use the results of our `lm` call to estimate the group means.
+
+```{r}
+limpets_int_coef <- round(coef(limpets_lm_int), digits = 3)
+```
+
+|            |SEASON - Spring| SEASON - Summer |
+|:-----------|:-------------:|:---------------:|
+|DENSITY - 8 |`r limpets_int_coef[1]`|`r limpets_int_coef[1] + limpets_int_coef[2]` |
+|DENSITY - 15|`r limpets_int_coef[1] + limpets_int_coef[3]`|`r limpets_int_coef[1] + limpets_int_coef[2] + limpets_int_coef[3] + limpets_int_coef[6]` |
+|DENSITY - 30|`r limpets_int_coef[1] + limpets_int_coef[4]`|`r limpets_int_coef[1] + limpets_int_coef[2] + limpets_int_coef[4] + limpets_int_coef[7]` |
+|DENSITY - 45|`r limpets_int_coef[1] + limpets_int_coef[5]`|`r limpets_int_coef[1] + limpets_int_coef[2] + limpets_int_coef[5] + limpets_int_coef[8]` |
+
+

@@ -1,0 +1,223 @@
+---
+title: "Meeting 13 Notes"
+author: "Matthew Aiello-Lammens"
+date: "5/6/2020"
+output: html_document
+---
+
+# Continuing our exploration of ANOVA
+
+## Last week - one-way anova
+
+One response variable, one predictor variable with multiple levels
+(recall, if we had one predictor variable with only two levels, could use t-test)
+
+# Nested ANOVA
+
+In nested ANOVA, we are accounting for potential non-independence among measurements.
+
+## Example - Density of sea urchins influence grazing
+
+
+
+```{r}
+algae_density <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter11/Data/andrew.csv")
+```
+
+```{r}
+summary(algae_density)
+```
+
+We need to convert PATCH and QUAD to factors
+
+```{r}
+algae_density$PATCH <- as.factor(algae_density$PATCH)
+algae_density$QUAD <- as.factor(algae_density$QUAD)
+```
+
+```{r}
+summary(algae_density)
+```
+
+
+
+First, let's do some visualizations
+
+```{r}
+library(ggplot2)
+
+ggplot(data = algae_density) +
+  geom_boxplot(aes(x = TREAT, y = ALGAE))
+
+```
+
+Let's incorporate the PATCHES
+
+```{r}
+ggplot(data = algae_density) +
+  geom_boxplot(aes(x = TREAT, y = ALGAE, fill = PATCH))
+```
+
+Let's run an ANOVA
+
+```{r}
+algae_density_aov_nonest <- aov(data = algae_density, ALGAE ~ TREAT)
+summary(algae_density_aov_nonest)
+```
+
+Let's redo the ANOVA, accounting for the nested structure
+
+```{r}
+algae_density_aov_nest <- aov(data = algae_density, ALGAE ~ TREAT + Error(PATCH))
+summary(algae_density_aov_nest)
+```
+
+
+# Factorial (two-way) ANOVA
+
+## Limpets, density, season -> Eggs
+
+```{r}
+limpets <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter12/Data/quinn.csv")
+
+summary(limpets)
+```
+
+Make density into a factor
+
+```{r}
+limpets$DENSITY <- as.factor(limpets$DENSITY)
+
+summary(limpets)
+```
+
+Some visualization
+
+```{r}
+ggplot(data = limpets) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS))
+```
+
+```{r}
+ggplot(data = limpets) + 
+  geom_boxplot(aes(x = SEASON, y = EGGS))
+```
+
+Let's look at both SEASON and DENSITY at the same time
+
+```{r}
+ggplot(data = limpets) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS, fill = SEASON))
+```
+
+***
+
+This stufff added later!!!
+
+```{r}
+limpets_lm_simp <- lm(data = limpets, formula = EGGS ~ SEASON)
+summary(limpets_lm_simp)
+
+1.8398 + (-0.7360)
+```
+
+
+
+
+
+
+
+
+***
+
+Let's run a model
+
+```{r}
+limpets_lm <- lm(data = limpets, formula = EGGS ~  SEASON + DENSITY)
+anova(limpets_lm)
+```
+
+Look at the `lm` coefficients 
+
+```{r}
+summary(limpets_lm)
+```
+
+```{r}
+library(dplyr)
+
+limpets %>%
+  group_by(SEASON) %>%
+  summarise(SEASAON_Mean = mean(EGGS))
+
+limpets %>%
+  group_by(DENSITY) %>%
+  summarise(DENSITY_Mean = mean(EGGS))
+
+limpets %>%
+  group_by(SEASON, DENSITY) %>%
+  summarise(GROUP_Mean = mean(EGGS))
+
+```
+
+```{r}
+library(effects)
+plot(allEffects(limpets_lm))
+```
+
+
+```{r}
+limpets_lm_int <- lm(data = limpets, EGGS ~ SEASON * DENSITY)
+anova(limpets_lm_int)
+summary(limpets_lm_int)
+```
+
+```{r}
+plot(allEffects(limpets_lm_int))
+```
+
+
+## Another 2-way example
+
+Same setup as above, but deeper into the water.
+
+```{r}
+limpets1 <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter12/Data/quinn1.csv")
+
+summary(limpets1)
+```
+
+Convert density into a factor again
+
+```{r}
+limpets1$DENSITY <- as.factor(limpets1$DENSITY)
+```
+
+
+```{r}
+summary(limpets1)
+```
+
+Visualization
+
+```{r}
+ggplot(data = limpets1) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS, fill = SEASON))
+```
+
+
+
+Run our ANOVA
+
+```{r}
+limpets1_lm <- lm(data = limpets1, EGGS ~ SEASON * DENSITY)
+
+anova(limpets1_lm)
+```
+
+Visualize the effects with our effects plot
+
+```{r}
+plot(allEffects(limpets1_lm))
+```
+
