@@ -39,7 +39,7 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 |4/22 | 11 | Multiple and complex regression |Q&K Chap. 6; Logan Chap. 8 & 9 | [Lecture notes 11](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-11.html) | [Problem Set 9](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-9.html) |
 |4/29 |  12 |ANOVA|Q&K 8; Logan 10 | [Lecture notes 12](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-12.html); [In class notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-12-Notes.Rmd) | [Problem Set 10](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-10.html); [Problem Set 10 - as Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-10.Rmd)|
 |5/6 | 13 |Nested and Factorial ANOVA; ANCOVA |Q&K 9 & 12; Logan 11-12 & 15 | [Lecture notes 13](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-13.html) |[Problem Set 11](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-11.html) |
-|5/13  | 14 |Analysis of Frequencies; GLM; Wrap-up |Logan Chap. 15-17; Q&K 12-14 | [Lecture notes 14](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-14.html) | Take-home Final |
+|5/13  | 14 |Analysis of Frequencies; GLM; Wrap-up |Logan Chap. 15-17; Q&K 12-14 | [Lecture notes 14](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-14.html) |  |
 
 ### Supplementary Notes
 
