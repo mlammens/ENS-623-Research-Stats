@@ -50,7 +50,7 @@ These notes go along with the videos I'm posting:
 * Linear Regression Diagnostics - [video](https://youtu.be/pOvZsR5JW2w), [slide deck](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Linear-Regression-Diagnostics.pptx), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Model-Diagnostics.html) 
 * Multiple Linear Regression - [video](https://youtu.be/uadovf4nk3w), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression.html), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression.Rmd)
 * Multiple Linear Regression with Interaction - [video](https://youtu.be/uadovf4nk3w), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression-Interaction.html), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression-Interaction.Rmd)
-* Interpreting ANOVA Coefficients - [video](), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-ANOVA-Coefficients.html), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-ANOVA-Coefficients.Rmd)
+* Interpreting ANOVA Coefficients - [video](https://youtu.be/FMGlj44Kp40), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-ANOVA-Coefficients.html), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-ANOVA-Coefficients.Rmd)
 * Analysis of Covariance (ANCOVA) - **video coming soon**, [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-ANCOVA.html), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-ANCOVA.Rmd)
 
 <!---
