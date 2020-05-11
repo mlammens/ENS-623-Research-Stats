@@ -88,6 +88,7 @@ I'm going to do this in the Rmd file by getting the model coefficients, then usi
 
 ```{r}
 limpets_coef <- round(coef(limpets_lm), digits = 3)
+limpets_coef
 ```
 
 |            |SEASON - Spring| SEASON - Summer |
