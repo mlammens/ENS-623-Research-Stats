@@ -1,0 +1,112 @@
+---
+title: "Analysis of Covariance - ANCOVA"
+author: "Matthew Aiello-Lammens"
+output: html_document
+---
+
+Some times we have a mix of continuous and categorical predictor variables, with a continuous response variable. 
+
+**See Figure 15.1 in Logan p. 449**
+
+![Logan - Figure 15.1](/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/lectures/Logan-Fig-15.1.png)
+
+## Example
+
+From Logan p. 457
+
+> To investigate the impacts of sexual activity on male fruitfly longevity, Partridge and Farquhar (1981), measured the longevity of male fruitflies with access to either one virgin female (potential mate), eight virgin females, one pregnant female (not a potential mate), eight pregnant females or no females. The available male fruitflies varied in size and since size is known to impact longevity, the researchers randomly allocated each individual fruitfly to one of the five treatments and also measured thorax length as a covariate (from Box 12.1 of Quinn and Keough (2002)).
+
+Get the data
+
+```{r}
+fruitfly <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter15/Data/partridge.csv")
+
+head(fruitfly)
+```
+
+Plot these data
+
+By group membership
+
+```{r}
+library(ggplot2)
+ggplot(data = fruitfly, aes(x = TREATMENT, y = LONGEV)) +
+  geom_boxplot() +
+  theme_bw()
+```
+
+By size
+
+```{r}
+ggplot(data = fruitfly, aes(x = THORAX, y = LONGEV)) +
+  geom_point() +
+  theme_bw()
+```
+
+By both
+
+```{r}
+ggplot(data = fruitfly, aes(x = THORAX, y = LONGEV, colour = TREATMENT)) +
+  geom_point() +
+  theme_bw()
+```
+
+With linear regressions
+
+```{r}
+ggplot(data = fruitfly, aes(x = THORAX, y = LONGEV)) +
+  geom_point(aes(colour = TREATMENT)) +
+  stat_smooth(aes(colour = TREATMENT), method = "lm") +
+  stat_smooth(method = "lm", size = 2, colour = "black") +
+  theme_bw()
+```
+
+Let's build an ANCOVA model
+
+```{r}
+fruitfly_ancova <- lm(data = fruitfly, LONGEV ~ TREATMENT * THORAX)
+```
+
+Look at the model diagnostics
+
+```{r}
+plot(fruitfly_ancova)
+```
+
+Note that there is a wedge-shaped pattern to the residuals, suggestive of non-homogeniety of variance. 
+We can use a log10 transform to deal with this problem.
+
+```{r}
+fruitfly_ancova_log <- lm(data = fruitfly, log10(LONGEV) ~ TREATMENT * THORAX)
+```
+
+
+Looking at the ANOVA table for this model, the fact that TREATMENT:THORAX interaction is not significant indicates that the slopes are not significantly different from each other.
+
+```{r}
+anova(fruitfly_ancova_log)
+```
+
+
+We can also look at a `summary` of this model and interpret the coefficients.
+
+```{r}
+summary(fruitfly_ancova_log)
+```
+
+
+
+
+Now we build another model in which we assume the slopes are all parallel.
+
+```{r}
+fruitfly_ancova_2 <- lm(data = fruitfly, log10(LONGEV) ~ TREATMENT + THORAX)
+
+plot(fruitfly_ancova_2)
+
+summary(fruitfly_ancova_2)
+```
+
+### Challenge
+
+Look at how the ANCOVA results differ from either ignoring the continuous or categorical predictor.
