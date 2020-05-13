@@ -56,8 +56,8 @@ With linear regressions
 ```{r}
 ggplot(data = fruitfly, aes(x = THORAX, y = LONGEV)) +
   geom_point(aes(colour = TREATMENT)) +
-  stat_smooth(aes(colour = TREATMENT), method = "lm") +
-  stat_smooth(method = "lm", size = 2, colour = "black") +
+  stat_smooth(aes(colour = TREATMENT), method = "lm", se = FALSE) +
+  stat_smooth(method = "lm", size = 2, colour = "black", se = FALSE) +
   theme_bw()
 ```
 
@@ -79,6 +79,13 @@ We can use a log10 transform to deal with this problem.
 ```{r}
 fruitfly_ancova_log <- lm(data = fruitfly, log10(LONGEV) ~ TREATMENT * THORAX)
 ```
+
+Recheck model diagnositcs
+
+```{r}
+plot(fruitfly_ancova_log)
+```
+
 
 
 Looking at the ANOVA table for this model, the fact that TREATMENT:THORAX interaction is not significant indicates that the slopes are not significantly different from each other.
@@ -107,6 +114,3 @@ plot(fruitfly_ancova_2)
 summary(fruitfly_ancova_2)
 ```
 
-### Challenge
-
-Look at how the ANCOVA results differ from either ignoring the continuous or categorical predictor.
