@@ -13,8 +13,8 @@ description: course syllabus
 **Credits:** 3  
 **Professors:** Dr. Matthew Aiello-Lammens  
 **Meeting day and time:** Wed 5:40 - 8:40 PM  
-**Term:** Spring 2020  
-**Location:** Environmental House Conference Room   
+**Term:** Spring 2021  
+**Location:** Environmental Classroom (pending) & Zoom   
 
 ## Course description
 
@@ -56,17 +56,24 @@ We will assess your achievement of the learning objectives based on your perform
 More information on each of these will be provided throughout the semester.
 
 * Participation during in class assignments (10%)
-* Problem sets (~~40%~~ 45%)
-* Analysis project (~~20%~~ 30%)
-* ~~Midterm and~~ Final - take home via Blackboard (15% ~~each / 30% total~~)
+* Problem sets (45%)
+* Analysis project (35%)
 
 
 ## Required materials
 
-Copies of these texts will be made available to you.
+Our textbook is available for free as a PDF (you choose how much to pay). Go to the website noted below to access the textbook site.
 
-* Logan. 2010. Biostatistical Design and Analysis Using R: A Practical Guide. Wiley-Blackwell
-* Quinn and Keough. 2009. Experimental Design and Data Analysis for Biologists. Cambridge Press
+>Vu and Harrington. 2020. Introductory Statistics for the Life and Biomedical Sciences. OpenIntro Statistics. [https://www.openintro.org/book/biostat/](https://www.openintro.org/book/biostat/)
+
+We will also be using Perusall for group reading of other papers related to the course materials. 
+
+## Other resources
+
+Copies of these texts will be made available to you. These are standard analysis resources in the environmental fields.
+
+>Logan. 2010. Biostatistical Design and Analysis Using R: A Practical Guide. Wiley-Blackwell
+>Quinn and Keough. 2009. Experimental Design and Data Analysis for Biologists. Cambridge Press
 
 
 ## Data sets
