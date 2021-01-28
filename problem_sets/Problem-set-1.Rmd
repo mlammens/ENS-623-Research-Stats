@@ -1,9 +1,11 @@
 ---
-title: "ENS 623 - Spring 2020 - Problem Set 1"
-output: html_document
+title: "ENS 623 - Spring 2021 - Problem Set 1"
+output:
+  word_document: default
+  html_document: default
 ---
 
-**Please submit this homework on Blackboard as *both* an R Markdown (Rmd) and DOCX file.**
+**Please submit this homework on Classes as *both* an R Markdown (Rmd) and DOCX file.**
 
 As I mentioned during our first meeting, rmarkdown is a way to incorporate text, with simple formatting, with R code chunks.
 Rather than spell out how to create an Rmd file here, I recommend you consult the following resources:
@@ -27,18 +29,26 @@ For example,
 
 # Part 1 - Introducing the Iris data set
 
-In class I mentioned that the R package `datasets` includes several different kinds of data sets to use in R. In this problem set, we'll work with the `iris` data set. Using any of the help functions we learned in class, `?` or `help.search`, find the help page for the iris data set. 
+The basic R installation includes a package named `datasets` that contains several different example data sets to use in R. In this problem set, we'll work with the `iris` data set. Using any of the help functions we learned in class, `?` or `help.search`, find the help page for the iris data set. 
 
-* Briefly describe what these data are.
-* Think about a model that might describe the varition in petal length values in this data set.
+
+```{r}
+# Show your code to find information on iris here
+```
+
+
+**Briefly describe what these data are. What is being measured? How many measurements? Etc. Please embed your answer within tese doubl asterisks so your answer is bold-faced.**
 
 
 # Part 2 - Play with the the `iris` data set
 
 Use the `head`, `tail`, and `summary` functions to investigate the `iris` data set. Use the help functions (or search online) to figure out *how* to use these functions and *what* these functions return. Make at least three observations about the data and/or the data set using these functions.
 
+```{r}
+# Put your code here
+```
 
 
-
+**Put your three observations here.**
 
 
