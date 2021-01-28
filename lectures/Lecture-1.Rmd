@@ -1,7 +1,6 @@
 ---
 title: "Meeting 1 - Introduction to R Programming"
 author: "Matthew E. Aiello-Lammens"
-date: '2020-01-29'
 output:
   html_document:
     code_folding: hide
@@ -25,44 +24,14 @@ output:
 * Lots of **live coding** examples - you should follow along, but don't have to
 * Challenges - some will be short, some long. Some you work on alone, some with a partner or in groups
 
-# Hypothesis testing and the scientific method
-
-### What is a theory?
-
-A proposed explanation for some event or process that is based on the available evidence related to that event.
-We also call this a **model**. *Models don't necessarily mean **math**.*
-
-### What is a hypothesis?
-
-A prediction based on our model (or theory). 
-For a hypothesis to be considered **scientific** it must be **falsifable**.
-
-## Scientific method
-
-Traditional view:
-
-1. Develop a hypothesis 
-2. Make a prediction based on hypothesis 
-3. Do an experiment to test the prediction
-4. Analyze the data from our experiment
-5. Based on results, make an inference about our hypothesis - do the data support or reject our prediction?
-6. Repeat as necessary to acquire knowledge
-
-Checkout [Understanding Science](https://undsci.berkeley.edu/flowchart_noninteractive.php)
-
-### Analysis is iterative
-
-The process of analyzing data is often iterative. 
-That means, we may start looking at our data, applying analysis techniques that might *not* be the techniques we use in our final report (i.e., our reports and manuscripts). 
-Don't be afraid to start exploring your data, and applying analyses, before you think you're ready.
 
 # Introduction to R and RStudio
 
 ## Why do I have to learn to program in R?
 
 In short, it's "industry standard". 
-But the longer answer has to do with replicability of data analyses.
-Documenting your analysis in R, using R scripts or Rmd files allows you to re-run your analysis whenever the need arises, and to share your analysis workflow with others.
+But the longer answer has to do with replicability (or reproducability) of data analyses.
+Documenting your analysis in R, using R scripts or Rmd files allows you to re-run your analysis whenever the need arises, and to share your analysis work flow with others.
 
 ## Getting started
 
@@ -70,21 +39,43 @@ Documenting your analysis in R, using R scripts or Rmd files allows you to re-ru
 
 In this class, we will be working primarily in RStudio.
 So what is the difference between R and RStudio?
-R is both a programming language (specifically a statsitical analysis programming language), while RStudio is an **Integrated Development Environment**, or **IDE** for short. 
+R is both a programming language (specifically a statistical analysis programming language) and a software for using that language, while RStudio is an **Integrated Development Environment**, or **IDE** for short.
 RStudio offers a number of features, mostly related to visual presentation of information, that make writing and working with R code easier.
 
 ### Overall layout
 
-* Four panels, each has valuable information
+There are four panels in the RStudio interface (though you may only have three open when you first start it), each has valuable information.
+
+* Console / Terminal panel (lower-left)
+* Environment / History / Git (upper-right)
+* Files / Plots / Packages / Help (lower-right)
+* Source / Editor (upper-left)
 
 ### File management
+
+Before we do anything in R/RStudio, let's make a new folder on our computers where our class data can reside.
+You can use your operating systems file manager (i.e., Finder on Mac and Windows Explorer on Windows) to created a new folder where ever suites you. 
 
 * Setup a `ENS-623-Research-Stats` directory
 * Make a `data` directory
 * Make a `scripts` directory
-* In RStudio, set working directory to your new `ENS-623-Research-Stats` directory
+
+### Making an R Project
+
+Go back to RStudio.
+Let's make a new R Project associated with your `ENS-623-Research-Stats` directory. 
+To make a new project, go to the upper right-hand side of the RStudio interface, where it says **Project: (None)**.
+Click the little downward arrow, select "New Project", then select "Existing Directory" from the window that pops up. 
+Use the graphical user interface (GUI) to navigate to the `ENS-623-Research-Stats` directory, then select "Create Project".
+Once you've created your project, your RStudio session will restart in this project.
+
+There is also now a file in the folder you just made that ends in *.Rproj.
+If you double click on this file, RStudio will open, opening this project at the same time.
+This is a good way to re-open RStudio for your next session.
 
 #### Setting your working directory
+
+If you open a project using the *.Rproj file, then your R session will automatically set the working directory to your `ENS-623-Research-Stats` folder. If you need to set the working directory manually, here are two ways to do that.
 
 Point-and-click method - Use 'Session' > 'Set Working Directory' > 'Choose Directory'.
 
@@ -94,11 +85,6 @@ Using the R Console:
 setwd("/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-SP18/")
 ```
 
-#### Make an RStudio Project
-
-In the upper right hand corner, let's navigate the project options and make a project from an existing directory.
-
-Close RStudio, and reopen by double clicking on the project.
 
 ### Getting help
 
@@ -156,6 +142,8 @@ Use a script file for your work. It's easier to go back to and easy to document.
 
 **Important:** within an R file, you can use the # sign to add comments. Anything written after the # is *not* interpreted when you run the code.
 
+**Important:** we can write commands in our R script file, then run/execute those commands by pressing `CMD` + `RETURN` (Macs) or `CNTR` + `RETURN` (Windows). We can also execute only a section of code by highlighting it and pressing these same key strokes.
+
 #### Challenge
 
 Create a new R script file in your `scripts` directory. Run a few basic commands in the new file.
@@ -168,6 +156,9 @@ getwd()
 
 # Move to a different director?
 setwd(".")
+
+# What files are in the current directory?
+#dir()
 ```
 
 #### Things to cover
@@ -232,6 +223,8 @@ Make a new variable
 my_var_tot <- my_var + my_var2
 ```
 
+***
+
 #### Challenge
 
 Change the value of my_var2
@@ -242,5 +235,5 @@ my_var2 <- 3
 
 What is the value of `my_var_tot` now?
 
-
+***
 
