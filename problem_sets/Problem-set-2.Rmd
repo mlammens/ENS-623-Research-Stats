@@ -1,5 +1,5 @@
 ---
-title: "ENS 623 - Spring 2020 - Problem Set 2"
+title: "ENS 623 - Spring 2021 - Problem Set 2"
 output: html_document
 ---
 
@@ -10,11 +10,11 @@ See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Resear
 
 Your file should use the following naming scheme
 
-**`[last name]_ENS623_SP20_PS2.Rmd`**
+**`[last name]_ENS623_SP21_PS2.Rmd`**
 
 For example, 
 
-`Lammens_ENS623_SP20_PS2.Rmd`
+`Lammens_ENS623_SP21_PS2.Rmd`
 
 #### Grading note
 
@@ -51,23 +51,18 @@ I very briefly showed you that you can add the term `geom_smoth(method = "lm")` 
 
 
 ```{r}
+# You will modify this code, as per description below
 ggplot(data = iris, aes( x = Sepal.Length, y = Petal.Length, colour = Species )) + 
   geom_point() +
   geom_smooth(method = "lm")
 
 ```
 
-**Use the code above, but replace `Petal.Length` with `Sepal.Width`. Make a new x-y scatter plot with linear regression lines. Describe how fitting a different line to the data from each species might influence how you interpret your data, in comparison to an x-y scatter plot where you do not seperate the species.**
+*Use the code above, but replace `Petal.Length` with `Sepal.Width`. Make a new x-y scatter plot with linear regression lines. Describe how fitting a different line to the data from each species might influence how you interpret your data, in comparison to an x-y scatter plot where you do not separate the species.*
 
-***Hint:* You should make two plots, one where you color the points by species and a second where you do not include any color.**
+***Hint:** You should make two plots, one where you color the points by species and a second where you do not include any color.*
 
-```{r, eval=FALSE, echo=FALSE}
-ggplot(data = iris, aes( x = Sepal.Length, y = Sepal.Width, colour = Species )) + 
-  geom_point() +
-  geom_smooth(method = "lm")
-
-```
-
+**Put your written answer to the question above, here.**
 
 ## Problem 2 - Working with syntax in `ggplot2`
 
@@ -93,8 +88,10 @@ ggplot(data = iris, aes(x = Petal.Length)) +
   theme_bw() 
 ```
 
-**Describe the differences between the code chunks.**
+*Describe the differences between the code chunks.*
 
-**Do Chunks 1 and 2 produce the same plots? (You need to show me that you ran the code to get credit for this.)**
+*Do Chunks 1 and 2 produce the same plots? (You need to show me that you ran the code to get credit for this.)*
 
-**Based on the answers to the above two questions, what do you think the role of defining arguments in the `ggplot()` function is versus defining arguments in the `geom_` functions?**
+*Based on the answers to the above two questions, what do you think the role of defining arguments in the `ggplot()` function is versus defining arguments in the `geom_` functions?*
+
+**Put your answers to the questions above here.**
