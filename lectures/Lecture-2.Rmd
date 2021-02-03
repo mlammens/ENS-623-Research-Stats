@@ -1,7 +1,6 @@
 ---
 title: "Meeting 2 - R Programming and Data Visualizatoin"
 author: "Matthew E. Aiello-Lammens"
-date: '2020-02-05'
 output:
   html_document:
     code_folding: hide
@@ -106,7 +105,7 @@ Let's make a matrix
 
 #### Challenge
 
-With the people next to you, break down this function, and describe each argument.
+With a partner, break down this function, and describe each argument.
 What is the final product?
 
 ```{r}
@@ -218,7 +217,7 @@ Let's begin by using the `summary` function to examine this dataset.
 `summary` returns many of the standard statistics.
 When doing data exploration, a few things you want to look at are:
 
-* How to the mean and median values within a variable compare?
+* How do the mean and median values within a variable compare?
 * Do the min and max values suggest there are outliers?
 * Which variables (i.e., columns) are quantitative (numeric) versus categorical (factors or characters)
 
@@ -332,7 +331,7 @@ For the next section, we're going to continue to work with the
 
 #### Challenge
 
-What commands can I use if I want the first 10 elements of both the sepal width and the species columns?
+What commands can I use if I want the first 6 elements of both the sepal width and the species columns?
 
 ***
 
