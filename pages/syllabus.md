@@ -56,7 +56,8 @@ We will assess your achievement of the learning objectives based on your perform
 More information on each of these will be provided throughout the semester.
 
 * Participation during in class assignments (10%)
-* Problem sets (45%)
+* Perusall readings (15%)
+* Problem sets (40%)
 * Analysis project (35%)
 
 
