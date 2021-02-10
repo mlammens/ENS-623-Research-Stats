@@ -1,7 +1,6 @@
 ---
 title: "Meeting 3 - R Programming"
 author: "Matthew E. Aiello-Lammens"
-date: '2020-02-12'
 output:
   html_document:
     toc: yes
