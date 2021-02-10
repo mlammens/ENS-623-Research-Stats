@@ -4,7 +4,6 @@ author: "Matthew E. Aiello-Lammens"
 date: '2020-02-12'
 output:
   html_document:
-    code_folding: hide
     toc: yes
 ---
 
@@ -152,19 +151,6 @@ for( x in 1:length(temp_data)){
 print(temp_data_kelvin)
 ```
 
-***
-
-#### Challenge
-
-Write a **function** that uses a `for` loop to calculate the mean of a vector of numbers.
-
-Recall that the mean is:
-
-$$
-\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n}
-$$
-
-Compare the results of your function with that of the `mean` function in base R.
 
 ***
 
@@ -245,9 +231,13 @@ if (num > 100) {
 }
 ```
 
+***
+
 #### Challenge 
 
 Re-define `num` so you get the other option.
+
+***
 
 We don't need an `else` statement for this to work -
 
@@ -258,6 +248,8 @@ if (num > 100) {
 }
 
 ```
+
+### `if`/`else` cascades
 
 We can also write a "cascade" of `if`/`else` statements
 
@@ -299,7 +291,7 @@ We're going to use a `while` loop to address the challenge below.
 
 # Writing Pseudocode
 
-When faced with a problem such as that in the challenge below (or in [Problem Set 4](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-4.html), I will often write out the flow of my simulation before I start coding. 
+When faced with a problem such as that in the challenge below, I will often write out the flow of my simulation before I start coding. 
 This is called [pseudocode](https://en.wikipedia.org/wiki/Pseudocode) in computer programming.
 For this challenge, I might write out the pseudocode in several steps.
 
