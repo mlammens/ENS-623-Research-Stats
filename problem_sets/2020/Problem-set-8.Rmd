@@ -1,6 +1,8 @@
 ---
 title: "ENS 623 - Spring 2020 - Problem Set 8"
-output: html_document
+output:
+  word_document: default
+  html_document: default
 ---
 
 **Please submit this homework as an R Markdown (Rmd) file AND a Word file (docx).**
