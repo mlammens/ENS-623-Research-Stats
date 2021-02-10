@@ -1,0 +1,47 @@
+---
+title: "ENS 623 - Spring 2021 - Problem Set 3"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file.**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP21_PS3.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP21_PS3.Rmd`
+
+#### Grading note
+
+* Problem 1 is worth 15 points
+* Problem 2 is worth 10 points
+
+
+## Problem 1 - creating a `myMean` function
+
+Write a **function** named `myMean` that uses a `for` loop to calculate the mean of a vector of numbers.
+
+Recall that the mean is:
+
+$$
+\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n}
+$$
+So you should use the `for` loop to add up a vector of numbers.
+
+Create a vector of numbers to test your function on, and compare the results of your function with that of the `mean` function in base R.
+
+
+## Problem 2 - practicing writing pseudo code
+
+***Note: this scenario is made up, but inspired by real projects and real environmental issues.*** 
+
+[The Hudson River Eel Project](https://www.dec.ny.gov/lands/49580.html) is a citizen / community science project involving monitoring glass eel migration into tributaries of the Hudson River.
+Community members establish fyke nets near barriers to up-river migration (e.g., dams), collect glass eels in these nets, count them, and release them *above* the barrier. 
+Let's assume that in order to establish a viable eel population in a tributary above the first barrier, we need at least 1000 glass eels to survive after they are moved.
+Further, assume the probability of survival is 0.25 (i.e., 25%). 
+**Write *pseudo code* for an R script that simulates the total number of eels community members must transfer in order to establish a population of 1000 glass eels.**
