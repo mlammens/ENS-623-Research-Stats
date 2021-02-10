@@ -27,7 +27,7 @@ R code that does some generic "computation" task.
 
 ### Why write a function?
 
-To make repeating a process easier. *Rule of thumb* - if you are copying and pasting your code, to use is someplace else in a script, you should probably write a function.
+To make repeating a process easier. *Rule of thumb* - if you are copying and pasting your code, to use in someplace else in a script, you should probably write a function.
 
 ### Example: Converting from Fahrenheit to Kelvin
 
@@ -326,37 +326,6 @@ Note that since the coin flip is a random process, it will not necessarily take 
 3. Add in key components of the flow-control
 
 
-
-***
-
-# Reading in your own data
-
-One of the most basic things you will need to do in R is read in your own data set. 
-You can read in Excel files, simple text files, and even files from Google Sheets.
-But the easiest type of file to read in is a comma separated values (CSV) file. 
-You can save an Excel workbook (or Numbers workbook or Google Sheet) as a CSV file by using the "Save as ..." menu item. 
-
-For today, we're going to work with a data set related to gastropod fecundity.
-First, download the file here - [gastropod data](https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/ward.csv) **The download will begin when you press the hyperlink! The file is called `ward.csv`.**
-
-Once you've downloaded the file, move it to the `data` sub folder in your `ENS-623-Research-Stats` folder.
-
-### Differences in fecundity of intertidal gastropods in two different intertidal zones (Example 6A in Logan, Box 3.1 in Q&K)
-
-Ward and Quinn (1988) investigated the differences in fecundity of *Lepsiella vinosa* in two different intertidal zones (mussel zone and littorinid zone). 
-
-Let's read in the data and have a quick look
-
-```{r, eval=FALSE}
-gastro <- read.csv(file = "~/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/data/Logan_Examples/Chapter6/Data/ward.csv")
-summary(gastro)
-```
-
-
-```{r, echo=FALSE}
-gastro <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/ward.csv")
-summary(gastro)
-```
 
 
 
