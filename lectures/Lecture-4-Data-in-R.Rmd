@@ -1,0 +1,127 @@
+---
+title: "Meeting 4 - Working with Data in R"
+author: "Matthew E. Aiello-Lammens"
+output:
+  html_document:
+    toc: yes
+---
+
+> *Note - much of the material in this session is based on or remixed from materials in the [Data Carpentry - Data Analysis and Visualization in R for Ecologists](https://datacarpentry.org/R-ecology-lesson/index.html) lessons, maintained by François Michonneau & Auriel Fournier. Copyright (c) Data Carpentry.
+
+# Today's Goals
+
+* Be able to load a data set into the R environment from a .csv file
+* Practice with basic data summary and `data.frame` indexing functions
+* Practice working with **factors** and **dates**
+* Become familiar with the `tidyverse` "curated" list of packages
+* Practice subsetting a data set using functions `select` and `filter`
+* Practice calculating summaries of a data set usinig functions `group_by` and `summarize`
+
+***
+
+# Portal Project Data Set
+
+We will be working with a data set from the [Portal Project](https://portal.weecology.org/), a long-term ecological research project near Portal, Arizona (southeast AZ) that was started in 1977. 
+Data collected as part of this project includes observations of plants, rodents, and ants in a set of experimentally manipulated study plots. 
+
+### Downloading the data
+
+We are going to use the R function `download.file()` to download the CSV file
+that contains the survey data from [figshare](https://figshare.com/), a website for storing and archiving research products.
+Here's a direct link to the figshare page for these data - [https://figshare.com/articles/dataset/Portal_Project_Teaching_Database/1314459/10](https://figshare.com/articles/dataset/Portal_Project_Teaching_Database/1314459/10) - but we won't be downloading these data manually.
+
+Inside the `download.file` command, the first entry is a character string with the
+source URL ("https://ndownloader.figshare.com/files/2292169"). 
+This source URL downloads a CSV file from figshare. The text after the comma
+("data/portal_data_joined.csv") is the destination of the file on your local
+machine. You'll need to have a folder on your machine called "data" where 
+you'll download the file to. 
+You should have created this folder in the first week of class.
+So this command downloads a file from figshare, names 
+it "portal_data_joined.csv" and adds it to a preexisting folder named "data".
+
+```{r, eval=FALSE, purl=TRUE}
+download.file(url = "https://ndownloader.figshare.com/files/2292169",
+              destfile = "data/portal_data_joined.csv")
+```
+
+```{r, echo=FALSE, purl=TRUE}
+download.file(url = "https://ndownloader.figshare.com/files/2292169",
+              destfile = "../data/portal_data_joined.csv")
+```
+
+
+### Reading the data into R
+
+The file has now been downloaded to the destination you specified, but R has not 
+yet loaded the data from the file into memory. 
+To do this, we are going to use the `read_csv()` function from the **`tidyverse`** package.
+Note that there other ways to read data in, such as the base R `read.csv()`, but we'll use the upgraded `read_csv()` function here.
+
+First, we need to install the **`tidyverse`** package. 
+Type `install.packages("tidyverse")` straight into the console. 
+It's better to write this in the console than in our script for any package, as there's no 
+need to re-install packages every time we run the script. 
+Then, to load the package type:
+
+```{r, message = FALSE, purl = FALSE}
+## load the tidyverse packages, incl. dplyr
+library(tidyverse)
+```
+
+Now we can use the functions from the **`tidyverse`** package. 
+Let's use `read_csv()` to read the data into a data frame:
+
+```{r, eval=FALSE,  purl=FALSE}
+surveys <- read_csv("data/portal_data_joined.csv")
+```
+
+```{r, eval=TRUE, echo=FALSE,  purl=FALSE}
+surveys <- read_csv("../data/portal_data_joined.csv")
+```
+
+
+You will see the message `Parsed with column specification`, followed by each
+column name and its data type.
+When you execute `read_csv` on a data file, it looks through the first 1000 rows 
+of each column and guesses its data type. For example, in this data set,
+`read_csv()` reads `weight` as `col_double` (a numeric data type), and `species` 
+as `col_character`. You have the option to specify the data type for a column
+manually by using the `col_types` argument in `read_csv`.
+
+### Examining the `surveys` data frame
+
+Let's use some of the functions we've learned in the past, and a few new ones, to look at the `surveys` data frame.
+
+First, let's open the data frame in a viewer.
+
+```{r}
+View(surveys)
+```
+
+Next, let's use the `summary` function.
+
+```{r}
+summary(surveys)
+```
+
+How about a few other functions?
+
+***
+
+#### Challenge - looking a data frames
+
+Try using each of the functions below and identifying what they do.
+
+```{r, eval = FALSE}
+dim(surveys)
+nrow(surveys)
+ncol(surveys)
+names(surveys)
+rownames(surveys)
+str(surveys)
+
+```
+
+***
+
