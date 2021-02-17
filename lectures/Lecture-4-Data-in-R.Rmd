@@ -6,7 +6,7 @@ output:
     toc: yes
 ---
 
-> *Note - much of the material in this session is based on or remixed from materials in the [Data Carpentry - Data Analysis and Visualization in R for Ecologists](https://datacarpentry.org/R-ecology-lesson/index.html) lessons, maintained by François Michonneau & Auriel Fournier. Copyright (c) Data Carpentry.
+> *Note - much of the material in this session is based on or remixed from materials in the [Data Carpentry - Data Analysis and Visualization in R for Ecologists](https://datacarpentry.org/R-ecology-lesson/index.html) lessons, maintained by François Michonneau & Auriel Fournier. Copyright (c) Data Carpentry.*
 
 # Today's Goals
 
@@ -19,7 +19,9 @@ output:
 
 ***
 
-# Portal Project Data Set
+# Working with data files
+
+## Portal Project data set
 
 We will be working with a data set from the [Portal Project](https://portal.weecology.org/), a long-term ecological research project near Portal, Arizona (southeast AZ) that was started in 1977. 
 Data collected as part of this project includes observations of plants, rodents, and ants in a set of experimentally manipulated study plots. 
@@ -95,7 +97,7 @@ Let's use some of the functions we've learned in the past, and a few new ones, t
 
 First, let's open the data frame in a viewer.
 
-```{r}
+```{r, eval = FALSE}
 View(surveys)
 ```
 
@@ -124,4 +126,177 @@ str(surveys)
 ```
 
 ***
+
+### Metadata
+
+Metadata is information about the data. 
+Standards for metadata can be complicated, but at its most basic level, metadata is simply information about each column of a data set. 
+Here's an example of metadata for the Portal data set.
+
+| Column           | Description                        |
+|------------------|------------------------------------|
+| record\_id       | Unique id for the observation      |
+| month            | month of observation               |
+| day              | day of observation                 |
+| year             | year of observation                |
+| plot\_id         | ID of a particular plot            |
+| species\_id      | 2-letter code                      |
+| sex              | sex of animal ("M", "F")           |
+| hindfoot\_length | length of the hindfoot in mm       |
+| weight           | weight of the animal in grams      |
+| genus            | genus of animal                    |
+| species          | species of animal                  |
+| taxon            | e.g. Rodent, Reptile, Bird, Rabbit |
+| plot\_type       | type of plot                       |
+
+### Practice navigating a `data.frame` - REVIEW
+
+We can access elements of a `data.frame` in many ways. 
+The challenge below asks you to identify some of these ways.
+
+***
+
+#### Challenge - navigating a `data.frame`
+
+Describe what each of the lines of code is doing and what it is returning to the user.
+
+```{r, eval=FALSE}
+surveys[1,1]
+surveys[1:200, 1:5]
+surveys$species_id
+surveys$hindfoot_length[1:10]
+
+```
+
+***
+
+#### Challenge - editing an element of `data.frame`
+
+Execute the code below and describe what each step is doing
+
+```{r}
+survey_shrt <- surveys[c(1,8,100,9075,20000), ]
+survey_shrt_orig <- survey_shrt
+survey_shrt$sex[2] <- "M"
+survey_shrt$hindfoot_length[2] <- 320
+survey_shrt$weight[1:2] <- mean(survey_shrt$weight, na.rm = TRUE)
+```
+
+***
+
+## Factors
+
+When we ran `str(surveys)` above we saw that several of the columns consist of
+integers. The columns `genus`, `species`, `sex`, `plot_type`, ... however, are
+of the class `character`.
+Arguably, these columns contain **categorical data**, that is, they can only take on a limited number of values. 
+R has a special class for working with categorical data, called `factor`.
+
+Once created, factors can only contain a pre-defined set of values, known as
+**levels**. 
+Factors are stored as integers associated with labels and they can be ordered or unordered. While factors look (and often behave) like character vectors, they are actually treated as integer vectors by R. *So you need to be very careful when treating them as strings*.
+
+When importing a data frame with `read_csv()`, the columns that contain text are not automatically coerced (=converted) into the `factor` data type. 
+**Note - ** this is different than the behavior of the base R `read.csv()` function.
+Once we have loaded the data we can convert columns to factors using the `factor()` function: 
+
+```{r}
+surveys$sex <- factor(surveys$sex)
+```
+
+We can see that the conversion has worked by using the `summary()` 
+function again. This produces a table with the counts for each factor level:
+
+```{r}
+summary(surveys$sex)
+```
+
+**IMPORTANT -** By default, R always sorts levels in alphabetical order. For
+instance, if you have a factor with 2 levels:
+
+```{r}
+sex <- factor(c("male", "female", "female", "male"))
+```
+
+R will assign `1` to the level `"female"` and `2` to the level `"male"` (because `f` comes before `m`, even though the first element in this vector is
+`"male"`). 
+You can see this by using the function `levels()` and you can find the number of levels using `nlevels()`:
+
+```{r}
+levels(sex)
+nlevels(sex)
+```
+
+Sometimes, the order of the factors does not matter, other times you might want
+to specify the order because it is meaningful (e.g., "low", "medium", "high"),
+it improves your visualization, or it is required by a particular type of
+analysis. Here, one way to reorder our levels in the `sex` vector would be:
+
+```{r}
+sex # current order
+sex <- factor(sex, levels = c("male", "female"))
+sex # after re-ordering
+```
+
+In R's memory, these factors are represented by integers (1, 2, 3), but are more informative than integers because factors are self describing: `"female"`,
+`"male"` is more descriptive than `1`, `2`. Which one is "male"?  You wouldn't
+be able to tell just from the integer data. Factors, on the other hand, have
+this information built in. You can actually see the conversion (and see some of the ways you might run into trouble) by coercing a factor into a number:
+
+```{r}
+as.numeric(sex)
+```
+
+***
+
+#### Challenge - applying factors to the Portal data
+
+Change the columns `taxa` and `genus` in the `surveys` data frame into a factor. 
+Once you have done this, use the `summary` function to determine how many of each `taxa` are in the data set.
+
+***
+
+Here's a more detailed example of how converting factors can go off the rails.
+
+```{r}
+year_fct <- factor(c(1990, 1983, 1977, 1998, 1990))
+as.numeric(year_fct)               # Wrong! And there is no warning...
+as.numeric(as.character(year_fct)) # Works...
+as.numeric(levels(year_fct))[year_fct]    # The recommended way.
+```
+
+### Renaming factors
+
+When your data is stored as a factor, you can use the `plot()` function to get a quick glance at the number of observations represented by each factor level. 
+Let's look at the number of males and females captured over the course of the experiment:
+
+```{r}
+## bar plot of the number of females and males captured during the experiment:
+plot(surveys$sex)
+```
+
+However, as we saw when we used `summary(surveys$sex)`, there are about 1700 
+individuals for which the sex information hasn't been recorded. To show them in
+the plot, we can turn the missing values into a factor level with the 
+`addNA()` function. We will also have to give the new factor level a label.
+We are going to work with a copy of the `sex` column, so we're not modifying the working copy of the data frame:
+
+```{r}
+sex <- surveys$sex
+levels(sex)
+sex <- addNA(sex)
+levels(sex)
+head(sex)
+levels(sex)[3] <- "undetermined"
+levels(sex)
+head(sex)
+```
+
+Now we can plot the data again, using `plot(sex)`.
+
+```{r}
+plot(sex)
+```
+
+
 
