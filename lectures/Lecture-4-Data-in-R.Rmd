@@ -272,7 +272,8 @@ Let's look at the number of males and females captured over the course of the ex
 
 ```{r}
 ## bar plot of the number of females and males captured during the experiment:
-plot(surveys$sex)
+ggplot(data = surveys, aes(x = sex)) +
+  geom_bar()
 ```
 
 However, as we saw when we used `summary(surveys$sex)`, there are about 1700 
@@ -295,7 +296,8 @@ head(sex)
 Now we can plot the data again, using `plot(sex)`.
 
 ```{r}
-plot(sex)
+ggplot(data = NULL, aes(x = sex)) +
+  geom_bar()
 ```
 
 ## Formatting dates
