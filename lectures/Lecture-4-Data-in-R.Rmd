@@ -707,6 +707,17 @@ surveys %>%
 From the table above, we may learn that, for instance, there are 75 observations of 
 the *albigula* species that are not specified for its sex (i.e. `NA`).
 
+***
+
+#### Challenge - counting captures per year
+
+Use `group_by` and `count` as we worked with above to determine the number of captures per year.
+
+Calculate the mean number of captures per year.
+
+***
+
+
 ## Reshaping with gather and spread
 
 In `surveys`, the rows of `surveys` contain the values of variables associated

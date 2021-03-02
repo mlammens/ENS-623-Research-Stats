@@ -1,0 +1,208 @@
+---
+title: "Meeting 5 - Introduction to Probability"
+author: "Matthew E. Aiello-Lammens"
+output:
+  html_document:
+    toc: yes
+---
+
+# Today's Goals
+
+* Introduce some basic principles of probability
+* Learn to simulate some basic probabilistic events
+* Apply R data management skills to calculate frequencies and probabilities of events using data sets
+
+
+***
+
+# Meeting preliminaries
+
+We'll be working with the Portal Survey data this week. 
+We must first load these data into our work environment.
+Also, we'll be focusing only on the Rodent taxa, so let's filter the data to include only rodents
+
+```{r}
+library(tidyverse)
+
+surveys <- read_csv("../data/portal_data_joined.csv")
+surveys <-
+  surveys %>%
+  filter(taxa == "Rodent")
+```
+
+
+
+# Probability
+
+> *We usually talk about probabilities in terms of events; the probability of event A occurring is written P(A). Probabilities can be between zero and one; if P(A) equals zero, then the event is impossible; if P(A) equals one, then the event is certain.* - Quinn and Keough 2002
+
+## Frequentist statistics 
+
+The relative frequency of an event over the long term, after many trials.
+
+E.g., throwing a coin. What's the probability of a 'heads'? After one trial, two trials, ..., 1000 trials.
+
+Here's an example of throwing a single coin.
+
+```{r}
+(head <- runif(1) > 0.5)
+```
+
+
+## Bayesian statistics
+
+For now, all I will say is that there are other perspectives in statistics. 
+A key difference between Frequentist and Bayesian statistics is that the latter allows for you to incorporate **prior knowledge**.
+
+### Flipping a coin - frequentist vs bayesian perspective
+
+You find a coin on the ground, and want to know the probability that you will get a heads if you flip the coin. 
+A frequentist approach would flip the coin many times and assume the probability of getting a heads is approximately the **frequency** of heads.
+A Bayesian approach would assume that the probability is 0.5 based on a naive guess, then collect data (i.e., flip the coin) and update the *prior* probability using the newly acquired data.
+
+***
+
+
+# Properties of probability
+
+* a **random process** gives rise to an **outcome**
+    * a coin-flip is a random process
+    * capturing a *Peromyscus* in the Portal traps
+* 0 $\le$ P(*some event*) $\le$ 1
+* $\hat{p}_n$ is the proportion of outcomes out of the total number of **trials** run
+    * If we flip a coin 100 times, and 52 times we got heads, $\hat{p}_{100} = \frac{52}{100}$
+    * Out of `r nrow(surveys)` total rodent captures, `r sum(surveys$genus == "Peromyscus")` were *Peromyscus*, thus the probability of capturing a *Peromyscus* is `r round(sum(surveys$genus == "Peromyscus") / nrow(surveys), 2)`
+
+## Law of Large Numbers
+
+> *The tendency of $\hat{p}_n$ to stabilize around $p$ [as $n$ increases] is described by the **Law of Large Numbers**.* - Vu and Harrington 2020, p. 92
+
+## Example of law of large numbers
+
+Let's start by calculating the frequency of each of the genera captures in the Portal traps. 
+These frequency values can be interpreted as probability values of catching a particular genus in a trap.
+
+```{r}
+genus_frequencies <-
+  surveys %>%
+  group_by(genus) %>%
+  count()
+
+genus_frequencies$freq <- round(genus_frequencies$n / sum(genus_frequencies$n), 4)
+
+knitr::kable(genus_frequencies)
+```
+
+The probabilities above are based on **full information**. 
+What happens if we only has partial information?
+
+First, how can we get a subset of the data?
+
+```{r}
+# Pick the number of rows to select
+rows_to_keep <- sample(1:nrow(surveys), size = 100, replace = FALSE)
+
+surveys_subset <- surveys[rows_to_keep, ]
+```
+
+Next let's calculate the frequencies / probabilities with the subset of data.
+
+```{r}
+gen_freq_sub <-
+  surveys_subset %>%
+  group_by(genus) %>%
+  count()
+
+gen_freq_sub$freq <- round(gen_freq_sub$n / sum(gen_freq_sub$n), 4)
+
+gen_freq_sub
+
+```
+
+Next, let's play with the numbers of samples, and see what happens to the frequencies compared to the *real* frequencies.
+
+```{r}
+# Pick the number of rows to select
+rows_to_keep <- sample(1:nrow(surveys), size = 1000, replace = FALSE)
+
+surveys_subset <- surveys[rows_to_keep, ]
+
+gen_freq_sub <-
+  surveys_subset %>%
+  group_by(genus) %>%
+  count()
+
+gen_freq_sub$freq <- round(gen_freq_sub$n / sum(gen_freq_sub$n), 4)
+
+gen_freq_sub
+
+```
+
+
+### Aside: sampling with vs. without replacement
+
+Above, we set `replace = FALSE` in the `sample` function.
+This means that any row that is selected, can only be selected **once**. 
+
+On the other hand, if we set `replace = TRUE`, then any row can be selected more than once *by random*. 
+
+```{r}
+# Pick the number of rows to select - WITH REPLACE = TRUE!
+rows_to_keep <- sample(1:nrow(surveys), size = 1000, replace = TRUE)
+
+surveys_subset <- surveys[rows_to_keep, ]
+
+gen_freq_sub <-
+  surveys_subset %>%
+  group_by(genus) %>%
+  count()
+
+gen_freq_sub$freq <- round(gen_freq_sub$n / sum(gen_freq_sub$n), 4)
+
+gen_freq_sub
+
+```
+
+With a sample size of 1000, these values should be pretty similar.
+But there are reasons why you might choose `replace = TRUE`. 
+For example, if you are projecting probabilities of capturing genera *in the future*, then treating past observations as a way to build generic distributions (using `replace = TRUE`) may be more appropriate.
+
+## Specific examples of calculating probabilities
+
+1. Probability of capturing a *Neotoma*
+
+P(*Neotoma*) = 0.0366 = 3.6%
+
+2. Probability of capturing a *Neotoma* OR a *Dipodomys*
+
+These are **mutually exclusive** events. You *cannot* be both a *Neotoma* and a *Dipodomys*.
+
+P(*Neotoma* OR *Dipodomys*) = 0.0366 + 0.4721 = 0.5087
+
+3. Probability of capturing something **other than** *Onychomys*
+
+This is called the **complement** of *Onychomys*
+
+P(not *Onychomys*) = 1 - 0.0954 = 0.9046
+
+***
+
+#### Challenge - more with probability
+
+1. What is the probability of capturing a **female** rodent?
+
+2. What is the probability of capturing a female *Dipodomys*?
+
+P(female AND *Dipodomys*)
+
+3. What is the probability of capturing a female rodent OR a *Dipodomys*?
+
+*Note* - these are non-independent events. You need to use the **General Addition Rule**.
+
+$$
+P(A \text{ or } B) = P(A) + P(B) - P(A \text{ and } B)
+$$
+
+
+
+
