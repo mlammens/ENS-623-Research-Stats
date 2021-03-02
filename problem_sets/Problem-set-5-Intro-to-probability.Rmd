@@ -1,0 +1,66 @@
+---
+title: "ENS 623 - Spring 2021 - Problem Set 5"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file.**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP21_PS5.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP21_PS5.Rmd`
+
+#### Grading note
+
+
+## NYS Spill Incidents Data Set
+
+In this problem set, we will work with the [NYS Spill Incidents Data Set](https://data.ny.gov/Energy-Environment/Spill-Incidents/u44d-k5fk).
+This is a data set of more than 13k records related to petroleum and other hazardous materials spills here in NY state. 
+Below is draft code to download this data set.
+Note that this is a fairly large date set (approx. 92 MB), and may take a few moments to download.
+
+### Download the data
+
+**NOTE: this chunk is set as `eval = FALSE`. This is because you should download the data first in an interactive session, but once this is complete, then you do not need to download the data during the knitting process.**
+
+```{r, eval = FALSE}
+download.file(url = "https://www.dropbox.com/s/sciza23x1up2m81/Spill_Incidents.csv?dl=1",
+              destfile = "../data/Spill_Incidents.csv")
+```
+
+### Load the data into your environment
+
+
+```{r}
+library(tidyverse)
+
+spills <- read_csv("../data/Spill_Incidents.csv")
+```
+
+Using these data and the skills and knowledge you've learned in class, complete the following tasks.
+
+* Using the `summary` function, and any other functions you wish, look at these data and describe at least five observations / points about the data. **NOTE** - you may have to transform some of the data.frame columns to make them useful for data summaries.
+
+
+* Calculate the probability that a reported spill is related to "#2 fuel oil". Would you describe this as a likely event based on this result?
+
+
+* Make a histogram of the `quantity` of "diesel" fuel spilled, for reported spills related to "diesel". **NOTE** - you should filter your data so the quantity is less than 5000, because there are some extremely large outlier spills.
+
+
+* Calculate the probability that a reported spill is related to "diesel" fuel AND had a quantity less than or equal to 500 gallons. Is it more likely that a diesel spill was greater than or less than 500 gallons? Explain your answer.
+
+
+* What is the probability of observing a "#2 fuel oil spill" or a spill that is less than or equal to 500 gallons?
+
+
+* Are there any observable trends in the number of spills reported per year? **NOTE** - there are many ways for you to answer this question, but you must justify your answer with your R code.
+
+

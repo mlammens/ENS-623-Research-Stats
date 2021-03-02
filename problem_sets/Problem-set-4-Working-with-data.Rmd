@@ -1,0 +1,37 @@
+---
+title: "ENS 623 - Spring 2021 - Problem Set 4"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file.**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP21_PS4.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP21_PS4.Rmd`
+
+#### Grading note
+
+* Steps 1-3 = 5 points
+* Step 4 - Figures = 15 points (5 points for each figure)
+* Descriptions of the results of each figure (5 points)
+
+In this problem set, we will use multiple skills we've learned over the first four weeks of class to put together a mini-report on the differences in weights and hind-foot lengths of different rodent genera measured during the Portal Project. 
+
+Here are the steps you need to carry out. Show your code in code chunks. How many chunks you use is up to you.
+
+1. Read in the Portal data set
+2. Filter the data set so you are only working with the taxa **Rodent**
+3. Create a new column in your data set that includes the **date** *in appropriate date format!*
+4. Make the following plots / figures
+    * A histogram of weight values, with each genera represented by a different color (hint: check out the use of `fill` in your `aes` function)
+    * A histogram of weight values, with each genera on a different panel of the figure (check out `facet_wrap`) AND sex represented by different colors
+    * An x-y scatter plot of date on the x-axis and hind-foot length on the y-axis, with different colors for the different genera
+
+For your problem set to be complete, **you must include a short description of the results of each figure** (2-3 sentences). 
