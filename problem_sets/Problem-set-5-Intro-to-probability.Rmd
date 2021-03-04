@@ -63,4 +63,7 @@ Using these data and the skills and knowledge you've learned in class, complete 
 
 * Are there any observable trends in the number of spills reported per year? **NOTE** - there are many ways for you to answer this question, but you must justify your answer with your R code.
 
+* Using the appropriate statistical distribution, estimate how many spills will be related to "#2 fuel oil" out of 500 reported spills? Make 100 estimates of this and plot the values as a histogram.
+
+* Draw 100 random samples of sample size = 500 (i.e., 100 sets of 500 spills) from the data set, and compare the number of "#2 fuel oil spills" observed for these 100 random samples to what you observed in the previous question.
 
