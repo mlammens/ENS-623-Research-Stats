@@ -1,0 +1,302 @@
+---
+title: "Meeting 7 - CLT and Confidence Intervals"
+author: "Matthew E. Aiello-Lammens"
+output:
+  html_document:
+    toc: yes
+---
+
+# Today's Goals
+
+* Identify the mathematical relationships between population statistics, sample statistics, and confidence intervals
+* Be able to calculate a margin of error and confidence interval
+* Define the use of confidence intervals in hypothesis testing
+
+***
+
+# Central Limit Theorem
+
+In the limit as $n \to \infty$, the probability distribution of means of samples from ***any distribution*** will approach a normal distribution.
+
+## ASIDE: Population versus sample statistics
+
+We use **sample statistics** to estimate **population statistics**.
+In most cases in biology, populations are too large to measure population parameters directly.
+Therefore, we use different **estimators** to calculate the **populations statistics** based on the **sample statistics**.
+
+### Good videos explaining the CLT
+
+* [https://youtu.be/lsCc_pS3O28](https://youtu.be/lsCc_pS3O28)
+* [https://youtu.be/3SKwerKHbRk](https://youtu.be/3SKwerKHbRk)
+
+
+## CLT Example - Working with the Youth Risk Behavior Surveillance System (YRBSS) data
+
+In this lesson, we're going to explore variation in point estimates and Confidence Intervals.
+We will largely be following content that can be found in the textbook OpenIntro Statistics by Diez, Barr, and Çetinkaya-Rundel.
+
+We'll be working with the Youth Risk
+Behavior Surveillance System (YRBSS).
+Here, we will start be examining the **full** data set.
+
+### Population Parameters
+
+Let's begin by loading the data into our environment.
+
+You may need to first install the `openintro` R package
+
+```{r, eval=FALSE}
+install.packages("openintro")
+```
+
+After that, we can load in the data.
+
+```{r}
+library(openintro)
+data(yrbss)
+```
+
+
+As with any data set, let's have a quick look at the data using `summary`.
+
+```{r}
+summary(yrbss)
+```
+
+
+For now, let's focus on the variable `height`. 
+First, let's calculate the **population mean** for `height`.
+Remember, that the population mean is going to be the mean value for the *full* data set.
+
+```{r}
+mean(yrbss$height)
+```
+
+That's probably not the answer you were expecting. 
+There must have been students whose data was collected, but their heights weren't recorded, so a value of *NA* was assigned.
+In order to ignore these data, we need to add the argument `na.rm = TRUE` to our `mean` call.
+
+```{r}
+mean(yrbss$height, na.rm = TRUE)
+```
+
+
+### Sample Parameter Estimates
+
+OK, let's assume that we could only collect data from a subset of the high school students whose data are in this data set. 
+We can use the data in this subset to **estimate** population level parameters.
+This subset would be called our **sample**.
+
+We'll choose a subset at random, but we'll make it so that everyone in the class gets the same random subset.
+
+```{r}
+set.seed(1981)
+yrbss_samp <- yrbss[sample(x = 1:nrow(yrbss), replace = FALSE, size = 10), ]
+```
+
+***
+
+#### Challenge - Breakdown each piece of the command that we are using to get our sample.
+
+To do this, you should make sure to look at the help for `sample`.
+
+***
+
+Let's calculate the mean height based on our sample.
+
+```{r}
+mean(yrbss_samp$height, na.rm = TRUE)
+```
+
+How does it compare to the true mean?
+
+Let's try increasing our sample size, and see if that makes a difference?
+
+#### Sample size = 100
+
+```{r}
+set.seed(1981)
+yrbss_samp <- yrbss[sample(x = 1:nrow(yrbss), replace = FALSE, size = 100), ]
+mean(yrbss_samp$height, na.rm = TRUE)
+```
+
+#### Sample size = 1000
+
+```{r}
+set.seed(1981)
+yrbss_samp <- yrbss[sample(x = 1:nrow(yrbss), replace = FALSE, size = 1000), ]
+mean(yrbss_samp$height, na.rm = TRUE)
+```
+
+
+In general, though not always, as you increase sample size, you get closer to the *true* population values for an estimated parameter.
+
+
+## Standard Error of the Mean
+
+Let's imagine the we took *100 different subsets, or **samples**,* from these data, then calculated the mean for each of these samples, and then examined the histogram of these means.
+The shape of the histogram should prove to be that of a normal distribution.
+
+In order to demonstrate this, we'll need to use `for` loops. 
+
+
+```{r}
+# start with a vector to store our mean values
+samp_means <- c()
+
+# start a for loop the does 100 iterations
+for(x in 1:100){
+  # get a sample of the data of size 100
+  yrbss_samp <- yrbss[sample(x = 1:nrow(yrbss), replace = FALSE, size = 100), ]
+  
+  # calulate the mean of this sample
+  mean_samp <- mean(yrbss_samp$height, na.rm = TRUE)
+  
+  # add this mean to the vector of sample means
+  samp_means <- c(samp_means, mean_samp)
+}
+
+```
+
+We should now have 100 values in the vector `samp_means`. 
+Let's look at a histogram of these values.
+
+```{r}
+hist(samp_means, breaks = 20)
+```
+
+
+Alright, it's normalish (i.e., approximately normal), though clearly not perfectly normal.
+
+***
+
+### Challenge - interpreting this distribution
+
+* What is the mean of the means?
+* What is the standard deviation of the means?
+* How do the above to values compare to the population values?
+
+```{r, eval = FALSE}
+mean(yrbss$height, na.rm = TRUE)
+mean(samp_means)
+sd(yrbss$height, na.rm = TRUE)
+sd(samp_means)
+
+```
+
+***
+
+The means are very similar, but the sds are not. Why?
+
+
+The **standard error of the mean** is the standard deviation of the *estimates*. 
+
+
+In practice, we only examine *one*, or a very few, samples. We can still compute the standard error of the mean using the formula:
+
+$$
+SE = \frac{\sigma}{\sqrt{n}}
+$$
+
+
+, where $\sigma$ is the population standard deviation and $n$ is the sample size.
+
+However we almost never know $\sigma$, so we estimate it with our **sample standard deviation** value.
+
+## Confidence Intervals
+
+We just demonstrated that **sample means are approximately normally distributed**. 
+This is a consequence of the **Central Limit Theorem**.
+
+What can we do with this?
+To start, we can say something about the precision and accuracy of our estimates of the *population* mean based on the *sample* mean.
+
+First, we need to learn about **Z-scores**, which are related to the **Standard Normal Distribution**. 
+The standard normal distribution is a normal distribution with a mean = 0 and a standard deviation = 1.
+We can convert any observation from normal distribution to it's equivalent value from a standard normal distribution using:
+
+$$
+z_i = \frac{y_i - \mu}{\sigma}
+$$
+
+These are sometimes called ***z-scores***.
+
+Using this formula, we can convert a sample mean, $\bar{y}$, into its corresponding value from a standard normal using:
+
+$$
+z = \frac{\bar{y} - \mu}{SE}
+$$
+
+where the denominator is the standard error of the mean (see above). 
+
+We can use this information to estimate how confident we are that are sample mean is a good representation of the *true* population mean.
+Again, we are doing this by taking advantage of the fact that we know the sample means are *normally distributed*.
+We calculate the range in which 95% of the sample mean values fall.
+
+In mathematical terms, this looks like:
+
+$$
+P\{\bar{y} - 1.96 \times SE \leq \mu \leq \bar{y} + 1.96 \times  SE \} = 0.95
+$$
+
+**VERY IMPORTANT:** The probability statement here is about the *interval*, not $\mu$. 
+$\mu$ is not a random variable; it is fixed.
+What we are saying is that there is 95% confidence that this interval includes the population mean, $\mu$.
+
+
+
+### Unknown $\sigma$ (and $SE$)
+
+As noted above, we rarely know $\sigma$, so we cannot calculate $SE$ exactly. 
+So what *can* we do?
+
+Instead, we use the sample standard deviation, $s_{\bar{y}}$. 
+So now we are dealing with a random variable that looks like: 
+
+$$
+\frac{\bar{y}-\mu}{SE}
+$$
+
+which is no longer standard normal distributed, but rather ***t* distributed**.
+We'll learn more about this distribution later!
+
+### Calculating Confidence Intervals
+
+Let's calculate the Confidence Interval for our estimate of mean height, using our very first sample of the yrbss data.
+
+First, get the sample again.
+
+```{r}
+set.seed(1981)
+yrbss_samp <- yrbss[sample(x = 1:nrow(yrbss), replace = FALSE, size = 10), ]
+```
+
+Calculate our sample means.
+
+```{r}
+mean_yrbss_samp <- mean(yrbss$height, na.rm = TRUE)
+```
+
+
+Now, let's calculate Standard Error.
+
+```{r}
+se_yrbss_samp <- sd(yrbss_samp$height, na.rm = TRUE) / sqrt(nrow(yrbss_samp))
+```
+
+Now, calculate our 95% Confidence Interval.
+
+```{r}
+CI_yrbss_upper <- mean_yrbss_samp + (1.96*se_yrbss_samp)
+CI_yrbss_lower <- mean_yrbss_samp - (1.96*se_yrbss_samp)
+```
+
+Does our Confidence Interval contain the *true* population mean?
+
+*** 
+
+#### Challenge - effect of sample size
+
+What happens to the Confidence Interval if you increase the sample size to 100?
+
+***
