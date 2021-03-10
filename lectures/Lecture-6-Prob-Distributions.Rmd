@@ -338,7 +338,7 @@ It is also probably the most familiar.
 The probability density function for the normal is:
 
 $$
-f(x|\mu,\sigma) ~ \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+f(x|\mu,\sigma) \sim \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 $$
 
 Let's dive into working with the Normal in R.
