@@ -1,0 +1,51 @@
+---
+title: "ENS 623 Analysis Project Update"
+author: "PUT YOUR NAME HERE"
+output: word_document
+---
+
+*This activity is meant to act as the template for your Analysis Project Update*
+
+***Instructions***
+
+*There are several sections below. Address each of these sections. Note, some of these sections correspond to sections required of your final project submission, while others are specific to this assignment. When submitting this document, make sure to remove all of my text, which is italicized in the Word doc version of this document. I expect you to be able to `knit` this documents and submit both the Rmd and docx versions on Classes.*
+
+# Introduction
+
+*Here is where you should describe your intended research question.*
+
+# Data
+
+*Describe the data set you will be using here. You should give citations to the data set, and make sure to include the citation in the References Cited section below.*
+
+*Aspects of your data set that you should describe - what are the data? What kind of variables is the data set made up of, continuous, categorical, etc.? How big is the data set? Does it cover some extended period of time, space, etc.?*
+
+*How do the data "look"? Do they appear to follow some known distribution - e.g., the normal, binomial, etc..*
+
+*You should read the data set into R and perform some functions you would use to summarize your data.*
+
+```{r}
+## Put code to input data here
+```
+
+
+## Figures and Tables
+
+*Make figures that **visualize** your data here. Also, include any tables that you think might be important.*
+
+# Hypotheses
+
+*Do you have hypotheses related to your data set and analysis? If yes, describe them. If no, why not?*
+
+# Analysis Method
+
+*Based on what we've learned in class so far, identify whether what we have learned is applicable to your analysis. Describe why it is or isn't?*
+
+## Meeting Analysis Assumptions
+
+*Describe if your data meet the assumptions of parametric analyses, as we have learned them so far.*
+
+
+# References Cited
+
+*Use APA citation format.*

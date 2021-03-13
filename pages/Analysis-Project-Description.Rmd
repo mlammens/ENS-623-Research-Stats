@@ -1,48 +1,75 @@
 ---
-title: "ENS 623 - Spring 2020 - Analysis Project Proposal"
+title: "ENS 623 - Spring 2021 - Analysis Project Proposal"
 output: html_document
 ---
 
 ## Analysis Project Overview
 
-During the semester, you will carry out an independent research and analysis project, using the skills we learn in this class. 
+During the rest of the semester, you will carry out an independent research and analysis project, using the skills we learn in this class. 
 The purpose of the **Analysis Project** is for you to gain independent applied research experience. 
 You are expected to apply the data analysis skills we learn in class to a real-world data set (ideally one related to your thesis or capstone research interests).
-The project represents 30% of your grade, but is broken up into several components. 
+The project represents 35% of your grade, but is broken up into several components. 
 
-**Guidelines and Requirements**
 
-* Your analysis project should be submitted in both \*.Rmd and \*.docx format on the course Blackboard page
+## Project Components
+
+### Analysis Project Proposal (5%; DUE - March 24)
+
+The proposal is a short document expressing your interests and identifying potential data sets to work with.
+It is comprised of two parts. 
+The first part is a summary of your experience with the **Research Question Exercise** from Karban et al. 2014 (Chapter 1, Box 3). 
+I'm expecting between 250-500 words for this part, and you can include pictures of your work if you'd like.
+The second part is a short statement regarding your research interests, and what kinds of data sets you think might be available that relate to your interests.
+Make sure to look at the links at the bottom of this document for ideas on sources of data.
+I'm expecting between 250-500 words for this part as well.
+
+### Analysis Project Update (5%; DUE - April 7)
+
+Follow the guidelines in the **Analysis-Project-Update.Rmd** document associated with this assignment.
+
+### Analysis Project Draft (10%; DUE - April 16)
+
+For your draft, I will expect that you have attempted to complete each component of the Analysis Project (see below). 
+I expect your written communication to be clear, but will not be incorporating this into your score. 
+*However*, it must be clear enough that I can understand your work.
+I will **not** decrease your score if you have performed an analysis incorrectly. 
+Rather, I will be score the draft based on completeness and clear indications that you attempted to perform a defensible analysis.
+
+
+### Analysis Project - Final Version (15%; DUE - May 1)
+
+I will assess the final version of your project on completeness, accuracy, and overall quality of communication. 
+A complete rubric will be provided in advance of the due date.
+
+**Guidelines and Requirements for Components of the Analysis Project Draft and Final Version**
+
+* Your analysis project should be submitted in both \*.Rmd and \*.docx format on the course Classes page
 * Your write up should include the following sections
     * **Introduction** (approx. 250 - 500 words) - an overview of the data set you are using in your analysis. If you generated the data yourself, describe how you collected these data. If you are using data from another person's or group's project, describe why and how these data were collected by that individual or group.
     * **Research Question** (approx. 250 - 500 words) - describe your research question that you are trying to answer with these data. Why is this question important in a broader context (i.e., with respect to environmental science in general).
     * **Statistical Analysis** (approx. 500 - 750 words) - describe the analysis you are using to answer your question. Why is this the most appropriate analysis for your data and question? What assumptions are there in this analysis? Do you data meet these assumptions? If not, how much of an influence might these violations have on the interpretation of your results? Are there any other studies that have used a similar analysis to answer a similar question? 
     * **Results** (approx. 500 - 750 words) - provide a description and interpretation of your results.
-* You should include any and all **in text** citations and a **works cited** section to support your description of your data, question, analysis choice, and results interpretation.
+    * **References Cited** (at least 10 citations) - I expect you to cite at least 10 different sources, primarily peer reviewed literature. These sources should either relate to your research question, your data set, the methods you are using, support any interpretations you make in the results section, etc.. All references and in-text citation should be in **APA format**.
 * **Figures and Tables** - you should include any and all figures and tables that support your analysis. **Each figure and table should have it's own caption that stands alone from the paper in *briefly* describing what information the figure/table is meant to convey.**
 
 
 ### Additional Points:
 
 * Your analysis must include a **hypothesis testing** approach covered in the class, *unless* you have discussed an alternative with Prof. Aiello-Lammens.
-* Your narrative must be well written, and poor written communication will be penalized.
+* Your narrative must be well written - poor written communication will be penalized.
 * You must submit both an Rmd file and a Word file of the final product. The Word file **MUST** be a product of knitting the Rmd file.
 
-### Important Dates:
 
-* Wednesday, March 25 - Analysis project proposal due
-    * The proposal is a short document expressing your interests and identifying potential data sets to work with. It will help me to guide you to resources that will be useful for your project.
-* Wednesday, April 29 - Project update due
-    * Your project update should include a description of the data set you will analyze, along with summary stats and figures related to these data. 
-* Wednesday, May 6 - Draft project due
-    * Your draft should inlcude your Introduction and Research Question sections, as well as *at minimum* basic descriptions of your data and ideas for your analysis. 
-* Wednesday, May 13 - Analysis project due
-
-### Possible Sources of Data:
+## Possible Sources of Data:
 
 * Your own data!
 * DataONE - [https://www.dataone.org/](https://www.dataone.org/)
 * NEON Data Portal - [https://data.neonscience.org/home](https://data.neonscience.org/home)
 * Dryad Data - [https://datadryad.org/search](https://datadryad.org/search)
+* The Behavior Risk Factor Surveillance Survey (which we worked with in class) - [https://www.cdc.gov/brfss/index.html](https://www.cdc.gov/brfss/index.html)
+* The Youth Risk Behavior Surveillance Survey (similar to above, but for people under 18) - [https://www.cdc.gov/healthyyouth/data/yrbs/index.htm](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm)
+* Any of the data sets available at Our World In Data - [https://ourworldindata.org/](https://ourworldindata.org/)
+* Data available from NYC - [https://opendata.cityofnewyork.us/](https://opendata.cityofnewyork.us/)
+* Data available from NY State - [https://data.ny.gov/](https://data.ny.gov/) 
 * Other data repositories - [https://www.nature.com/sdata/policies/repositories](https://www.nature.com/sdata/policies/repositories)
 
