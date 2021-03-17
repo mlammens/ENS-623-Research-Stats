@@ -1,0 +1,84 @@
+---
+title: "ENS 623 - Spring 2021 - Problem Set 6"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file.**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP21_PS6.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP21_PS6.Rmd`
+
+
+## Working with the YRBSS data set
+
+For this assignment, we are going to use the Youth Risk Behavior Surveillance System (YRBSS) data set.
+Let's begin by loading the data into our environment.
+
+```{r}
+library(openintro)
+data(yrbss)
+```
+
+Next, draw a random sample of these data, with sample size equal to 100.
+
+```{r}
+yrbss_samp <- yrbss[sample(x = 1:nrow(yrbss), replace = FALSE, size = 100), ]
+```
+
+
+## Problem 1 (5 points)
+
+Calculate the **sample mean** and the **95% Confidence Interval** for **height** based on your sample.
+
+
+```{r}
+# Put your code here
+```
+
+## Problem 2 (5 points)
+
+You can calculate the **population mean** for **height** for the `yrbss` data set. 
+Does your **95% confidence interval** calculated in Problem 1 *include* the true population mean?
+
+
+```{r}
+# Put code to calculate population mean here
+```
+
+
+**Answer to question here.**
+
+
+## Problem 3 (5 points)
+
+Using the **population mean** calculated in Problem 2, and the sample mean calculated in Problem 1, calculate the $z$ statistic associated with your sample mean. Is your sample mean significantly different from the population mean? **Explain your response.**
+
+
+```{r}
+# Put code to calculate z statistic and associated probability here
+
+```
+
+**Answer to question here.**
+
+# Problem 4 (10 points)
+
+Using your sample, calculate the **sample means** and **confidence intervals** for **height** for males and females separately. Based on these values, is there a difference between male and female height? **Explain your answer.**
+
+
+```{r}
+# Put your code here
+```
+
+
+**Answer to question here.**
+
+
