@@ -1,0 +1,59 @@
+---
+title: "ENS 623 - Spring 2021 - Problem Set 7"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file AND a Word file (docx).**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP21_PS7.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP21_PS7.Rmd`
+
+# A comparison of metabolic rates of northern fulmars (sea-bird)
+
+[Furness and Bryant (1996)](https://esajournals.onlinelibrary.wiley.com/doi/abs/10.2307/2265587) measured the metabolic rates of male and female breeding northern fulmars, and tested if there were any observable differences in these rates.
+
+<a title="Northern-Fulmar2.jpg: Andreas Trepte
+derivative work: Bogbumper / CC BY-SA (https://creativecommons.org/licenses/by-sa/2.5)" href="https://commons.wikimedia.org/wiki/File:Northern-Fulmar2_cropped.jpg"><img width="256" alt="Northern-Fulmar2 cropped" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Northern-Fulmar2_cropped.jpg/256px-Northern-Fulmar2_cropped.jpg"></a>
+
+Attribution: Northern-Fulmar2.jpg: Andreas Treptederivative work: Bogbumper / CC BY-SA [(https://creativecommons.org/licenses/by-sa/2.5)](https://creativecommons.org/licenses/by-sa/2.5)
+
+
+Get the data and have a look
+
+```{r}
+fulmars <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter6/Data/furness.csv")
+fulmars
+summary(fulmars)
+```
+
+# Problem 1
+
+Make a box plot showing a comparison of metabolic rate (`METRATE` in this data set) and the sex of northern fulmars.
+
+# Problem 2
+
+Calculate a *t* statistic, using the formulas presented in [Lecture 9](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-9.html) and following the example related to fecundity of intertidal gastropods. 
+Once you have the *t* statistic, calculate the probability that the samples of metabolic rates for male and female northern fulmars come from the same population. 
+
+**Use this probability value to make a statement about whether you would accept or reject your null hypothesis.**
+
+# Problem 3
+
+Use the `t.test` function to verify that your answers for Problem 2 are correct. **Hint:** for this to work properly you will need to add the argument `var.equal = TRUE` to the `t.test` function call.
+
+# Problem 4
+
+Go back to Problem 1 and look at the box plots. 
+You should notice that the variances (standard deviations) of the two groups are quite different from each other. This is a violation of one of the assumptions of the *t* test. 
+One way to address this is to use the **Welch's *t* test**.
+R will use Welch's *t* test by default if the variances are not equal, but you can make sure it does by setting `var.equal = FALSE`.
+
+**Compare the results of Problem 3 and Problem 4. How do they differ?**
