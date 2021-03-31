@@ -1,0 +1,242 @@
+---
+title: "Meeting 10 - ANOVA"
+author: "Matthew E. Aiello-Lammens"
+output:
+  html_document:
+    toc: yes
+---
+
+# Today's Goals
+
+* Understand when to apply ANOVA vs $t$ tests
+* Identify correct $H_0$ for an ANOVA, and for an ANOVA with fixed vs. random effects
+* Practice applying what we learned about the `t.test` function to a data set
+* Learn how to apply the `lm`, `anova`, and `aov` functions to carry out an ANOVA
+* Become familiar with multi-way ANOVA (bonus material!)
+
+
+***
+
+# Introduction to Analysis of Variance - ANOVA
+
+In environmental science there are many times when we are working with **categorical** predictor variables and **continuous / numerical** response variables. 
+For example, let's consider a fertilizer addition experiment, where the growth of some plant species is measured under a fertilizer versus no-fertilizer treatment. 
+Here, the predictor variable (fertilizer addition or not) is a categorical variable. 
+
+If our categorical predictor variable only has 2 levels (e.g., fertilizer vs. no fertilizer), then we may be able to examine differences between treatments using a $t$ test. 
+However, if we are dealing with a categorical variable with 3 or more levels, then we need to move to ANOVA.
+
+## Fixed versus Random Effects
+
+Our categorical predictor variables can represent two different kinds of **factors** in our model, **fixed** vs **random** factors. 
+In this course, we will only deal with **fixed** factors, but you should be aware of the differences between the two.
+
+**Fixed factors** are ones we have manipulated, or that we expect *a priori* to have an effect on the response. 
+From Logan, p 254 - "conclusions about the effects of a fixed factor are restricted to the specific treatment levels investigated ..."
+
+**Random factors** are, as per Logan, p. 254, "randomly chosen from all the possible levels of populations and are used as random representatives of the populations". 
+E.g., density of plants could be random. Or position of camera traps on a hillside.
+
+## Null hypotheses
+
+Our $H_0$s are different, depending on whether we are working with fixed versus random factors.
+
+**Fixed effects model:** 
+
+$$
+H_0: \mu_1 = \mu_2 = ... = \mu_i = \mu
+$$
+
+**Random effects model:**
+
+$$
+H_0: \sigma^2_1 = \sigma^2_2 = ... = \sigma^2_i = \sigma^2 
+$$
+
+# One-way ANOVA
+
+
+We will be using the a data set on **aldrin** concentration values at three different depths in the Wolf River.
+This case study is further described in the ANOVA lecture.
+
+```{r}
+aldrin <- read.csv("https://www.dropbox.com/s/sfstj4p8beajir5/aldrin.csv?dl=1")
+summary(aldrin)
+
+```
+
+Let's make a box plot of these data
+
+```{r}
+library(ggplot2)
+
+ggplot(data = aldrin, aes(x = depth, y = aldrin)) +
+  geom_boxplot()
+```
+
+Just looking at the box plot, it does appear as though there are differences in the levels of aldrin at the different depths.
+
+***
+
+#### Challenge - Compare concentrations of aldrin at different depths with *t* test
+
+There are three possible **pair-wise comparisons** we can do here:
+
+* bottom - middle
+* bottom - surface
+* middle - surface
+
+***
+
+<!---
+
+### bottom - middle comparison
+
+Subset our data set
+
+```{r}
+aldrin_bot_mid = subset(aldrin, depth %in% c("bottom", "middepth"))
+```
+
+Perform *t* test
+
+```{r}
+t.test(data = aldrin_bot_mid, aldrin ~ depth)
+```
+
+### bottom - surface
+
+
+```{r}
+aldrin_bot_surf = subset(aldrin, depth %in% c("bottom", "surface"))
+t.test(data = aldrin_bot_surf, aldrin ~ depth)
+```
+
+
+### middle - surface
+
+```{r}
+aldrin_mid_surf = subset(aldrin, depth %in% c("middepth", "surface"))
+t.test(data = aldrin_mid_surf, aldrin ~ depth)
+```
+
+
+--->
+
+
+# Demonstration of ANOVA in R
+
+## Carry out an ANOVA
+
+ANOVA is a kind of linear model (we'll talk more about this soon), so we use the `lm` function in R first.
+
+```{r}
+aldrin_lm <- lm(data = aldrin, aldrin~depth)
+```
+
+Next, we use a special summary command called `anova` to show the results of our linear model.
+
+```{r}
+anova(aldrin_lm)
+```
+
+You could do something similar with the `aov` function. 
+
+```{r}
+aldrin_aov <- aov(data = aldrin, aldrin~depth)
+summary(aldrin_aov)
+```
+
+## Testing model assumptions
+
+We can use a set of data visualization tools to test for *some* of the assumptions of ANOVA (i.e., normality of residuals, independences of observations, equal variances).
+
+```{r}
+plot(aldrin_lm)
+```
+
+
+
+In the lecture, I mention the possibility of doing multiple comparisons to test for which groups are different from each other.
+In practice, we would normally use a method like Tukey's Honset Significant Differences test, which I implement below. Note that I use the `aov` command here, instead of the `anova(lm())` syntax. 
+
+```{r}
+TukeyHSD(aov(data = aldrin, aldrin~depth))
+```
+
+## Non-parametric ANOVA
+
+As with many of the other methods we go over in this course, there are also non-parametric ANOVA approaches. 
+The most common is the Kruskal-Wallace test, which uses **rank based** statistics.
+We wont be covering it here, but you can find information on this test by looking at the help file for the `kruskal.test` function or checking out these websites as a starting point - [http://www.sthda.com/english/wiki/kruskal-wallis-test-in-r](http://www.sthda.com/english/wiki/kruskal-wallis-test-in-r) or [https://rcompanion.org/rcompanion/d_06.html](https://rcompanion.org/rcompanion/d_06.html).
+
+
+
+# Multi-way (Factorial) ANOVA
+
+What if we want to look at two, or more, factors?
+
+**See visuals as per Logan, Fig 12.1 and 12.2.**
+
+![Logan - Figure 12.1](/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/lectures/logan-fig-12-1.png)
+
+![Logan - Figure 12.2](/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-Web/lectures/logan-fig-12-2.png)
+
+For formula, see Logan p. 314 and for calculation of F-ratios see Table 12.1.
+
+
+
+
+### Two-way (two-factor) fixed effects model (Model I)
+
+From Logan (Example 12A):
+
+> Quinn (1988) manipulated the density of adults limpets within enclosures (8, 15, 30 and 45 individuals per enclosure) during two seasons (winter-spring and summer-autumn) so as to investigate the effects of adult density and season on egg mass production by intertidal limpets. Three replicate enclosures per density/season combination were used, and both density and season were considered fixed factors (from Box 9.4 of Quinn and Keough (2002)).
+
+```{r}
+limpets <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter12/Data/quinn.csv")
+
+head(limpets)
+summary(limpets)
+
+limpets$DENSITY <- factor(limpets$DENSITY)
+```
+
+Let's get some visuals.
+
+```{r}
+ggplot(data = limpets) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets) +
+  geom_boxplot(aes(x = SEASON, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS, fill = SEASON)) +
+  theme_bw()
+
+```
+
+
+And let's run the model.
+
+```{r}
+limpets_lm <- lm(data = limpets, formula = EGGS ~ SEASON * DENSITY)
+summary(limpets_lm)
+anova(limpets_lm)
+```
+
+Plot the effects of Season and Density using the `allEffects` function in the `effects` package. You may need to use `install.packages` to install this package.
+
+
+```{r}
+library(effects)
+
+plot(allEffects(limpets_lm))
+```
+
+
+
+
