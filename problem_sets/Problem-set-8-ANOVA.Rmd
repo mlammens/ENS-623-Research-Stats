@@ -1,20 +1,7 @@
 ---
-title: "ENS 623 - Spring 2020 - Problem Set 10"
+title: "ENS 623 - Spring 2021 - Problem Set 8"
 output: html_document
 ---
-
-**Please submit this homework as an R Markdown (Rmd) file AND a Word file (docx).**
-See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
-
-#### File name
-
-Your file should use the following naming scheme
-
-**`[last name]_ENS623_SP20_PS10.Rmd`**
-
-For example, 
-
-`Lammens_ENS623_SP20_PS10.Rmd`
 
 
 # Overview
@@ -31,14 +18,14 @@ soil_data <- read.csv("https://www.dropbox.com/s/b8vanatf6kejuba/soil_p_data.csv
 summary(soil_data)
 ```
 
-# ANOVA "by hand" (15 points)
+# ANOVA "by hand" (10 points)
 
 **NOTE -** when I say "by hand", what I mean is that you should use R to calculate the group means, grand means, residuals, etc.. Please **do not** do these calculations external from R.
 
 Calculate all of the components to perform an ANOVA and build your ANOVA table.
-You might want to consult the [OpenIntro supplementary chatper on ANOVA](https://www.openintro.org/download.php?file=stat_extra_anova_calculations&referrer=/stat/textbook.php) for help or **Table 8.2 in Quinn and Keough 2002**.
+You might want to consult the [OpenIntro supplementary chatper on ANOVA](https://www.openintro.org/download.php?file=stat_extra_anova_calculations&referrer=/stat/textbook.php) for help or **Table 8.2 in Quinn and Keough 2002** (available in Perusall).
 
-**Put your R code below, and use #s to add comments to keep track of your calculations.**
+**Put your R code below, and use #s to add comments to keep track of your calculations. YOU MUST INCLUDE COMMENTS TO RECIEVE FULL CREDIT**
 
 ```{r}
 # Start R code here
@@ -85,3 +72,12 @@ Use `TukeyHSD()` to perform all multiple comparisons, and to determine with site
 Based on the results of the Tukey HSD test, which sites do you think are different from one another? Explain your answer.
 
 **Write your answer here.**
+
+# Results and Discussion (5 points)
+
+Based on all of the analyses you have done here, write a brief results and discussion section. This section should include *at least* three specific observations of your results and at least two potential interpretations of these results that are supported by your analyses.
+
+
+**Write your answer here.**
+
+
