@@ -1,0 +1,197 @@
+---
+title: "Meeting 11 - Correlation and Linear Regression"
+author: "Matthew E. Aiello-Lammens"
+output:
+  html_document:
+    toc: yes
+---
+
+# Today's Goals
+
+* Review foundations of statistical models
+* Become familiar with key concepts of linear modeling
+* Introduce concepts of covariation and correlation
+* Identify relationship between correlation and linear regression
+
+# Introduction to Linear Models
+
+## Statistical Models
+
+From Logan, p. 151:
+
+> A **statistical model** is an expression that attempts to explain patterns in the observed values of a *response variable* by relating the response variable to a set of *predictor variables* and parameters.
+
+A generic model looks like:
+
+response variable = model + error
+
+### Simple linear model
+
+$$
+y = bx + a
+$$
+
+where $b$ is the slope and $a$ is the y-intercept.
+
+To make this a **statistical model** we could use the following equation:
+
+
+$$
+y_i = \beta_0 + \beta_1 * x_i + \epsilon_i
+$$
+
+Considering all data points at the same time, we can write this as:
+
+$$
+Y \sim \beta_0 + \beta_1 * X + \epsilon
+$$
+
+where:
+
+$$
+\epsilon \sim N(0,\sigma^2)
+$$
+
+
+## Co-variation
+
+Let's take a step back and ignore the potential cause-effect relationships implied by the above linear model (i.e., the model that suggests a change in $x$ results in a change in $y$). 
+Perhaps changes in $x$ and $y$ are only ***correlated*** with each other, or said another way, they ***co-vary*** with each other.
+
+We can measure the *strength* of this relationship as **co-variation** and/or **correlation**.
+
+### Co-variance
+
+This is also known as the *sum of cross-products*.
+
+$$
+\frac{\sum{(x_i-\bar{x})(y_i-\bar{y})}}{n-1}
+$$
+
+### Example with `iris` data
+
+Calculate co-variation between sepal length and sepal width, using the `iris` dataset.
+
+```{r}
+data(iris)
+
+library(ggplot2)
+ggplot(data = iris) +
+  geom_point(aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
+  theme_bw()
+
+covar <- sum((iris$Sepal.Length - mean(iris$Sepal.Length)) * (iris$Sepal.Width - mean(iris$Sepal.Width)))/ (nrow(iris) - 1)
+
+## Confirm
+var(x = iris$Sepal.Length, y = iris$Sepal.Width)
+
+```
+
+
+
+## Correlation
+
+We can *standardize* co-variation to take on a value between -1 and 1, yielding a value called the **Pearson's correlation coefficient** or the **product-moment coefficient**.
+
+$$
+\rho_{xy} = \frac{\sum{(x_i-\bar{x})(y_i-\bar{y})}}{\sqrt{\sum{(x_i-\bar{x})^2 \sum{(y_i-\bar{y})^2}}}}
+$$
+
+If we use $\hat{\bar{x}}$ and $\hat{\bar{y}}$, that is the **sample means for x and y**, then $\rho$ is represented by $r$, and called the **sample correlation coefficient statistic**.
+$r$ has an underlying distribution, just like other sample statistics (e.g., $t$ or $F$), which is essentially a $t$ distribution with a standard error of:
+
+$$
+s_r = \sqrt{\frac{(1-r^2)}{(n-2)}}
+$$
+
+Then the $t$ value is $t = \frac{r}{s_r}$.
+
+### Example of correlation with `iris` data
+
+Calculate the correlation between sepal length and sepal width, and calculate whether $r$ is significantly different from 0 or not.
+
+```{r}
+cor_iris <- covar / (sd(iris$Sepal.Length)*sd(iris$Sepal.Width))
+
+se_cor_iris <- sqrt((1 - cor_iris^2)/(nrow(iris) - 2))
+
+t_cor_iris <- cor_iris/se_cor_iris
+
+## Calculate the probability of getting our t value, or one more extreme
+pt(q = t_cor_iris, df = (nrow(iris)-2))*2
+
+## Use `cor` to find correlation value
+with(data = iris, cor(x = Sepal.Length, y = Sepal.Width, method = "pearson"))
+
+## Test the correlation
+with(data = iris, cor.test(x = Sepal.Length, y = Sepal.Width, method = "pearson"))
+
+
+```
+
+
+## Robust correlation
+
+For Pearson's correlation coefficient to be appropriate, the data should have:
+
+1. A linear relationship
+2. A bivariate normal distribution
+
+* Spearman's Rank Correlation - calculates correlation on ranks of observed values
+* Kendall's Rank Correlation
+
+
+# Linear regression
+
+Now we assume that any change in **y** is due to a change in **x**.
+
+## Example of linear regression
+
+Effects of starvation and humidity on water loss in the confused flour beetle.
+Here, looking at the relationship between humidity and weight loss
+
+```{r}
+flr_beetle <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter8/Data/nelson.csv")
+flr_beetle
+```
+
+Plot these data
+
+```{r}
+library(ggplot2)
+ggplot() +
+  geom_point(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
+  theme_bw()
+```
+
+Run a linear regression
+
+```{r}
+flr_beetle_lm <- lm(data = flr_beetle, WEIGHTLOSS ~ HUMIDITY)
+summary(flr_beetle_lm)
+```
+
+Plot these data, with `lm` fit
+
+```{r}
+ggplot(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
+  geom_point() +
+  stat_smooth(method = "lm") +
+  theme_bw()
+```
+
+
+### Linear regression assumptions
+
+#### The big three:
+
+1. **Normality:** The $y_i$ **AND** error values ($\epsilon_i$) are normally distributed. If normality is violated, *p*-values and confidence intervals may be inaccurate and unreliable.
+2. **Homogeneity of variance:** The $y_i$ **AND** error values ($\epsilon_i$) have similar levels of variance across all $x_i$ values. 
+3. **Independence:** The $y_i$ **AND** error values are independent of *each other*.
+
+#### Other assumptions:
+
+* **Linearity:** The relationship between $x_i$ and $y_i$ is linear (only important when using simple linear regression).
+* **Fixed $x$ values:** The $x_i$ values are measured without error. In practice this means the error in the $x_i$ values is much smaller than that in the $y_i$ values.
+
+
