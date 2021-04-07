@@ -274,7 +274,7 @@ yrbss_samp <- yrbss[sample(x = 1:nrow(yrbss), replace = FALSE, size = 10), ]
 Calculate our sample means.
 
 ```{r}
-mean_yrbss_samp <- mean(yrbss$height, na.rm = TRUE)
+mean_yrbss_samp <- mean(yrbss_samp$height, na.rm = TRUE)
 ```
 
 
