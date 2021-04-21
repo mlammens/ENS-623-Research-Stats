@@ -1,5 +1,5 @@
 ---
-title: "ENS 623 - Spring 2020 - Problem Set 11"
+title: "ENS 623 - Spring 2021 - Problem Set 9"
 output: html_document
 ---
 
@@ -10,11 +10,11 @@ See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Resear
 
 Your file should use the following naming scheme
 
-**`[last name]_ENS623_SP20_PS11.Rmd`**
+**`[last name]_ENS623_SP21_PS9.Rmd`**
 
 For example, 
 
-`Lammens_ENS623_SP20_PS11.Rmd`
+`Lammens_ENS623_SP21_PS9.Rmd`
 
 # Overview
 
@@ -56,7 +56,7 @@ knitr::kable(tibble::tibble(`Distance (meters)` = distance, `Observed Turtle Mor
 
 ## Caffeine and Sugar
 
-A double-blind randomized experiment assigned healthy undergraduate students to drink one of four beverages after fasting overnight: water, water with 75 mg of caffeine, water with 75 g of glucose, and water with 75 mg of caffeine and 75 g of glucose. There were 18 students in each of these treatment groups. After drinking the beverage, the students took a test to measure their cognitive skills - attention, reaction time, etc.. They were given a score for this test. You would like to know if the drinks had an effect on the students test performance. Below is a table of summary statistics for these data. How shale you proceed in your analysis? 
+A double-blind randomized experiment assigned healthy undergraduate students to drink one of four beverages after fasting overnight: water, water with 75 mg of caffeine, water with 75 g of glucose, and water with 75 mg of caffeine and 75 g of glucose. There were 18 students in each of these treatment groups. After drinking the beverage, the students took a test to measure their cognitive skills - attention, reaction time, etc.. They were given a score for this test. You would like to know if the drinks had an effect on the students test performance. Below is a table of summary statistics for these data. How shale you proceed in your analysis, assuming you have access to all of the data (i.e., not just the summaries below)? 
 
 |Beverage|n|Mean test performance|
 |--------|-|:-------------------:|
