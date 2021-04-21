@@ -1,0 +1,93 @@
+---
+title: "Meeting 13 - Chi-Squared Analysis Example"
+author: "Matthew E. Aiello-Lammens"
+output:
+  html_document:
+    toc: yes
+---
+
+# Today's Goals
+
+* Practice using $\chi^2$ analysis for goodness of fit tests
+* Practice using $\chi^2$ analysis test of independence
+
+# $\chi^2$ analysis
+
+
+$$
+\chi^2 = \sum \frac{(o-e)^2}{e}
+$$
+
+where $o =$ observed and $e =$ expected frequencies.
+
+## Goodness of fit tests
+
+To examine if some set of data is distributed in a specific way, or has a frequency based on a known distribution, we can use a $\chi^2$ test.
+
+### Example - COVID deaths and race
+
+First, let's gather the information on COVID deaths from the CDC website here - [https://covid.cdc.gov/covid-data-tracker/#demographics](https://covid.cdc.gov/covid-data-tracker/#demographics).
+
+Second, open the data set in a Excel (or the equivalent).
+
+Third, gather information on the population percentages from the Census here - [https://www.census.gov/quickfacts/fact/table/US/PST045219](https://www.census.gov/quickfacts/fact/table/US/PST045219). Add these percentages to the data sheet.
+
+Forth, read in the data sheet.
+
+```{r, eval = FALSE}
+#covid = read.csv(file.choose())
+covid = read.csv("~/Dropbox/00_Sort/deaths_by_race_ethnicity__all_age_groups.csv")
+```
+
+
+Calculate $\frac{(observed - expected)^2}{expected}$.
+
+```{r, eval = FALSE}
+covid$obs_exp = ((covid$Death_Percentage - covid$Pop_Percentage)^2) / covid$Pop_Percentage
+```
+
+Finally, calculate $\chi^2$ and its probability.
+
+```{r, eval = FALSE}
+chi_sq = sum(covid$obs_exp)
+pchisq(q = chi_sq, df = 6, lower.tail = FALSE)
+```
+
+
+
+
+## Contingency tables
+
+Examine if two or more categorical variables are associated with each other. This is essentially an extension of the $\chi^2$ analysis. The **Null** hypothesis is that the variables are **not** associated.
+
+### Example - Two-way contingency table
+
+From Logan pp. 478 - 480
+
+> In order to investigate the mortality of coolibah (Eucalyptus coolibah) trees across riparian dunes, Roberts (1993) counted the number of quadrats in which dead trees were present and the number in which they were absent in three positions (top, middle and bottom) along transects from the lakeshore up to the top of dunes. In this case, the classification of quadrats according to the presence/absence of dead coolibah trees will be interpreted as a response variable and the position along transect as a predictor variable (see Box 14.3 of Quinn and Keough (2002)).
+
+*(If there is time, go through few slides on this.)*
+
+Get the data
+
+```{r}
+trees = read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter16/Data/roberts.csv")
+
+head(trees)
+```
+
+Make a contingency table
+
+```{r}
+trees_xtab = table(trees$POSITION, trees$DEAD)
+trees_xtab
+```
+
+Run a $\chi^2$ test
+
+```{r}
+trees_chisq = chisq.test(trees_xtab)
+
+trees_chisq
+
+```
