@@ -5,15 +5,6 @@ tagline: Learning to collect and analyze data
 description: A website for ENS 511 at Pace University
 ---
 
-## Archives
-
-This page is for ENS 623 during the Spring of 2021. 
-However, it is being updated on a weekly basis, so some links may still be associated with Spring 2020.
-Links to previous versions of this course are below:
-
-* [ENS 623 - Spring 2019](https://mlammens.github.io/ENS-623-Research-Stats-Spring-2019/)
-* [ENS 623 - Spring 2018](https://mlammens.github.io/ENS-623-Research-Stats-Spring-2018/)
-
 ## Course Description
 
 This course covers issues related to the proper manner in which to develop and conduct a research project. Statistical issues related to environmental evaluations will be discussed, including minimal detectable levels, proper sample size, and determination of proper methods for evaluation of data, using both parametric and non-parametric procedures. 
@@ -96,3 +87,13 @@ Here are some useful resources for learning R, biostats, research methods, and g
 * [Diagram of distribution relationships](http://www.johndcook.com/blog/distribution_chart/) - Here's a good site outlining the different relationships between various statistical distributions. It's based on a well known 
 [paper](http://www.math.wm.edu/~leemis/2008amstat.pdf) by Leemis and McQueston.
 
+
+
+## Archives
+
+This page is for ENS 623 during the Spring of 2022. 
+However, it is being updated on a weekly basis, so some links may still be associated with past classes.
+Links to previous versions of this course are below, *however, be warned that some links may be broken*:
+
+* [ENS 623 - Spring 2019](https://mlammens.github.io/ENS-623-Research-Stats-Spring-2019/)
+* [ENS 623 - Spring 2018](https://mlammens.github.io/ENS-623-Research-Stats-Spring-2018/)
