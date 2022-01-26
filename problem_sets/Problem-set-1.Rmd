@@ -1,11 +1,12 @@
 ---
-title: "ENS 623 - Spring 2021 - Problem Set 1"
+title: "ENS 623 - Spring 2022 - Assignment 1"
 output:
-  word_document: default
   html_document: default
 ---
 
 **Please submit this homework on Classes as *both* an R Markdown (Rmd) and DOCX file.**
+
+In order to create a DOCX file, you can use the 'down arrow' next to the **Knit** button, and select "Knit to Word". 
 
 As I mentioned during our first meeting, rmarkdown is a way to incorporate text, with simple formatting, with R code chunks.
 Rather than spell out how to create an Rmd file here, I recommend you consult the following resources:
@@ -16,18 +17,18 @@ Rather than spell out how to create an Rmd file here, I recommend you consult th
 
 #### Your file should use the following naming scheme
 
-**`[last name]_ENS623_SP20_PS1.Rmd`**
+**`[last name]_ENS623_SP22_PS1.Rmd`**
 
 For example, 
 
-`Lammens_ENS623_SP20_PS1.Rmd`
+`Lammens_ENS623_SP22_PS1.Rmd`
 
 #### Grading note
 
 * Part 1 is worth 10 points
 * Part 2 is worth 15 points
 
-# Part 1 - Introducing the Iris data set
+# Part 1 - Introducing the *Iris* data set
 
 The basic R installation includes a package named `datasets` that contains several different example data sets to use in R. In this problem set, we'll work with the `iris` data set. Using any of the help functions we learned in class, `?` or `help.search`, find the help page for the iris data set. 
 
@@ -37,17 +38,19 @@ The basic R installation includes a package named `datasets` that contains sever
 ```
 
 
-**Briefly describe what these data are. What is being measured? How many measurements? Etc. Please embed your answer within tese doubl asterisks so your answer is bold-faced.**
+**Briefly describe what these data are. What is being measured? How many measurements? Etc. Please embed your answer within these double asterisks so your answer is bold-faced.**
 
 
 # Part 2 - Play with the the `iris` data set
 
-Use the `head`, `tail`, and `summary` functions to investigate the `iris` data set. Use the help functions (or search online) to figure out *how* to use these functions and *what* these functions return. Make at least three observations about the data and/or the data set using these functions.
+Use the `head`, `tail`, and `summary` functions to investigate the `iris` data set. Use the help functions (or search online) to figure out *how* to use these functions and *what* these functions return. 
 
 ```{r}
 # Put your code here
 ```
 
+
+Make at least three observations about the data and/or the data set using these functions. "Observations" can include the number of rows of data in the data set, the number of columns, the types of values in the columns, etc..
 
 **Put your three observations here.**
 
