@@ -8,7 +8,7 @@ description: course syllabus
 
 # ENS 623: Research and Statistical Methods
 
-**Term:** Spring 2021\
+**Term:** Spring 2022\
 **CRN:** 26404\
 **Credits:** 3\
 **Meeting day and time:** Wed 5:40 - 8:40 PM\
