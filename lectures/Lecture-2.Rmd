@@ -3,7 +3,6 @@ title: "Meeting 2 - R Programming and Data Visualizatoin"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
-    code_folding: hide
     toc: yes
 ---
 
@@ -17,9 +16,66 @@ output:
 
 Before we do anything, let's make sure we are all working with a blank slate. Re-start RStudio and clear your environment if there's anything in there.
 
-## Variables and objects (cont'd)
+## Variables and objects
 
-We're going to start right from where we stopped last week, working with different kinds of variables in R.
+There are several basic types of data structures in R.
+
+* **VECTORS**: One-dimensional arrays of numbers, character strings, or logical values (T/F)
+* **FACTORS**: One-dimensional arrays of factors (Stop - Let's discuss factors)
+* **DATA FRAMES**: Data tables in which the various columns may be of different type
+* **MATRICES**: In R, matrices can only be 2-dimensional, anything higher dimension is called an array (see below). Matrix elements are numerical; some functions, like the transpose function t(), only work on matrices
+* **ARRAYS**: higher dimensional matrices are called arrays in R
+* **LISTS**: lists can contain any type of object as list elements. You can have a list of numbers, a list of matrices, a list of characters, etc., or any combination of the above.
+
+### Functions that are useful for understanding the different types of data structures
+
+```
+str()
+class()
+```
+
+## Practice with variables
+
+### Variables (aka Objects)
+
+Define a variable
+
+```{r}
+my_var <- 8
+```
+
+And another
+
+```{r}
+my_var2 <- 10
+```
+
+Work with vars
+
+```{r}
+my_var + my_var2
+```
+
+Make a new variable
+
+```{r}
+my_var_tot <- my_var + my_var2
+```
+
+***
+
+#### Challenge
+
+Change the value of my_var2
+
+```{r}
+my_var2 <- 3
+```
+
+What is the value of `my_var_tot` now?
+
+***
+
 
 ### Vectors
 
