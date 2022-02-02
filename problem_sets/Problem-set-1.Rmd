@@ -25,8 +25,8 @@ For example,
 
 #### Grading note
 
-* Part 1 is worth 10 points
-* Part 2 is worth 15 points
+* Part 1 is worth 5 points
+* Part 2 is worth 5 points
 
 # Part 1 - Introducing the *Iris* data set
 

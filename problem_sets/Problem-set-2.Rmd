@@ -1,5 +1,5 @@
 ---
-title: "ENS 623 - Spring 2021 - Problem Set 2"
+title: "ENS 623 - Spring 2022 - Assignment 2"
 output: html_document
 ---
 
@@ -10,23 +10,23 @@ See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Resear
 
 Your file should use the following naming scheme
 
-**`[last name]_ENS623_SP21_PS2.Rmd`**
+**`[last name]_ENS623_SP22_PS2.Rmd`**
 
 For example, 
 
-`Lammens_ENS623_SP21_PS2.Rmd`
+`Lammens_ENS623_SP22_PS2.Rmd`
 
 #### Grading note
 
-* Problem 1 is worth 15 points
-* Problem 2 is worth 10 points
+* Problem 1 is worth 5 points
+* Problem 2 is worth 5 points
 
 
 ## Problem 1 - Plotting relationships between variables
 
-In class on Wednesday, I demonstrated how to use `ggplot2` to make an x-y scatter plot comparing `Sepal.Length` and `Petal.Length` in the `iris` data set.
+In class we learned to use `ggplot2` to make an x-y scatter plot comparing `Sepal.Length` and `Petal.Length` in the `iris` data set.
 
-Recall that you must first install `ggplot2` if you have not done so already:
+Recall that you must first install `ggplot2` if you have not done so already. **ONLY DO THIS IF YOU HAVE NOT ALREADY INSTALLED GGPLOT 2**:
 
 ```{r, eval=FALSE}
 install.packages("ggplot2")
@@ -60,38 +60,31 @@ ggplot(data = iris, aes( x = Sepal.Length, y = Petal.Length, colour = Species ))
 
 *Use the code above, but replace `Petal.Length` with `Sepal.Width`. Make a new x-y scatter plot with linear regression lines. Describe how fitting a different line to the data from each species might influence how you interpret your data, in comparison to an x-y scatter plot where you do not separate the species.*
 
-***Hint:** You should make two plots, one where you color the points by species and a second where you do not include any color.*
+***Hint:** You should make a second plot where you do not include any color arguments to see what happens.*
 
 **Put your written answer to the question above, here.**
 
-## Problem 2 - Working with syntax in `ggplot2`
+## Problem 2 - Histograms
 
-Below are two code chunks, both which create histograms and density plots using the `iris` data set.
-
-### Chunk 1
+Below is a code chunk to create a histogram of **petal length** values using the `iris` data set.
 
 ```{r, eval=FALSE}
 ggplot() +
-  geom_histogram(data = iris, aes(x = Petal.Length, y = ..density.., fill = Species), 
+  geom_histogram(data = iris, aes(x = Petal.Length, fill = Species), 
                  position = "dodge") +
-  geom_density(data = iris, aes(x = Petal.Length, colour = Species)) +
   theme_bw() 
 ```
 
-### Chunk 2
+Modify this code to make a histogram for `Sepal.Length` instead.
 
-```{r, eval=FALSE}
-ggplot(data = iris, aes(x = Petal.Length)) +
-  geom_histogram( aes(y = ..density.., fill = Species), 
-                 position = "dodge") +
-  geom_density( aes(colour = Species)) +
-  theme_bw() 
+```{r}
+# Put your code here.
 ```
 
-*Describe the differences between the code chunks.*
+*What differences do you notice about the values, as presented in these histograms, for petal length versus sepal length?*
 
-*Do Chunks 1 and 2 produce the same plots? (You need to show me that you ran the code to get credit for this.)*
 
-*Based on the answers to the above two questions, what do you think the role of defining arguments in the `ggplot()` function is versus defining arguments in the `geom_` functions?*
+**Put your written answer to the question above, here.**
 
-**Put your answers to the questions above here.**
+
+
