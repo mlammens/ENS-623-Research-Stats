@@ -1,0 +1,45 @@
+---
+title: "ENS 623 - Spring 2022 - Assignment 2"
+output: html_document
+---
+
+**Please submit this homework as an R Markdown (Rmd) file.**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+#### File name
+
+Your file should use the following naming scheme
+
+**`[last name]_ENS623_SP22_PS2.Rmd`**
+
+For example, 
+
+`Lammens_ENS623_SP22_PS2.Rmd`
+
+#### Grading note
+
+* Problem 1 is worth 5 points
+* Problem 2 is worth 5 points
+
+
+## Problem 1 - Indexing `data.frames`
+
+Using the built-in `iris` data set, use the indexing techniques learned in class to create three new `data.frame`s, each which contains **only** measurements for only one of the species.
+That is, one `data.frame` for **setosa**, one for **versicolor**, and one for **virginica**.
+
+
+```{r}
+# Put your code here
+```
+
+## Problem 2 - `summary` of your new data frames
+
+Run the `summary` function on each of your new `data.frame`s. 
+Compare and contrast the summary stats (e.g. the mean values, or median values, etc.) for each of the data sets.
+
+```{r}
+# Put your code here.
+```
+
+
+**Put your compare and contast comments regarding the three data.frames here.**
