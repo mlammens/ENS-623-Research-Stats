@@ -11,7 +11,7 @@ output:
 * Be able to write your own "user defined" function
 * Repeat a computation task using `for` and `while` loops
 * Implement flow control in your R scripts using conditional `if` and `else`
-* Understand and practice the use of pseudocode to help solve computational problems
+* Understand and practice the use of pseudocode to help solve computational problems (maybe)
 
 ***
 
