@@ -1,5 +1,5 @@
 ---
-title: "Meeting 4 - Working with Data in R"
+title: "Meeting 5 - Working with Data in R"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
@@ -15,7 +15,7 @@ output:
 * Practice working with **factors** and **dates**
 * Become familiar with the `tidyverse` "curated" list of packages
 * Practice subsetting a data set using functions `select` and `filter`
-* Practice calculating summaries of a data set usinig functions `group_by` and `summarize`
+* Practice calculating summaries of a data set using functions `group_by` and `summarize`
 
 ***
 
