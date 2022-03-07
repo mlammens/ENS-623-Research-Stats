@@ -1,0 +1,84 @@
+---
+title: "ENS 623 - Spring 2022 - Data Report 1 assignment"
+output: html_document
+---
+
+## Overview
+
+The goal of the Data Report assignment is for you to demonstrate your ability to use R to examine a data set. 
+This includes reading in a data set, calculating summary statistics for a data set, and creating data visualizations. 
+
+**Please submit your Data Report as both an R Markdown (Rmd) file and a Word (docx) file.**
+See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+
+## Expected style, format, and sections
+
+I am expecting a Data Report that is written as a consistent narrative, rather than simply answers to questions posed below. 
+Imagine you are submitting this report to a supervisor who has asked you to review the data set and deliver a few key points about it.
+You should write in complete sentences and paragraphs, with a logical order and flow. 
+Your code should be embedded within the report as R chuncks in the appropriate sections.
+
+Here are the sections I am expecting in your report:
+
+* **Introduction** - this section should include information about what the data set is, who has collected it, what measurements and variables it contains, etc.. I expect this section to be approximately 300 - 350 words. You *should* reference the information provided at the website listed below.
+* **Data Set Summary** - In this section you should address the results of the tasks listed in **Analysis and summary of all data** below. This should include at least one table. The table should also have a table caption, that *briefly* describes the content of the table.
+* **Analysis of #2 fuel oil spills** - In this section you should address the results of the tasks listed in **Analysis of #2 fuel oil spills** below. This should include at least two figures - a histogram and a x-y scatter plot.
+* **Analysis of [chosen material] spills** - In this section you should address the results of the tasks listed in **Analysis of #2 fuel oil spills** below, but applied to your material of choice. This should include at least two figures - a histogram and a x-y scatter plot.
+* **Summary** - this section should contain a brief (approximately 100 words) summary of what you have found based on the analyses documented above. 
+
+### Figures and plot formats
+
+Your plots should have x- and y-axis labels that are meaningful **AND** figure captions that describe the figure with enough detail that a reader could understand the figure without reading the rest of the report.
+
+## NYS Spill Incidents Data Set
+
+For this Data Report, you will work with the [NYS Spill Incidents Data Set](https://data.ny.gov/Energy-Environment/Spill-Incidents/u44d-k5fk).
+This is a data set of more than 500k records related to petroleum and other hazardous materials spills here in NY state. 
+An overview of this data set is provided in a pdf document linked from the website above. 
+Below is draft code to download this data set.
+Note that this is a fairly large date set (approx. 92 MB), and may take a few moments to download.
+
+### Download the data
+
+**NOTE: this chunk is set as `eval = FALSE`. This is because only need to download the data once. When this is complete and the data set is saved to your computer, you do not need to download the data during the knitting process.**
+
+```{r, eval = FALSE}
+download.file(url = "https://www.dropbox.com/s/sciza23x1up2m81/Spill_Incidents.csv?dl=1",
+              destfile = "data/Spill_Incidents.csv")
+```
+
+### Load the data into your environment
+
+Here is the code you should use the load these data into your R environment. 
+The path to this file may differ if you saved the data file somewhere other than in your `data` directory.
+
+```{r, eval=FALSE}
+library(tidyverse)
+
+spills <- read_csv("data/Spill_Incidents.csv")
+```
+
+Using these data and the skills and knowledge you've learned in class, address each of the following tasks.
+
+### Analysis and summary of all data
+
+* Using the `summary` function, and any other functions you wish, look at these data and describe at least five observations / points about the data. **NOTE** - you may have to transform some of the data.frame columns to make them useful for data summaries (e.g., from characters to factors).
+
+* Calculate the number of spills reported for each different toxins (i.e., `Material Name`). Make sure that the resulting table presents the data descending order, from most common material spilled to least common.
+
+
+### Analysis of #2 fuel oil spills
+
+* Calculate the probability that a reported spill is related to "#2 fuel oil". Would you describe this as a likely event based on this result?
+
+* Make a histogram of the `quantity` of "#2 fuel oil" fuel spilled, for reported spills related to "#2 fuel oil". **NOTE** - you should filter your data so the quantity is less than 1000, because there are some extremely large outlier spills.
+
+* Calculate the probability that a reported spill is related to "#2 fuel oil" fuel AND had a quantity less than or equal to 100 gallons. Is it more likely that a #2 fuel oil spill was greater than or less than 100 gallons? Explain your answer.
+
+* Are there any observable trends through time in the number of #2 fuel oil spills reported per year? **NOTE** - there are many ways for you to answer this question, but you must justify your answer with your R code.
+
+### Analysis of spills of another material
+
+* Repeat all of the steps in the section above for another value of `Material Name` - e.g., `diesel`, `motor oil`, etc.
+
+
