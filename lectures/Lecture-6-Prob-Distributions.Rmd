@@ -1,5 +1,5 @@
 ---
-title: "Meeting 6 - Probability Distributions"
+title: "Meeting 7 - Probability Distributions"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
@@ -53,7 +53,7 @@ surveys <-
 
 * Is flipping two coins different from flipping one, then the other? 
 * You flip 99 heads. What is the probability you will flip a head on the 100th toss?
-* For our 6-sided die example above, why aren't $P(<4)$ and $P(\text{odd})$ **NOT** independent events?
+* For a 6-sided die example, why aren't $P(<4)$ and $P(\text{odd})$ **NOT** independent events?
 * You catch a *Neotoma* in a trap in one of the Portal plots. What is the probability that you will catch a *Neotoma* in a trap in one of the other Portal plots?
 
 
@@ -190,12 +190,31 @@ Foundation of Bayesian statistics:
 
 # Probability Distributions
 
-***
+## Random Variables
 
-#### Challenge - review
+A *random variable* is a function that maps each event in a sample space to a number.
+  
+  - A *discrete random variable* takes on a finite number of values.
+  
+Suppose $X$ is the number of heads in 3 tosses of a fair coin.
 
-* What is a random variable?
-* What do we mean by 'a distribution of random variables'?
+  - $X$ can take on the values 0, 1, 2, 3.
+
+![3 coin tosses](coinToss.png)
+
+### Distribution of a Discrete Random Variable
+
+The distribution of a discrete random variable is the collection of its values and the probabilities associated with those values.
+
+The probability distribution for $X$ is as follows:
+
+| | | | | |
+|--|--|--|--|--|
+|$x_i$ | 0 | 1 | 2 | 3 |
+|$P(X = x_i)$ | 1/8 | 3/8 | 3/8 | 1/8 |
+
+
+\[\sum_{x=0}^3 P(X = x_i) = 1 \]
 
 ***
 
