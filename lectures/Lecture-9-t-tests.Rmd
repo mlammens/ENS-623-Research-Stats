@@ -1,5 +1,5 @@
 ---
-title: "Meeting 9 - Intro to Hypothesis Testing and *t* tests"
+title: "Meeting 10 - Intro to Hypothesis Testing and *t* tests"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
@@ -48,7 +48,7 @@ The *differences* should be *t* distributed.
     
 ## We select the Type-I error rate
 
-General Consensus is $p = 0.05$. This is known as Type-I error, or $\alpha$.
+General consensus is $p = 0.05$. This is known as Type-I error, or $\alpha$.
 
 ### Type-I versus Type-II error
 
@@ -81,7 +81,7 @@ Increase the sample size.
 See p. 33-34 in Q&K. Fisher's approach below:
 
 * Construct null hypothesis ($H_0$)
-* Choose a test stat that measures deviation from null
+* Choose a test stat that measures deviation from that null hypothesis
 * Collect data and compare the value of the test stat to the known distribution of that stat.
 * Determine p-val
 * Accept or reject null
