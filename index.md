@@ -44,6 +44,13 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 | 14 |Analysis of Frequencies; GLM; Wrap-up |Logan Chap. 15-17; Q&K 12-14 | [Lecture notes 14](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-14.html) |  |
 --->
 
+## Practice Assignments
+
+| Topic | HTML | Rmd |
+|:------|:-----|:----|
+| Practice with Rmd and `data.frame` summaries | [assignment 1 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-1-RMDs-and-dataframe-summary.html) | [assignment 1 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-1-RMDs-and-dataframe-summary.Rmd)|
+| Practicing with `ggplot2`| [assignment 2 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-2-Practicing-with-ggplot2.html) | [assignment 2 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-2-Practicing-with-ggplot2.Rmd)|
+
 ### Supplementary Notes
 
 These notes go along with the videos I'm posting:

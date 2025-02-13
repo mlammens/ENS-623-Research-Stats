@@ -1,5 +1,5 @@
 ---
-title: "ENS 623 - Spring 2022 - Assignment 2"
+title: "Assignment 2 - Practicing with `ggplot2`"
 output: html_document
 ---
 
