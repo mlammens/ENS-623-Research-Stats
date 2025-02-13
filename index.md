@@ -25,8 +25,11 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 |:-------|:---------|:---------------|
 | 01 |[Introduction to R](http://mlammens.github.io/ENS-623-Research-Stats/lectures/01-Intro-to-R.html) |[Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)| 
 | 02 |[Variables and `data.frame`s](http://mlammens.github.io/ENS-623-Research-Stats/lectures/02-Variables-and-data-frames.html) |[Data Carpentry - Exploring and Understanding Data](http://datacarpentry.github.io/R-ecology-lesson/how-r-thinks-about-data.html)| 
+| 03 |[Data Visualization and Exploration](http://mlammens.github.io/ENS-623-Research-Stats/lectures/03-Data-Visualization-and-Exploration.html) | [R Graphics Cookbook](https://r-graphics.org/); [R4DS - Data Vis](https://r4ds.hadley.nz/data-visualize) |
+| 04 |[R Programming](http://mlammens.github.io/ENS-623-Research-Stats/lectures/04-R-Programming.html) | [Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)| 
+| 05 |[Data Wrangling](http://mlammens.github.io/ENS-623-Research-Stats/lectures/05-Data-Wrangling.html) | [Data Carpentry - Working with Data](https://datacarpentry.github.io/R-ecology-lesson/working-with-data.html)
 
-
+<!---
 | 3 |R Programming |[Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)|[Lecture notes 3](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-3.html); [In class notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/meeting-3.html) | [Problem Set 3](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-3.html); [Research Question Exercise](http://mlammens.github.io/ENS-623-Research-Stats/pages/research-question-exercise.html)|
 | 4 |Asking Research Questions and Introduction to Probability|Karban et al. 2014, Chapter 1; Q&K Chap. 1; Logan Chap. 3| [Lecture notes 4](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-4.html); [In class notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/meeting-4.html); [Fox Problem Notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/fox-ps-whiteboard.png) | Continue PS3 |
 | 5 |Probability |Q&K Chap. 1 & 4; Logan Chap. 5 | [Lecture notes 5](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-5.html); [In class notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/meeting-5.html) | [Problem Set 4](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-4.html) |
@@ -39,6 +42,7 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 |  12 |ANOVA|Q&K 8; Logan 10 | [Lecture notes 12](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-12.html); [In class notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Meeting-12-Notes.Rmd) | [Problem Set 10](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-10.html); [Problem Set 10 - as Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-10.Rmd)|
 | 13 |Nested and Factorial ANOVA; ANCOVA |Q&K 9 & 12; Logan 11-12 & 15 | [Lecture notes 13](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-13.html) |[Problem Set 11](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-11.html) |
 | 14 |Analysis of Frequencies; GLM; Wrap-up |Logan Chap. 15-17; Q&K 12-14 | [Lecture notes 14](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-14.html) |  |
+--->
 
 ### Supplementary Notes
 
@@ -95,13 +99,3 @@ Here are some useful resources for learning R, biostats, research methods, and g
 * [Diagram of distribution relationships](http://www.johndcook.com/blog/distribution_chart/) - Here's a good site outlining the different relationships between various statistical distributions. It's based on a well known 
 [paper](http://www.math.wm.edu/~leemis/2008amstat.pdf) by Leemis and McQueston.
 
-
-
-## Archives
-
-This page is for ENS 623 during the Spring of 2022. 
-However, it is being updated on a weekly basis, so some links may still be associated with past classes.
-Links to previous versions of this course are below, *however, be warned that some links may be broken*:
-
-* [ENS 623 - Spring 2019](https://mlammens.github.io/ENS-623-Research-Stats-Spring-2019/)
-* [ENS 623 - Spring 2018](https://mlammens.github.io/ENS-623-Research-Stats-Spring-2018/)
