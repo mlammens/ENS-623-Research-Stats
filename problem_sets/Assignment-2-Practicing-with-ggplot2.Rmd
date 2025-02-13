@@ -53,7 +53,7 @@ ggplot(data = iris, aes( x = Sepal.Length, y = Petal.Length, colour = Species ))
 
 *Use the code above, but replace `Petal.Length` with `Sepal.Width`. Make a new x-y scatter plot with linear regression lines. Describe how having separate lines for each species versus one line for all of the data combined influences your interpretations of these data, and specificially the relationship between `Sepal.Length` and `Sepal.Width`.*
 
-***Hint:** You should make another plot where you *do not* include any `color` arguments to see what happens. That is, a plot where you ignore the species identifications.*
+***Hint:** You should make another plot where you **do not** include any `color` arguments to see what happens. That is, a plot where you ignore the species identifications.*
 
 **Put your written answer to the question here.**
 
