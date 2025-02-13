@@ -2,23 +2,31 @@
 layout: page
 title: ENS 623 Research and Statistical Methods
 tagline: Learning to collect and analyze data
-description: A website for ENS 511 at Pace University
+description: A website for ENS 623 at Pace University
 ---
 
 ## Course Description
 
-This course covers issues related to the proper manner in which to develop and conduct a research project. Statistical issues related to environmental evaluations will be discussed, including minimal detectable levels, proper sample size, and determination of proper methods for evaluation of data, using both parametric and non-parametric procedures. 
+This course covers issues related to the proper manner in which to develop and 
+conduct a research project. Statistical issues related to environmental 
+evaluations will be discussed, including minimal detectable levels, proper 
+sample size, and determination of proper methods for evaluation of data, using 
+both parametric and non-parametric procedures. 
 
+<!---
 ## Syllabus
 
 You can find a copy of the syllabus [here](pages/syllabus.html)
+--->
 
-## R Course Notes
+## Course Materials
 
-| Meeting | Topic | Recommended Reading | Lecture Notes | Assignment |
-|:-------|:---------|:---------------|:------------|:-----|
-| 1 |Introduction to R |[Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)| [Lecture notes 1](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-1.html); [In class notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/meeting-1.html)| [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) |
-| 2 |Intro to R (cont) and Data Visaluzation |[Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)| [Lecture notes 2](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-2.html); [In class notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/meeting-2.html)| [Problem Set 2](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-2.html) |
+| Section | Topic | Additional Reading |
+|:-------|:---------|:---------------|
+| 01 |[Introduction to R](http://mlammens.github.io/ENS-623-Research-Stats/lectures/01-Intro-to-R.html) |[Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)| 
+| 02 |[Variables and `data.frame`s](http://mlammens.github.io/ENS-623-Research-Stats/lectures/02-Variables-and-data-frames.html) |[Data Carpentry - Exploring and Understanding Data](http://datacarpentry.github.io/R-ecology-lesson/how-r-thinks-about-data.html)| 
+
+
 | 3 |R Programming |[Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)|[Lecture notes 3](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-3.html); [In class notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/meeting-3.html) | [Problem Set 3](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-3.html); [Research Question Exercise](http://mlammens.github.io/ENS-623-Research-Stats/pages/research-question-exercise.html)|
 | 4 |Asking Research Questions and Introduction to Probability|Karban et al. 2014, Chapter 1; Q&K Chap. 1; Logan Chap. 3| [Lecture notes 4](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-4.html); [In class notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/meeting-4.html); [Fox Problem Notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/fox-ps-whiteboard.png) | Continue PS3 |
 | 5 |Probability |Q&K Chap. 1 & 4; Logan Chap. 5 | [Lecture notes 5](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-5.html); [In class notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/meeting-5.html) | [Problem Set 4](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-4.html) |

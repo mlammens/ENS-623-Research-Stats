@@ -1,5 +1,5 @@
 ---
-title: "ENS 623 - Spring 2022 - Assignment 1"
+title: "Assignment 1"
 output:
   html_document: default
 ---
@@ -17,11 +17,11 @@ Rather than spell out how to create an Rmd file here, I recommend you consult th
 
 #### Your file should use the following naming scheme
 
-**`[last name]_ENS623_SP22_PS1.Rmd`**
+**`[last name]_ENS623_SP25_A1.Rmd`**
 
 For example, 
 
-`Lammens_ENS623_SP22_PS1.Rmd`
+`Lammens_ENS623_SP25_A1.Rmd`
 
 #### Grading note
 

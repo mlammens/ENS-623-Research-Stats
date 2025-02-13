@@ -1,0 +1,203 @@
+---
+title: "Data Visualization and Exploration"
+author: "Matthew E. Aiello-Lammens"
+output:
+  html_document:
+    toc: yes
+---
+
+## Section Goals 
+
+The first step to any data analysis is to interrogate your data by calculating some standard statistics and by visualizing it in various ways. 
+In this section, we'll focus on data visualization.
+
+* Introduce basic concepts of data visualization
+* Become familiar with common functions in the `ggplot2` library
+
+## Setting up our data
+
+For the next section, we're going to continue to work with the
+[iris dataset](https://stat.ethz.ch/R-manual/R-patched/library/datasets/html/iris.html).
+
+Before continuing with visualization, let's add a habitat type variable to the iris data set. We'll use this later. 
+*Caveat - I made up these habitat type preferences.*
+
+```{r}
+iris_habitat <- data.frame( Species = c( "setosa", "versicolor", "virginica" ),
+                            Habitat = c( "forest", "wetland", "meadow" ) )
+
+iris_full <- merge( x = iris, y = iris_habitat, by = "Species" )
+
+head( iris_full )
+tail( iris_full )
+```
+
+
+## Visualization using the `ggplot2` package
+
+I'm going to introduce a data visualization package called **ggplot2**.
+This package is great for producing publication quality graphics, but the syntax
+used to create a plot is a little more involved than base R (i.e., the `graphics` package).
+
+### Aside: Installing and loading packages
+
+First, we need to install the `ggplot2` package:
+
+```{r installggplot2, eval=FALSE}
+# Only need to do this once
+install.packages("ggplot2")
+```
+
+Then load it:
+
+```{r loadggplot2, message=FALSE}
+library(ggplot2)
+```
+
+**NOTE: You will only have to intall a new package once, but you will need to call the `library` function at the beginning of every new R session.**
+
+### Visualizing the measurements of a single variable
+
+Perhaps the most common way to look at data for a single variable is a histogram.
+This essentially is a bar plot, where each bar represents the number of times a value falls within a particular *bin*.
+
+Example: let's look at the distribution of `Petal.Length` values
+
+```{r}
+ggplot(data = iris_full, aes(x = Petal.Length)) +
+  geom_histogram() 
+```
+
+Let's break down this call to introduce a few key things about ggplot
+
+* ggplot: the initial canvas we're working on
+* geom: geometric objects (i.e. the type of plot - histogram, points, line, etc) 
+* aes: aesthetic mapping 
+
+***
+
+#### Challenge - use `?geom_histogram` to determine how to change the number of bins used
+
+```{r, echo=FALSE, eval=FALSE}
+ggplot(data = iris_full, aes(x = Petal.Length)) +
+  geom_histogram(bins = 100) 
+```
+
+***
+
+### Visualizing relationships between two variables
+
+Now, let's make an x-y scatter plot. 
+Specifically, we would like to plot Sepal.Length versus Petal.Length. 
+
+```{r plot1-ggplot}
+ggplot(data = iris_full, aes( x = Sepal.Length, y = Petal.Length )) + 
+  geom_point(  )
+```
+
+
+**THAT SEEMS SO COMPLICATED!**
+
+It's true. The syntax for ggplot can seem pretty complicated. 
+But the power of ggplot lies in the ability to lay several geometries (geoms) over each other.
+Also, each geometry has a rich set of options. 
+For example, let's say I want to create the plot we just made, but have each species represented by a different color.
+
+```{r plot2}
+ggplot(data = iris_full, aes( x = Sepal.Length, y = Petal.Length, colour = Species ) ) + 
+  geom_point( )
+```
+
+Let's add more information - how about habitat type as well.
+
+```{r}
+ggplot(data = iris_full, aes( x = Sepal.Length, y = Petal.Length, colour = Species, shape = Habitat)) + 
+  geom_point(size = 2.5 ) +
+  theme_bw()
+```
+
+How about if we wanted to add trend lines.
+
+```{r}
+ggplot(data = iris_full, aes( x = Sepal.Length, y = Petal.Length, colour = Species)) + 
+  geom_point(size = 2.5 ) +
+  geom_smooth(method = "lm") +
+  theme_bw()
+```
+
+**facets** - a way to separate data into different subplots
+
+Let's say we wanted different plots for each species. We can do that in ggplot using
+`facets`.
+
+```{r plot2-facets}
+ggplot( data = iris_full, aes( x = Sepal.Length, y = Petal.Length ) ) + 
+  geom_point() +
+  facet_grid( Species ~ . )
+```
+
+
+*** 
+
+#### Challenge
+
+1. `ggplot2` has many geometries, allowing us to make lot's of different 
+types of plots. Let's make two new plots - one **boxplot** of `Petal.Length`, 
+with one boxplot for each species. Use `geom_boxplot` for this.
+
+```{r}
+ggplot(data = iris_full, aes(x = Species, y = Petal.Length, fill = Species)) +
+  geom_boxplot() +
+  theme_bw()  
+```
+
+2. Make a histogram of Petal.width. 
+
+```{r}
+ggplot(data = iris_full, aes(x = Petal.Length)) +
+  geom_histogram() +
+  theme_bw()  
+```
+
+
+Use facets to separate the three species.
+
+```{r}
+ggplot(data = iris_full, aes(x = Petal.Length, fill = Species)) +
+  geom_histogram() +
+  facet_grid( Species ~ . ) +
+  theme_bw()  
+```
+
+3. Second, let's make density plots of Petal.Width. Use `geom_density` and
+`colour` to make different colored density lines for iris in each 
+habitat type. 
+**Note: the area under the curve is equal to 1.**
+
+```{r}
+ggplot(data = iris_full, aes(x = Petal.Length, colour = Species)) +
+  geom_density() +
+  theme_bw()
+```
+
+4. Use histogram to plot density instead of counts.
+
+```{r}
+ggplot(data = iris_full, aes(x = Petal.Length)) +
+  geom_histogram(aes(y = ..density.., fill = Species)) +
+  facet_grid( Species ~ . ) +
+  geom_density(aes(colour = Species)) +
+  theme_bw()  
+```
+
+
+***
+
+### More `ggplot2` resources
+
+* <http://docs.ggplot2.org/current/>: The official **ggplot2** documentation.
+* <http://www.amazon.com/o/ASIN/0387981403/ref=nosim/gettgenedone-20>: The **ggplot2** book, by the developer, Hadley Wickham.
+* <https://groups.google.com/forum/#!forum/ggplot2>: The **ggplot2** Google Group (mailing list, discussion forum).
+* <https://github.com/swcarpentry/bc/tree/master/intermediate/r/data-visualization>: Intermediate Software Carpentry lesson on data visualization with **ggplot2**.
+* <http://learnr.wordpress.com/>: A blog with a good number of posts describing how to reproduce various kind of plots using **ggplot2**.
+* <http://stackoverflow.com/questions/tagged/ggplot2>: Thousands of questions and answers tagged with "ggplot2" on Stack Overflow, a programming Q&A site.

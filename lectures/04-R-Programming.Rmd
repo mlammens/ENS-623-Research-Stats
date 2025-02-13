@@ -1,12 +1,12 @@
 ---
-title: "Meeting 3 - R Programming"
+title: "R Programming"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
     toc: yes
 ---
 
-# Today's Goals
+## Section Goals
 
 * Be able to write your own "user defined" function
 * Repeat a computation task using `for` and `while` loops
@@ -14,8 +14,6 @@ output:
 * Understand and practice the use of pseudocode to help solve computational problems (maybe)
 
 ***
-
-# R Programming
 
 ## User defined functions
 

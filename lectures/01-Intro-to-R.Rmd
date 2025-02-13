@@ -1,22 +1,20 @@
 ---
-title: "Meeting 1 - Introduction to R Programming"
+title: "Introduction to R"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
-    code_folding: hide
-    toc: yes
-  pdf_document:
     toc: yes
 ---
 
 # Class goals
 
-* Learn how to develop a research question
-* Become proficient using the R statistical programming language
-* Learn how to explore data collected during a research project
-* Learn and master the standard statistical analyses used in scientific studies
-* Understand the connections between statistical analyses and study design
-* Become familiar with resources to explore advanced analysis methods
+* Learn how to clean and prepare data for analyses.
+* Learn how to perform exploratory data analysis.
+* Learn how to evaluate data quality.
+* Understand and practice methods to visualize patterns in data.
+* Become familiar with how to perform standard data analysis techniques, including linear regression, ANOVA, and generalized linear modeling.
+* Demonstrate how to identify the most appropriate analysis techniques to use with a given data set.
+* Be able to use knowledge of standard data analysis techniques to effectively choose and apply more advanced methods.
 
 # Class format
 
@@ -29,9 +27,12 @@ output:
 
 ## Why do I have to learn to program in R?
 
-In short, it's "industry standard". 
-But the longer answer has to do with replicability (or reproducability) of data analyses.
+Data science is a valuable, often necessary, skill for many jobs in environmental science and policy.
+Over the past 20 years, R has become the leading analysis tool in the environmental sciences. 
+Python and other programming languages have also become increasingly prevalent. 
+Any of these approaches increases replicability (or reproducability) of data analyses, which is important for the advancement of science and policy work.
 Documenting your analysis in R, using R scripts or Rmd files allows you to re-run your analysis whenever the need arises, and to share your analysis work flow with others.
+We are learning R in this program because it is fairly standard in our fields and learning this program / language will give you a good foundation to learn other programs as needed.
 
 ## Getting started
 
@@ -82,7 +83,7 @@ Point-and-click method - Use 'Session' > 'Set Working Directory' > 'Choose Direc
 Using the R Console:
 
 ```{r, eval=FALSE}
-setwd("/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-SP18/")
+setwd("/Users/maiellolammens/Dropbox/Pace/Teaching/ENS-623-Research-Stats/ENS-623-Research-Stats-SP25/")
 ```
 
 
@@ -138,7 +139,8 @@ sqrt(-5)
 
 ## R script file
 
-Use a script file for your work. It's easier to go back to and easy to document.
+In order to ensure replicability we often use R script files. 
+They are easy to go back to and to document your work while you go.
 
 **Important:** within an R file, you can use the # sign to add comments. Anything written after the # is *not* interpreted when you run the code.
 
@@ -150,7 +152,7 @@ Create a new R script file in your `scripts` directory. Run a few basic commands
 
 ### Basic file managment in R
 
-```{r}
+```{r, results='hide'}
 # What working directory am I in?
 getwd()
 
@@ -158,7 +160,7 @@ getwd()
 setwd(".")
 
 # What files are in the current directory?
-#dir()
+dir()
 ```
 
 #### Things to cover
@@ -174,66 +176,30 @@ setwd(".")
 
 ## Rmd file
 
-Use this to integrate text and R code into the same document.
-**I will expect most of your homework assignments as an Rmd file.**
+Using [R Markdown](https://rmarkdown.rstudio.com/), we can integrate descriptive text, R code, and the output from that code, into a seamless document that can be easily **reproduced**.
+Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. 
+While some of the details of using Markdown (and thus R Markdown) can get tricky, the basics are very easy to pickup.
+RStudio even comes with two very useful tools to learn and use Markdown. 
+First, go to the `Help` tab and select `Markdown Quick Reference`.
+Second, a more detailed reference can be found in the `Help` -> `Cheatsheets` section.
 
-*Practice with Rmd file*
+### Markdown vs R Markdown
 
-## Variables and objects
+R Markdown is a tool that allows you to make a simple text document using the Markdown formatting syntax **with** R code and associated output embedded. 
 
-There are several basic types of data structures in R.
+### Starting with R Markdown
 
-* **VECTORS**: One-dimensional arrays of numbers, character strings, or logical values (T/F)
-* **FACTORS**: One-dimensional arrays of factors (Stop - Let's discuss factors)
-* **DATA FRAMES**: Data tables in which the various columns may be of different type
-* **MATRICES**: In R, matrices can only be 2-dimensional, anything higher dimension is called an array (see below). Matrix elements are numerical; some functions, like the transpose function t(), only work on matrices
-* **ARRAYS**: higher dimensional matrices are called arrays in R
-* **LISTS**: lists can contain any type of object as list elements. You can have a list of numbers, a list of matrices, a list of characters, etc., or any combination of the above.
+Go to the new file button (upper left corner of the RStudio interface, or `File` -> `New File`) and choose the R Markdown option. 
+A screen will pop-up requesting information such as Title, Author, and Output Format. 
+Give your new doc a title and select **HTML** as the output format.
+A new file that is pre-populated with a bunch of text will open in the `Source` panel.
 
-### Functions that are useful for understanding the different types of data structures
+We will go over each section briefly:
 
-```
-str()
-class()
-```
+* Header
+* Sections
+* Code Chunks (The code chunk syntax is *very* specific and important. As a beginner, you may choose to use the GUI button to make empty chunks - it's the little green box with a **C** in it and a plus sign.)
 
-## Practice with variables
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. Click **Knit** now to see what happens.
 
-Define a variable
-
-```{r}
-my_var <- 8
-```
-
-And another
-
-```{r}
-my_var2 <- 10
-```
-
-Work with vars
-
-```{r}
-my_var + my_var2
-```
-
-Make a new variable
-
-```{r}
-my_var_tot <- my_var + my_var2
-```
-
-***
-
-#### Challenge
-
-Change the value of my_var2
-
-```{r}
-my_var2 <- 3
-```
-
-What is the value of `my_var_tot` now?
-
-***
 

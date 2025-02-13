@@ -1,5 +1,5 @@
 ---
-title: "Meeting 5 - Working with Data in R"
+title: "Introductory Data Wrangling"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
@@ -8,20 +8,20 @@ output:
 
 > *Note - much of the material in this session is based on or remixed from materials in the [Data Carpentry - Data Analysis and Visualization in R for Ecologists](https://datacarpentry.org/R-ecology-lesson/index.html) lessons, maintained by François Michonneau & Auriel Fournier. Copyright (c) Data Carpentry.*
 
-# Today's Goals
+## Section Goals
 
 * Be able to load a data set into the R environment from a .csv file
 * Practice with basic data summary and `data.frame` indexing functions
 * Practice working with **factors** and **dates**
 * Become familiar with the `tidyverse` "curated" list of packages
-* Practice subsetting a data set using functions `select` and `filter`
+* Practice sub-setting a data set using functions `select` and `filter`
 * Practice calculating summaries of a data set using functions `group_by` and `summarize`
 
 ***
 
-# Working with data files
+## Working with data files
 
-## Portal Project data set
+### Portal Project data set
 
 We will be working with a data set from the [Portal Project](https://portal.weecology.org/), a long-term ecological research project near Portal, Arizona (southeast AZ) that was started in 1977. 
 Data collected as part of this project includes observations of plants, rodents, and ants in a set of experimentally manipulated study plots. 
@@ -111,7 +111,7 @@ How about a few other functions?
 
 ***
 
-#### Challenge - looking a data frames
+#### Challenge - looking at data frames
 
 Try using each of the functions below and identifying what they do.
 
@@ -127,7 +127,7 @@ str(surveys)
 
 ***
 
-### Metadata
+## Metadata
 
 Metadata is information about the data. 
 Standards for metadata can be complicated, but at its most basic level, metadata is simply information about each column of a data set. 
@@ -184,7 +184,7 @@ survey_shrt$weight[1:2] <- mean(survey_shrt$weight, na.rm = TRUE)
 
 ***
 
-## Factors
+### Factors
 
 When we ran `str(surveys)` above we saw that several of the columns consist of
 integers. The columns `genus`, `species`, `sex`, `plot_type`, ... however, are
@@ -300,7 +300,7 @@ ggplot(data = NULL, aes(x = sex)) +
   geom_bar()
 ```
 
-## Formatting dates
+## Working with dates
 
 One of the most common issues that new (and experienced!) R users have is
 converting date and time information into a variable that is appropriate and
@@ -391,11 +391,11 @@ analyses, how would you deal with this situation?
 
 ***
 
-# Data manipulation using **`dplyr`** and **`tidyr`**
+## Data wrangling using **`dplyr`** and **`tidyr`**
 
 Bracket subsetting is handy, but it can be cumbersome and difficult to read,
 especially for complicated operations. Enter **`dplyr`**. **`dplyr`** is a package for
-making tabular data manipulation easier. It pairs nicely with **`tidyr`** which enables you to swiftly convert between different data formats for plotting and analysis.
+making tabular data wrangling easier. It pairs nicely with **`tidyr`** which enables you to swiftly convert between different data formats for plotting and analysis.
 
 The **`tidyverse`** package is an
 "umbrella-package" that installs **`tidyr`**, **`dplyr`**, and several other packages useful for data analysis, such as  **`ggplot2`**, **`tibble`**, etc.
@@ -409,7 +409,7 @@ doing data analysis with some of the functions that come with R:
 3. Hidden arguments, having default operations that new learners are not aware
    of.
 
-## What are **`dplyr`** and **`tidyr`**?
+### What are **`dplyr`** and **`tidyr`**?
 
 The package **`dplyr`** provides easy tools for the most common data manipulation
 tasks. It is built to work directly with data frames, with many common tasks
@@ -444,7 +444,7 @@ Next, we're going to learn some of the most common **`dplyr`** functions:
 - `arrange()`: sort results
 - `count()`: count discrete values
 
-## Selecting columns and filtering rows
+### Selecting columns and filtering rows
 
 To select columns of a data frame, use `select()`. The first argument
 to this function is the data frame (`surveys`), and the subsequent
@@ -471,7 +471,7 @@ filter(surveys, year == 1995)
 ```
 
 
-## Pipes
+### Pipes
 
 What if you want to select and filter at the same time? There are three
 ways to do this: use intermediate steps, nested functions, or pipes.
@@ -592,9 +592,6 @@ paradigm: split the data into groups, apply some analysis to each group, and
 then combine the results. **`dplyr`** makes this very easy through the use of the
 `group_by()` function.
 
-
-#### The `summarize()` function (or `summarise`)
-
 `group_by()` is often used together with `summarize()`, which collapses each
 group into a single-row summary of that group.
 **Important note - ** the functions `summarize()` and `summarise()` are equivelant. Just two different spellings for the same thing ¯\\\_(ツ)\_/¯.
@@ -656,7 +653,7 @@ surveys %>%
   arrange(desc(mean_weight))
 ```
 
-#### Counting
+### Counting
 
 When working with data, we often want to know the number of observations found
 for each factor or combination of factors. For this task, **`dplyr`** provides
@@ -740,7 +737,7 @@ a variable.
 We can do both these of transformations with two `tidyr` functions, `spread()`
 and `gather()`.
 
-#### Spreading
+### Spreading
 
 `spread()` takes three principal arguments:
 
@@ -785,7 +782,7 @@ surveys_gw %>%
   head()
 ```
 
-#### Gathering
+### Gathering
 
 The opposing situation could occur if we had been provided with data in the
 form of `surveys_spread`, where the genus names are column names, but we 
@@ -829,7 +826,7 @@ surveys_spread %>%
   head()
 ```
 
-# Exporting data
+## Exporting data
 
 Now that you have learned how to use **`dplyr`** to extract information from
 or summarize your raw data, you may want to export these new data sets to share
