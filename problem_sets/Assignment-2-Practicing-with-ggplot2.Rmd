@@ -3,18 +3,11 @@ title: "Assignment 2 - Practicing with `ggplot2`"
 output: html_document
 ---
 
-**Please submit this homework as an R Markdown (Rmd) file.**
-See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+## Learning Outcomes
 
-#### File name
-
-Your file should use the following naming scheme
-
-**`[last name]_ENS623_SP22_PS2.Rmd`**
-
-For example, 
-
-`Lammens_ENS623_SP22_PS2.Rmd`
+* Practice using `ggplot2` to create data visualizations.
+* Identify the uses of different types of visualizations.
+* Explain the biological or environmental significance of a data visualization.
 
 #### Grading note
 
@@ -24,7 +17,7 @@ For example,
 
 ## Problem 1 - Plotting relationships between variables
 
-In class we learned to use `ggplot2` to make an x-y scatter plot comparing `Sepal.Length` and `Petal.Length` in the `iris` data set.
+In [section 03](http://mlammens.github.io/ENS-623-Research-Stats/lectures/03-Data-Visualization-and-Exploration.html) we learned to use `ggplot2` to make an x-y scatter plot comparing `Sepal.Length` and `Petal.Length` in the `iris` data set.
 
 Recall that you must first install `ggplot2` if you have not done so already. **ONLY DO THIS IF YOU HAVE NOT ALREADY INSTALLED GGPLOT 2**:
 
@@ -38,7 +31,7 @@ Then load it into your environment:
 library(ggplot2)
 ```
 
-Then the code to create the actual plot looks like this:
+The code to create one of the plots from section 03 looks like this:
 
 ```{r}
 data(iris)
@@ -47,7 +40,7 @@ ggplot(data = iris, aes( x = Sepal.Length, y = Petal.Length, colour = Species ))
   geom_point()
 ```
 
-I very briefly showed you that you can add the term `geom_smoth(method = "lm")` to add linear regression lines onto your plot, as such:
+We also learned that you can add the term `geom_smoth(method = "lm")` to add linear regression lines onto your plot, as such:
 
 
 ```{r}
@@ -58,11 +51,11 @@ ggplot(data = iris, aes( x = Sepal.Length, y = Petal.Length, colour = Species ))
 
 ```
 
-*Use the code above, but replace `Petal.Length` with `Sepal.Width`. Make a new x-y scatter plot with linear regression lines. Describe how fitting a different line to the data from each species might influence how you interpret your data, in comparison to an x-y scatter plot where you do not separate the species.*
+*Use the code above, but replace `Petal.Length` with `Sepal.Width`. Make a new x-y scatter plot with linear regression lines. Describe how having separate lines for each species versus one line for all of the data combined influences your interpretations of these data, and specificially the relationship between `Sepal.Length` and `Sepal.Width`.*
 
-***Hint:** You should make a second plot where you do not include any color arguments to see what happens.*
+***Hint:** You should make another plot where you *do not* include any `color` arguments to see what happens. That is, a plot where you ignore the species identifications.*
 
-**Put your written answer to the question above, here.**
+**Put your written answer to the question here.**
 
 ## Problem 2 - Histograms
 
