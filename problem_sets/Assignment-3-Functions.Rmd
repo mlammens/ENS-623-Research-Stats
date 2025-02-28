@@ -1,0 +1,27 @@
+---
+title: "Assignment 3 - Practicing with functions"
+output: html_document
+---
+
+## Learning Outcomes
+
+* Understand what functions are and why they are used.
+* Develop a function to solve a given problem.
+* Write a `for` loop.
+
+## Problem - creating a `myMean` function
+
+Write a **function** named `myMean` that uses a `for` loop to calculate the mean of a vector of numbers.
+
+Recall that the mean is:
+
+$$
+\bar{x} = \frac{\sum_{i=1}^n{x_i}}{n}
+$$
+
+### Notes
+
+* You should use the `for` loop to add up a vector of numbers. **DO NOT USE THE SUM FUNCTION IN YOUR CODE!**
+* Create a vector of numbers to test your function on, and compare the results of your function with that of the `mean` function in base R.
+
+
