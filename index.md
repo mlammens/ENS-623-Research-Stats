@@ -50,6 +50,7 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 |:------|:-----|:----|
 | Practice with Rmd and `data.frame` summaries | [assignment 1 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-1-RMDs-and-dataframe-summary.html) | [assignment 1 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-1-RMDs-and-dataframe-summary.Rmd)|
 | Practicing with `ggplot2`| [assignment 2 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-2-Practicing-with-ggplot2.html) | [assignment 2 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-2-Practicing-with-ggplot2.Rmd)|
+| Practicing with functions| [assignment 3 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-3-Functions.html) | [assignment 2 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-3-Functions.Rmd)|
 
 ### Supplementary Notes
 
