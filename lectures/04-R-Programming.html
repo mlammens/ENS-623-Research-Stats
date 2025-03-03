@@ -629,13 +629,13 @@ if (num &gt; 100) {
 <p>We can also write a “cascade” of <code>if</code>/<code>else</code>
 statements</p>
 <pre class="r"><code>if (num &gt; 0) {
-  return(1)
+  print(&quot;positive&quot;)
 } else if (num == 0) {
-  return(0)
+  print(&quot;equal to 0&quot;)
 } else {
-  return(-1)
+  print(&quot;negative&quot;)
 }</code></pre>
-<pre><code>## [1] 1</code></pre>
+<pre><code>## [1] &quot;positive&quot;</code></pre>
 <hr />
 <div id="challenge-3" class="section level4">
 <h4>Challenge</h4>

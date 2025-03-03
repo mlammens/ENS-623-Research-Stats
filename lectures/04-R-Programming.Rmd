@@ -252,11 +252,11 @@ We can also write a "cascade" of `if`/`else` statements
 
 ```{r}
 if (num > 0) {
-  return(1)
+  print("positive")
 } else if (num == 0) {
-  return(0)
+  print("equal to 0")
 } else {
-  return(-1)
+  print("negative")
 }
 ```
 
