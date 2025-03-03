@@ -1,12 +1,12 @@
 ---
-title: "Meeting 6 - Introduction to Probability"
+title: "Introduction to Probability"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
     toc: yes
 ---
 
-# Today's Goals
+## Section Goals
 
 * Introduce some basic principles of probability
 * Learn to simulate some basic probabilistic events
@@ -15,7 +15,7 @@ output:
 
 ***
 
-# Meeting preliminaries
+## Meeting preliminaries
 
 We'll be working with the Portal Survey data this week. 
 We must first load these data into our work environment.
@@ -32,11 +32,11 @@ surveys <-
 
 
 
-# Probability
+## Probability
 
 > *We usually talk about probabilities in terms of events; the probability of event A occurring is written P(A). Probabilities can be between zero and one; if P(A) equals zero, then the event is impossible; if P(A) equals one, then the event is certain.* - Quinn and Keough 2002
 
-## Frequentist statistics 
+### Frequentist statistics 
 
 The relative frequency of an event over the long term, after many trials.
 
@@ -49,12 +49,12 @@ Here's an example of throwing a single coin.
 ```
 
 
-## Bayesian statistics
+### Bayesian statistics
 
 For now, all I will say is that there are other perspectives in statistics. 
 A key difference between Frequentist and Bayesian statistics is that the latter allows for you to incorporate **prior knowledge**.
 
-### Flipping a coin - frequentist vs bayesian perspective
+#### Flipping a coin - frequentist vs bayesian perspective
 
 You find a coin on the ground, and want to know the probability that you will get a heads if you flip the coin. 
 A frequentist approach would flip the coin many times and assume the probability of getting a heads is approximately the **frequency** of heads.
@@ -63,7 +63,7 @@ A Bayesian approach would assume that the probability is 0.5 based on a naive gu
 ***
 
 
-# Properties of probability
+## Properties of probability
 
 * a **random process** gives rise to an **outcome**
     * a coin-flip is a random process
@@ -73,11 +73,11 @@ A Bayesian approach would assume that the probability is 0.5 based on a naive gu
     * If we flip a coin 100 times, and 52 times we got heads, $\hat{p}_{100} = \frac{52}{100}$
     * Out of `r nrow(surveys)` total rodent captures, `r sum(surveys$genus == "Peromyscus")` were *Peromyscus*, thus the probability of capturing a *Peromyscus* is `r round(sum(surveys$genus == "Peromyscus") / nrow(surveys), 2)`
 
-## Law of Large Numbers
+### Law of Large Numbers
 
 > *The tendency of $\hat{p}_n$ to stabilize around $p$ [as $n$ increases] is described by the **Law of Large Numbers**.* - Vu and Harrington 2020, p. 92
 
-## Example of law of large numbers
+#### Example of law of large numbers
 
 Let's start by calculating the frequency of each of the genera captures in the Portal traps. 
 These frequency values can be interpreted as probability values of catching a particular genus in a trap.
@@ -139,7 +139,7 @@ gen_freq_sub
 ```
 
 
-### Aside: sampling with vs. without replacement
+#### Aside: sampling with vs. without replacement
 
 Above, we set `replace = FALSE` in the `sample` function.
 This means that any row that is selected, can only be selected **once**. 
