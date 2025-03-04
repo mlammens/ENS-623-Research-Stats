@@ -1,26 +1,24 @@
 ---
-title: "ENS 623 - Spring 2022 - Assignment 4"
+title: "Assignment 4 - Working with data"
 output: html_document
 ---
 
-**Please submit this homework as an R Markdown (Rmd) file.**
-See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+## Learning Outcomes
 
-#### File name
+* Apply a given criteria to filter a data set.
+* Create a new column in a `data.frame` using existing columns in that data set.
+* Practice using `ggplot2` to create data visualizations.
+* Identify the uses of different types of visualizations.
+* Explain the biological or environmental significance of a data visualization.
 
-Your file should use the following naming scheme
-
-**`[last name]_ENS623_SP22_PS4.Rmd`**
-
-For example, 
-
-`Lammens_ENS623_SP22_PS4.Rmd`
 
 #### Grading note
 
 * Steps 1-3 = 4 points
 * Step 4 - Figures = 4 points (2 points for each figure)
 * Descriptions of the results of each figure (2 points)
+
+## Problem - filtering, mutating, and plotting the Portal data
 
 In this problem set, we will use multiple skills we've learned over the first four weeks of class to put together a mini-report on the differences in weights and hind-foot lengths of different rodent genera measured during the Portal Project. 
 
