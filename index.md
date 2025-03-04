@@ -50,7 +50,8 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 |:------|:-----|:----|
 | Practice with Rmd and `data.frame` summaries | [assignment 1 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-1-RMDs-and-dataframe-summary.html) | [assignment 1 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-1-RMDs-and-dataframe-summary.Rmd)|
 | Practicing with `ggplot2`| [assignment 2 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-2-Practicing-with-ggplot2.html) | [assignment 2 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-2-Practicing-with-ggplot2.Rmd)|
-| Practicing with functions| [assignment 3 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-3-Functions.html) | [assignment 2 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-3-Functions.Rmd)|
+| Practicing with functions| [assignment 3 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-3-Functions.html) | [assignment 3 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-3-Functions.Rmd)|
+| Working with data| [assignment 4 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-4-Working-with-data.html) | [assignment 4 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-4-Working-with-data.Rmd)|
 
 ### Supplementary Notes
 
@@ -95,6 +96,13 @@ The project represents 30% of your grade, but is broken up into several componen
 ## Resources
 
 Here are some useful resources for learning R, biostats, research methods, and grants.
+
+### Textbooks
+
+* [Introductory Statistics for the Life and Biomedical Sciences](https://www.openintro.org/book/biostat/) - by Vu and Harrington; 
+An open-source textbook published by the [OpenIntro](https://www.openintro.org/) group. 
+This is a very good overview of biostatistics that can be adapted for many class levels.
+The PDF version of this text can be downloaded for free.
 
 ### R
 
