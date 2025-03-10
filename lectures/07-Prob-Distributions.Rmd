@@ -1,20 +1,19 @@
 ---
-title: "Meeting 7 - Probability Distributions"
+title: "Probability Distributions"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
     toc: yes
 ---
 
-# Today's Goals
+# Section Goals
 
-* Wrap-up important concepts of probability - i.e., **independence** and **conditional probability**
 * Introduce concepts of probability distributions
 * Learn details of a few important probability distributions
 
 ***
 
-# Meeting preliminaries
+## Meeting preliminaries
 
 We'll be working with the Portal Survey data this week (again). 
 We must first load these data into our work environment.
@@ -29,11 +28,9 @@ surveys <-
   filter(taxa == "Rodent")
 ```
 
-# Probability 
-
 ***
 
-#### Challenge - review
+#### Challenge - Probability review
 
 * What are the three main properties of probability (as we've discussed in this class)?
 * Define what we mean by **mutually exclusive** events
@@ -41,154 +38,6 @@ surveys <-
 * In what context would you use the **General Addition Rule**? Note - the General Addition Rule is $P(A\text{ or } B ) = P(A) + P(B) - P(A\text{ and }B)$
 
 ***
-
-
-## Independence
-
-> *Two processes are **independent** if knowing the outcome of one provides* no useful information *about the outcome of the other.* - Vu and Harrington 2020, p. 101
-
-***
-
-#### Challenge 
-
-* Is flipping two coins different from flipping one, then the other? 
-* You flip 99 heads. What is the probability you will flip a head on the 100th toss?
-* For a 6-sided die example, why aren't $P(<4)$ and $P(\text{odd})$ **NOT** independent events?
-* You catch a *Neotoma* in a trap in one of the Portal plots. What is the probability that you will catch a *Neotoma* in a trap in one of the other Portal plots?
-
-
-***
-
-### Multiplication Rule for Independent Processes
-
-From *Vu and Harrington 2020, p. 103*
-
-> If A and B represent events from two different and independent processes, then the probability that both A and B occur is given by:
-
-$$
-P(A \text{ and } B) = P(A) \times P(B)
-$$
-
-> Similarly, if there are $k$ events $A_1$, ..., $A_k$ from $k$ independent processes, then the probability they all occur is:
-
-$$
-P(A_1)P(A_2)...P(A_k)
-$$
-
-***
-
-#### Challenge - probability of capturing 100 *Dipodomys* in a row vs capturing 100 *Chaetodipus* in a row.
-
-First recall how we calculated the frequencies / probabilities of capturing each of the different genera of rodents. Then use the multiplication rule to calculate the two probabilities above.
-
-```{r}
-genus_frequencies <-
-  surveys %>%
-  group_by(genus) %>%
-  count()
-
-genus_frequencies$freq <- round(genus_frequencies$n / sum(genus_frequencies$n), 4)
-
-knitr::kable(genus_frequencies)
-```
-
-***
-
-## Conditional Probability
-
-### Conditional Probability: Intuition
-
-Consider height in the US population.
-
-What is the probability that a randomly selected individual in the population is taller than 6 feet, 4 inches?
-
-* Suppose you learn that the individual is a professional basketball player. Does this change the probability that the individual is taller than 6 feet, 4 inches?
-
-### Conditional Probability: Concept
-
-The **conditional probability** of an event $A$, given a second event $B$, is the probability of $A$ happening, knowing that the event $B$ has happened.
-
-* This conditional probability is denoted $P(A|B)$
-
-What is the probability of trapping a *Dipodomys merriami*?
-
-Let $A$ = capture a *Dipodomys merriami*
-
-```{r}
-species_frequencies <-
-  surveys %>%
-  group_by(genus, species) %>%
-  count()
-
-species_frequencies <-
-  species_frequencies %>%
-  mutate(freq = round(n / sum(species_frequencies$n), 4))
-
-```
-
-What is the probability of trapping a *Dipodomys merriami*, conditional (or *given*) that you captures a *Dipodomys*?
-
-Again, let $A$ = capture a *Dipodomys merriami*, and now $B$ = capture a *Dipodomys*.
-
-```{r}
-dipo_frequencies <-
-  surveys %>%
-  filter(genus == "Dipodomys") %>%
-  group_by(species) %>%
-  count()
-
-dipo_frequencies <-
-  dipo_frequencies %>%
-  mutate(freq = round(n / sum(dipo_frequencies$n), 4))
-
-dipo_frequencies
-```
-
-
-### Conditional Probability: Formal Definition
-
-As long as $P(B) > 0$,
-\[P(A|B) = \dfrac{P(A \cap B)}{P(B)}. \]
-
-From the definition,
-\begin{align*}
-P(A|B) =& \dfrac{P(\text{capture a Dipodomys merriami AND capture a Dipodomys})}{P(\text{capture a Dipodomys})} \\
-=& \dfrac{0.3094}{0.4721} = 0.6554
-\end{align*}
-
-### Independence, Again...
-
-A consequence of the definition of conditional probability:
-
-* If $P(A|B) = P(A)$, then $A$ and $B$ are independent; knowing $B$ offers no information about whether $A$ occurred.
-
-
-### General Multiplication Rule
-
-If $A$ and $B$ represent two outcomes or events, then
-\[P(A \cap B) = P(A|B)P(B).\]
-
-This follows from rearranging the definition of conditional probability:
-\[P(A|B) = \frac{P(A \cap B)}{P(B)} \rightarrow P(A|B)P(B) = P(A \cap B)\]
-
-Unlike the previously mentioned multiplication rule, this is valid for events that might not be independent.
-
-### Bayes' Theorem, aka Bayes' Rule
-
-Bayes' Thorem (simplest form):
-
-$$ P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
-
-
-Follows directly from the definition of conditional probability by noting that $P(A) P(B|A)$ equals $P(A \text{ and } B)$:
-
-\[P(A|B) =  \frac{P(A \cap B)}{P(B)} = \frac{P(B|A)P(A)}{P(B)}\]
-
-Foundation of Bayesian statistics:
-
-\[P(\text{assumptions}|\text{data}) =  \frac{P(\text{data}|\text{assumptions})P(\text{assumptions})}{P(\text{data})}\]
-
-# Probability Distributions
 
 ## Random Variables
 
