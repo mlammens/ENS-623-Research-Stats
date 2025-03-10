@@ -53,6 +53,7 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 | Practicing with `ggplot2`| [assignment 2 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-2-Practicing-with-ggplot2.html) | [assignment 2 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-2-Practicing-with-ggplot2.Rmd)|
 | Practicing with functions| [assignment 3 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-3-Functions.html) | [assignment 3 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-3-Functions.Rmd)|
 | Working with data| [assignment 4 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-4-Working-with-data.html) | [assignment 4 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-4-Working-with-data.Rmd)|
+| Data report - NYS Spills Incidents| [data report 1 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Data-Report-1.html) | [data report 1 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Data-Report-1.Rmd)|
 
 ### Supplementary Notes
 

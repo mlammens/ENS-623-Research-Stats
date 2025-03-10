@@ -1,5 +1,5 @@
 ---
-title: "ENS 623 - Spring 2022 - Data Report 1 assignment"
+title: "Data Report 1 - NYS Spills Incidencts Data Analysis"
 output: html_document
 ---
 
@@ -9,22 +9,22 @@ The goal of the Data Report assignment is for you to demonstrate your ability to
 This includes reading in a data set, calculating summary statistics for a data set, and creating data visualizations. 
 
 **Please submit your Data Report as both an R Markdown (Rmd) file and a Word (docx) file.**
-See the introduction to [Problem Set 1](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Problem-set-1.html) if you need more information about the Rmd format.
+See the introduction to Assignment 1 if you need more information about the Rmd format.
 
 ## Expected style, format, and sections
 
 I am expecting a Data Report that is written as a consistent narrative, rather than simply answers to questions posed below. 
 Imagine you are submitting this report to a supervisor who has asked you to review the data set and deliver a few key points about it.
 You should write in complete sentences and paragraphs, with a logical order and flow. 
-Your code should be embedded within the report as R chuncks in the appropriate sections.
+Your code should be embedded within the report as R chunks in the appropriate sections.
 
 Here are the sections I am expecting in your report:
 
-* **Introduction** - this section should include information about what the data set is, who has collected it, what measurements and variables it contains, etc.. I expect this section to be approximately 300 - 350 words. You *should* reference the information provided at the website listed below.
-* **Data Set Summary** - In this section you should address the results of the tasks listed in **Analysis and summary of all data** below. This should include at least one table. The table should also have a table caption, that *briefly* describes the content of the table.
-* **Analysis of #2 fuel oil spills** - In this section you should address the results of the tasks listed in **Analysis of #2 fuel oil spills** below. This should include at least two figures - a histogram and a x-y scatter plot.
-* **Analysis of [chosen material] spills** - In this section you should address the results of the tasks listed in **Analysis of #2 fuel oil spills** below, but applied to your material of choice. This should include at least two figures - a histogram and a x-y scatter plot.
-* **Summary** - this section should contain a brief (approximately 100 words) summary of what you have found based on the analyses documented above. 
+* **Introduction (15 pnts)** - this section should include information about what the data set is, who has collected it, what measurements and variables it contains, etc.. I expect this section to be approximately 200 - 300 words. You *should* reference the information provided at the website listed below.
+* **Data Set Summary (15 pnts)** - In this section you should address the results of the tasks listed in **Analysis and summary of all data** below. This should include at least one table. The table should also have a table caption, that *briefly* describes the content of the table.
+* **Analysis of #2 fuel oil spills (30 pnts)** - In this section you should address the results of the tasks listed in **Analysis of #2 fuel oil spills** below. This should include at least two figures - a histogram and a x-y scatter plot.
+* **Analysis of [chosen material] spills (30 pnts)** - In this section you should address the results of the tasks listed in **Analysis of #2 fuel oil spills** below, but applied to your material of choice. This should include at least two figures - a histogram and a x-y scatter plot.
+* **Summary (10 pnts)** - this section should contain a brief (approximately 100 - 150 words) summary of what you have found based on the analyses documented above. 
 
 ### Figures and plot formats
 
@@ -32,7 +32,7 @@ Your plots should have x- and y-axis labels that are meaningful **AND** figure c
 
 ## NYS Spill Incidents Data Set
 
-For this Data Report, you will work with the [NYS Spill Incidents Data Set](https://data.ny.gov/Energy-Environment/Spill-Incidents/u44d-k5fk).
+For this Data Report, you will work with the [NYS Spill Incidents Data Set](https://data.ny.gov/Energy-Environment/Spill-Incidents/u44d-k5fk/about_data).
 This is a data set of more than 500k records related to petroleum and other hazardous materials spills here in NY state. 
 An overview of this data set is provided in a pdf document linked from the website above. 
 Below is draft code to download this data set.
@@ -40,11 +40,12 @@ Note that this is a fairly large date set (approx. 92 MB), and may take a few mo
 
 ### Download the data
 
-**NOTE: this chunk is set as `eval = FALSE`. This is because only need to download the data once. When this is complete and the data set is saved to your computer, you do not need to download the data during the knitting process.**
+**NOTE: this chunk is set as `eval = FALSE`. This is because you only need to download the data once. When this is complete and the data set is saved to your computer, you do not need to download the data during the knitting process.**
 
 ```{r, eval = FALSE}
-download.file(url = "https://www.dropbox.com/s/sciza23x1up2m81/Spill_Incidents.csv?dl=1",
-              destfile = "data/Spill_Incidents.csv")
+download.file(url = "https://raw.githubusercontent.com/mlammens/ENS-623-Research-Stats/88869202dfbf499d573233a1b47b8bc6bbb0eecb/data/Spill_Incidents_20250303.csv",
+              destfile = "data/Spill_Incidents_SP25.csv")
+
 ```
 
 ### Load the data into your environment
@@ -55,7 +56,7 @@ The path to this file may differ if you saved the data file somewhere other than
 ```{r, eval=FALSE}
 library(tidyverse)
 
-spills <- read_csv("data/Spill_Incidents.csv")
+spills <- read_csv("data/Spill_Incidents_SP25.csv")
 ```
 
 Using these data and the skills and knowledge you've learned in class, address each of the following tasks.
