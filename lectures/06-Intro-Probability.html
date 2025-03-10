@@ -369,16 +369,29 @@ statistics</a></li>
 <ul>
 <li><a href="#law-of-large-numbers" id="toc-law-of-large-numbers">Law of
 Large Numbers</a></li>
-</ul></li>
 <li><a href="#specific-examples-of-calculating-probabilities" id="toc-specific-examples-of-calculating-probabilities">Specific
 examples of calculating probabilities</a></li>
+<li><a href="#independence" id="toc-independence">Independence</a></li>
+<li><a href="#multiplication-rule-for-independent-processes" id="toc-multiplication-rule-for-independent-processes">Multiplication
+Rule for Independent Processes</a></li>
+<li><a href="#conditional-probability" id="toc-conditional-probability">Conditional Probability</a></li>
+<li><a href="#conditional-probability-concept" id="toc-conditional-probability-concept">Conditional Probability:
+Concept</a></li>
+<li><a href="#independence-again" id="toc-independence-again">Independence, Again…</a></li>
+<li><a href="#general-multiplication-rule" id="toc-general-multiplication-rule">General Multiplication
+Rule</a></li>
+<li><a href="#bayes-theorem-aka-bayes-rule" id="toc-bayes-theorem-aka-bayes-rule">Bayes’ Theorem, aka Bayes’
+Rule</a></li>
+</ul></li>
 </ul>
 </div>
 
 <div id="section-goals" class="section level2">
 <h2>Section Goals</h2>
 <ul>
-<li>Introduce some basic principles of probability</li>
+<li>Introduce some basic principles of probability, including conecpts
+of <strong>independence</strong> and <strong>conditional
+probability</strong></li>
 <li>Learn to simulate some basic probabilistic events</li>
 <li>Apply R data management skills to calculate frequencies and
 probabilities of events using data sets</li>
@@ -431,7 +444,7 @@ trials.</p>
 trial, two trials, …, 1000 trials.</p>
 <p>Here’s an example of throwing a single coin.</p>
 <pre class="r"><code>(head &lt;- runif(1) &gt; 0.5)</code></pre>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="bayesian-statistics" class="section level3">
 <h3>Bayesian statistics</h3>
@@ -581,20 +594,18 @@ of data.</p>
 gen_freq_sub$freq &lt;- round(gen_freq_sub$n / sum(gen_freq_sub$n), 4)
 
 gen_freq_sub</code></pre>
-<pre><code>## # A tibble: 10 × 3
-## # Groups:   genus [10]
-##    genus               n  freq
-##    &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;
-##  1 Baiomys             1  0.01
-##  2 Chaetodipus        19  0.19
-##  3 Dipodomys          53  0.53
-##  4 Neotoma             3  0.03
-##  5 Onychomys           8  0.08
-##  6 Perognathus         7  0.07
-##  7 Peromyscus          1  0.01
-##  8 Reithrodontomys     6  0.06
-##  9 Sigmodon            1  0.01
-## 10 Spermophilus        1  0.01</code></pre>
+<pre><code>## # A tibble: 8 × 3
+## # Groups:   genus [8]
+##   genus                n  freq
+##   &lt;chr&gt;            &lt;int&gt; &lt;dbl&gt;
+## 1 Ammospermophilus     4  0.04
+## 2 Chaetodipus         16  0.16
+## 3 Dipodomys           50  0.5 
+## 4 Neotoma              1  0.01
+## 5 Onychomys           12  0.12
+## 6 Perognathus          5  0.05
+## 7 Peromyscus           3  0.03
+## 8 Reithrodontomys      9  0.09</code></pre>
 <p>Next, let’s play with the numbers of samples, and see what happens to
 the frequencies compared to the <em>real</em> frequencies.</p>
 <pre class="r"><code># Pick the number of rows to select
@@ -614,17 +625,17 @@ gen_freq_sub</code></pre>
 ## # Groups:   genus [11]
 ##    genus                n  freq
 ##    &lt;chr&gt;            &lt;int&gt; &lt;dbl&gt;
-##  1 Ammospermophilus    10 0.01 
-##  2 Baiomys              2 0.002
-##  3 Chaetodipus        183 0.183
-##  4 Dipodomys          458 0.458
-##  5 Neotoma             37 0.037
+##  1 Ammospermophilus     8 0.008
+##  2 Baiomys              4 0.004
+##  3 Chaetodipus        152 0.152
+##  4 Dipodomys          483 0.483
+##  5 Neotoma             30 0.03 
 ##  6 Onychomys           95 0.095
-##  7 Perognathus         46 0.046
-##  8 Peromyscus          68 0.068
-##  9 Reithrodontomys     85 0.085
-## 10 Sigmodon             2 0.002
-## 11 Spermophilus        14 0.014</code></pre>
+##  7 Perognathus         43 0.043
+##  8 Peromyscus          78 0.078
+##  9 Reithrodontomys     97 0.097
+## 10 Sigmodon             6 0.006
+## 11 Spermophilus         4 0.004</code></pre>
 </div>
 <div id="aside-sampling-with-vs.-without-replacement" class="section level4">
 <h4>Aside: sampling with vs. without replacement</h4>
@@ -646,22 +657,21 @@ gen_freq_sub &lt;-
 gen_freq_sub$freq &lt;- round(gen_freq_sub$n / sum(gen_freq_sub$n), 4)
 
 gen_freq_sub</code></pre>
-<pre><code>## # A tibble: 12 × 3
-## # Groups:   genus [12]
+<pre><code>## # A tibble: 11 × 3
+## # Groups:   genus [11]
 ##    genus                n  freq
 ##    &lt;chr&gt;            &lt;int&gt; &lt;dbl&gt;
-##  1 Ammospermophilus     9 0.009
+##  1 Ammospermophilus    15 0.015
 ##  2 Baiomys              1 0.001
-##  3 Chaetodipus        177 0.177
-##  4 Dipodomys          480 0.48 
-##  5 Neotoma             35 0.035
-##  6 Onychomys           99 0.099
-##  7 Perognathus         52 0.052
-##  8 Peromyscus          59 0.059
-##  9 Reithrodontomys     74 0.074
-## 10 Rodent               2 0.002
-## 11 Sigmodon             7 0.007
-## 12 Spermophilus         5 0.005</code></pre>
+##  3 Chaetodipus        184 0.184
+##  4 Dipodomys          465 0.465
+##  5 Neotoma             44 0.044
+##  6 Onychomys           82 0.082
+##  7 Perognathus         51 0.051
+##  8 Peromyscus          65 0.065
+##  9 Reithrodontomys     82 0.082
+## 10 Sigmodon             8 0.008
+## 11 Spermophilus         3 0.003</code></pre>
 <p>With a sample size of 1000, these values should be pretty similar.
 But there are reasons why you might choose <code>replace = TRUE</code>.
 For example, if you are projecting probabilities of capturing genera
@@ -670,9 +680,8 @@ build generic distributions (using <code>replace = TRUE</code>) may be
 more appropriate.</p>
 </div>
 </div>
-</div>
-<div id="specific-examples-of-calculating-probabilities" class="section level2">
-<h2>Specific examples of calculating probabilities</h2>
+<div id="specific-examples-of-calculating-probabilities" class="section level3">
+<h3>Specific examples of calculating probabilities</h3>
 <ol style="list-style-type: decimal">
 <li>Probability of capturing a <em>Neotoma</em></li>
 </ol>
@@ -711,6 +720,234 @@ rodent?</p></li>
 <p><span class="math display">\[
 P(A \text{ or } B) = P(A) + P(B) - P(A \text{ and } B)
 \]</span></p>
+</div>
+</div>
+<div id="independence" class="section level3">
+<h3>Independence</h3>
+<blockquote>
+<p><em>Two processes are <strong>independent</strong> if knowing the
+outcome of one provides</em> no useful information <em>about the outcome
+of the other.</em> - Vu and Harrington 2020, p. 101</p>
+</blockquote>
+<hr />
+<div id="challenge" class="section level4">
+<h4>Challenge</h4>
+<ul>
+<li>Is flipping two coins different from flipping one, then the
+other?</li>
+<li>You flip 99 heads. What is the probability you will flip a head on
+the 100th toss?</li>
+<li>You catch a <em>Neotoma</em> in a trap in one of the Portal plots.
+What is the probability that you will catch a <em>Neotoma</em> in a trap
+in one of the other Portal plots?</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="multiplication-rule-for-independent-processes" class="section level3">
+<h3>Multiplication Rule for Independent Processes</h3>
+<p>From <em>Vu and Harrington 2020, p. 103</em></p>
+<blockquote>
+<p>If A and B represent events from two different and independent
+processes, then the probability that both A and B occur is given by:</p>
+</blockquote>
+<p><span class="math display">\[
+P(A \text{ and } B) = P(A) \times P(B)
+\]</span></p>
+<blockquote>
+<p>Similarly, if there are <span class="math inline">\(k\)</span> events
+<span class="math inline">\(A_1\)</span>, …, <span class="math inline">\(A_k\)</span> from <span class="math inline">\(k\)</span> independent processes, then the
+probability they all occur is:</p>
+</blockquote>
+<p><span class="math display">\[
+P(A_1)P(A_2)...P(A_k)
+\]</span></p>
+<hr />
+<div id="challenge---probability-of-capturing-100-dipodomys-in-a-row-vs-capturing-100-chaetodipus-in-a-row." class="section level4">
+<h4>Challenge - probability of capturing 100 <em>Dipodomys</em> in a row
+vs capturing 100 <em>Chaetodipus</em> in a row.</h4>
+<p>First recall how we calculated the frequencies / probabilities of
+capturing each of the different genera of rodents. Then use the
+multiplication rule to calculate the two probabilities above.</p>
+<pre class="r"><code>genus_frequencies &lt;-
+  surveys %&gt;%
+  group_by(genus) %&gt;%
+  count()
+
+genus_frequencies$freq &lt;- round(genus_frequencies$n / sum(genus_frequencies$n), 4)
+
+knitr::kable(genus_frequencies)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">genus</th>
+<th align="right">n</th>
+<th align="right">freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Ammospermophilus</td>
+<td align="right">437</td>
+<td align="right">0.0128</td>
+</tr>
+<tr class="even">
+<td align="left">Baiomys</td>
+<td align="right">46</td>
+<td align="right">0.0013</td>
+</tr>
+<tr class="odd">
+<td align="left">Chaetodipus</td>
+<td align="right">6029</td>
+<td align="right">0.1760</td>
+</tr>
+<tr class="even">
+<td align="left">Dipodomys</td>
+<td align="right">16167</td>
+<td align="right">0.4721</td>
+</tr>
+<tr class="odd">
+<td align="left">Neotoma</td>
+<td align="right">1252</td>
+<td align="right">0.0366</td>
+</tr>
+<tr class="even">
+<td align="left">Onychomys</td>
+<td align="right">3267</td>
+<td align="right">0.0954</td>
+</tr>
+<tr class="odd">
+<td align="left">Perognathus</td>
+<td align="right">1629</td>
+<td align="right">0.0476</td>
+</tr>
+<tr class="even">
+<td align="left">Peromyscus</td>
+<td align="right">2234</td>
+<td align="right">0.0652</td>
+</tr>
+<tr class="odd">
+<td align="left">Reithrodontomys</td>
+<td align="right">2694</td>
+<td align="right">0.0787</td>
+</tr>
+<tr class="even">
+<td align="left">Rodent</td>
+<td align="right">10</td>
+<td align="right">0.0003</td>
+</tr>
+<tr class="odd">
+<td align="left">Sigmodon</td>
+<td align="right">233</td>
+<td align="right">0.0068</td>
+</tr>
+<tr class="even">
+<td align="left">Spermophilus</td>
+<td align="right">249</td>
+<td align="right">0.0073</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+</div>
+<div id="conditional-probability" class="section level3">
+<h3>Conditional Probability</h3>
+<div id="conditional-probability-intuition" class="section level4">
+<h4>Conditional Probability: Intuition</h4>
+<p>Consider height in the US population.</p>
+<p>What is the probability that a randomly selected individual in the
+population is taller than 6 feet, 4 inches?</p>
+<ul>
+<li>Suppose you learn that the individual is a professional basketball
+player. Does this change the probability that the individual is taller
+than 6 feet, 4 inches?</li>
+</ul>
+</div>
+</div>
+<div id="conditional-probability-concept" class="section level3">
+<h3>Conditional Probability: Concept</h3>
+<p>The <strong>conditional probability</strong> of an event <span class="math inline">\(A\)</span>, given a second event <span class="math inline">\(B\)</span>, is the probability of <span class="math inline">\(A\)</span> happening, knowing that the event <span class="math inline">\(B\)</span> has happened.</p>
+<ul>
+<li>This conditional probability is denoted <span class="math inline">\(P(A|B)\)</span></li>
+</ul>
+<p>What is the probability of trapping a <em>Dipodomys
+merriami</em>?</p>
+<p>Let <span class="math inline">\(A\)</span> = capture a <em>Dipodomys
+merriami</em></p>
+<pre class="r"><code>species_frequencies &lt;-
+  surveys %&gt;%
+  group_by(genus, species) %&gt;%
+  count()
+
+species_frequencies &lt;-
+  species_frequencies %&gt;%
+  mutate(freq = round(n / sum(species_frequencies$n), 4))</code></pre>
+<p>What is the probability of trapping a <em>Dipodomys merriami</em>,
+conditional (or <em>given</em>) that you captures a
+<em>Dipodomys</em>?</p>
+<p>Again, let <span class="math inline">\(A\)</span> = capture a
+<em>Dipodomys merriami</em>, and now <span class="math inline">\(B\)</span> = capture a <em>Dipodomys</em>.</p>
+<pre class="r"><code>dipo_frequencies &lt;-
+  surveys %&gt;%
+  filter(genus == &quot;Dipodomys&quot;) %&gt;%
+  group_by(species) %&gt;%
+  count()
+
+dipo_frequencies &lt;-
+  dipo_frequencies %&gt;%
+  mutate(freq = round(n / sum(dipo_frequencies$n), 4))
+
+dipo_frequencies</code></pre>
+<pre><code>## # A tibble: 4 × 3
+## # Groups:   species [4]
+##   species         n   freq
+##   &lt;chr&gt;       &lt;int&gt;  &lt;dbl&gt;
+## 1 merriami    10596 0.655 
+## 2 ordii        3027 0.187 
+## 3 sp.            40 0.0025
+## 4 spectabilis  2504 0.155</code></pre>
+<div id="conditional-probability-formal-definition" class="section level4">
+<h4>Conditional Probability: Formal Definition</h4>
+<p>As long as <span class="math inline">\(P(B) &gt; 0\)</span>, <span class="math display">\[P(A|B) = \dfrac{P(A \cap B)}{P(B)}. \]</span></p>
+<p>From the definition, <span class="math display">\[\begin{align*}
+P(A|B) =&amp; \dfrac{P(\text{capture a Dipodomys merriami AND capture a
+Dipodomys})}{P(\text{capture a Dipodomys})} \\
+=&amp; \dfrac{0.3094}{0.4721} = 0.6554
+\end{align*}\]</span></p>
+</div>
+</div>
+<div id="independence-again" class="section level3">
+<h3>Independence, Again…</h3>
+<p>A consequence of the definition of conditional probability:</p>
+<ul>
+<li>If <span class="math inline">\(P(A|B) = P(A)\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent; knowing <span class="math inline">\(B\)</span> offers no information about whether
+<span class="math inline">\(A\)</span> occurred.</li>
+</ul>
+</div>
+<div id="general-multiplication-rule" class="section level3">
+<h3>General Multiplication Rule</h3>
+<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> represent two outcomes or events, then
+<span class="math display">\[P(A \cap B) = P(A|B)P(B).\]</span></p>
+<p>This follows from rearranging the definition of conditional
+probability: <span class="math display">\[P(A|B) = \frac{P(A \cap
+B)}{P(B)} \rightarrow P(A|B)P(B) = P(A \cap B)\]</span></p>
+<p>Unlike the previously mentioned multiplication rule, this is valid
+for events that might not be independent.</p>
+</div>
+<div id="bayes-theorem-aka-bayes-rule" class="section level3">
+<h3>Bayes’ Theorem, aka Bayes’ Rule</h3>
+<p>Bayes’ Thorem (simplest form):</p>
+<p><span class="math display">\[ P(A|B) =
+\frac{P(B|A)P(A)}{P(B)}\]</span></p>
+<p>Follows directly from the definition of conditional probability by
+noting that <span class="math inline">\(P(A) P(B|A)\)</span> equals
+<span class="math inline">\(P(A \text{ and } B)\)</span>:</p>
+<p><span class="math display">\[P(A|B) =  \frac{P(A \cap B)}{P(B)} =
+\frac{P(B|A)P(A)}{P(B)}\]</span></p>
+<p>Foundation of Bayesian statistics:</p>
+<p><span class="math display">\[P(\text{assumptions}|\text{data})
+=  \frac{P(\text{data}|\text{assumptions})P(\text{assumptions})}{P(\text{data})}\]</span></p>
 </div>
 </div>
 
