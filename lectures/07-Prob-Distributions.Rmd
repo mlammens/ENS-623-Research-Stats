@@ -108,6 +108,10 @@ $$
 *Question:* What is the number of successes, $x$, in $N$ trials,
 where the probability of a success is $h$
 
+### Binomial Distribution shiny app
+
+[https://istats.shinyapps.io/BinomialDist/](https://istats.shinyapps.io/BinomialDist/)
+
 ### Bernoulli Distribution:
 
 The Bernoulli distribution is a very simple distribution that
@@ -234,6 +238,11 @@ ggplot() +
 1. Increase the number of random variables drawn.
 2. Change the `mean` and `sd` parameters.
 
+
+### Normal Distribution shiny app
+
+[https://istats.shinyapps.io/NormalDist/](https://istats.shinyapps.io/NormalDist/)
+
 ### Standard Normal distribution
 
 The **Standard Normal** distribution is a **Normal** distribution with $\mu = 0$ and $\sigma = 1$.
@@ -339,3 +348,36 @@ period T**.
 $$
 {pdf} = P(x|T,\lambda) = \frac{ e^{-(\lambda T)} (\lambda T)^x }{ x! }
 $$
+
+### Poisson Distribution shiny app
+
+[https://istats.shinyapps.io/PoissonDist/](https://istats.shinyapps.io/PoissonDist/)
+
+### Case study - rate of catching rock pocket mice (*Chaetodipus intermedius*)
+
+
+Calculate the rates (number of captures per year) for all of the species.
+
+```{r}
+surveys %>%
+  group_by(genus, species, year) %>%
+  count() %>%
+  mutate(genus_species = paste(genus, species)) %>%
+  group_by(genus_species) %>%
+  summarise(avg_cnt = mean(n)) %>%
+  arrange(avg_cnt)
+```
+
+What is the probability that we will capture **exactly** 5 rock pocket mice in the coming year's survey?
+
+```{r}
+dpois(x = 5, lambda = 2.25)
+```
+
+What is the probability that we will capture **5 or more** rock pocket mice?
+
+```{r}
+ppois(q = 4, lambda = 2.25, lower.tail = FALSE)
+```
+
+
