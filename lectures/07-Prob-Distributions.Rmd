@@ -331,7 +331,7 @@ pnorm(q = mean_chaeto_logweight,
 
 ***
 
-## Poisson Distribution:
+## Poisson Distribution
 
 There are many questions we may ask that are related
 to the Poisson distribution. Usually we think of the 

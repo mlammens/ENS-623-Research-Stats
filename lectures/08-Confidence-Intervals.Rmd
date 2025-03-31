@@ -1,12 +1,12 @@
 ---
-title: "Meeting 9 - CLT and Confidence Intervals"
+title: "Central Limit Theorem (CLT) and Confidence Intervals"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
     toc: yes
 ---
 
-# Today's Goals
+# Section Goals
 
 * Identify the mathematical relationships between population statistics, sample statistics, and confidence intervals
 * Be able to calculate a margin of error and confidence interval
