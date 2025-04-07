@@ -28,9 +28,10 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 | 03 |[Data Visualization and Exploration](http://mlammens.github.io/ENS-623-Research-Stats/lectures/03-Data-Visualization-and-Exploration.html) | [R Graphics Cookbook](https://r-graphics.org/); [R4DS - Data Vis](https://r4ds.hadley.nz/data-visualize) |
 | 04 |[R Programming](http://mlammens.github.io/ENS-623-Research-Stats/lectures/04-R-Programming.html) | [Software Carpentry - Intro to Programming](http://swcarpentry.github.io/r-novice-inflammation/)| 
 | 05 |[Data Wrangling](http://mlammens.github.io/ENS-623-Research-Stats/lectures/05-Data-Wrangling.html) | [Data Carpentry - Working with Data](https://datacarpentry.github.io/R-ecology-lesson/working-with-data.html) |
-| 06 |[Introductino to Probability](http://mlammens.github.io/ENS-623-Research-Stats/lectures/06-Intro-Probability.html) | Vu & Harrington - Chapter 2: Probability | 
+| 06 |[Introduction to Probability](http://mlammens.github.io/ENS-623-Research-Stats/lectures/06-Intro-Probability.html) | Vu & Harrington - Chapter 2: Probability | 
 | 07 |[Probability Distributions](http://mlammens.github.io/ENS-623-Research-Stats/lectures/07-Prob-Distributions.html) | Vu & Harrington - Chapter 3: Distributions of random variables | 
 | 08 |[CLT and Confidence Intervals](http://mlammens.github.io/ENS-623-Research-Stats/lectures/08-Confidence-Intervals.html) | Vu & Harrington - Chapter 4: Foundations for inference | 
+| 09 |[Introduction to Hypothesis Testing](http://mlammens.github.io/ENS-623-Research-Stats/lectures/09-Intro-Hypothesis-Testing.html) | Vu & Harrington - Chapter 4: Foundations for inference | 
 
 <!---
 | 4 |Asking Research Questions and Introduction to Probability|Karban et al. 2014, Chapter 1; Q&K Chap. 1; Logan Chap. 3| [Lecture notes 4](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-4.html); [In class notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/meeting-4.html); [Fox Problem Notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/fox-ps-whiteboard.png) | Continue PS3 |
