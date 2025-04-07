@@ -1,12 +1,12 @@
 ---
-title: "Meeting 11 - ANOVA"
+title: "Introduction to ANOVA"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
     toc: yes
 ---
 
-# Today's Goals
+## Section Goals
 
 * Understand when to apply ANOVA vs $t$ tests
 * Identify correct $H_0$ for an ANOVA, and for an ANOVA with fixed vs. random effects
@@ -17,7 +17,7 @@ output:
 
 ***
 
-# Introduction to Analysis of Variance - ANOVA
+## Introduction to Analysis of Variance - ANOVA
 
 In environmental science there are many times when we are working with **categorical** predictor variables and **continuous / numerical** response variables. 
 For example, let's consider a fertilizer addition experiment, where the growth of some plant species is measured under a fertilizer versus no-fertilizer treatment. 
@@ -26,7 +26,7 @@ Here, the predictor variable (fertilizer addition or not) is a categorical varia
 If our categorical predictor variable only has 2 levels (e.g., fertilizer vs. no fertilizer), then we may be able to examine differences between treatments using a $t$ test. 
 However, if we are dealing with a categorical variable with 3 or more levels, then we need to move to ANOVA.
 
-## Fixed versus Random Effects
+### Fixed versus Random Effects
 
 Our categorical predictor variables can represent two different kinds of **factors** in our model, **fixed** vs **random** factors. 
 In this course, we will only deal with **fixed** factors, but you should be aware of the differences between the two.
@@ -37,7 +37,7 @@ From Logan, p 254 - "conclusions about the effects of a fixed factor are restric
 **Random factors** are, as per Logan, p. 254, "randomly chosen from all the possible levels of populations and are used as random representatives of the populations". 
 E.g., density of plants could be random. Or position of camera traps on a hillside.
 
-## Null hypotheses
+### Null hypotheses
 
 Our $H_0$s are different, depending on whether we are working with fixed versus random factors.
 
@@ -53,7 +53,7 @@ $$
 H_0: \sigma^2_1 = \sigma^2_2 = ... = \sigma^2_i = \sigma^2 
 $$
 
-# One-way ANOVA
+## One-way ANOVA
 
 
 We will be using the a data set on **aldrin** concentration values at three different depths in the Wolf River.
@@ -124,9 +124,9 @@ t.test(data = aldrin_mid_surf, aldrin ~ depth)
 --->
 
 
-# Demonstration of ANOVA in R
+## Demonstration of ANOVA in R
 
-## Carry out an ANOVA
+### Carry out an ANOVA
 
 ANOVA is a kind of linear model (we'll talk more about this soon), so we use the `lm` function in R first.
 
@@ -147,7 +147,7 @@ aldrin_aov <- aov(data = aldrin, aldrin~depth)
 summary(aldrin_aov)
 ```
 
-## Testing model assumptions
+### Testing model assumptions
 
 We can use a set of data visualization tools to test for *some* of the assumptions of ANOVA (i.e., normality of residuals, independences of observations, equal variances).
 
@@ -172,7 +172,7 @@ We wont be covering it here, but you can find information on this test by lookin
 
 
 
-# Multi-way (Factorial) ANOVA
+## Multi-way (Factorial) ANOVA
 
 What if we want to look at two, or more, factors?
 
