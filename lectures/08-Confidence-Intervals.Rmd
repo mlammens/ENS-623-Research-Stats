@@ -6,7 +6,7 @@ output:
     toc: yes
 ---
 
-# Section Goals
+## Section Goals
 
 * Identify the mathematical relationships between population statistics, sample statistics, and confidence intervals
 * Be able to calculate a margin of error and confidence interval
@@ -14,11 +14,11 @@ output:
 
 ***
 
-# Central Limit Theorem
+## Central Limit Theorem
 
 In the limit as $n \to \infty$, the probability distribution of means of samples from ***any distribution*** will approach a normal distribution.
 
-## ASIDE: Population versus sample statistics
+### ASIDE: Population versus sample statistics
 
 We use **sample statistics** to estimate **population statistics**.
 In most cases in biology, populations are too large to measure population parameters directly.

@@ -1,12 +1,12 @@
 ---
-title: "Meeting 10 - Intro to Hypothesis Testing and *t* tests"
+title: "Introduction to Hypothesis Testing and *t* tests"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
     toc: yes
 ---
 
-# Today's Goals
+## Section Goals
 
 * Review of principles of hypothesis testing
 * Become familiar with the $t$ test, as a 'standard' hypothesis test
@@ -14,7 +14,7 @@ output:
 
 ***
 
-# Hypothesis Testing
+## Hypothesis Testing
 
 * What is a hypothesis? 
 * How do we test our hypothesis?
@@ -22,7 +22,7 @@ output:
 The answers to these questions, with respect to this course, are primarily based on frequentest statistics.
 
 
-## Example
+### Example
 
 Let's say we have a sample of observations that we want to know if they come from some population with a known value for $\mu$ (i.e., we know the population mean). 
 We can see how (un)likely it is that the sample estimates come from this particular population, by looking at where these values fall in a *t* distribution. That is, calculate the *t* statistic:
@@ -31,7 +31,7 @@ $$
 t_s = \frac{\bar{y} - \mu}{s_{\bar{y}}}
 $$
 
-### ASIDE: Why are we using the *t* distribution?
+#### ASIDE: Why are we using the *t* distribution?
 
 We are using the *t* distribution because we are using an approximation of standard error, $s_{\bar{y}}$, based on data in our sample.
 
@@ -76,7 +76,7 @@ Increase the sample size.
 
 ![power](../lectures/power.png)
 
-## What are the general steps to hypothesis testing?
+### What are the general steps to hypothesis testing?
 
 See p. 33-34 in Q&K. Fisher's approach below:
 
@@ -150,9 +150,9 @@ $$
 
 ***
 
-# Example of parametric hypothesis testing
+## Example of parametric hypothesis testing
 
-## Differences in fecundity of intertidal gastropods in two different intertidal zones (Example 6A in Logan, Box 3.1 in Q&K)
+### Differences in fecundity of intertidal gastropods in two different intertidal zones (Example 6A in Logan, Box 3.1 in Q&K)
 
 Ward and Quinn (1988) investigated the differences in fecundity of *Lepsiella vinosa* in two different intertidal zones (mussel zone and littorinid zone). 
 
@@ -193,7 +193,7 @@ gastro_summary <-
 gastro_summary
 ```
 
-### Calculate the *t* stat by hand, using the equations above
+#### Calculate the *t* stat by hand, using the equations above
 
 First, let's calculate $s_{\bar{y}_1 - \bar{y}_2}$ using the formula noted above:
 
@@ -234,7 +234,7 @@ pt(q = tstat, df = df_gastro) * 2
 
 The resulting probability value is **very** small, much less than 0.05. In this case, we would **reject the null hypothesis** that these two samples come from the same population. 
 
-### Use R's native `t.test` function
+#### Use R's native `t.test` function
 
 ```{r}
 (gastro_t_test <- t.test(data = gastro, EGGS ~ ZONE, var.equal = TRUE))

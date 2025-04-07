@@ -6,14 +6,14 @@ output:
     toc: yes
 ---
 
-# Section Goals
+## Section Goals
 
 * Introduce concepts of probability distributions
 * Learn details of a few important probability distributions
 
 ***
 
-## Meeting preliminaries
+### Meeting preliminaries
 
 We'll be working with the Portal Survey data this week (again). 
 We must first load these data into our work environment.
