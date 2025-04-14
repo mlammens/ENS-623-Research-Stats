@@ -71,7 +71,7 @@ Let's think of these as regression coefficients (which they are!) and use the fo
 |*b~3~*       |DENSITY30   |
 |*b~4~*       |DENSITY45   |
 
-The table below translates how these coefficients can be used to calcualte *estimates* for each group mean value.
+The table below translates how these coefficients can be used to calculate *estimates* for each group mean value.
 
 **NOTE** - I'm emphasizing that these are *estimates* of the group means. In this case, our model assumes that there is **no interaction** between the predictor variables DENSITY and SEASON. 
 
@@ -127,7 +127,7 @@ As above, let's think of these as regression coefficients (which they are!) and 
 |*b~7~*       |SEASONsummer:DENSITY45|
 
 
-The table below translates how these coefficients can be used to calcualte *estimates* for each group mean value. 
+The table below translates how these coefficients can be used to calculate *estimates* for each group mean value. 
 Pay particular attention to the fact that we now have **three** more coefficients to work with, representing the interaction effects.
 
 |            |SEASON - Spring| SEASON - Summer |
