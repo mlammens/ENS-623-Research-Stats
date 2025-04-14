@@ -33,6 +33,7 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 | 08 |[CLT and Confidence Intervals](http://mlammens.github.io/ENS-623-Research-Stats/lectures/08-Confidence-Intervals.html) | Vu & Harrington - Chapter 4: Foundations for inference | 
 | 09 |[Introduction to Hypothesis Testing](http://mlammens.github.io/ENS-623-Research-Stats/lectures/09-Intro-Hypothesis-Testing.html) | Vu & Harrington - Chapter 5: Inference for numerical data | 
 | 10 |[Introduction to ANOVA](http://mlammens.github.io/ENS-623-Research-Stats/lectures/10-ANOVA.html) | Vu & Harrington - Chapter 5: Inference for numerical data | 
+| 11 |[Interpreting ANOVA Coefficients](http://mlammens.github.io/ENS-623-Research-Stats/lectures/11-ANOVA-Coefficients.html) | [video](https://youtu.be/FMGlj44Kp40), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/11-ANOVA-Coefficients.Rmd)|
 
 <!---
 | 10 |Correlation and Regression |Q&K Chap. 3 & 5; Logan Chap. 6-8| [Lecture notes 10](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-10.html); [Written Notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-10-Notes.pdf) | [Analysis Project - Update](http://mlammens.github.io/ENS-623-Research-Stats/pages/Analysis-Project-Description.html) | 
