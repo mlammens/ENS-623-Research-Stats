@@ -26,6 +26,10 @@ Here, the predictor variable (fertilizer addition or not) is a categorical varia
 If our categorical predictor variable only has 2 levels (e.g., fertilizer vs. no fertilizer), then we may be able to examine differences between treatments using a $t$ test. 
 However, if we are dealing with a categorical variable with 3 or more levels, then we need to move to ANOVA.
 
+### A slide deck related to ANOVA background
+
+Here's a slide deck I use to provide background information on ANOVA - [Wolf River Aldrin Concentrations ](https://docs.google.com/presentation/d/1dkWNSVRYUWei170BAH1zM85Qj6W38YoZrcT618-WAY4/edit?usp=drivesdk)
+
 ### Fixed versus Random Effects
 
 Our categorical predictor variables can represent two different kinds of **factors** in our model, **fixed** vs **random** factors. 
@@ -238,5 +242,53 @@ plot(allEffects(limpets_lm))
 ```
 
 
+### Two-way (two-factor) fixed effects model with interactions
+
+From Logan (Example 12B):
+
+> In a similar experiment to that illustrated in Example 12A, Quinn (1988) also manipulated the density of larger adults limpets **further down the shoreline** within enclosures (6, 12 and 24 individuals per enclosure) during the two seasons (winter-spring and summer-autumn) so as to investigate their effects on egg mass production. Again, three replicate enclosures per density/season combination were used, and both density and season were considered fixed factors (from Box 9.4 of Quinn and Keough (2002)).
+
+```{r}
+limpets2 <- read.csv(file = "https://mlammens.github.io/ENS-623-Research-Stats/data/Logan_Examples/Chapter12/Data/quinn1.csv")
+
+head(limpets2)
+summary(limpets2)
+
+limpets2$DENSITY <- factor(limpets2$DENSITY)
+summary(limpets2)
+
+```
+
+```{r}
+ggplot(data = limpets2) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets2) +
+  geom_boxplot(aes(x = SEASON, y = EGGS)) +
+  theme_bw()
+
+ggplot(data = limpets2) +
+  geom_boxplot(aes(x = DENSITY, y = EGGS, fill = SEASON)) +
+  theme_bw()
+
+```
+
+And let's run the model.
+
+```{r}
+limpets2_lm <- lm(data = limpets2, formula = EGGS ~ SEASON * DENSITY)
+summary(limpets2_lm)
+anova(limpets2_lm)
+```
+
+Plot the effects of Season and Density using the `allEffects` function in the `effects` package. You may need to use `install.packages` to install this package.
+
+
+```{r}
+library(effects)
+
+plot(allEffects(limpets2_lm))
+```
 
 
