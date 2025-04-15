@@ -53,6 +53,7 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 | Working with data| [assignment 4 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-4-Working-with-data.html) | [assignment 4 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-4-Working-with-data.Rmd)|
 | Data report - NYS Spills Incidents| [data report 1 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Data-Report-1.html) | [data report 1 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Data-Report-1.Rmd)|
 | Calculating confidence intervals| [assignment 5 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-5-Confidence-Intervals.html) | [assignment 5 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Assignment-5-Confidence-Intervals.Rmd)|
+| Data report - Soil nutrients on a college campus| [data report 2 - web](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Data-Report-2.html) | [data report 2 - Rmd](http://mlammens.github.io/ENS-623-Research-Stats/problem_sets/Data-Report-2.Rmd)|
 
 ### Supplementary Notes
 
