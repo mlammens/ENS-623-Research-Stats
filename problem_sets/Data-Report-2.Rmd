@@ -1,0 +1,41 @@
+---
+title: "ENS 623 - Spring 2022 - Data Report 2 assignment"
+output: html_document
+---
+
+## Overview
+
+The goal of the Data Report assignment is for you to demonstrate your ability to use R to examine a data set. 
+This includes reading in a data set, calculating summary statistics for a data set, creating data visualizations, and performing appropriate statistical analyses. 
+
+**Please submit your Data Report as both an R Markdown (Rmd) file and a Word (docx) file.**
+
+## Expected style, format, and sections
+
+I am expecting a Data Report that is written as a consistent narrative, rather than simply answers to questions posed below. 
+Imagine you are submitting this report to a supervisor who has asked you to review the data set and deliver a few key points about it.
+You should write in complete sentences and paragraphs, with a logical order and flow. 
+Your code should be embedded within the report as R chunks in the appropriate sections.
+
+Here are the sections I am expecting in your report:
+
+* **Introduction** - this section should include information about what the data set is, who has collected it, what measurements and variables it contains, etc.. I expect this section to be approximately 150 - 200 words. You *should* reference the information provided in this assignment.
+* **Data Set Summary** - In this section you should include a summary table of the provided data, with a table caption. The table should include summary statistics, including mean and standard deviation values, for each nutrient measured, separated (i.e., using the `group_by` function) by `site`. You should provide a written summary as well, highlighting major points you see in the data summary (approx. 100 words).
+* **Data Visualization** - Your report should include three box plots, one each for the three nutrients measured. You should provide a written summary of what the plots show you (approx. 100 - 200 words).
+* **Data Analysis** - This section should include three separate ANOVAs, one each for the three nutrients. In each, the nutrient level should be the response variable and the site should be the predictor variable. Perform the ANOVAs, print the resulting ANOVA tables, interpret the results of each, and address whether these analyses fit the assumptions of ANOVA. I expect this section to be approximately 300 - 350 words.
+* **Summary** - This section should contain a brief (approximately 100 words) summary of what you have found based on the analyses documented above. 
+
+### Figures and plot formats
+
+Your plots should have x- and y-axis labels that are meaningful **AND** figure captions that describe the figure with enough detail that a reader could understand the figure without reading the rest of the report.
+
+## Pace University Campus Soil Nutrient Data Set
+
+For this Data Report, you will work with a data set collected on Pace's campus in 2018. The data set can be downloaded from Classes (in `soil_nutrient_data.csv` in the 'Data Sets' module).
+To give you some context for these data, the following is an excerpt from the student project these data were collect for:
+
+> Ecosystems provide fundamental ecological services that are important to humans and wildlife.  Healthy and thriving ecosystems require maintenance on our part due to negative impacts of human activities. These can include land conversion for agricultural, storm water runoff from highways and agricultural lands, impacts of extraction of fossil fuels, improper solid waste management, and pollution from multiple sources. In suburban and urban areas, the negative impacts of storm water run-off can by particularly harmful, affecting soil nutrient levels, waterways and aquatic life due to the presence of harmful bacteria from animal waste, leaked pollutants and heavy metals from vehicles, fertilizers from farms and lawns, and many other contaminants. In this study, we examined how different habitat types at the Pace University Pleasantville campus absorb nutrients from storm water run-off. This absorption is important for mitigating the effects of eutriphication, and may be a proxy for absorption of other pollutants. Rather than measuring nutrient levels in plant material, we examined the nutrient levels in the soil around vegetation, assuming that lower levels of nutrients are associated with greater absorption by the nearby plants. We collected five different samples at each of five different locations on campus - near the Townhouse dorm, above the OSA building, below the OSA building, above the wetland next to the Environmental Center (Farm), and below this wetland area. Soil at these locations were measured for concentrations of nitrate nitrogen and phosphorus, as well as pH level. 
+
+
+
+
