@@ -1,21 +1,23 @@
 ---
-title: "Meeting 11 - Correlation and Linear Regression"
+title: "Correlation and Linear Regression"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
     toc: yes
 ---
 
-# Today's Goals
+## Section Goals
 
 * Review foundations of statistical models
 * Become familiar with key concepts of linear modeling
 * Introduce concepts of covariation and correlation
 * Identify relationship between correlation and linear regression
 
-# Introduction to Linear Models
+***
 
-## Statistical Models
+## Introduction to Linear Models
+
+### Statistical Models
 
 From Logan, p. 151:
 
@@ -25,7 +27,7 @@ A generic model looks like:
 
 response variable = model + error
 
-### Simple linear model
+#### Simple linear model
 
 $$
 y = bx + a
@@ -53,24 +55,22 @@ $$
 $$
 
 
-## Co-variation
+### Co-variation
 
 Let's take a step back and ignore the potential cause-effect relationships implied by the above linear model (i.e., the model that suggests a change in $x$ results in a change in $y$). 
 Perhaps changes in $x$ and $y$ are only ***correlated*** with each other, or said another way, they ***co-vary*** with each other.
 
 We can measure the *strength* of this relationship as **co-variation** and/or **correlation**.
 
-### Co-variance
-
-This is also known as the *sum of cross-products*.
+**Co-variance:** is known as the *sum of cross-products*.
 
 $$
 \frac{\sum{(x_i-\bar{x})(y_i-\bar{y})}}{n-1}
 $$
 
-### Example with `iris` data
+#### Example with `iris` data
 
-Calculate co-variation between sepal length and sepal width, using the `iris` dataset.
+Calculate co-variation between sepal length and sepal width, using the `iris` data set.
 
 ```{r}
 data(iris)
@@ -89,7 +89,7 @@ var(x = iris$Sepal.Length, y = iris$Sepal.Width)
 
 
 
-## Correlation
+### Correlation
 
 We can *standardize* co-variation to take on a value between -1 and 1, yielding a value called the **Pearson's correlation coefficient** or the **product-moment coefficient**.
 
@@ -106,7 +106,7 @@ $$
 
 Then the $t$ value is $t = \frac{r}{s_r}$.
 
-### Example of correlation with `iris` data
+#### Example of correlation with `iris` data
 
 Calculate the correlation between sepal length and sepal width, and calculate whether $r$ is significantly different from 0 or not.
 
@@ -130,7 +130,7 @@ with(data = iris, cor.test(x = Sepal.Length, y = Sepal.Width, method = "pearson"
 ```
 
 
-## Robust correlation
+### Robust correlation
 
 For Pearson's correlation coefficient to be appropriate, the data should have:
 
@@ -140,10 +140,11 @@ For Pearson's correlation coefficient to be appropriate, the data should have:
 * Spearman's Rank Correlation - calculates correlation on ranks of observed values
 * Kendall's Rank Correlation
 
+***
 
-# Linear regression
+## Linear regression
 
-Now we assume that any change in **y** is due to a change in **x**.
+Now, let's assume that any change in **y** is due to a change in **x**.
 
 ## Example of linear regression
 
