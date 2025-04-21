@@ -196,3 +196,116 @@ ggplot(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
 * **Fixed $x$ values:** The $x_i$ values are measured without error. In practice this means the error in the $x_i$ values is much smaller than that in the $y_i$ values.
 
 
+## Line fitting and model evalutation 
+
+You can access a video going through this section here - [https://youtu.be/2tI5YFDajp8](https://youtu.be/2tI5YFDajp8)
+
+### Finding the best-fit line
+
+We have jumped into linear regression by going through the example above relating flour beetle weight loss to humidity, but we have not gone into detail about how "the best fit line" is actually calculated.
+
+We are not going to go into the mathematical details of line fitting here (you can get more details looking at Box 5.5 on pp. 83-84 in Quinn and Keough 2002), but we will go through an intuitive explanation. 
+
+Recall, that our goal is to fit a line through the cloud of data points such that the distance between the points and the line is minimized. 
+These distances are what we call **residuals** (or **errors**), and are symbolized with $\epsilon$ or $e$.
+
+Looking at the plot made with the code below, the vertical black lines represent the residuals.
+
+```{r}
+library(dplyr)
+flr_beetle$y_hat <- predict(flr_beetle_lm, newdata = flr_beetle)
+flr_beetle$y_min <- apply(select(flr_beetle, WEIGHTLOSS, y_hat), MARGIN = 1, FUN = min)
+flr_beetle$y_max <- apply(select(flr_beetle, WEIGHTLOSS, y_hat), MARGIN = 1, FUN = max)
+
+ggplot(data = flr_beetle, aes( x = HUMIDITY, y = WEIGHTLOSS)) +
+  geom_point() +
+  stat_smooth(method = "lm", se = FALSE) +
+  geom_linerange(aes(ymin = y_min, ymax = y_max )) +
+  theme_bw()
+
+
+```
+
+Again, our goal is to fit a line that minimizes these residuals. 
+In a mathematical sense, what we want to do is find estimates of $\beta_0$ and $\beta_1$, i.e., our slope and intercept values, to use in the equation of this line, $\hat{y} = b_0 + b_1 x$, such that we minimize the value $\sum(y_i - \hat{y})^2$. 
+
+This last equation, $\sum(y_i - \hat{y})^2$, goes by several names, including the **sum of squared residuals**, **sum of squared errors**, and **sum of squared deviations**. For short, I'll often use $SS_{res}$.
+
+It is possible to minimize $SS_{res}$ by taking a guess at $b_0$ and $b_1$, calculating $SS_{res}$, taking another guess at the parameters, and accepting them if $SS_{res}$ is smaller. Keep doing this until to cannot minimize $SS_{res}$ any further. 
+But this is a pretty inefficient approach.
+Instead, using the probability distribution for the line and a few principles of calculus, we can find the values of $b_0$ and $b_1$ that minimize $SS_{res}$. 
+
+
+### Model evalutation
+
+In order to determine if your linear regression model is meaningful (or *significant*) you must compare the **variance explained** by your model versus the **variance NOT explained ** by your model (conveniently referred to as the variance unexplained).
+
+**Your residuals represent the variation that is *not* explained!**
+
+![Logan - Figure 8.3](../lectures/logan-fig-8-3.png)
+
+**Note:** there is a typo in this figure in panel (c). Instead of "Explained variability", the arrow tag should be "Unexplained variability".
+
+In this figure, we see in panel (d) that we compare the variation explained to the variation unexplained, and use an **F-ratio test** to see if the amount of variation ascribed to each are different. 
+If the explained variation is relatively large compared to the unexplained variation, then this ratio will be large. 
+Larger $F$ ratios are more extreme, when considering an **F distribution**. 
+Thus, an extreme $F$ ratio would imply that the two variances are **not** equal, and specifically, that the amount of variance explained is **significantly** greater than that unexplained.
+
+
+### Standard error of regression coefficients, the regression line, and $\hat{y}_i$ predictions
+
+Regression coefficients are statistics and thus we can determine the standard error of these statistics.
+From there, we can use these values and the *t*-distribution to determine confidence intervals.
+(Note that we can also see if these coefficients are **significantly** different from 0 using a **Wald Test** (similar to the $t$ test).)
+
+The confidence interval for $b_1$ is:
+
+$$
+b_1 \pm t_{0.05, n-2}s_{b_{1}}
+$$
+
+#### $\beta_1$ standard error
+
+$$
+s_{b_{1}} = \sqrt{ \frac{MS_{Residual}}{\sum^n_{i=1}(x_i-\bar{x})^2} }
+$$
+
+#### $\beta_0$ standard error
+
+$$
+s_{b_{0}} = \sqrt{ MS_{Residual} [\frac{1}{n} + \frac{\bar{x}^2}{\sum^n_{i=1}(x_i-\bar{x})^2}] }
+$$
+
+#### Confidence bands for regression line 
+
+From Quinn and Keough, p. 87:
+
+> The 95% confidence band is a biconcave band that will contain the true population regression line 95% of the time.
+
+#### $\hat{y}_i$ standard error
+
+$$
+s_{\hat{y}} = \sqrt{ MS_{Residual} [1 + \frac{1}{n} + \frac{x_p - \bar{x}^2}{\sum^n_{i=1}(x_i-\bar{x})^2}] }
+$$
+
+where $x_p$ is the value from $x$ we are "predicting" a $y$ value for.
+
+
+## Linear regression diagnostics
+
+If we plot the `lm` result, we will see a set of diagnostic plots:
+
+```{r}
+plot(flr_beetle_lm)
+```
+
+* **Leverage:** a measure of how extreme a value in **x-space** is (i.e., along the x-axis) and how much of an influence each $x_i$ has on $\hat{y}_i$. High leverage values indicate that model is unduly influenced by an outlying value.
+
+* **Residuals:** the differences between the observed $y_i$ values and the predicted $\hat{y}_i$ values. Looking at the pattern between residuals and $\hat{y}_i$ values can yield important information regarding violation of model assumptions (e.g., homogeneity of variance).
+
+* **Cook's D:** a statistics that offers a measure of the influence of each data point on the fitted model that incorporates both leverage and residuals. Values $\ge 1$ are considered "suspect".
+
+More details on linear regression diagnostics can be found in this video - [https://youtu.be/pOvZsR5JW2w](https://youtu.be/pOvZsR5JW2w).
+
+
+

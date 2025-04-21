@@ -30,6 +30,15 @@ However, if we are dealing with a categorical variable with 3 or more levels, th
 
 Here's a slide deck I use to provide background information on ANOVA - [Wolf River Aldrin Concentrations ](https://docs.google.com/presentation/d/1dkWNSVRYUWei170BAH1zM85Qj6W38YoZrcT618-WAY4/edit?usp=drivesdk)
 
+### A figure related to ANOVA
+
+In order to determine if your ANOVA model is meaningful (or *significant*) you must compare the **variance explained** by your model versus the **variance NOT explained ** by your model (conveniently referred to as the variance unexplained).
+
+**Your residuals represent the variation that is *not* explained!**
+
+![Logan - Figure 8.3](../lectures/logan-fig-10-2.png)
+
+
 ### Fixed versus Random Effects
 
 Our categorical predictor variables can represent two different kinds of **factors** in our model, **fixed** vs **random** factors. 
