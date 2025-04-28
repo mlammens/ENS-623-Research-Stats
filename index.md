@@ -35,6 +35,7 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 | 10 |[Introduction to ANOVA](http://mlammens.github.io/ENS-623-Research-Stats/lectures/10-ANOVA.html) | Vu & Harrington - Chapter 5: Inference for numerical data | 
 | 11 |[Interpreting ANOVA Coefficients](http://mlammens.github.io/ENS-623-Research-Stats/lectures/11-ANOVA-Coefficients.html) | [video](https://youtu.be/FMGlj44Kp40), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/11-ANOVA-Coefficients.Rmd)|
 | 12 |[Correlation and Regression](http://mlammens.github.io/ENS-623-Research-Stats/lectures/12-Linear-Regression.html) | Vu & Harrington - Chapter 6: Simple linear regression |
+| 13 |[Understanding Regression Coefficients](http://mlammens.github.io/ENS-623-Research-Stats/lectures/13-Regression-Coefficients.html) | [video](https://youtu.be/JavRAr5u-6w), Vu & Harrington - Chapter 6: Simple linear regression |
 
 <!---
 | 10 |Correlation and Regression |Q&K Chap. 3 & 5; Logan Chap. 6-8| [Lecture notes 10](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-10.html); [Written Notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-10-Notes.pdf) | [Analysis Project - Update](http://mlammens.github.io/ENS-623-Research-Stats/pages/Analysis-Project-Description.html) | 
@@ -60,7 +61,6 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 
 These notes go along with the videos I'm posting:
 
-* Regression Coefficients - [video](https://youtu.be/JavRAr5u-6w), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Regression-Coefficients.html), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Regression-Coefficients.Rmd)
 * Multiple Linear Regression - [video](https://youtu.be/uadovf4nk3w), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression.html), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression.Rmd)
 * Multiple Linear Regression with Interaction - [video](https://youtu.be/uadovf4nk3w), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression-Interaction.html), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-Multiple-Linear-Regression-Interaction.Rmd)
 * Analysis of Covariance (ANCOVA) - [video](https://youtu.be/40bfmlrhrwc), [notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-ANCOVA.html), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Supp-ANCOVA.Rmd)
