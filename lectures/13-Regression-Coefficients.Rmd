@@ -6,9 +6,16 @@ output:
     toc: yes
 ---
 
+## Section Goals
+
+* Introduce the equations for estimating simple linear regression coefficients
+* Identify that regression coefficients are stastics that are t-distributed
+
+***
+
 ## Simple linear model
 
-Recall that the qquation to define any given response value $y_i$ based on knowing predictor value $x_i$ is: 
+Recall that the equation to define any given response value $y_i$ based on knowing predictor value $x_i$ is: 
 
 $$
 y_i = \beta_0 + \beta_1*x_i + \epsilon_i
