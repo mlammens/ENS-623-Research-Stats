@@ -1,12 +1,14 @@
 ---
-title: "Regression Coefficients"
+title: "Understanding Regression Coefficients"
 author: "Matthew Aiello-Lammens"
-output: html_document
+output:
+  html_document:
+    toc: yes
 ---
 
-# Simple linear model
+## Simple linear model
 
-Equation to define any given response value $y_i$ based on knowing predictor value $x_i$ 
+Recall that the qquation to define any given response value $y_i$ based on knowing predictor value $x_i$ is: 
 
 $$
 y_i = \beta_0 + \beta_1*x_i + \epsilon_i
@@ -32,7 +34,7 @@ $$
 
 and we are trying to estimate $\beta_0$, $\beta_1$, and $\sigma$.
 
-In [Meeting 10](https://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-10.html) we learned the equations for estimating these parameters:
+Below we note the equations used to estimate the coefficient values. A detailed description of the mathematics can be found in Chapter 6 of Vu and Harrington (and Chapter 5 of Quinn and Keough).
 
 ### $\beta_0$ estimate
 
@@ -46,6 +48,8 @@ $$
 b_1 = \frac{\sum_{i=1}^n{[(x_i - \bar{x})(y_i - \bar{y})]}}{\sum_{i=1}^n{(x_i - \bar{x})^2}}
 $$
 
+Note that this is the co-variance between X and Y, divided by the variance of X.
+
 ### $\epsilon$ estimate
 
 $$
@@ -54,7 +58,7 @@ $$
 
 and thus $s$, the estimate for $\sigma$ is the standard deviation of the residuals.
 
-# Model parameters / coefficients are statistics
+## Model parameters / coefficients are statistics
 
 Model parameters are statistics, and we can calculate standard errors for these statistics.
 
@@ -74,7 +78,7 @@ $$
 
 What is MS_Residual? 
 
-It's the Mean Sums of Squares Residuals (see figure in [Lecture 11 notes](https://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-11.html#my-model-looks-good-but-is-it-meaningful)).
+It's the Mean Sums of Squares Residuals (see figure in [Section 12 notes](https://mlammens.github.io/ENS-623-Research-Stats/lectures/12-Linear-Regression.html#model-evalutation)).
 
 Note that the degrees of freedom used to calculate MS_Residuals is the number of observations minus the number of coefficients being estimated. 
 So hear, $n - 2$, because we are estimating $\beta_0$ and $\beta_1$.
@@ -131,7 +135,7 @@ ggplot(data = flr_beetle, aes(x = HUMIDITY, y = WEIGHTLOSS)) +
 
 
 
-# Testing whether coefficients are *significant*
+## Testing whether coefficients are *significant*
 
 We can also use our standard error values to examine whether the coefficient estimates resulting from a linear regression are **significantly** different from 0 using a **Wald Test** (similar to the $t$ test).
 
@@ -148,6 +152,7 @@ summary(flr_beetle_lm)
 ```{r}
 pt(q = 45.44, df = (9-2), lower.tail = FALSE) * 2
 ```
- Reject our null that intercept is 0, and support alternative that it's not 0.
+
+Reject our null that intercept is 0, and support alternative that it's not 0.
 
 
