@@ -1,17 +1,21 @@
 ---
-title: "Meeting 13 - Chi-Squared Analysis Example"
+title: "Chi-Squared Analysis"
 author: "Matthew E. Aiello-Lammens"
 output:
   html_document:
     toc: yes
 ---
 
-# Today's Goals
+## Section Goals
 
 * Practice using $\chi^2$ analysis for goodness of fit tests
 * Practice using $\chi^2$ analysis test of independence
 
-# $\chi^2$ analysis
+## Brief lecture
+
+Here's a link to a lecture I use in my undergrad class [Chi-squared Primer](https://docs.google.com/presentation/d/1NK56U1F2lUq8lJ9B-heq7PpCWzIalMUHUsEq2vdGJRQ/edit?usp=drivesdk)
+
+### $\chi^2$ statistic
 
 
 $$
@@ -30,29 +34,35 @@ First, let's gather the information on COVID deaths from the CDC website here - 
 
 Second, open the data set in a Excel (or the equivalent).
 
-Third, gather information on the population percentages from the Census here - [https://www.census.gov/quickfacts/fact/table/US/PST045219](https://www.census.gov/quickfacts/fact/table/US/PST045219). Add these percentages to the data sheet.
+Now, read in the data sheet.
 
-Forth, read in the data sheet.
-
-```{r, eval = FALSE}
-#covid = read.csv(file.choose())
-covid = read.csv("~/Dropbox/00_Sort/deaths_by_race_ethnicity__all_age_groups.csv")
+```{r}
+covid = read.csv("../data/deaths_by_race_ethnicity_2025.csv")
 ```
 
 
 Calculate $\frac{(observed - expected)^2}{expected}$.
 
-```{r, eval = FALSE}
-covid$obs_exp = ((covid$Death_Percentage - covid$Pop_Percentage)^2) / covid$Pop_Percentage
+```{r}
+covid$obs_exp = ((covid$Death_Percent - covid$Population_Percent)^2) / covid$Population_Percent
 ```
 
 Finally, calculate $\chi^2$ and its probability.
 
-```{r, eval = FALSE}
+```{r}
 chi_sq = sum(covid$obs_exp)
-pchisq(q = chi_sq, df = 6, lower.tail = FALSE)
+pchisq(q = chi_sq, df = 5, lower.tail = FALSE)
 ```
 
+Can also visualize the Chi-squared distribution with this Shiny app [https://istats.shinyapps.io/ChisqDist/](https://istats.shinyapps.io/ChisqDist/)
+
+
+### R function goodness of fit
+
+```{r}
+covid$Population_Percent_Mod <- covid$Population_Percent/sum(covid$Population_Percent)
+chisq.test(covid$Death_Percent, p = covid$Population_Percent_Mod)
+```
 
 
 
