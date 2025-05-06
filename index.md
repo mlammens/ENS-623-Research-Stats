@@ -36,6 +36,7 @@ You can find a copy of the syllabus [here](pages/syllabus.html)
 | 11 |[Interpreting ANOVA Coefficients](http://mlammens.github.io/ENS-623-Research-Stats/lectures/11-ANOVA-Coefficients.html) | [video](https://youtu.be/FMGlj44Kp40), [Rmd file](http://mlammens.github.io/ENS-623-Research-Stats/lectures/11-ANOVA-Coefficients.Rmd)|
 | 12 |[Correlation and Regression](http://mlammens.github.io/ENS-623-Research-Stats/lectures/12-Linear-Regression.html) | Vu & Harrington - Chapter 6: Simple linear regression |
 | 13 |[Understanding Regression Coefficients](http://mlammens.github.io/ENS-623-Research-Stats/lectures/13-Regression-Coefficients.html) | [video](https://youtu.be/JavRAr5u-6w), Vu & Harrington - Chapter 6: Simple linear regression |
+| 14 |[Chi-squared Analysis](http://mlammens.github.io/ENS-623-Research-Stats/lectures/14-Chi-Squared.html) | Vu & Harrington - Chapter 8: Inference for Categorical Data - Sections 4 & 5|
 
 <!---
 | 10 |Correlation and Regression |Q&K Chap. 3 & 5; Logan Chap. 6-8| [Lecture notes 10](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-10.html); [Written Notes](http://mlammens.github.io/ENS-623-Research-Stats/lectures/Lecture-10-Notes.pdf) | [Analysis Project - Update](http://mlammens.github.io/ENS-623-Research-Stats/pages/Analysis-Project-Description.html) | 
